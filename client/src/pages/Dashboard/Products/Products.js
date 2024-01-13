@@ -1,11 +1,11 @@
 import React from 'react'
 
-function SideBar() {
+function Products() {
   return (
     <div>
-      side bar
+      products
     </div>
   )
 }
 
-export default SideBar
+export default Products

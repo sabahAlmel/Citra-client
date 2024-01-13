@@ -1,12 +1,11 @@
 import React from 'react'
 
-function Dashboard() {
+function OverView() {
   return (
     <div>
-      dashboard
+      overView
     </div>
   )
 }
 
-export default Dashboard
-
+export default OverView

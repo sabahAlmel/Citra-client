@@ -1,11 +1,11 @@
 import React from 'react'
 
-function SideBar() {
+function Users() {
   return (
     <div>
-      side bar
+      users
     </div>
   )
 }
 
-export default SideBar
+export default Users
