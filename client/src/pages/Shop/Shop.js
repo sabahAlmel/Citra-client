@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
+import Category from "../../components/Shop/Category";
+import ShopSide from "../../components/Shop/ShopSide";
 
 function Shop() {
   return (
     <div>
-      shop
+      <ShopSide />
+      <Category />
     </div>
-  )
+  );
 }
 
-export default Shop
+export default Shop;
