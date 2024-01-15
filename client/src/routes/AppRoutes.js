@@ -12,6 +12,7 @@ import NotFound from "../pages/NotFound/NotFound.js";
 import SingleProduct from "../pages/SingleProduct/SingleProduct.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
 import Cart from "../pages/cart/Cart.js";
+import DropDownCart from "../components/dorpDownCart/DropDownCart.js";
 function AppRoutes() {
   return (
     <Routes>
@@ -20,6 +21,7 @@ function AppRoutes() {
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/singleProduct" element={<SingleProduct />}></Route>
+        <Route path="/minicart" element={<DropDownCart />}></Route>
       </Route>
       <Route path="/signin" element={<SignIn />}></Route>
       <Route path="/signup" element={<SignUp />}></Route>

@@ -19,3 +19,10 @@
     cursor: pointer;
     scale: 1.5;
 }
+
+@media(max-width:485px){
+    .wrapper{
+        flex-direction: column;
+        height: 50vh;
+    }
+}

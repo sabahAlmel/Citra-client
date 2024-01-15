@@ -10,11 +10,6 @@
     margin: 1rem 8rem 1rem 0rem;
     line-height: 1.8rem;
 }
-.productCard{
-    height: 20vh;
-    width: 20vw;
-    background-color: var( --rose-color) ;
-}
 .displayCards{
     display: flex;
     flex-direction: column;
@@ -42,4 +37,16 @@
 scale:1.02;
 background-color: var(--blue-color);
 border:1px solid var(--rose-color);
+}
+
+@media(max-width:485px){
+    .checkoutBTN{
+        flex-direction: column;
+        align-self: center;
+        width: 150px;
+    }
+    .description{
+        align-self: center;
+    }
+
 }
