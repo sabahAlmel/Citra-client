@@ -11,11 +11,18 @@ import UserOutlet from "../Outlet/userOutlet.js";
 import NotFound from "../pages/NotFound/NotFound.js";
 import SingleProduct from "../pages/SingleProduct/SingleProduct.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
+import LoadingPage from "../components/loadingPage.js";
+import CategorySection from '../components/categorySection/categorySection.js'
+import ProductCard from '../components/productSection/productCard.js'
+import ProductData from '../components/productSection/productSection.js'
+
+
+
 function AppRoutes() {
   return (
     <Routes>
       <Route exact path="/" element={<UserOutlet />}>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<ProductData />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/singleProduct" element={<SingleProduct />}></Route>
       </Route>

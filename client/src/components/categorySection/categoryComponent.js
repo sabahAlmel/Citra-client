@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Button } from '@mui/material';
-import image from '../../assets/images/ctra.webp';
+import image from '../../assets/images/hijab.webp';
 
 const CategoryComponent = () => {
   return (
@@ -10,24 +10,23 @@ const CategoryComponent = () => {
         maxWidth: 375,
         margin: 'auto',
         marginTop: 4,
-        height: 260,
-        borderRadius:"0",
+        height:265,
+        borderRadius: "0",
         transition: 'transform 0.4s',
         '&:hover': {
-            transform: 'scale(1.1)',
-            zIndex: 2,
-          },
-          
-          
+          transform: 'scale(1.1)',
+          zIndex: 2,
+        },
       }}
     >
       <CardMedia
         component="img"
         alt="Background"
-        height="100%" 
+        height="100%"
         image={image}
         sx={{
           objectFit: 'cover',
+          height: '100%', 
         }}
       />
       <CardContent>
