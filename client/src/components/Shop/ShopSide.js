@@ -42,19 +42,40 @@ const ShopSide = () => {
     ],
   };
 
+  const [filters, setFilters] = useState(subCateg.subCateg);
+
+  const handleCheckboxChange = (filterId) => {
+    const updatedFilters = filters.map((filter) =>
+      filter._id === filterId ? { ...filter, checked: !filter.checked } : filter
+    );
+    setFilters(updatedFilters);
+  };
+
   return (
     <>
-      <div
+      <aside
         id="mySidepanel"
         className={style.sidepanel}
         style={{ width: sidePanelWidth + "px" }}
       >
-        <div className={style.sideBarContainer}>
-          <div className={style.closebtn} onClick={closeNav}>
+        <section className={style.sideBarContainer}>
+          <section className={style.closebtn} onClick={closeNav}>
             &times;
-          </div>
-        </div>
-      </div>
+          </section>
+          {subCateg.subCateg.map((filter) => (
+            <section key={filter._id} className={style.filter}>
+              <input
+                type="checkbox"
+                id={`filter_${filter._id}`}
+                checked={filter.checked}
+                className={style.inputFilter}
+                onChange={() => handleCheckboxChange(filter._id)}
+              />
+              <label htmlFor={`filter_${filter.id}`}>{filter.name}</label>
+            </section>
+          ))}
+        </section>
+      </aside>
 
       <button className={style.openbtn} onClick={openNav}>
         <IoIosArrowForward />

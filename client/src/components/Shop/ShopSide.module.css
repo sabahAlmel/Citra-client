@@ -10,26 +10,58 @@
   transition: 0.5s;
   font-weight: 400;
   padding-top: 15px;
+  /* box-shadow: #ffdfb8; */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
+
 .sidepanel .closebtn {
   font-size: 37px;
 }
 .closebtn {
   color: var(--blue-color);
   cursor: pointer;
+  position: absolute;
+  top: 2px;
+  right: 10px;
 }
 .openbtn {
-  font-size: 35px;
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
-  background-color: transparent;
+  padding: 7px;
+  padding-left: 10px;
+  margin-left: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--main-color);
   color: var(--blue-color);
+  font-size: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
   border: none;
-  height: 50px;
-  margin: 0 10px;
+  border-radius: 40px;
 }
-
 .openbtn:hover {
-  background-color: transparent;
+  background-color: #f1cab1;
+}
+.filter {
+  margin-top: 40px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  color: var(--brown-color);
+}
+.filter .inputFilter {
+  margin-right: 5px;
+  accent-color: var(--blue-color);
+  scale: 1.4;
+}
+.filter .inputFilter:checked {
+  outline: var(--blue-color);
+  background-color: var(--blue-color);
 }
 @media (max-width: 769px) {
   .openbtn {

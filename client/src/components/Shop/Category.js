@@ -61,13 +61,13 @@ function Category() {
     ],
   };
   return (
-    <div className={style.container}>
+    <section className={style.container}>
       {allCategories.categories.map((ele) => (
-        <div key={ele._id} className={style.subContainer}>
+        <section key={ele._id} className={style.subContainer}>
           <h3>{ele.name}</h3>
-        </div>
+        </section>
       ))}
-    </div>
+    </section>
   );
 }
 
