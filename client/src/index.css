@@ -1,12 +1,20 @@
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=Readex+Pro:wght@300&display=swap');
+  
+  /* font-family: 'Readex Pro', sans-serif; */
+  /* font-family: 'Noto Nastaliq Urdu', serif; */
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Readex Pro', sans-serif;
+
 }
 
 :root {
   --blue-color: #368681;
-  --brown-color: #4D342B;
-  --rose-color: #F1CAB1;
-  --main-color: #FEE7CB;
+  --brown-color: #4d342b;
+  --rose-color: #f1cab1;
+  --main-color: #fee7cb;
+  --border-radius: 8px;
+  --margin-LR: 4rem;
 }
