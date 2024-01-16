@@ -7,7 +7,7 @@
   height: 100vh;
   width: 0;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   right: 0;
   background-color: var(--main-color);
@@ -68,6 +68,7 @@
   transition: left 0.3s ease;
   border: none;
   border-radius: 40px;
+  z-index: 1;
 }
 .openbtn:hover {
   background-color: #f1cab1;
