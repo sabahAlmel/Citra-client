@@ -1,0 +1,59 @@
+.wrapper{
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom:20px;
+    background-color: var(--main-color);
+}
+.upper{
+    font-family: 'Noto Nastaliq Urdu', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--brown-color);
+}
+.lower{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80vw;
+    column-gap: 2rem;
+    margin: auto;
+}
+.slogan{
+    color: var(--brown-color);
+    font-size: 2rem;
+    line-height: 70px;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+}
+.image{
+    border-bottom-right-radius: 200px;
+}
+.gotoshop{
+    padding: 10px;
+    margin-top: 20px ;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brown-color);
+    border: 2px solid var(--blue-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: larger;
+    width: 20rem;
+    align-self: flex-end;
+}
+.gotoshop:hover{
+    background-color: var(--blue-color);
+    color: white;
+}
