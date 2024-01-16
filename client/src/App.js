@@ -5,8 +5,9 @@ function App() {
   return (
     <div className="App">
       <AppRoutes />
-    </div>
+      </div>
   );
 }
+
 
 export default App;
