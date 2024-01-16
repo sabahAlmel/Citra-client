@@ -1,0 +1,33 @@
+.wrapper, .left, .middle, .right, .side{
+    display: flex;
+    align-items: center;
+    line-height: 30px;
+}
+.wrapper, .left, .middle, .right{
+    justify-content: space-around;
+}
+.left, .middle, .right{
+    width: 20vw;
+}
+.wrapper{
+    width: 100vw;
+    background-color: var(--main-color);
+    padding: 100px;
+}
+.right, .side{
+    flex-direction: column;
+}
+.logo{
+    padding: 0 5px;
+}
+.link{
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.text, .link{
+    color: var(--brown-color);
+    font-weight: 600;
+    opacity: 0.8;
+}
