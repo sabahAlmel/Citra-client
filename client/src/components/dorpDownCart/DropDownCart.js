@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./DropDownCart.module.css";
 import { Link } from "react-router-dom";
 import overview from "../../assets/images/overview.jpeg";
-import trashCan from "../../assets/icons/TrashCan.svg";
+import trashCan from "../../assets/icons/blueTrashCan.svg";
 import redTrashCan from "../../assets/icons/redTrashCan.svg";
 
 function Img() {
@@ -80,8 +80,8 @@ function DropDownCart() {
                   </div>
                   <div className={style.lower}>
                     <div className={style.lowerRight}>
-                      <p className={style.details}>{product.color}</p>
-                      <p className={style.details}>{product.size}</p>
+                      <p className={style.details}>اللون : {product.color}</p>
+                      <p className={style.details}>الوصف : {product.size}</p>
                     </div>
                     <Img />
                   </div>
