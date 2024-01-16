@@ -11,14 +11,12 @@ import UserOutlet from "../Outlet/userOutlet.js";
 import NotFound from "../pages/NotFound/NotFound.js";
 import AboutUs from "../pages/AboutUs/AboutUs.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
-
 import Cart from "../pages/cart/Cart.js";
-
 function AppRoutes() {
   return (
     <Routes>
       <Route exact path="/" element={<UserOutlet />}>
-        <Route path="/" element={<Home/>}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/aboutus" element={<AboutUs />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
