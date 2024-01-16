@@ -56,80 +56,6 @@ const NavBar = () => {
           }`}
         >
           <di className={navBarStyle.container}>
-          <div className={navBarStyle.left}>
-            
-            
-        
-
-          <li className={navBarStyle.signin}>
-            <NavLink
-              onClick={() => {
-                setActive([false, false, false, true, false,false]);
-              }}
-              className={`${navBarStyle.navLi} ${
-                isActive[4] ? navBarStyle.active : ""
-              }`}
-              to={"./signin"}
-            >
-            تسجيل دخول
-            </NavLink>
-          </li>
-       
-          <li>
-            <form className={navBarStyle.search}>
-            <input
-              id="search"
-              className={navBarStyle.inputSearch}
-              type="text"
-              placeholder="إبحث عن إسم المنتج"
-              value={searchInput}
-              onChange={handleSearchInputChange}
-            />
-            <button
-              type="button"
-              className={navBarStyle.searchButton}
-              onClick={handleSearch}
-            >
-              <img src={magnifire} alt="search img" width="25" height="20" />
-            </button>
-          </form>
-            </li>
-      
-          <li >
-            <NavLink
-              onClick={() => {
-                setActive([false, false, false, false,false,false]);
-              }}
-              className={`${navBarStyle.order} ${
-                isActive[1] ? navBarStyle.active : ""
-              }`}
-              to={"./shop"}
-            >
-               <img src={order}  alt="orderNow"/>
-            إطلب الآن
-            </NavLink>
-          </li>
-          </div>
-        
-        
-       
-          <div className={navBarStyle.logoContainer}>
-            <NavLink
-                onClick={() => {
-                  setActive([true, false, false, false, false,false]);
-                }}
-              
-              to={"./"}
-            >
-              <img
-                className={navBarStyle.navImg}
-                src={isResponsive ? logo : logo}
-                alt="logo"
-              />
-            </NavLink>
-          </div>
-         
-     
           <div className={navBarStyle.right}>
           <li >
             <NavLink
@@ -171,6 +97,89 @@ const NavBar = () => {
             </NavLink>
           </li>
       </div>
+       
+          <div className={navBarStyle.logoContainer}>
+            <NavLink
+                onClick={() => {
+                  setActive([true, false, false, false, false,false]);
+                }}
+              
+              to={"./"}
+            >
+              <img
+                className={navBarStyle.navImg}
+                src={isResponsive ? logo : logo}
+                alt="logo"
+              />
+            </NavLink>
+          </div>
+         
+          <div className={navBarStyle.left}>
+            
+            
+        
+
+          <li className={navBarStyle.signin}>
+            <NavLink
+              onClick={() => {
+                setActive([false, false, false, true, false,false]);
+              }}
+              className={`${navBarStyle.navLi} ${
+                isActive[4] ? navBarStyle.active : ""
+              }`}
+              to={"./signin"}
+            >
+            تسجيل دخول
+            </NavLink>
+          </li>
+       
+          <li>
+           
+            <form className={navBarStyle.search}>
+            <div>
+            <input
+              id="search"
+              className={navBarStyle.inputSearch}
+              type="text"
+              placeholder="إبحث عن إسم المنتج"
+              value={searchInput}
+              onChange={handleSearchInputChange}
+            />
+            <button
+              type="button"
+              className={navBarStyle.searchButton}
+              onClick={handleSearch}
+            >
+              <img src={magnifire} alt="search img" width="25" height="20" />
+            </button>
+              </div>
+       
+          </form>
+            </li>
+      
+          <li >
+<div className={navBarStyle.order}>
+
+
+<NavLink
+  onClick={() => {
+    setActive([false, false, false, false,false,false]);
+  }}
+  className={`${navBarStyle.navLi} ${
+    isActive[1] ? navBarStyle.active : ""
+  }`}
+  to={"./shop"}
+>
+إطلب الآن
+</NavLink>
+<img src={order}  alt="orderNow"/>
+</div>
+       
+          </li>
+          </div>
+        
+        
+         
       </di>
  
           
