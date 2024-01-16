@@ -93,14 +93,3 @@
 .filter label {
   cursor: pointer;
 }
-@media (max-width: 769px) {
-  .openbtn {
-    padding: 0;
-    margin: 45px 0px;
-  }
-}
-@media (max-width: 350px) {
-  .openbtn {
-    font-size: 28px;
-  }
-}

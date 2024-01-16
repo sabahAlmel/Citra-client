@@ -10,7 +10,7 @@
   .productSection {
     gap: 25px 5px;
     justify-content: center;
-    margin: 0 0.5rem;
+    margin: 2rem 0.5rem;
   }
 }
 .productHolder {
