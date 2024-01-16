@@ -31,3 +31,13 @@
     font-weight: 600;
     opacity: 0.8;
 }
+
+@media(max-width:850px){
+    .wrapper{
+        flex-direction: column;
+    }
+    .left, .middle, .right{
+        margin-bottom: 20px;
+        width: 100vw;
+    }
+}
