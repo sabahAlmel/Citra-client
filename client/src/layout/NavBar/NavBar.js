@@ -23,8 +23,8 @@ function NavBar() {
       <img className={styles.logo} src={logo} alt="citra's logo "/>
       <ul>
         <li><Link className={styles.link} to="./">الصفحة الرئيسية</Link> </li>
-        <li><Link className={styles.link}to="./"> منتجاتنا </Link> </li>
-        <li> <Link className={styles.link} to="./card">إطلب الآن</Link></li>
+        <li><Link className={styles.link}to="./shop"> منتجاتنا </Link> </li>
+        <li> <Link className={styles.link} to="./">إطلب الآن</Link></li>
         <li><Link className={styles.link}to="./aboutus">حولنا</Link>   </li>
       </ul>
       <form>
