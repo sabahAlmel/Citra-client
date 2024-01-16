@@ -1,19 +1,44 @@
+.sidepanel::-webkit-scrollbar {
+  display: none;
+}
 .sidepanel {
+  overflow-y: auto;
+  height: 98vh;
   height: 100vh;
   width: 0;
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 0;
+  right: 0;
   background-color: var(--main-color);
   overflow-x: hidden;
   transition: 0.5s;
   font-weight: 400;
   padding-top: 15px;
-  /* box-shadow: #ffdfb8; */
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
-
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.head h3 {
+  font-weight: 600;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+.line {
+  background-color: var(--blue-color);
+  width: 80%;
+  height: 1px;
+  margin: 0 auto;
+}
+.subHead {
+  margin-top: 20px;
+}
+.subHead h3 {
+  margin: 20px 10px;
+}
 .sidepanel .closebtn {
   font-size: 37px;
 }
@@ -22,24 +47,24 @@
   cursor: pointer;
   position: absolute;
   top: 2px;
-  right: 10px;
+  left: 10px;
 }
 .openbtn {
   position: fixed;
-  left: 0;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   padding: 7px;
-  padding-left: 10px;
-  margin-left: -5px;
+  padding-right: 10px;
+  margin-right: -5px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--main-color);
   color: var(--blue-color);
   font-size: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: left 0.3s ease;
   border: none;
   border-radius: 40px;
@@ -48,20 +73,25 @@
   background-color: #f1cab1;
 }
 .filter {
-  margin-top: 40px;
-  margin-left: 10px;
+  margin-bottom: 40px;
+  margin-right: 10px;
   display: flex;
   align-items: center;
   color: var(--brown-color);
 }
 .filter .inputFilter {
-  margin-right: 5px;
+  padding: 0 10px;
+  cursor: pointer;
+  margin-left: 10px;
   accent-color: var(--blue-color);
   scale: 1.4;
 }
 .filter .inputFilter:checked {
   outline: var(--blue-color);
   background-color: var(--blue-color);
+}
+.filter label {
+  cursor: pointer;
 }
 @media (max-width: 769px) {
   .openbtn {

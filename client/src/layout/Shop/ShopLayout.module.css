@@ -1,0 +1,6 @@
+.pagination {
+  direction: ltr;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

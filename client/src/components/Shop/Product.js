@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import image from "./image.png";
 import style from "./Product.module.css";
+import cart from "../../assets/icons/order.svg";
 
 function Product() {
   let products = {
@@ -68,7 +69,7 @@ function Product() {
   return (
     <section className={style.productSection}>
       {products.products.map((element) => (
-        <section className={style.productHolder}>
+        <NavLink to="/single" className={style.productHolder}>
           {/* <img src={element.images[0]} alt="product"/> */}
           <img src={image} alt="product" />
           <div className={style.details}>
@@ -76,11 +77,11 @@ function Product() {
               <h4>{element.name}</h4>
               <p>${element.price}</p>
             </div>
-            <Link to="/" className={style.linkToSingle}>
-              المزيد
+            <Link to="/" className={style.addToCart}>
+              <img src={cart} alt="order now" />
             </Link>
           </div>
-        </section>
+        </NavLink>
       ))}
     </section>
   );
