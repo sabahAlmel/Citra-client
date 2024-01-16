@@ -9,7 +9,7 @@ import SignUp from "../pages/SignUp/SignUp.js";
 import Shop from "../pages/Shop/Shop.js";
 import UserOutlet from "../Outlet/userOutlet.js";
 import NotFound from "../pages/NotFound/NotFound.js";
-import SingleProduct from "../pages/SingleProduct/SingleProduct.js";
+import AboutUs from "../pages/AboutUs/AboutUs.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
 import Cart from "../pages/cart/Cart.js";
 import DropDownCart from "../components/dorpDownCart/DropDownCart.js";
@@ -19,8 +19,9 @@ function AppRoutes() {
       <Route exact path="/" element={<UserOutlet />}>
         <Route path="/" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
+        <Route path="/aboutus" element={<AboutUs />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/singleProduct" element={<SingleProduct />}></Route>
+        {/* <Route path="/singleProduct" element={<SingleProduct />}></Route> */}
         <Route path="/minicart" element={<DropDownCart />}></Route>
       </Route>
       <Route path="/signin" element={<SignIn />}></Route>
