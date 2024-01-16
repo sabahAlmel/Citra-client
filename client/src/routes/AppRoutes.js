@@ -14,7 +14,9 @@ import LayoutWithSidebar from "./LayoutWithSidebar.js";
 import LoadingPage from "../components/loadingPage.js";
 import CategorySection from '../components/categorySection/categorySection.js'
 import ProductCard from '../components/productSection/productCard.js'
-import ProductData from '../components/productSection/productSection.js'
+import ProductSection from "../components/productSection/productSection.js";
+import CategoryComponent from '../components/categorySection/categoryComponent.js'
+import AboutUs from '../components/aboutUs/aboutUs.js'
 
 
 
@@ -22,7 +24,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route exact path="/" element={<UserOutlet />}>
-        <Route path="/" element={<ProductData />}></Route>
+        <Route path="/" element={<Home/>}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/singleProduct" element={<SingleProduct />}></Route>
       </Route>

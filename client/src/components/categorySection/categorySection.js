@@ -1,27 +1,90 @@
 import React from 'react';
-import { Grid, Typography } from '@mui/material';
 import CategoryComponent from '../categorySection/categoryComponent.js'
+import style from '../categorySection/categorySection.module.css'
+import image from '../../assets/images/hijab.webp'
 
 
 const CategorySection = () => {
-  const rows = [3, 3, 2];
+  const fakeCategory =[
+    {
+    id:1,
+     image:image ,
+      name:'حجابات'
+  },
+  {
+    id:1,
+     image:image ,
+      name:'بيت قرآن'
+  },
+  {
+    id:1,
+     image:image ,
+      name:'مسبحة'
+  },
+  {
+    id:1,
+     image:image ,
+      name:'مرطبات'
+  },
+  {
+    id:1,
+     image:image ,
+      name:'صابون'
+  },
+  {
+    id:1,
+     image:image ,
+      name:'مناشف'
+  },
+  {
+    id:1,
+     image:image ,
+      name:'إكسسوارات'
+  },{
+    id:1,
+     image:image ,
+      name:'أطقم صلاة'
+  }
+  ];
 
-  return (
-    <Grid container spacing={2} justifyContent="center">
-      <Grid item xs={12} style={{ textAlign: 'center', marginBottom: '20px' }}>
-        <Typography variant="h6">All Categories</Typography>
-      </Grid>
-      {rows.map((numCards, rowIndex) => (
-        <Grid container spacing={1} key={rowIndex} justifyContent="center">
-          {Array.from({ length: numCards }).map((_, cardIndex) => (
-            <Grid item xs={8} sm={6} md={4} key={cardIndex}>
-              <CategoryComponent />
-            </Grid>
+
+
+  return(
+    <section className={style.categorySection}>
+      <h2 className={style.title}>الخانات</h2>
+      <div className={style.categoryContainer}>
+        <div className={style.row}>
+          {fakeCategory.slice(0, 3).map((category) => (
+            <CategoryComponent
+              key={category.id}
+              image={category.image}
+              name={category.name}
+            />
           ))}
-        </Grid>
-      ))}
-    </Grid>
-  );
-};
+        </div>
+        <div className={style.row}>
+          {fakeCategory.slice(3, 6).map((category) => (
+            <CategoryComponent
+              key={category.id}
+              image={category.image}
+              name={category.name}
+            />
+          ))}
+        </div>
+        <div className={style.row}>
+          {fakeCategory.slice(6, 8).map((category) => (
+            <CategoryComponent
+              key={category.id}
+              image={category.image}
+              name={category.name}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+  )
+  
+}
 
 export default CategorySection;

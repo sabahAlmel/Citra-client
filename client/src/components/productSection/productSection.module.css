@@ -1,0 +1,34 @@
+.contentsection {
+    text-align: center;
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    padding: 4rem;
+    
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem;
+  }
+ 
+  @media(max-width:768px){
+    .cardContainer {
+        display: flex;
+        flex-direction: column;
+   
+
+    }
+  }
+  
+
+  
+  
