@@ -1,13 +1,11 @@
 import React from "react";
-import Category from "../../components/Shop/Category";
-import ShopSide from "../../components/Shop/ShopSide";
+import ShopLayout from "../../layout/Shop/ShopLayout";
 
 function Shop() {
   return (
-    <div>
-      <ShopSide />
-      <Category />
-    </div>
+    <section>
+      <ShopLayout />
+    </section>
   );
 }
 

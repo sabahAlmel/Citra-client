@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SingleProduct() {
+function AboutUs() {
   return (
     <div>
         single product
@@ -9,4 +9,4 @@ function SingleProduct() {
   )
 }
 
-export default SingleProduct
+export default AboutUs

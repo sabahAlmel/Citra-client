@@ -1,0 +1,28 @@
+.wrapper{
+    height: 20vh;
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid #c0c0c0;
+    box-shadow: 1px 3px 6px #c1c1c1;
+    border-radius: var(--border-radius);
+    transition: 0.3s;
+}
+.wrapper:hover{
+    scale: 1.02;
+}
+.trash{
+    transition: 0.3s;
+}
+.trash:hover{
+    cursor: pointer;
+    scale: 1.5;
+}
+
+@media(max-width:485px){
+    .wrapper{
+        flex-direction: column;
+        height: 50vh;
+    }
+}
