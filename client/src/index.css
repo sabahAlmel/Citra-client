@@ -1,7 +1,13 @@
-* {
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=Readex+Pro:wght@300&display=swap');
+  
+  /* font-family: 'Readex Pro', sans-serif; */
+  /* font-family: 'Noto Nastaliq Urdu', serif; */
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Readex Pro', sans-serif;
+
 }
 
 :root {
