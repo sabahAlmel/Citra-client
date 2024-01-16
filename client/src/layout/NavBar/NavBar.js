@@ -174,6 +174,32 @@ function Navbar() {
                     ابحث
                   </NavLink>
                 </li>
+                <li>
+                  <form className={Styles.search}>
+                    <div>
+                      <input
+                        id="search"
+                        className={Styles.inputSearch}
+                        type="text"
+                        placeholder="إبحث عن إسم المنتج"
+                        value={searchInput}
+                        onChange={handleSearchInputChange}
+                      />
+                      <button
+                        type="button"
+                        className={Styles.searchButton}
+                        onClick={handleSearch}
+                      >
+                        <img
+                          src={magnifire}
+                          alt="search img"
+                          width="25"
+                          height="20"
+                        />
+                      </button>
+                    </div>
+                  </form>
+                </li>
               </div>
             </ul>
             {/* Navbar Ending */}
