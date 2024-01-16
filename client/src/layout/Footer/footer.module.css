@@ -10,7 +10,7 @@
     width: 20vw;
 }
 .wrapper{
-    width: 100vw;
+    width: 100%;
     background-color: var(--main-color);
     padding: 100px;
 }
