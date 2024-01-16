@@ -3,6 +3,7 @@
 .navLi.active {
   height: 100%;
   border-bottom: 2px solid var(--blue-color);
+
 }
 
 .navBar {
@@ -137,15 +138,21 @@ border: 2px solid var(--blue-color);
 .order p {
   color: var(--brown-color);
 }
-.signin {
-  /* width: 30%; */
-}
+
 @media (max-width: 480px) {
-  .navLi.active {
+  .container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .navUl{
+    width: 100%;
+  }
+  /* .navLi.active {
     height: 100%;
     padding: 10px;
     border-bottom: 2px solid var(--blue-color);
-  }
+  } */
   .navMenu {
     position: absolute;
     top: 2vh;
@@ -164,12 +171,21 @@ border: 2px solid var(--blue-color);
     border-radius: 0.2rem;
   }
   .navImg {
-    width: 56px;
-    margin-left: -27px;
-    height: 56px;
+
+    width: 30px;
+    height: 30px;
+   position: absolute;
+  bottom: 0rem;
+  right: 19.5rem;
+  
+
+  }
+  .navimgClose{
+background-color: aqua;
   }
   .navMenu {
     display: flex;
+
   }
   .navTitle {
     color: var(--brown-color);
