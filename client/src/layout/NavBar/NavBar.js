@@ -4,6 +4,7 @@ import logo from "../../assets/icons/logo.svg";
 import magnifier from "../../assets/icons/search.png";
 import order from "../../assets/icons/order.svg";
 import styles from "./NavBar.module.css";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
   const [searchInput, setSearchInput] = useState("");
@@ -40,7 +41,13 @@ function NavBar() {
     const bar1 = [styles.bar, menuOpen ? styles.lineone : ""].join(" ");
     const bar2 = [styles.bar, menuOpen ? styles.linetwo : ""].join(" ");
     const bar3 = [styles.bar, menuOpen ? styles.linethree : ""].join(" ");
-  
+  /////////////
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    // Use the history object to go back to the previous page
+    navigate(-1);
+  };
   return (
     <header>
       <nav className={styles.nav}>
@@ -119,12 +126,13 @@ function NavBar() {
             onClick={handleSearch}
           />
         </form> */}
-
+ <Link to="/DropDownCart">
         <img
           className={`${styles.order} ${menuOpen ? styles.open : ""}`}
           src={order}
           alt="bag"
-        />
+          onClick={handleClick}
+          /></Link>
       </nav>
     </header>
   );

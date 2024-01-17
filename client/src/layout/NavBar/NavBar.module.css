@@ -57,7 +57,7 @@ input:focus {
   left: 44rem;
 } */
 li{
-  padding-top:14px ;
+  margin-top:26px ;
 }
 .link {
   text-decoration: none;
@@ -114,13 +114,14 @@ li{
   height: 100%;
   top: -100%;
   left: 0;
-  background-color: gray;
+  background-color: var(--blue-color);
   z-index: -1;
   transition: all 400ms ease-in;
 }
 
 .btn:hover {
-  color: red;
+  color: var(--main-color);
+  background-color: var(--blue-color);
 }
 
 .btn::before {
