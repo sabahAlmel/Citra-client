@@ -1,5 +1,8 @@
 * {
   font-size: 19px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 .nav {
   width: 100%;
@@ -50,18 +53,108 @@ input:focus {
 a:active {
   border-bottom: 2px solid var(--blue-color);
 }
-@media(max-width:850px){
-  .nav.open {
+.link {
+  transition: 0.7 ease;
+}
+.link:hover {
+  color: var(--blue-color);
+}
+.hamburger {
+  display: none;
+}
+.bar {
+  width: 25px;
+  display: block;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--brown-color);
+}
+@media (max-width: 950px) {
+  header {
+    width: 100%;
+  }
+  nav {
+    width: 100%;
+  }
+  .hamburger {
+    display: block;
+  }
+  /* .hamburger:active .bar:nth-child(2){
+    opacity: 0
+  };
+  .hamburger:active .bar:nth-child(1){
+   transform: translateX(8px) rotate(45deg);
+  };
+  .hamburger:active .bar:nth-child(3){
+    transform: translateX(-8px) rotate(-45deg);
+   }; */
+  ul {
+    position: fixed;
+    transform: translateX(-100%);
+    left: -100%;
+    top: 70px;
+    gap: 0;
+    flex-direction: column;
+    background-color: var(--main-color);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+  }
+  li{
+    margin: 16px 0;
+
+
+  }
+  li:active{
+    left: 0;
+
+  }
+  .form,
+.order,
+.link,
+.dropdown {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.nav.open .form,
+.nav.open .order,
+.nav.open .link,
+.nav.open .dropdown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background-color: var(--main-color);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+  /* //////////////////////////////////////////////////// */
+  /* .nav.open {
     display: flex;
     z-index: 1000;
     height: auto;
-    background-color: var(--main-color);
+    background-color: var(--brown-color);
   }
-  .nav{
+  .nav {
     display: flex;
     flex-direction: column;
+    align-content: center;
   }
-  .navMenu {
+  .hamburger {
+    cursor: pointer;
     position: absolute;
     top: 2vh;
     margin: 10px;
@@ -78,4 +171,24 @@ a:active {
     background-color: #fefefe;
     border-radius: 0.2rem;
   }
+  .navMenu {
+    display: flex;
+  }
+  .nav .ul .li {
+    display: flex;
+    margin: 6px 0 6px 0;
+    color: #fefefe;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .ul li {
+    list-style-type: none;
+    width: 100%;
+    text-align: center;
+  }
+  header {
+    height: auto;
+    width: 100%;
+  } */
 }
