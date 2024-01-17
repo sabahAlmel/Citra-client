@@ -1,6 +1,5 @@
 import React from 'react';
 import imag from '../../assets/images/image.jpeg';
-import image from '../../assets/images/pluus.png';
 import ProductCard from './productCard';
 import style from "../productSection/productSection.module.css"
 const productData = [
@@ -21,7 +20,7 @@ const ProductSection = () => {
     <h2 className={style.title}>منتجاتنا</h2>
     <div className={style.cardContainer}>
       {productData.map((item, index) => (
-        <ProductCard key={item.id} image={image} {...item} />
+        <ProductCard key={item.id} image={imag} {...item} />
       ))}
       
     </div>

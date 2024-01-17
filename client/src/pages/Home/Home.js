@@ -5,7 +5,7 @@ import ProductSection from '../../components/productSection/productSection'
 import style from "../../pages/Home/Home.module.css"
 function Home() {
   return (
-    <div className={style.wrapper}>
+    <div className={style.container}>
       <CategorySection />
       <AboutUs />
       <ProductSection />

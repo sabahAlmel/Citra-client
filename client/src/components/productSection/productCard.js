@@ -1,5 +1,4 @@
 import React from 'react';
-import imag from '../../assets/images/image.jpeg'
 import style from '../productSection/productCard.module.css'
 
 
