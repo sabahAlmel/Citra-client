@@ -1,9 +1,10 @@
 import React from 'react'
+import DashTable from '../../../components/DashTable/DashTable'
 
 function Users() {
   return (
     <div>
-      users
+      <DashTable/>
     </div>
   )
 }
