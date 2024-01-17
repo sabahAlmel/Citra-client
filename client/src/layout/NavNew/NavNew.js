@@ -1,14 +1,14 @@
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import "../Styles/main.css";
+import styles from "./NavNew.module.css";
 
-function Navbar() {
+
+function Nav() {
 	const navRef = useRef();
 
 	const showNavbar = () => {
-		navRef.current.classList.toggle(
-			"responsive_nav"
-		);
+		navRef.current.classList.toggle(styles.responsive_nav);
+
 	};
 
 	return (
@@ -34,4 +34,4 @@ function Navbar() {
 	);
 }
 
-export default Navbar;
+export default Nav;

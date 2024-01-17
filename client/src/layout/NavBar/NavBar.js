@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/icons/logo.svg";
 import magnifier from "../../assets/icons/search.png";
@@ -8,6 +8,7 @@ import styles from "./NavBar.module.css";
 function NavBar() {
   const [searchInput, setSearchInput] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isResponsive, setIsResponsive] = useState(window.innerWidth <= 480);
 
   const handleSearchInputChange = (e) => {
     setSearchInput(e.target.value);
@@ -19,44 +20,91 @@ function NavBar() {
 
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
+    console.log(menuOpen);
   };
+  useEffect(() => {
+    // Check the window width and set the isResponsive state when the component mounts
+    const handleResize = () => {
+      setIsResponsive(window.innerWidth <= 850);
+    };
 
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+    // Navbar
+    
+
+    const bar1 = [styles.bar, menuOpen ? styles.lineone : ""].join(" ");
+    const bar2 = [styles.bar, menuOpen ? styles.linetwo : ""].join(" ");
+    const bar3 = [styles.bar, menuOpen ? styles.linethree : ""].join(" ");
+  
   return (
     <header>
-      <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
-        <div className={styles.hamburger} onClick={handleMenuClick}>
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
+      <nav className={styles.nav}>
+      <div className={styles.hamburger}  onClick={handleMenuClick}>
+          <span className={bar1 } ></span>
+          <span className={bar2}></span>
+          <span className={bar3}></span>
+        
+        
         </div>
-        <Link className={styles.link}>
+        
+
+        <div className={styles.divdrop}>
           <img className={styles.logo} src={logo} alt="citra's logo" />
-        </Link>
-        <div className={styles.dropdown}>
-          <ul>
+        </div>
+        <div>
+          <ul className={` ${menuOpen ? styles.dropdown : styles.navUl}`}>
+           
             <li>
-              <NavLink className={styles.link} to="./">
+              <NavLink
+                className={styles.link}
+                to="./"
+                onClick={() => setMenuOpen(false)}
+              >
                 الصفحة الرئيسية
               </NavLink>
             </li>
             <li>
-              <NavLink className={styles.link} to="./shop">
+              <NavLink
+                className={styles.link}
+                to="./shop"
+                onClick={() => setMenuOpen(false)}
+              >
                 منتجاتنا
               </NavLink>
             </li>
             <li>
-              <NavLink className={styles.link} to="./">
+              <NavLink
+                className={styles.link}
+                to="./"
+                onClick={() => setMenuOpen(false)}
+              >
                 إطلب الآن
               </NavLink>
             </li>
             <li>
-              <NavLink className={styles.link} to="./aboutus">
+              <NavLink
+                className={styles.link}
+                to="./aboutus"
+                onClick={() => setMenuOpen(false)}
+              >
                 حولنا
               </NavLink>
             </li>
+
+            <button className={`${styles.btn}`}  >
+             < NavLink className={styles.link} to="./signin">
+              تسجيل دخول
+              </NavLink>
+              <i className="fas fa-chevron-right"></i>
+            </button>
           </ul>
         </div>
-        <form className={`${styles.form} ${menuOpen ? styles.open : ""}`}>
+        {/* <form className={`${styles.form} ${menuOpen ? styles.open : ""}`}>
           <input
             id="search"
             type="text"
@@ -70,14 +118,13 @@ function NavBar() {
             alt="magnifier"
             onClick={handleSearch}
           />
-        </form>
-        <Link className={`${styles.link} ${menuOpen ? styles.open : ""}`} to="./signin">
-          تسجيل دخول
-        </Link>
-        <Link className={`${styles.link} ${menuOpen ? styles.open : ""}`} to="./signup">
-          اشتراك
-        </Link>
-        <img className={`${styles.order} ${menuOpen ? styles.open : ""}`} src={order} alt="bag" />
+        </form> */}
+
+        <img
+          className={`${styles.order} ${menuOpen ? styles.open : ""}`}
+          src={order}
+          alt="bag"
+        />
       </nav>
     </header>
   );
