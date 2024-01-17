@@ -1,4 +1,4 @@
-.container {
+.wrapper {
     background-image: url(../../assets/images/back.png);
     background-position: 0px 0px;
     background-repeat: no-repeat;
@@ -10,7 +10,7 @@
         background-position: 0px 0px;
     }
     50% {
-        background-position: 3% 3%;
+        background-position: 5% 5%;
     }
     100% {
         background-position: 0px 0px;

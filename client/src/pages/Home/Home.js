@@ -6,11 +6,13 @@ import style from "../../pages/Home/Home.module.css";
 import HeroSection from "../../components/heroSection/HeroSection";
 function Home() {
   return (
-    <div className={style.wrapper}>
+    <div className={style.container}>
       <HeroSection />
+      <div className={style.wrapper}>
       <CategorySection />
       <AboutUs />
       <ProductSection />
+      </div>
     </div>
   );
 }
