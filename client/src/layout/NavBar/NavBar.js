@@ -35,12 +35,11 @@ function NavBar() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-    // Navbar
-    
+  // Navbar
 
-    const bar1 = [styles.bar, menuOpen ? styles.lineone : ""].join(" ");
-    const bar2 = [styles.bar, menuOpen ? styles.linetwo : ""].join(" ");
-    const bar3 = [styles.bar, menuOpen ? styles.linethree : ""].join(" ");
+  const bar1 = [styles.bar, menuOpen ? styles.lineone : ""].join(" ");
+  const bar2 = [styles.bar, menuOpen ? styles.linetwo : ""].join(" ");
+  const bar3 = [styles.bar, menuOpen ? styles.linethree : ""].join(" ");
   /////////////
   const navigate = useNavigate();
 
@@ -48,24 +47,31 @@ function NavBar() {
     // Use the history object to go back to the previous page
     navigate(-1);
   };
+
   return (
     <header>
       <nav className={styles.nav}>
-      <div className={styles.hamburger}  onClick={handleMenuClick}>
-          <span className={bar1 } ></span>
-          <span className={bar2}></span>
-          <span className={bar3}></span>
-        
-        
-        </div>
-        
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div className={styles.hamburger} onClick={handleMenuClick}>
+            <span className={bar1}></span>
+            <span className={bar2}></span>
+            <span className={bar3}></span>
+          </div>
 
-        <div className={styles.divdrop}>
-          <img className={styles.logo} src={logo} alt="citra's logo" />
+          <Link to="/DropDownCart">
+            <img
+              className={`${styles.order} ${menuOpen ? styles.open : ""}`}
+              src={order}
+              width={"30px"}
+              height={"30px"}
+              alt="bag"
+              onClick={handleClick}
+            />
+          </Link>
         </div>
+
         <div>
           <ul className={` ${menuOpen ? styles.dropdown : styles.navUl}`}>
-           
             <li>
               <NavLink
                 className={styles.link}
@@ -103,12 +109,9 @@ function NavBar() {
               </NavLink>
             </li>
 
-            <button className={`${styles.btn}`}  >
-             < NavLink className={styles.link} to="./signin">
+            <NavLink className={` ${styles.btn}`} to="./signin">
               تسجيل دخول
-              </NavLink>
-              <i className="fas fa-chevron-right"></i>
-            </button>
+            </NavLink>
           </ul>
         </div>
         {/* <form className={`${styles.form} ${menuOpen ? styles.open : ""}`}>
@@ -126,13 +129,14 @@ function NavBar() {
             onClick={handleSearch}
           />
         </form> */}
- <Link to="/DropDownCart">
+
         <img
-          className={`${styles.order} ${menuOpen ? styles.open : ""}`}
-          src={order}
-          alt="bag"
-          onClick={handleClick}
-          /></Link>
+          className={styles.logo}
+          width={"60px"}
+          height={"60px"}
+          src={logo}
+          alt="citra's logo"
+        />
       </nav>
     </header>
   );

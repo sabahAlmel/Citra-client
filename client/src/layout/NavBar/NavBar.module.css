@@ -4,8 +4,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-header{
-  height: 23vh;
+
+header {
+  height: 20vh;
 }
 .nav {
   width: 100%;
@@ -14,15 +15,10 @@ header{
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color:var(--main-color)
+  background-color: var(--main-color);
 }
-.logo {
-  
-  width: 60px;
-  height: 60px;
-}
+
 .order {
-  
   width: 40px;
   height: 40px;
 }
@@ -32,10 +28,8 @@ header{
   display: flex;
   justify-content: space-between;
   list-style-type: none;
-    column-gap: 1.5rem;
-    
+  column-gap: 1.5rem;
 }
-
 
 input {
   border: none;
@@ -56,8 +50,8 @@ input:focus {
   top: 3.25rem;
   left: 44rem;
 } */
-li{
-  margin-top:26px ;
+li {
+  margin-top: 10px;
 }
 .link {
   text-decoration: none;
@@ -68,13 +62,11 @@ li{
   cursor: pointer;
 }
 
-
 .link {
-  transition: 0.7 ease;
+  transition: all 0.2s ease;
 }
 .link:hover {
-  color: var(--blue-color);
- 
+  color: var(--brown-color);
 }
 /* ///////////////////////////////////////////////////////// */
 .btn {
@@ -82,10 +74,10 @@ li{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 220.52px;
-  min-height: 56px;
+  width: 170px;
+  min-height: 36px;
   font-size: 1.2em;
-  border-radius: 100px;
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 400;
   position: relative;
@@ -93,58 +85,26 @@ li{
   color: var(--brown-color);
   background-color: transparent;
   overflow: hidden;
-  margin-top: 12px;
-}
-
-.btn i {
+  margin-top: 5px;
+  text-decoration: none;
   font-size: 1em;
-  padding: 0 10px;
-  transition: all 0.5s linear;
-}
-
-.btn:hover i {
-  transform: translateX(10px);
-}
-
-.btn::before,
-.btn::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: -100%;
-  left: 0;
-  background-color: var(--blue-color);
-  z-index: -1;
-  transition: all 400ms ease-in;
+  padding: 0 5px;
+  transition: all 0.3s linear;
 }
 
 .btn:hover {
-  color: var(--main-color);
+  color: white;
   background-color: var(--blue-color);
 }
 
-.btn::before {
-  opacity: 0.3;
-}
-
-.btn::after {
-  transition-delay: 0.3s;
-}
-
-.btn:hover::before,
-.btn:hover::after {
-  top: 0;
-}
-
-    /* ///////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////// */
 .hamburger {
   display: none;
 }
 .bar {
-  width: 25px;
+  width: 30px;
   display: block;
-  height: 3px;
+  height: 5px;
   margin: 5px auto;
   transition: all 0.3s ease-in-out;
   background-color: var(--brown-color);
@@ -152,26 +112,18 @@ li{
 /* ////////////////////////////////////////////////////// */
 
 @media (max-width: 950px) {
-
-
- .nav{
-
-  width: 100%;
-  height: 15vh;
-}
-  .hamburger{
+  .nav {
+    width: 100%;
+    height: 10vh;
+  }
+  .hamburger {
     display: block;
-    position: absolute;
-    left: 0;
-    margin: 0 3rem;
+
+
+ 
   }
-  .order{
-    position: absolute;
-  }
-  .divdrop{
-    position: relative
-  }
-  .dropdown{
+
+  .dropdown {
     position: absolute;
     height: auto;
     left: 0px;
@@ -181,76 +133,57 @@ li{
     flex-direction: column;
     z-index: 1000;
     background-color: var(--main-color);
-    margin-top: 16rem;
+    margin-top: 18rem;
     align-items: center;
-    padding: 10px
-}
-
+    padding: 10px;
+  }
 
   .navUl {
     z-index: 1000;
     display: none;
     flex-direction: column;
- 
   }
-  li{
-  
+  li {
     height: 2rem;
     display: flex;
     flex-direction: column;
-
-
   }
 
-  .logo{
-    position: absolute;
-    bottom: -1rem;
-    width: 36px;
-    height: 36px;
-    left: 6rem;
 
+
+  /* /////////////////////////////////// */
+  .line {
+    width: 100%;
+    height: 2px;
+    list-style-type: none;
+    background-color: var(--brown-color);
+    margin-top: 3em;
+    transition: all 500ms ease;
   }
- 
-/* /////////////////////////////////// */
-.line {
-  width: 100%;
-  height: 2px;
-  list-style-type: none;
-  background-color: var(--brown-color);
-  margin-top: 3em;
-  transition: all 500ms ease;
-}
 
+  .hamburger .bar {
+    transform-origin: 15% 50%;
+  }
 
-.hamburger .bar {
-  transform-origin: 15% 50%;
-}
+  .hamburger .lineone {
+    transform: rotate(45deg);
+  }
 
-.hamburger .lineone {
-  transform: rotate(45deg);
-}
+  .hamburger .linetwo {
+    opacity: 0;
 
-.hamburger .linetwo {
-  opacity: 0;
-}
+    /* transform: rotate(45deg); */
+  }
 
-.hamburger .linethree {
-  transform: rotate(-45deg);
-}
+  .hamburger .linethree {
+    
+    transform: rotate(-45deg);
+  }
 
-/* ////////////////////////btn/./////////// */
+  /* ////////////////////////btn/./////////// */
 
-
-}
-@media (max-width: 757px) {
-  .logo{
-   display: block;
-   position: absolute;
-    bottom: -1rem;
-    width: 36px;
-    height: 36px;
-    left: 0;
-    margin: 0 3rem;
-
+  .btn:hover {
+    color: var(--main-color);
+    /* background-color: var(--blue-color); */
   }
 }
