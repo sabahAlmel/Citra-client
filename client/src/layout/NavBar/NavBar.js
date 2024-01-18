@@ -34,31 +34,26 @@ function NavBar() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-    // Navbar
-    
+  // Navbar
 
-    const bar1 = [styles.bar, menuOpen ? styles.lineone : ""].join(" ");
-    const bar2 = [styles.bar, menuOpen ? styles.linetwo : ""].join(" ");
-    const bar3 = [styles.bar, menuOpen ? styles.linethree : ""].join(" ");
-  
+  const bar1 = [styles.bar, menuOpen ? styles.lineone : ""].join(" ");
+  const bar2 = [styles.bar, menuOpen ? styles.linetwo : ""].join(" ");
+  const bar3 = [styles.bar, menuOpen ? styles.linethree : ""].join(" ");
+
   return (
     <header>
       <nav className={styles.nav}>
-      <div className={styles.hamburger}  onClick={handleMenuClick}>
-          <span className={bar1 } ></span>
+        <div className={styles.hamburger} onClick={handleMenuClick}>
+          <span className={bar1}></span>
           <span className={bar2}></span>
           <span className={bar3}></span>
-        
-        
         </div>
-        
 
         <div className={styles.divdrop}>
           <img className={styles.logo} src={logo} alt="citra's logo" />
         </div>
         <div>
           <ul className={` ${menuOpen ? styles.dropdown : styles.navUl}`}>
-           
             <li>
               <NavLink
                 className={styles.link}
@@ -96,12 +91,9 @@ function NavBar() {
               </NavLink>
             </li>
 
-            <button className={`${styles.btn}`}  >
-             < NavLink className={styles.link} to="./signin">
+            <NavLink className={` ${styles.btn}`} to="./signin">
               تسجيل دخول
-              </NavLink>
-              <i className="fas fa-chevron-right"></i>
-            </button>
+            </NavLink>
           </ul>
         </div>
         {/* <form className={`${styles.form} ${menuOpen ? styles.open : ""}`}>
