@@ -140,7 +140,7 @@ const ShopSide = () => {
             <div className={style.closebtn} onClick={closeNav}>
               &times;
             </div>
-            <h3>الخانات الفرعية</h3>
+            <h3>الخانات الاساسية</h3>
           </section>
           <form>
             {allCategories.categories.map((filter) => (

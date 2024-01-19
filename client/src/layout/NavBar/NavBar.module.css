@@ -31,11 +31,11 @@ header {
   column-gap: 1.5rem;
 }
 
-input {
+/* input {
   border: none;
   background-color: var(--main-color);
   height: 3rem;
-}
+} */
 input::placeholder {
   align-items: center;
   height: 3rem;
@@ -118,9 +118,6 @@ li {
   }
   .hamburger {
     display: block;
-
-
- 
   }
 
   .dropdown {
@@ -149,8 +146,6 @@ li {
     flex-direction: column;
   }
 
-
-
   /* /////////////////////////////////// */
   .line {
     width: 100%;
@@ -176,7 +171,6 @@ li {
   }
 
   .hamburger .linethree {
-    
     transform: rotate(-45deg);
   }
 
