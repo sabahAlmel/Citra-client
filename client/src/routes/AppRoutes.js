@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home.js";
 import Products from "../pages/Dashboard/Products/Products.js";
 import Users from "../pages/Dashboard/Users/Users.js";
 import OverView from "../pages/Dashboard/OverView/OverView.js";
+import Order from "../pages/Dashboard/Orders/Order.js";
 import SignIn from "../pages/SignIn/SignIn.js";
 import SignUp from "../pages/SignUp/SignUp.js";
 import Shop from "../pages/Shop/Shop.js";
@@ -49,6 +50,15 @@ function AppRoutes() {
           <LayoutWithSidebar>
             {" "}
             <OverView />
+          </LayoutWithSidebar>
+        }
+      ></Route>
+      <Route
+        path="/orders"
+        element={
+          <LayoutWithSidebar>
+            {" "}
+            <Order />
           </LayoutWithSidebar>
         }
       ></Route>
