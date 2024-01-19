@@ -8,11 +8,11 @@ function Home() {
   return (
     <div className={style.container}>
       <HeroSection />
-      <div className={style.wrapper}>
-      <CategorySection />
-      <AboutUs />
-      <ProductSection />
-      </div>
+      {/* <div className={style.wrapper}>
+        <CategorySection />
+        <AboutUs />
+        <ProductSection />
+      </div> */}
     </div>
   );
 }
