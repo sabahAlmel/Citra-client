@@ -24,7 +24,6 @@ function AppRoutes() {
         <Route path="/singleProduct" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/dropDownCart" element={<DropDownCart />}></Route>
-        {/* <Route path="/singleProduct" element={<SingleProduct />}></Route> */}
       </Route>
       <Route path="/signin" element={<SignIn />}></Route>
       <Route path="/signup" element={<SignUp />}></Route>
