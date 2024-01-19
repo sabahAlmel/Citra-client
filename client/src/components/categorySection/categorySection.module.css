@@ -20,7 +20,7 @@
   }
   
   .row {
-    gap: 10rem;
+    gap: 2rem;
     margin-top: 25px;
     display: flex;
     justify-content: center;

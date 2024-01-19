@@ -1,12 +1,12 @@
 .wrapper{
-    height: 85%;
+    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: var(--main-color);
     row-gap: 50px;
-    margin-bottom:100px ;
+    margin-bottom: 60px;
 }
 .upper{
     font-family: 'Noto Nastaliq Urdu', serif;
@@ -16,7 +16,7 @@
     justify-content: center;
     align-items: center;
     color: var(--brown-color);
-    margin: auto;
+    margin: 0 auto;
 }
 .upperTxt{
     font-size: 48px;
@@ -32,7 +32,7 @@
     align-items: center;
     width: 80vw;
     column-gap: 2rem;
-    margin: auto;
+    margin: 0 auto;
 }
 .slogan{
     color: var(--brown-color);
@@ -63,9 +63,10 @@ width: 38vw;
     border-radius: var(--border-radius);
     text-decoration: none;
     font-weight: 600;
-    font-size: larger;
+    font-size: 24px;
     width: 50%;
     align-self: flex-start;
+    transition:all 0.3s linear;
 }
 .gotoshop:hover{
     background-color: var(--blue-color);
@@ -73,6 +74,11 @@ width: 38vw;
 }
 
 @media(max-width:1000px){
+    .wrapper{
+        height: 100%;
+        background-image: url("../../assets//images/overview.jpeg");
+        background-blend-mode:overlay;
+    }
     .lower{
         flex-direction: column;
         row-gap: 10px;
@@ -83,6 +89,7 @@ width: 38vw;
         border-radius: initial;
         width: 80%;
         border-radius: var(--border-radius);
+        display: none;
     }
     .left,.right{
         width: 90vw;
@@ -102,6 +109,6 @@ width: 38vw;
         font-size: 36px;
     }
     .gotoshop{
-        font-size: medium;
+        font-size: 18px;
     }
 }

@@ -11,7 +11,7 @@ import UserOutlet from "../Outlet/userOutlet.js";
 import NotFound from "../pages/NotFound/NotFound.js";
 import AboutUs from "../pages/AboutUs/AboutUs.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
-import DropDownCart from "../components/dorpDownCart/DropDownCart.js";
+import CartCards from "../components/cartCards/CartCards.js";
 function AppRoutes() {
   return (
     <Routes>
@@ -19,7 +19,7 @@ function AppRoutes() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/aboutus" element={<AboutUs />}></Route>
-        <Route path="/dropDownCart" element={<DropDownCart />}></Route>
+        <Route path="/cart" element={<CartCards />}></Route>
         {/* <Route path="/singleProduct" element={<SingleProduct />}></Route> */}
       </Route>
       <Route path="/signin" element={<SignIn />}></Route>
