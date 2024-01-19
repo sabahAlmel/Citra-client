@@ -1,10 +1,14 @@
 import React from 'react'
-import ProductTable from '../../../components/DashTable/productTable'
+// import ProductTable from '../../../components/DashTable/productTable'
  
 
 function Products() {
   return (
-   <ProductTable/>
+    <div>
+      product
+  {/* <ProductTable/> */}
+    </div>
+ 
   )
 }
 
