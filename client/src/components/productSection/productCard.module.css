@@ -1,0 +1,60 @@
+article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    margin-top: 3rem;
+  }
+  .figure {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .figure img {
+    width: 100%;
+    max-width: 275px;
+    height: 300px;
+    transition: transform 0.3s ease-in-out;
+    
+  }
+  .figure:hover img {
+    transform:scale(1.2)
+  }
+  
+  .section {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .p {
+    font-size: 1rem;
+   
+  }
+  
+  
+  .h2 {
+    font-size: 1rem;
+    margin-top:5px;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+  }
+  .h2:hover {
+    color: green; 
+    transform: scale(1.1); 
+}
+  @media (max-width:768px){
+    .article {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 40vw;
+        margin-top:1rem;
+        
+    }
+    .figure img {
+        width: 100%;
+        max-width: 275px;
+
+        height: 300px;
+      }
+  }

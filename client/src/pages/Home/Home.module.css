@@ -1,0 +1,21 @@
+.wrapper {
+    background-image: url(../../assets/images/back.png);
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    animation: bg-animation linear 3s infinite;
+}
+
+@keyframes bg-animation {
+    0% {
+        background-position: 0px 0px;
+    }
+    50% {
+        background-position: 5% 5%;
+    }
+    100% {
+        background-position: 0px 0px;
+    }
+}
+
+
+

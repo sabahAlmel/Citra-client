@@ -8,6 +8,7 @@ import instagram from "../../assets/icons/instagram.png";
 
 function Footer() {
   return (
+
     <footer className={style.wrapper}>
       <section className={style.right}>
         <p className={style.text}>متجر سترا - مركز البراق</p>
