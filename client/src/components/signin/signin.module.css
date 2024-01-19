@@ -1,0 +1,69 @@
+.wrapper{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main{
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+}
+.g{
+    margin-right: 0.2rem;
+}
+
+.h1{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--brown-color);
+}
+
+.h3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--brown-color);
+}
+.icon{
+    display: flex;
+    flex-direction: column;
+    /* margin-right: 0.1rem;    */
+}
+.p{
+    /* margin-top: 8px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    text-decoration: none;
+    line-height: 30px;
+    color: rgb(0, 0, 171);
+}
+.p:hover{
+    color: rgb(65, 65, 255);
+}
+.pending{
+    font-size: 18px;
+    animation-name: gradient;
+    animation-duration: 4s;
+}
+.smallScreen{
+    width: 80%;
+    margin: 2rem auto;
+}
+.passInp{
+    position: relative;
+}
+.openClose{
+    position: absolute;
+    top: 1.2rem;
+    right: 0.8rem;
+}
+
