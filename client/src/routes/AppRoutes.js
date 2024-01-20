@@ -34,7 +34,6 @@ function AppRoutes() {
         path="/products"
         element={
           <LayoutWithSidebar>
-            {" "}
             <Products />
           </LayoutWithSidebar>
         }
@@ -43,7 +42,7 @@ function AppRoutes() {
         path="/users"
         element={
           <LayoutWithSidebar>
-            {" "}
+       
             <Users />
           </LayoutWithSidebar>
         }
@@ -52,7 +51,6 @@ function AppRoutes() {
         path="/overview"
         element={
           <LayoutWithSidebar>
-            {" "}
             <OverView />
           </LayoutWithSidebar>
         }
