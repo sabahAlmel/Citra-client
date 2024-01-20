@@ -59,7 +59,7 @@ function NavBar() {
               onClick={handleClick}
             />
           </button>
-          {shopping ? <DropDownCart /> : ""}
+          {shopping ? <DropDownCart setShopping={setShopping} /> : ""}
         </div>
 
         <div>
@@ -92,13 +92,13 @@ function NavBar() {
               </NavLink>
             </li>
             <li>
-              <NavLink
+              <a
+                href="#aboutus"
                 className={styles.link}
-                to="./aboutus"
                 onClick={() => setMenuOpen(false)}
               >
                 حولنا
-              </NavLink>
+              </a>
             </li>
 
             <NavLink className={` ${styles.btn}`} to="./signin">
