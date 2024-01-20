@@ -121,3 +121,4 @@ const ShopSide = () => {
     </>
   );
 };
+export default ShopSide;
