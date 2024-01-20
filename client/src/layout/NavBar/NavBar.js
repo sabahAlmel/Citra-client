@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/icons/logo.svg";
 import order from "../../assets/icons/order.svg";
 import styles from "./NavBar.module.css";
 import DropDownCart from "../../components/dorpDownCart/DropDownCart";
 
 function NavBar() {
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   ///shopping cart drop down menu
   const [shopping, setShopping] = useState(false);
@@ -38,7 +39,37 @@ function NavBar() {
   const handleClick = () => {
     setShopping(!shopping);
   };
+  //handle scroll
+  const navigate = useNavigate();
+  const handleScrollToProduct = () => {
+    setMenuOpen(false);
+    if (location.pathname === "/") {
+      document
+        .getElementById("ourproducts")
+        .scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        document
+          .getElementById("ourproducts")
+          .scrollIntoView({ behavior: "smooth" });
+      }, 1000);
+    }
+  };
 
+  const handleScrollToAbout = () => {
+    setMenuOpen(false);
+    if (location.pathname === "/") {
+      document.getElementById("aboutus").scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        document
+          .getElementById("aboutus")
+          .scrollIntoView({ behavior: "smooth" });
+      }, 1000);
+    }
+  };
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -66,7 +97,9 @@ function NavBar() {
           <ul className={` ${menuOpen ? styles.dropdown : styles.navUl}`}>
             <li>
               <NavLink
-                className={styles.link}
+                className={
+                  location.pathname === "/" ? styles.activeLink : styles.link
+                }
                 to="./"
                 onClick={() => setMenuOpen(false)}
               >
@@ -76,29 +109,33 @@ function NavBar() {
             <li>
               <NavLink
                 className={styles.link}
-                to="./shop"
-                onClick={() => setMenuOpen(false)}
+                to={location.pathname === "/" ? "#" : "/"}
+                onClick={() => handleScrollToProduct()}
               >
                 منتجاتنا
               </NavLink>
             </li>
             <li>
               <NavLink
+                to={location.pathname === "/" ? "#" : "/"}
                 className={styles.link}
-                to="./"
+                onClick={() => handleScrollToAbout()}
+              >
+                حولنا
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={
+                  location.pathname === "/shop"
+                    ? styles.activeLink
+                    : styles.link
+                }
+                to="/shop"
                 onClick={() => setMenuOpen(false)}
               >
                 إطلب الآن
               </NavLink>
-            </li>
-            <li>
-              <a
-                href="#aboutus"
-                className={styles.link}
-                onClick={() => setMenuOpen(false)}
-              >
-                حولنا
-              </a>
             </li>
 
             <NavLink className={` ${styles.btn}`} to="./signin">
