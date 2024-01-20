@@ -20,6 +20,7 @@ function AppRoutes() {
       <Route exact path="/" element={<UserOutlet />}>
         <Route path="/" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
+        <Route path="/shop/:category" element={<Shop />}></Route>
         <Route path="/aboutus" element={<AboutUs />}></Route>
         <Route path="/singleProduct" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />}></Route>
