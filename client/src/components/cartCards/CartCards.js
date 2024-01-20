@@ -27,7 +27,7 @@ function Img() {
   );
 }
 
-function CartCards() {
+function CartCards({ name, price, size, color }) {
   const [hover, setHovered] = useState(false);
   const hoverHandler = () => {
     setHovered(!hover);
@@ -38,49 +38,23 @@ function CartCards() {
   } else {
     trash = trashCan;
   }
-  const products = [
-    {
-      name: "product 1",
-      price: "200",
-      color: "red",
-      size: "large",
-    },
-    {
-      name: "product 2",
-      price: "300",
-      color: "black",
-      size: "medium",
-    },
-    {
-      name: "product 3",
-      price: "250",
-      color: "yellow",
-      size: "large",
-    },
-  ];
   return (
-    <>
-      {products.map((product, index) => {
-        return (
-          <section className={style.wrapper}>
-            <div className={style.pic}>
-              <p>{product.name}</p>
-            </div>
-            <div className={style.middle}>
-              <p>{product.price}</p>
-              <p>{product.color}</p>
-            </div>
+    <section className={style.wrapper}>
+      <div className={style.pic}>
+        <p>{name}</p>
+      </div>
+      <div className={style.middle}>
+        <p>{price}</p>
+        <p>{color}</p>
+      </div>
 
-            <p>{product.size}</p>
-            <p>{product.size} $</p>
+      <p>{size}</p>
+      <p>{size} $</p>
 
-            <aside className={style.left}>
-              <Img />
-            </aside>
-          </section>
-        );
-      })}
-    </>
+      <aside className={style.left}>
+        <Img />
+      </aside>
+    </section>
   );
 }
 
