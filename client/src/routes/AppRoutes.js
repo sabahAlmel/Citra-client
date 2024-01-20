@@ -12,7 +12,7 @@ import UserOutlet from "../Outlet/userOutlet.js";
 import NotFound from "../pages/NotFound/NotFound.js";
 import AboutUs from "../pages/AboutUs/AboutUs.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
-import SingleProduct from "../components/SingleProduct/Content.js";
+import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Cart from "../components/cartCards/CartCards.js";
 function AppRoutes() {
   return (
