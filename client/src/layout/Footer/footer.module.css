@@ -1,13 +1,25 @@
-.wrapper, .left, .middle, .right, .side{
+.wrapper, .left, .middle, .right, .side, .info{
     display: flex;
     align-items: center;
     line-height: 30px;
+}
+.info{
+    width: 100%;
+    justify-content: space-around;
+}
+.company{
+    font-size: 24px;
+    color: var(--brown-color);
+}
+.middle, .left{
+    flex-direction: column;
+    row-gap: 50px;
 }
 .wrapper, .left, .middle, .right{
     justify-content: space-around;
 }
 .left, .middle, .right{
-    width: 20vw;
+    width: 20%;
 }
 .wrapper{
     width: 100%;
@@ -16,6 +28,10 @@
 }
 .right, .side{
     flex-direction: column;
+}
+.text{
+    text-align: right;
+    margin: auto;
 }
 .logo{
     padding: 0 5px;
@@ -39,5 +55,8 @@
     .left, .middle, .right{
         margin-bottom: 20px;
         width: 100vw;
+    }
+    .right{
+        width: 80vw;
     }
 }

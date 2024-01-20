@@ -15,16 +15,20 @@ import LayoutWithSidebar from "./LayoutWithSidebar.js";
 import Cart from "../pages/cart/Cart.js";
 import SingleProduct from "../pages/SingleProduct/SingleProduct.js";
 import DropDownCart from "../components/dorpDownCart/DropDownCart.js";
+import CartCards from "../components/cartCards/CartCards.js";
 function AppRoutes() {
   return (
     <Routes>
       <Route exact path="/" element={<UserOutlet />}>
         <Route path="/" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
+        <Route path="/shop/:category" element={<Shop />}></Route>
         <Route path="/aboutus" element={<AboutUs />}></Route>
         <Route path="/singleProduct" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/dropDownCart" element={<DropDownCart />}></Route>
+
+        <Route path="/cart" element={<CartCards />}></Route>
         {/* <Route path="/singleProduct" element={<SingleProduct />}></Route> */}
       </Route>
       <Route path="/signin" element={<SignIn />}></Route>

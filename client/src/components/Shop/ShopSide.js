@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import style from "./ShopSide.module.css";
 import { IoIosArrowBack } from "react-icons/io";
+import { useQuery } from "react-query";
+import { fetchAllCategories } from "../../db/fetchCategory";
+import { fetchAllSubCategories } from "../../db/fetchSubCategory";
 
 const ShopSide = () => {
   const [sidePanelWidth, setSidePanelWidth] = useState(0);
@@ -12,108 +15,25 @@ const ShopSide = () => {
   const closeNav = () => {
     setSidePanelWidth(0);
   };
-  let allCategories = {
-    categories: [
-      {
-        _id: "65a17e21f2a3f8191855d4e6",
-        name: "مجوهرات",
-        __v: 0,
-      },
-      {
-        _id: "65a1935e7be5c9797fe24c10",
-        name: "أدوات مطبخ",
-        createdAt: "2024-01-12T19:30:38.422Z",
-        updatedAt: "2024-01-12T19:30:38.422Z",
-        __v: 0,
-      },
-      {
-        _id: "65a1936e2e6e56c21d1e3b0",
-        name: "خانات التجرب",
-        createdAt: "2024-01-12T19:30:41.969Z",
-        updatedAt: "2024-01-12T19:30:41.969Z",
-        __v: 0,
-      },
-      {
-        _id: "65a193656c21d1e3b0",
-        name: " صباح",
-        createdAt: "2024-01-12T19:30:41.969Z",
-        updatedAt: "2024-01-12T19:30:41.969Z",
-        __v: 0,
-      },
-      {
-        _id: "65c21d1e3b0",
-        name: " حسن",
-        createdAt: "2024-01-12T19:30:41.969Z",
-        updatedAt: "2024-01-12T19:30:41.969Z",
-        __v: 0,
-      },
-      {
-        _id: "65a19361e2e6e56c21d1e3b0",
-        name: "فؤاد ",
-        createdAt: "2024-01-12T19:30:41.969Z",
-        updatedAt: "2024-01-12T19:30:41.969Z",
-        __v: 0,
-      },
-      {
-        _id: "65a193611d1e3b0",
-        name: " غيسى",
-        createdAt: "2024-01-12T19:30:41.969Z",
-        updatedAt: "2024-01-12T19:30:41.969Z",
-        __v: 0,
-      },
-      {
-        _id: "65a19361e21e3b0",
-        name: " مصلايات",
-        createdAt: "2024-01-12T19:30:41.969Z",
-        updatedAt: "2024-01-12T19:30:41.969Z",
-        __v: 0,
-      },
-    ],
-  };
-  let subCateg = {
-    subCateg: [
-      {
-        _id: "65a1802af2a3f8191855d4eb",
-        name: " اسم",
-        categoryID: "65a19361e21e3b0",
-        createdAt: "2024-01-12T18:08:42.135Z",
-        updatedAt: "2024-01-12T19:59:33.786Z",
-        __v: 0,
-      },
-      {
-        _id: "65a197762e084d9b91920073",
-        name: "  عيلة",
-        categoryID: "65c21d1e3b0",
-        createdAt: "2024-01-12T19:48:06.006Z",
-        updatedAt: "2024-01-12T20:12:11.341Z",
-        __v: 0,
-      },
-      {
-        _id: "65a19777845e1181ca602b",
-        name: "  منتوجات",
-        categoryID: "65c21d1e3b0",
-        createdAt: "2024-01-12T19:48:07.414Z",
-        updatedAt: "2024-01-12T19:48:07.414Z",
-        __v: 0,
-      },
-      {
-        _id: "65a1977181ca602b",
-        name: "   سيش منتوجات",
-        categoryID: "65c21d1e3b0",
-        createdAt: "2024-01-12T19:48:07.414Z",
-        updatedAt: "2024-01-12T19:48:07.414Z",
-        __v: 0,
-      },
-      {
-        _id: "67845e1181ca602b",
-        name: "   سشي منتوجات",
-        categoryID: "65c21d1e3b0",
-        createdAt: "2024-01-12T19:48:07.414Z",
-        updatedAt: "2024-01-12T19:48:07.414Z",
-        __v: 0,
-      },
-    ],
-  };
+
+  const { isLoadingCategory, data: allCategories } = useQuery(
+    "shop-categ",
+    fetchAllCategories,
+    {
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+    }
+  );
+  const { isLoadingSub, data: subCateg } = useQuery(
+    "shop-sub",
+    fetchAllSubCategories,
+    {
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+    }
+  );
+  console.log(allCategories);
+  console.log(subCateg.subCateg);
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [checkboxFilters, setCheckboxFilters] = useState(subCateg.subCateg);
@@ -127,7 +47,9 @@ const ShopSide = () => {
     );
     setCheckboxFilters(updatedFilters);
   };
-
+  if (isLoadingCategory && isLoadingSub) {
+    return <h2>loading...</h2>;
+  }
   return (
     <>
       <aside
@@ -143,7 +65,7 @@ const ShopSide = () => {
             <h3>الخانات الاساسية</h3>
           </section>
           <form>
-            {allCategories.categories.map((filter) => (
+            {allCategories?.categories.map((filter) => (
               <section key={filter._id} className={style.filter}>
                 <input
                   type="radio"
@@ -199,5 +121,4 @@ const ShopSide = () => {
     </>
   );
 };
-
 export default ShopSide;

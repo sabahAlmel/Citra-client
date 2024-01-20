@@ -19,7 +19,7 @@
   color: var(--brown-color);
   width: 250px;
   overflow: hidden;
-  box-shadow: 3px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
 }
 .productHolder img {
   height: 300px;

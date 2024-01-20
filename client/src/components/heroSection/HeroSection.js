@@ -8,13 +8,10 @@ function HeroSection() {
     <>
       <hero className={style.wrapper}>
         <section className={style.upper}>
-          <p>
+          <p className={style.upperTxt}>
             إِنْ أُرِيدُ إِلَّا الْإِصْلَاحَ مَا اسْتَطَعْتُ ۚ وَمَا تَوْفِيقِي
-            إِلَّا{" "}
-            <span style={{ color: "var(--blue-color)", fontSize: "4rem" }}>
-              بِاللَّهِ ۚ
-            </span>{" "}
-            عَلَيْهِ تَوَكَّلْتُ وَإِلَيْهِ أُنِيبُ
+            إِلَّا <span className={style.bigger}>بِاللَّهِ ۚ</span> عَلَيْهِ
+            تَوَكَّلْتُ وَإِلَيْهِ أُنِيبُ
           </p>
         </section>
         <section className={style.lower}>
@@ -29,13 +26,15 @@ function HeroSection() {
               الذهاب الى المتجر
             </Link>
           </aside>
-          <img
-            src={overview}
-            alt="hero"
-            className={style.image}
-            height="600px"
-            width="600px"
-          />
+          <aside className={style.left}>
+            <img
+              src={overview}
+              alt="hero"
+              className={style.image}
+              height="100%"
+              width="100%"
+            />
+          </aside>
         </section>
       </hero>
     </>
