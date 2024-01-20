@@ -13,9 +13,6 @@ import NotFound from "../pages/NotFound/NotFound.js";
 import AboutUs from "../pages/AboutUs/AboutUs.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
 import Cart from "../pages/cart/Cart.js";
-import SingleProduct from "../pages/SingleProduct/SingleProduct.js";
-import DropDownCart from "../components/dorpDownCart/DropDownCart.js";
-import CartCards from "../components/cartCards/CartCards.js";
 function AppRoutes() {
   return (
     <Routes>
@@ -30,6 +27,7 @@ function AppRoutes() {
 
         <Route path="/cart" element={<CartCards />}></Route>
         {/* <Route path="/singleProduct" element={<SingleProduct />}></Route> */}
+        <Route path="/singleProduct" element={<SingleProduct />}></Route>
       </Route>
       <Route path="/signin" element={<SignIn />}></Route>
       <Route path="/signup" element={<SignUp />}></Route>
