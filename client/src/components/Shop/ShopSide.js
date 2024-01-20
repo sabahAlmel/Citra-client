@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./ShopSide.module.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { useQuery } from "react-query";
@@ -33,13 +33,18 @@ const ShopSide = () => {
     }
   );
   console.log(allCategories);
-  console.log(subCateg.subCateg);
+  console.log(subCateg);
 
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [checkboxFilters, setCheckboxFilters] = useState(subCateg.subCateg);
+  const [checkboxFilters, setCheckboxFilters] = useState([]);
   const handleRadioChange = (categoryId) => {
     setSelectedCategory(categoryId);
   };
+  useEffect(() => {
+    if (subCateg && subCateg.subCateg) {
+      setCheckboxFilters(subCateg.subCateg);
+    }
+  }, [subCateg]);
 
   const handleCheckboxChange = (filterId) => {
     const updatedFilters = checkboxFilters.map((filter) =>
@@ -121,3 +126,4 @@ const ShopSide = () => {
     </>
   );
 };
+export default ShopSide;
