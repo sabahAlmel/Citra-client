@@ -12,6 +12,7 @@ import UserOutlet from "../Outlet/userOutlet.js";
 import NotFound from "../pages/NotFound/NotFound.js";
 import AboutUs from "../pages/AboutUs/AboutUs.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
+import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Cart from "../pages/cart/Cart.js";
 function AppRoutes() {
   return (
@@ -23,10 +24,6 @@ function AppRoutes() {
         <Route path="/aboutus" element={<AboutUs />}></Route>
         <Route path="/singleProduct" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/dropDownCart" element={<DropDownCart />}></Route>
-
-        <Route path="/cart" element={<CartCards />}></Route>
-        {/* <Route path="/singleProduct" element={<SingleProduct />}></Route> */}
         <Route path="/singleProduct" element={<SingleProduct />}></Route>
       </Route>
       <Route path="/signin" element={<SignIn />}></Route>
@@ -36,15 +33,25 @@ function AppRoutes() {
         path="/products"
         element={
           <LayoutWithSidebar>
+            {" "}
             <Products />
           </LayoutWithSidebar>
         }
       ></Route>
+<Route       path="/products/:productID"
+        element={
+          <LayoutWithSidebar>
+            {" "}
+            <SingleProduct />
+          </LayoutWithSidebar>
+        }>
+
+</Route>
       <Route
         path="/users"
         element={
           <LayoutWithSidebar>
-       
+            {" "}
             <Users />
           </LayoutWithSidebar>
         }
@@ -53,6 +60,7 @@ function AppRoutes() {
         path="/overview"
         element={
           <LayoutWithSidebar>
+            {" "}
             <OverView />
           </LayoutWithSidebar>
         }

@@ -44,10 +44,13 @@ body {
   padding: 10px;
   border: 1px solid var(--main-color);
   border-radius: 4px;
-  color: var(--main-color);
+  color: var(--brow-color);
   transition: 0.3s linear;
+  cursor: pointer;
 }
-
+.sidebar__button:hover{
+  background-color: var(--blue-color);
+}
 .sidebar {
   height: 100vh;
   width: 250px; /* Adjusted from min-width to width */
@@ -73,15 +76,22 @@ body {
   text-decoration: none;
   color: var(--main-color);
 }
-
+.sidebar__listItem:hover{
+  color: var(--blue-color);
+}
+.sidebar__listItem:active{
+color:var(--blue-color);}
 .sidebar__listItem span {
   white-space: nowrap;
   margin: 0 22px;
+
 }
+
 
 .sidebar__icon {
   margin: 0 15px 15px 0;
 }
+
 .logout{
   position: absolute;
   bottom: 0;

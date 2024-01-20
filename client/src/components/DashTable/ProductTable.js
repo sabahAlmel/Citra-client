@@ -382,10 +382,10 @@
     //       page={page}
     //       onPageChange={handleChangePage}
     //       onRowsPerPageChange={handleChangeRowsPerPage}
-    //       labelRowsPerPage="عدد الصفحات:"
-    //       labelDisplayedRows={({ from, to, count }) =>
-    //         `${from}-${to === -1 ? count : to} من ${count}`
-    //       }
+          // labelRowsPerPage="عدد الصفحات:"
+          // labelDisplayedRows={({ from, to, count }) =>
+          //   `${from}-${to === -1 ? count : to} من ${count}`
+          // }
     //     />
     //   </Paper>
     //   <FormControlLabel
@@ -462,34 +462,400 @@
 //     </Box>
 //   );
 // }
-import React, { useEffect, useState } from 'react';
+/////////////////////////////////Axios////////////////////////////////////////////
+// import React, { useEffect, useState } from 'react';
+// import Box from '@mui/material/Box';
+// import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+// import TablePagination from '@mui/material/TablePagination';
+
+// import './product.css';
+
+// const ProductTable = () => {
+//   const [latestNews, setLatestNews] = useState([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const fetchLatestNews = async () => {
+//       try {
+//         const response = await fetch(`${process.env.REACT_APP_API}product/getall`);
+//         const data = await response.json();
+//         setLatestNews(data);
+//       } catch (error) {
+//         console.error('Error fetching latest news:', error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchLatestNews();
+//   }, []);
+
+//   const columns = [
+//     { field: 'الإسم ', headerName: 'الإسم', flex: 1 },
+//     { field: 'name in english ', headerName: 'name in english ', flex: 1 },
+//     {
+//       field: 'date',
+//       headerName: 'Date',
+//       flex: 1,
+//       type: 'date',
+//       valueGetter: (params) => new Date(params.row.date),
+//     },
+//     { field: 'سعر', headerName: 'سعر', flex: 2 },
+//     { field: 'رقم سري', headerName: 'رقم سري', flex: 1 },
+//     // Add more columns as needed
+//   ];
+
+//   return (
+//     <Box sx={{ height: 400, width: '100%' }}>
+//       <DataGrid
+//         rows={latestNews}
+//         columns={columns}
+//         loading={loading}
+//         disableRowSelectionOnClick
+//         pagination
+//         pageSize={5} // Set the default number of rows per page
+//         rowsPerPageOptions={[5, 10, 25]} // Specify options for the number of rows per page
+//         components={{
+//           Toolbar: GridToolbar,
+//           Pagination: (props) => (
+//             <TablePagination
+//               {...props}
+//               labelRowsPerPage="عدد الصفحات:"
+//               labelDisplayedRows={({ from, to, count }) =>
+//                 `${from}-${to === -1 ? count : to} من ${count}`
+//               }
+//               nextIconButtonProps={{
+//                 style: { left: 'unset', right: 0, transform: 'rotateY(180deg)' },
+//               }}
+//               prevIconButtonProps={{
+//                 style: { left: 0, right: 'unset', transform: 'rotateY(0deg)' },
+//               }}
+//             />
+//           ),
+//         }}
+//       />
+//     </Box>
+//   );
+// };
+
+// export default ProductTable;
+
+
+///////////////////////////////////////////////////////////////
+// import React, { useState } from 'react';
+// import Box from '@mui/material/Box';
+// import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+
+// import './product.css';
+
+// const ProductTable = () => {
+//   // Sample static data for testing
+//   const sampleData = [
+//     {
+//       id: 1,
+//       الإسم: 'Product 1',
+//       'name in english': 'Product 1 (English)',
+//       date: '2022-01-20',
+//       سعر: 100,
+//       'رقم سري': 'ABC123',
+//     },
+//     {
+//       id: 2,
+//       الإسم: 'Product 2',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 3,
+//       الإسم: 'Product 3',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 4,
+//       الإسم: 'Product 4',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 5,
+//       الإسم: 'Product 5',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 6,
+//       الإسم: 'Product 6',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 7,
+//       الإسم: 'Product 7',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 8,
+//       الإسم: 'Product 8',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 9,
+//       الإسم: 'Product 9',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 10,
+//       الإسم: 'Product 10',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 11,
+//       الإسم: 'Product 11',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 12,
+//       الإسم: 'Product 12',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 13,
+//       الإسم: 'Product 13',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     {
+//       id: 13,
+//       الإسم: 'Product 13',
+//       'name in english': 'Product 2 (English)',
+//       date: '2022-01-21',
+//       سعر: 150,
+//       'رقم سري': 'XYZ456',
+//     },
+//     // Add more sample data as needed
+//   ];
+
+//   const columns = [
+//     { field: 'الإسم', headerName: 'الإسم', flex: 1 },
+//     { field: 'name in english', headerName: 'name in english', flex: 1 },
+//     {
+//       field: 'date',
+//       headerName: 'Date',
+//       flex: 1,
+//       type: 'date',
+//       valueGetter: (params) => new Date(params.row.date),
+//     },
+//     { field: 'سعر', headerName: 'سعر', flex: 2 },
+//     { field: 'رقم سري', headerName: 'رقم سري', flex: 1 },
+//     // Add more columns as needed
+//   ];
+  
+//   const [page, setPage] = useState(0);
+//   const [pageSize, setPageSize] = useState(5);
+
+//   const handlePageChange = (params) => {
+//     setPage(params.page);
+//   };
+
+//   const handlePageSizeChange = (params) => {
+//     setPageSize(params.pageSize);
+//     setPage(0);
+//   };
+
+//   const data = {
+//     rows: sampleData,
+//     columns,
+//     page,
+//     pageSize,
+//     rowCount: sampleData.length,
+//     pageSizeOptions: [5, 10, 25],
+//   };
+
+//   return (
+//     <Box sx={{ height: 400, width: '100%' }}>
+//    <div style={{ height: 400, width: '100%' }}>
+//       <DataGrid
+//         {...data}
+//         initialState={{
+//           ...data.initialState,
+//           pagination: { paginationModel: { pageSize: 5 } },
+//         }}
+//         pageSizeOptions={[5, 10, 25]}
+//         labelRowsPerPage="عدد الصفحات:"
+//       />
+//     </div>
+//     </Box>
+//   );
+// };
+
+
+
+// export default ProductTable;
+
+///////////////////////wpagination with filtration ///////////
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import "./product.css";
+import { DataGrid, GridToolbar,FilterToolbar } from '@mui/x-data-grid';
+import { useNavigate } from 'react-router-dom';
+import './product.css';
+import { Button } from "@mui/material";
+
+
 
 const ProductTable = () => {
-  const [latestNews, setLatestNews] = useState([]);
-  const [loading, setLoading] = useState(true);
+  
+  // Sample static data for testing
+  const sampleData = [
 
-  useEffect(() => {
-    const fetchLatestNews = async () => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_API}product/getall`);
-        const data = await response.json();
-        setLatestNews(data);
-      } catch (error) {
-        console.error('Error fetching latest news:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLatestNews();
-  }, []);
+    {
+      id: 72287362676,
+      الإسم: 'Product 1',
+      'name in english': 'Product 1 (English)',
+      date: '2022-01-20',
+      سعر: 100,
+      'رقم سري': 'ABC123',
+    },
+    {
+      id: 2,
+      الإسم: 'Product 2',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 3,
+      الإسم: 'Product 3',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 4,
+      الإسم: 'Product 4',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 5,
+      الإسم: 'Product 5',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 6,
+      الإسم: 'Product 6',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 7,
+      الإسم: 'Product 7',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 8,
+      الإسم: 'Product 8',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 9,
+      الإسم: 'Product 9',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 10,
+      الإسم: 'Product 10',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 11,
+      الإسم: 'Product 11',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 12,
+      الإسم: 'Product 12',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 13,
+      الإسم: 'Product 13',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    {
+      id: 13,
+      الإسم: 'Product 13',
+      'name in english': 'Product 2 (English)',
+      date: '2022-01-21',
+      سعر: 150,
+      'رقم سري': 'XYZ456',
+    },
+    // Add more sample data as needed
+  ];
 
   const columns = [
-    { field: 'الإسم ', headerName: 'الإسم', flex: 1 },
-    { field: 'name in english ', headerName: 'name in english ', flex: 1 },
+    { field: 'الإسم', headerName: 'الإسم', flex: 1 },
+    { field: 'name in english', headerName: 'name in english', flex: 1 },
     {
       field: 'date',
       headerName: 'Date',
@@ -499,23 +865,103 @@ const ProductTable = () => {
     },
     { field: 'سعر', headerName: 'سعر', flex: 2 },
     { field: 'رقم سري', headerName: 'رقم سري', flex: 1 },
-
     // Add more columns as needed
+  
   ];
+  const navigate = useNavigate();
+
+  const handleRowClick = (params) => {
+    // Redirect to the product details page with the productId from the clicked row
+    navigate(`/products/${params.id}`);
+  };
+
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
+  const [filterModel, setFilterModel] = useState( { items: [],}); // State for filter model
+
+  const handlePageChange = (params) => {
+    setPage(params.page);
+  };
+
+  const handlePageSizeChange = (params) => {
+    setPageSize(params.pageSize);
+    setPage(0);
+  };
+
+  const data = {
+    rows: sampleData,
+    columns,
+    page,
+    pageSize,
+    rowCount: sampleData.length,
+    pageSizeOptions: [5, 10, 25,50,75,100],
+    filterModel,
+  };
 
   return (
-    <Box sx={{ height: 400, width: '100%',  }}>
+    
+    <Box sx={{ height: 400, width: '100%', backgroundColor:"var(--main-color)" }}>
+                <Button
+          fullWidth
+          type="submit"
+          onClick={() => (window.location.href = '/')}
+            sx={{
+              margin:"10px",
+              height: "3rem",
+              width:"5rem",
+              // border: '2px solid #368681',
+              backgroundColor: "var(--brown-color)",
+              color: 'var(--main-color)',
+
+              '&:hover': {
+
+                // boxShadow: '0px 0px 10px 3px rgba(0,0,0,0.5)',
+                backgroundColor: 'var(--blue-color)',
+                color: 'var(--brown-color)'
+              }
+
+            }} color="primary">
+          أضف منتج
+          </Button>
+   <div style={{ height: 400, width: '100%' }}>
       <DataGrid
-        rows={latestNews}
-        columns={columns}
-        loading={loading}
-        disableRowSelectionOnClick
-        components={{
-          Toolbar: GridToolbar,
+      sx={{minHeight: "60vh"
+      }}
+   
+        {...data}
+        onRowClick={handleRowClick}
+        filterMode="server" // Optional: Use server-side filtering
+        onFilterModelChange={(model) => setFilterModel(model)}
+
+        initialState={{
+          ...data.initialState,
+          //pagination
+          pagination: { paginationModel: { pageSize: 5 } },
+          filter: {
+            //filter
+            ...data.initialState?.filter,
+            filterModel: {
+              items: [
+                {
+                  field: 'rating',
+                  operator: '>',
+                  value: '2.5',
+                },
+              ],
+            },
+          },
         }}
+        pageSizeOptions={ [5, 10, 25,50,75,100]}
+        slots={{
+          toolbar: GridToolbar,
+        }}
+   
       />
+    </div>
     </Box>
   );
 };
+
+
 
 export default ProductTable;

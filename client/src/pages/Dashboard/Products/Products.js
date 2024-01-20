@@ -5,7 +5,7 @@ import styles from "./Products.module.css"
 function Products() {
 
   return (
-    <div className={styles}>
+    <div className={styles.container}>
 
       <ProductTable  />
     
