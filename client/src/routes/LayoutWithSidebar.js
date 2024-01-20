@@ -10,7 +10,7 @@ function LayoutWithSidebar({ children }) {
           margin: "0%",
           display: "grid",
           gridTemplateColumns:" auto 1fr",
-          columnGap: "5%",
+          columnGap: "0%",
         }}
       >
         <Sidebar />

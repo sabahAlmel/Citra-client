@@ -36,6 +36,15 @@ function AppRoutes() {
           </LayoutWithSidebar>
         }
       ></Route>
+<Route       path="/products/:productID"
+        element={
+          <LayoutWithSidebar>
+            {" "}
+            <SingleProduct />
+          </LayoutWithSidebar>
+        }>
+
+</Route>
       <Route
         path="/users"
         element={
