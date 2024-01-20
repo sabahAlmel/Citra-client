@@ -3,56 +3,83 @@ import { Link } from "react-router-dom";
 import style from "./footer.module.css";
 import logo from "../../assets/icons/logo.svg";
 import buraqLogo from "../../assets/icons/Buraq-logo.png";
-import fb from "../../assets/icons/fb.png";
-import instagram from "../../assets/icons/instagram.png";
+import fb from "../../assets/icons/facebook.svg";
+import instagram from "../../assets/icons/instagram.svg";
 
 function Footer() {
   return (
-
     <footer className={style.wrapper}>
       <section className={style.right}>
-        <p className={style.text}>متجر سترا - مركز البراق</p>
-        <p className={style.text}>شارع المئتين - مقابل مستشفى أورانج ناسو</p>
-        <p className={style.text}>الطابق الأول</p>
-        <p className={style.text}>149 545 81 961+</p>
+        <p className={style.text}>
+          متجر سترا - مركز البراق شارع المئتين <br /> مقابل مستشفى أورانج ناسو
+          <br />
+          الطابق الأول <br />
+          149 545 81 961+
+        </p>
       </section>
       <section className={style.middle}>
-        <aside className={style.side}>
-          <Link
-            to="https://instagram.com/albouraq.lb?igshid=NTc4MTIwNjQ2YQ=="
-            className={style.link}
-          >
-            Instagram
-            <img src={instagram} alt="instagram" className={style.logo} />
-          </Link>
-          <Link
-            to="https://m.facebook.com/Albouraqorganization/"
-            className={style.link}
-          >
-            Facebook
-            <img src={fb} alt="fb" className={style.logo} />
-          </Link>
-        </aside>
-        <img src={logo} alt="ctra" height="70px" width="70px" />
+        <p className={style.company}>تواصلوا مع سترا</p>
+        <div className={style.info}>
+          <aside className={style.side}>
+            <Link
+              to="https://instagram.com/albouraq.lb?igshid=NTc4MTIwNjQ2YQ=="
+              className={style.link}
+            >
+              <img
+                src={instagram}
+                alt="instagram"
+                className={style.logo}
+                height="40px"
+                width="40px"
+              />
+            </Link>
+            <Link
+              to="https://m.facebook.com/Albouraqorganization/"
+              className={style.link}
+            >
+              <img
+                src={fb}
+                alt="fb"
+                className={style.logo}
+                height="40px"
+                width="40px"
+              />
+            </Link>
+          </aside>
+          <img src={logo} alt="ctra" height="70px" width="70px" />
+        </div>
       </section>
       <section className={style.left}>
-        <aside className={style.side}>
-          <Link
-            to="https://instagram.com/ctra_gifts?igshid=NzZlODBkYWE4Ng=="
-            className={style.link}
-          >
-            Instagram
-            <img src={instagram} alt="instagram" className={style.logo} />
-          </Link>
-          <Link
-            to="https://www.facebook.com/CtraGifts?mibextid=ZbWKwL"
-            className={style.link}
-          >
-            Facebook
-            <img src={fb} alt="fb" className={style.logo} />
-          </Link>
-        </aside>
-        <img src={buraqLogo} alt="buraq" height="100px" width="100px" />
+        <p className={style.company}>تواصلوا مع براق</p>
+        <div className={style.info}>
+          <aside className={style.side}>
+            <Link
+              to="https://instagram.com/ctra_gifts?igshid=NzZlODBkYWE4Ng=="
+              className={style.link}
+            >
+              <img
+                src={instagram}
+                alt="instagram"
+                className={style.logo}
+                height="40px"
+                width="40px"
+              />
+            </Link>
+            <Link
+              to="https://www.facebook.com/CtraGifts?mibextid=ZbWKwL"
+              className={style.link}
+            >
+              <img
+                src={fb}
+                alt="fb"
+                className={style.logo}
+                height="40px"
+                width="40px"
+              />
+            </Link>
+          </aside>
+          <img src={buraqLogo} alt="buraq" height="100px" width="100px" />
+        </div>
       </section>
     </footer>
   );

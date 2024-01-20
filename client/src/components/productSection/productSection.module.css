@@ -1,10 +1,9 @@
 .contentsection {
     text-align: center;
-    width: 80%;
+    width: 100%;
     height: auto;
-    margin: 0 auto;
+    margin:  auto;
     padding: 4rem;
-    
   }
   
   .title {
@@ -17,6 +16,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
     gap: 1rem;
   }
  
@@ -24,8 +24,6 @@
     .cardContainer {
         display: flex;
         flex-direction: column;
-   
-
     }
   }
   
