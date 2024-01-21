@@ -104,3 +104,11 @@ height: 10vh;
 .MuiSvgIcon-root .MuiSvgIcon-fontSizeSmall .MuiDataGrid-sortIcon .css-ptiqhd-MuiSvgIcon-root {
   color: var(--blue-color);
 }
+
+.delete-cell:hover{
+  background-color: var(--main-color);
+  
+}
+/* .css-rh4u34-MuiDataGrid-root .MuiDataGrid-withBorderColor {
+  direction: ltr;
+} */

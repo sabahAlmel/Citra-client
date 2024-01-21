@@ -213,17 +213,17 @@ export default function DashTable() {
               },
             }}
           />,
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={handleDeleteClick(id)}
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: 'var(--main-color)',
-              },
-            }}
-          />,
+          // <GridActionsCellItem
+          //   icon={<DeleteIcon />}
+          //   label="Delete"
+          //   onClick={handleDeleteClick(id)}
+          //   color="inherit"
+          //   sx={{
+          //     '&:hover': {
+          //       backgroundColor: 'var(--main-color)',
+          //     },
+          //   }}
+          // />,
         ];
       },
     },
