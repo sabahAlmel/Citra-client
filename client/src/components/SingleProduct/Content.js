@@ -96,13 +96,13 @@ function Content({ products, isLoading }) {
   if (isLoading) {
     return <h2>Loading...</h2>;
   }
-
   return (
     <div className={style.content}>
       <div className={style.title}>{products.fetchedProduct.name}</div>
       <div className={style.price}>${products.fetchedProduct.price}</div>
+      <div className={style.desc}>{products.fetchedProduct.description}</div>
       <div className={style.color}>
-        <h4>اختاري اللون</h4>
+        <h2>اختار اللون</h2>
         <div className={style.colorPalette}>
           {products.fetchedProduct.details.map((detail, index) => (
             <div
@@ -140,7 +140,7 @@ function Content({ products, isLoading }) {
         </div>
       </div>
       <div className={style.size}>
-        <h4>اختاري القياس</h4>
+        <h2>اختار القياس</h2>
         <div className={style.sizes}>
           {products.fetchedProduct.details
             .filter((detail) => detail.color === selectedColor)
