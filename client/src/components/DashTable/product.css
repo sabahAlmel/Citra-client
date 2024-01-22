@@ -120,3 +120,20 @@ height: 10vh;
 .MuiDataGrid-cell {
   width: 25%;
 }
+
+.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar .MuiTablePagination-actions :nth-child(1) {
+  /* color: white !important; */
+  /* border: 1px solid red; */
+  color: white !important;
+  cursor: pointer;
+}
+/* .css-ltf0zy-MuiDataGrid-iconButtonContaine{
+  color: white !important;
+} */
+
+.css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon :nth-child(1){
+  color: white !important;
+}
+.css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root :nth-child(2){
+  color: white !important;
+}

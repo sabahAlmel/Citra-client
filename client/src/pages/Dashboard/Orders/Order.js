@@ -1,9 +1,10 @@
 import React from 'react'
-
+import OrderTable from "../../../components/DashTable/OrderTabel"
+import styles from "./Order.module.css"
 function Order() {
   return (
-    <div>
-      orders
+    <div className={styles.container}>
+      <OrderTable/>
     </div>
   )
 }
