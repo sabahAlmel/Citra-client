@@ -28,6 +28,7 @@ header{
       justify-content: space-between;
       align-items: center;
       background-color: var(--main-color);
+      font-size: 24px;
 }
 .cart{
   background-color: transparent;
@@ -69,6 +70,7 @@ li {
   text-decoration: none;
   color: var(--brown-color);
   cursor: pointer;
+  font-size: 24px;
 }
 .magnifire {
   cursor: pointer;
@@ -137,7 +139,7 @@ li {
     position: absolute;
     height: 100vh;
     left: 0px;
-    top: -229px;
+    top: -250px;
     width: 100vw;
     display: flex;
     flex-direction: column;

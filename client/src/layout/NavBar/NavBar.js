@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/icons/logo.svg";
 import order from "../../assets/icons/order.svg";
 import styles from "./NavBar.module.css";
@@ -34,11 +34,13 @@ function NavBar() {
   const bar2 = [styles.bar, menuOpen ? styles.linetwo : ""].join(" ");
   const bar3 = [styles.bar, menuOpen ? styles.linethree : ""].join(" ");
   /////////////
-
+const navigate = useNavigate()
   const handleClick = () => {
     setShopping(!shopping);
   };
-
+const handlelogo=()=>{
+  navigate("./")
+}
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -113,6 +115,8 @@ function NavBar() {
           height={"60px"}
           src={logo}
           alt="citra's logo"
+          onClick={handlelogo}
+          style={{cursor:"pointer"}}
         />
       </nav>
     </header>
