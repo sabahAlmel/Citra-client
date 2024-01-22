@@ -112,3 +112,11 @@ height: 10vh;
 /* .css-rh4u34-MuiDataGrid-root .MuiDataGrid-withBorderColor {
   direction: ltr;
 } */
+ .MuiDataGrid-columnHeaders  {
+  width: 100%;
+  background-color: var(--brown-color);
+}
+/* ///////////users//////////////////////////////////////// */
+.MuiDataGrid-cell {
+  width: 25%;
+}
