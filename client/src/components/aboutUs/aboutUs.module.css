@@ -1,9 +1,12 @@
 .contentsection {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     text-align: center;
     margin-bottom: 10rem;
+    width: 80%;
+    margin: 2.5rem auto;
+    height: 100vh;
   }
   
   .contentsection img {
@@ -19,22 +22,27 @@
     width: 100%;
     max-width: 420px;
     height: auto;
-  
-    
-    
   }
   
   .title {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-  
-  
+    font-size: 2rem;
+    color: var(--brown-color);
+    margin: 2.5rem 0;
+    font-weight: bold;
 
   }
   
   .description {
     margin-bottom: 18rem;
-    font-size: 1rem;
+    font-size: 20px;
+    margin: auto 0;
+    
+  }
+  @media(max-width: 907px ) and ( min-width:768px){
+    .description{
+      height: 500px;
+      overflow-y: scroll;
+    }
   }
   @media only screen and (max-width: 768px) {
     .contentsection {
@@ -45,7 +53,8 @@
       border-top-left-radius: 0; 
     }
     .description {
-        margin-bottom: 0rem;
+    margin-bottom: 0rem;
+
     }
     .title {
         margin-bottom: 2rem;

@@ -2,6 +2,7 @@
   display: none;
 }
 .sidepanel {
+  color: var(--brown-color);
   overflow-y: auto;
   height: 98vh;
   height: 100vh;

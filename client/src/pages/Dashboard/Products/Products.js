@@ -1,10 +1,16 @@
 import React from 'react'
-import ProductTable from '../../../components/DashTable/productTable'
- 
+import ProductTable from '../../../components/DashTable/ProductTable'
+import styles from "./Products.module.css"
 
 function Products() {
+
   return (
-   <ProductTable/>
+    <div className={styles.container}>
+
+      <ProductTable  />
+    
+    </div>
+ 
   )
 }
 

@@ -1,21 +1,30 @@
 .wrapper{
-    height: 85vh;
+    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom:20px;
     background-color: var(--main-color);
+    row-gap: 50px;
+    margin-bottom: 60px;
 }
 .upper{
     font-family: 'Noto Nastaliq Urdu', serif;
-    font-size: 2.5rem;
     font-weight: 700;
-    height: 20vh;
+    word-spacing: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--brown-color);
+    margin: 0 auto;
+}
+.upperTxt{
+    font-size: 48px;
+    line-height: 100px;
+}
+.bigger{
+    color: var(--blue-color); 
+    font-size: 64px;
 }
 .lower{
     display: flex;
@@ -23,23 +32,28 @@
     align-items: center;
     width: 80vw;
     column-gap: 2rem;
-    margin: auto;
+    margin: 0 auto;
 }
 .slogan{
     color: var(--brown-color);
-    font-size: 2rem;
-    line-height: 70px;
+    font-size: 30px;
 }
 .right{
     display: flex;
     flex-direction: column;
+    width: 38vw;
+    line-height: 50px;
+}
+.left{
+width: 38vw;
 }
 .image{
     border-bottom-right-radius: 200px;
+    margin: auto;
 }
 .gotoshop{
     padding: 10px;
-    margin-top: 20px ;
+    margin-top: 16px ;
     margin-left: 20px;
     display: flex;
     align-items: center;
@@ -49,11 +63,52 @@
     border-radius: var(--border-radius);
     text-decoration: none;
     font-weight: 600;
-    font-size: larger;
-    width: 20rem;
-    align-self: flex-end;
+    font-size: 24px;
+    width: 50%;
+    align-self: flex-start;
+    transition:all 0.3s linear;
 }
 .gotoshop:hover{
     background-color: var(--blue-color);
     color: white;
+}
+
+@media(max-width:1000px){
+    .wrapper{
+        height: 100%;
+        background-image: url("../../assets//images/overview.jpeg");
+        background-blend-mode:overlay;
+    }
+    .lower{
+        flex-direction: column;
+        row-gap: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+    .image{
+        border-radius: initial;
+        width: 80%;
+        border-radius: var(--border-radius);
+        display: none;
+    }
+    .left,.right{
+        width: 90vw;
+    }
+    .left{
+        text-align: center;
+    }
+    .gotoshop{
+        align-self: center;
+    }
+    .upperTxt{
+        font-size: 28px;
+        text-align: center;
+        line-height: 60px;
+    }
+    .bigger{
+        font-size: 36px;
+    }
+    .gotoshop{
+        font-size: 18px;
+    }
 }

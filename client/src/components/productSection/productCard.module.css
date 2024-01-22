@@ -1,9 +1,9 @@
-article {
+.article {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 20%;
-    margin-top: 3rem;
+    row-gap: 10px;
   }
   .figure {
     position: relative;
@@ -54,7 +54,6 @@ article {
     .figure img {
         width: 100%;
         max-width: 275px;
-
         height: 300px;
       }
   }

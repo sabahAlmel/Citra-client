@@ -3,7 +3,31 @@ import style from "./CartCards.module.css";
 import trashCan from "../../assets/icons/TrashCan.svg";
 import redTrashCan from "../../assets/icons/redTrashCan.svg";
 
-function CartCards({ name, price, color, size }) {
+function Img() {
+  const [hover, setHover] = useState(false);
+  const hoverHandler = () => {
+    setHover(!hover);
+  };
+  let trash = trashCan;
+  if (hover) {
+    trash = redTrashCan;
+  } else {
+    trash = trashCan;
+  }
+  return (
+    <img
+      src={trash}
+      alt="trashcan"
+      onMouseOver={hoverHandler}
+      onMouseOut={hoverHandler}
+      style={{
+        cursor: "pointer",
+      }}
+    />
+  );
+}
+
+function CartCards({ name, price, size, color }) {
   const [hover, setHovered] = useState(false);
   const hoverHandler = () => {
     setHovered(!hover);
@@ -28,13 +52,7 @@ function CartCards({ name, price, color, size }) {
       <p>{size} $</p>
 
       <aside className={style.left}>
-        <img
-          src={trash}
-          alt="trash can"
-          onMouseOver={hoverHandler}
-          onMouseOut={hoverHandler}
-          className={style.trash}
-        />
+        <Img />
       </aside>
     </section>
   );

@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import image from "./image.png";
 import style from "./Product.module.css";
-import cart from "../../assets/icons/order.svg";
+import order from "../../assets/icons/order.svg";
+import orderHover from "../../assets/icons/orderHover.svg";
+
+function ShoppingBag() {
+  const [hover, setHovered] = useState(false);
+  const hoverHandler = () => {
+    setHovered(!hover);
+  };
+  let cart = order;
+  if (hover) {
+    cart = orderHover;
+  } else {
+    cart = order;
+  }
+  return (
+    <img
+      src={cart}
+      alt="order now"
+      onMouseOver={hoverHandler}
+      onMouseOut={hoverHandler}
+      className={style.cart}
+    />
+  );
+}
 
 function Product() {
   let products = {
@@ -69,7 +92,7 @@ function Product() {
   return (
     <section className={style.productSection}>
       {products.products.map((element) => (
-        <NavLink to="/single" className={style.productHolder}>
+        <NavLink to="/singleProduct" className={style.productHolder}>
           {/* <img src={element.images[0]} alt="product"/> */}
           <img src={image} alt="product" />
           <div className={style.details}>
@@ -78,7 +101,7 @@ function Product() {
               <p>${element.price}</p>
             </div>
             <Link to="/" className={style.addToCart}>
-              <img src={cart} alt="order now" />
+              <ShoppingBag />
             </Link>
           </div>
         </NavLink>

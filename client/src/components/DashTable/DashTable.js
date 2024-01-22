@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
+
 import {
   GridRowModes,
   DataGrid,
@@ -212,17 +213,17 @@ export default function DashTable() {
               },
             }}
           />,
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={handleDeleteClick(id)}
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: 'var(--main-color)',
-              },
-            }}
-          />,
+          // <GridActionsCellItem
+          //   icon={<DeleteIcon />}
+          //   label="Delete"
+          //   onClick={handleDeleteClick(id)}
+          //   color="inherit"
+          //   sx={{
+          //     '&:hover': {
+          //       backgroundColor: 'var(--main-color)',
+          //     },
+          //   }}
+          // />,
         ];
       },
     },

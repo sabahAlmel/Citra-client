@@ -9,8 +9,8 @@ function LayoutWithSidebar({ children }) {
           minHeight: "8vh",
           margin: "0%",
           display: "grid",
-          gridTemplateColumns: "20% 75%",
-          columnGap: "4%",
+          gridTemplateColumns:" auto 1fr",
+          columnGap: "0%",
         }}
       >
         <Sidebar />

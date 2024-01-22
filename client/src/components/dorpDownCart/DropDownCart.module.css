@@ -1,17 +1,31 @@
 .wrapper{
-    margin: 1rem;
+    position: absolute;
+    top: 100px;
     height: 60vh;
-    width: 20vw;
+    width: 400px;
     overflow-y: scroll;
     padding: 10px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     border: 2px solid var(--blue-color);
     color: var(--brown-color);
-    min-width: 500px;
+    z-index: 100;
+}
+.header{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  
 }
 .title{
-    margin:0.5rem 0 1rem 0;
+    margin:0.5rem 1rem 1rem 0;
     font-size: larger;
+}
+.x{
+    color: var(--blue-color);
+    font-weight: bold;
+    scale: 1.2;
+    cursor: pointer;
 }
 .container{
     margin:0.8rem ;
@@ -109,4 +123,15 @@
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #265e5b; 
+  }
+
+  @media(max-width:450px){
+    .wrapper{
+        overflow: scroll;
+        width: 100vw;
+        margin: 0;
+        height: 60%;
+        right: 0;
+    }
+    .container{margin: 0;}
   }

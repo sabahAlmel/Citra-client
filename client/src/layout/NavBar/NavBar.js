@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/icons/logo.svg";
-import magnifier from "../../assets/icons/search.png";
 import order from "../../assets/icons/order.svg";
 import styles from "./NavBar.module.css";
-import { useNavigate } from "react-router-dom";
+import DropDownCart from "../../components/dorpDownCart/DropDownCart";
 
 function NavBar() {
-  const [searchInput, setSearchInput] = useState("");
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  ///shopping cart drop down menu
+  const [shopping, setShopping] = useState(false);
+  ////////
   const [isResponsive, setIsResponsive] = useState(window.innerWidth <= 480);
-
-  const handleSearchInputChange = (e) => {
-    setSearchInput(e.target.value);
-  };
-
-  const handleSearch = () => {
-    console.log("Search for:", searchInput);
-  };
 
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
@@ -41,15 +35,43 @@ function NavBar() {
   const bar2 = [styles.bar, menuOpen ? styles.linetwo : ""].join(" ");
   const bar3 = [styles.bar, menuOpen ? styles.linethree : ""].join(" ");
   /////////////
-  const navigate = useNavigate();
 
   const handleClick = () => {
-    // Use the history object to go back to the previous page
-    navigate(-1);
+    setShopping(!shopping);
+  };
+  //handle scroll
+  const navigate = useNavigate();
+  const handleScrollToProduct = () => {
+    setMenuOpen(false);
+    if (location.pathname === "/") {
+      document
+        .getElementById("ourproducts")
+        .scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        document
+          .getElementById("ourproducts")
+          .scrollIntoView({ behavior: "smooth" });
+      }, 1000);
+    }
   };
 
+  const handleScrollToAbout = () => {
+    setMenuOpen(false);
+    if (location.pathname === "/") {
+      document.getElementById("aboutus").scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        document
+          .getElementById("aboutus")
+          .scrollIntoView({ behavior: "smooth" });
+      }, 1000);
+    }
+  };
   return (
-    <header>
+    <header className={styles.header}>
       <nav className={styles.nav}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <div className={styles.hamburger} onClick={handleMenuClick}>
@@ -58,7 +80,7 @@ function NavBar() {
             <span className={bar3}></span>
           </div>
 
-          <Link to="/DropDownCart">
+          <button className={styles.cart}>
             <img
               className={`${styles.order} ${menuOpen ? styles.open : ""}`}
               src={order}
@@ -67,14 +89,17 @@ function NavBar() {
               alt="bag"
               onClick={handleClick}
             />
-          </Link>
+          </button>
+          {shopping ? <DropDownCart setShopping={setShopping} /> : ""}
         </div>
 
         <div>
           <ul className={` ${menuOpen ? styles.dropdown : styles.navUl}`}>
             <li>
               <NavLink
-                className={styles.link}
+                className={
+                  location.pathname === "/" ? styles.activeLink : styles.link
+                }
                 to="./"
                 onClick={() => setMenuOpen(false)}
               >
@@ -84,28 +109,32 @@ function NavBar() {
             <li>
               <NavLink
                 className={styles.link}
-                to="./shop"
-                onClick={() => setMenuOpen(false)}
+                to={location.pathname === "/" ? "#" : "/"}
+                onClick={() => handleScrollToProduct()}
               >
                 منتجاتنا
               </NavLink>
             </li>
             <li>
               <NavLink
+                to={location.pathname === "/" ? "#" : "/"}
                 className={styles.link}
-                to="./"
-                onClick={() => setMenuOpen(false)}
+                onClick={() => handleScrollToAbout()}
               >
-                إطلب الآن
+                حولنا
               </NavLink>
             </li>
             <li>
               <NavLink
-                className={styles.link}
-                to="./aboutus"
+                className={
+                  location.pathname === "/shop"
+                    ? styles.activeLink
+                    : styles.link
+                }
+                to="/shop"
                 onClick={() => setMenuOpen(false)}
               >
-                حولنا
+                إطلب الآن
               </NavLink>
             </li>
 
@@ -114,21 +143,6 @@ function NavBar() {
             </NavLink>
           </ul>
         </div>
-        {/* <form className={`${styles.form} ${menuOpen ? styles.open : ""}`}>
-          <input
-            id="search"
-            type="text"
-            placeholder="إبحث عن إسم المنتج"
-            value={searchInput}
-            onChange={handleSearchInputChange}
-          ></input>
-          <img
-            className={styles.magnifier}
-            src={magnifier}
-            alt="magnifier"
-            onClick={handleSearch}
-          />
-        </form> */}
 
         <img
           className={styles.logo}
