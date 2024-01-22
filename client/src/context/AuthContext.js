@@ -17,19 +17,16 @@ export const AuthProvider = ({children})=>{
         const response = await axiosInstance.post('/user/login')
         console.log(response.data);
         setUser(response.data.data)
-    }catch{
+    }catch (error) {
+        console.error("Error fetching user data", error);
+        setUser(null);
+    } finally {
         setCheckUser(false);
-        setLoading(false);
+        setLoading(false); // Set loading to false when the operation is done
     }
  };
 
- useEffect(() => {
-    if (!user) {
-        fetchUserData();
-    } else {
-        console.log("loggedin");
-    }
-}, [user]);
+
 
 
 // logout

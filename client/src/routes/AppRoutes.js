@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home.js";
 import Products from "../pages/Dashboard/Products/Products.js";
 import Users from "../pages/Dashboard/Users/Users.js";
 import OverView from "../pages/Dashboard/OverView/OverView.js";
+import Order from "../pages/Dashboard/Orders/Order.js";
 import SignIn from "../pages/SignIn/SignIn.js";
 import SignUp from "../pages/SignUp/SignUp.js";
 import Shop from "../pages/Shop/Shop.js";
@@ -11,6 +12,8 @@ import UserOutlet from "../Outlet/userOutlet.js";
 import NotFound from "../pages/NotFound/NotFound.js";
 import AboutUs from "../pages/AboutUs/AboutUs.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
+import Cart from "../pages/cart/Cart.js";
+import SingleProduct from "../pages/SingleProduct/SingleProduct.js";
 import DropDownCart from "../components/dorpDownCart/DropDownCart.js";
 function AppRoutes() {
   return (
@@ -19,6 +22,8 @@ function AppRoutes() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/aboutus" element={<AboutUs />}></Route>
+        <Route path="/singleProduct" element={<SingleProduct />} />
+        <Route path="/cart" element={<Cart />}></Route>
         <Route path="/dropDownCart" element={<DropDownCart />}></Route>
         {/* <Route path="/singleProduct" element={<SingleProduct />}></Route> */}
       </Route>
@@ -49,6 +54,15 @@ function AppRoutes() {
           <LayoutWithSidebar>
             {" "}
             <OverView />
+          </LayoutWithSidebar>
+        }
+      ></Route>
+      <Route
+        path="/orders"
+        element={
+          <LayoutWithSidebar>
+            {" "}
+            <Order />
           </LayoutWithSidebar>
         }
       ></Route>

@@ -1,0 +1,75 @@
+.wrapper{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main{
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+    position: relative;
+}
+/* .circle {
+    position: absolute;
+    background-color: var(--brown-color); /* Circle color */
+    /* width: 150px; Circle diameter */
+    /* height: 200px; */
+    /* border-radius: 50%; Make it a circle */
+  /* }  */
+  
+/* .circle.left {
+    top: 0.1px; /* Adjust the top position as needed */
+    /* left: 750px; Adjust the left position as needed */
+    /* background-color: var(--blue-color); */
+/* }  */
+  
+/* .circle.right {
+    top: 380px; /* Adjust the top position as needed */
+    /* right: 600px; Adjust the right position as needed */
+    /* background-color: var(--rose-color); */
+/* } */ 
+
+.h2{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--brown-color);
+}
+
+.p{
+    /* margin-top: 8px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    text-decoration: none;
+    line-height: 25px;
+    color: rgb(0, 0, 171);
+}
+.p:hover{
+    color: rgb(65, 65, 255);
+}
+
+.g{
+    margin-right: 0.2rem;
+}
+
+.icon{
+    display: flex;
+    flex-direction: column;
+    
+}
+.passInp{
+    position: relative;
+}
+.openClose{
+    position: absolute;
+    top: 1.2rem;
+    right: 0.8rem;
+}
