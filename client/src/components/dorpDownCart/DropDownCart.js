@@ -28,7 +28,7 @@ function Img() {
     />
   );
 }
-function DropDownCart() {
+function DropDownCart({ setShopping }) {
   const products = [
     {
       name: "product 1",
@@ -54,7 +54,12 @@ function DropDownCart() {
   products.forEach((i) => (totalPrice += parseFloat(i.price)));
   return (
     <div className={style.wrapper}>
-      <h1 className={style.title}>سلة المشتريات {`(${nb})`}</h1>
+      <div className={style.header}>
+        <h1 className={style.title}>سلة المشتريات {`(${nb})`}</h1>
+        <p className={style.x} onClick={() => setShopping(false)}>
+          X
+        </p>
+      </div>
       <section className={style.orders}>
         {products.map((product, index) => {
           return (

@@ -10,7 +10,6 @@ import SignUp from "../pages/SignUp/SignUp.js";
 import Shop from "../pages/Shop/Shop.js";
 import UserOutlet from "../Outlet/userOutlet.js";
 import NotFound from "../pages/NotFound/NotFound.js";
-import AboutUs from "../pages/AboutUs/AboutUs.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
 import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Cart from "../pages/cart/Cart.js";
@@ -33,6 +32,15 @@ function AppRoutes() {
           <LayoutWithSidebar>
             {" "}
             <Products />
+          </LayoutWithSidebar>
+        }
+      ></Route>
+      <Route
+        path="/products/:productID"
+        element={
+          <LayoutWithSidebar>
+            {" "}
+            <SingleProduct />
           </LayoutWithSidebar>
         }
       ></Route>
