@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import { ToastContainer } from "react-toastify";
+import { ShopProvider } from "./ShopContext/ShopContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,7 +23,9 @@ root.render(
       theme="light"
     />
     <BrowserRouter>
-      <App />
+      <ShopProvider>
+        <App />
+      </ShopProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

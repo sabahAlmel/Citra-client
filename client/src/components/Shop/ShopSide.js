@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./ShopSide.module.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { useQuery } from "react-query";
 import { fetchAllCategories } from "../../db/fetchCategory";
 import { fetchAllSubCategories } from "../../db/fetchSubCategory";
+import { ShopContext } from "../../ShopContext/ShopContext";
 
 const ShopSide = () => {
+  const { selectedCategory, setSelectedCategory, setSelectedSubCategory } =
+    useContext(ShopContext);
   const [sidePanelWidth, setSidePanelWidth] = useState(0);
+  const [checkboxFilters, setCheckboxFilters] = useState([]);
+  const [selectedSubcategoriesArray, setSelectedSubcategoriesArray] = useState(
+    []
+  );
 
   const openNav = () => {
     setSidePanelWidth(280);
@@ -16,7 +23,7 @@ const ShopSide = () => {
     setSidePanelWidth(0);
   };
 
-  const { isLoadingCategory, data: allCategories } = useQuery(
+  const { isLoading: isLoadingCategory, data: allCategories } = useQuery(
     "shop-categ",
     fetchAllCategories,
     {
@@ -24,7 +31,7 @@ const ShopSide = () => {
       refetchOnWindowFocus: true,
     }
   );
-  const { isLoadingSub, data: subCateg } = useQuery(
+  const { isLoading: isLoadingSub, data: subCateg } = useQuery(
     "shop-sub",
     fetchAllSubCategories,
     {
@@ -32,14 +39,13 @@ const ShopSide = () => {
       refetchOnWindowFocus: true,
     }
   );
-  console.log(allCategories);
-  console.log(subCateg);
 
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [checkboxFilters, setCheckboxFilters] = useState([]);
   const handleRadioChange = (categoryId) => {
     setSelectedCategory(categoryId);
+    setSelectedSubCategory(null);
+    setSelectedSubcategoriesArray([]);
   };
+
   useEffect(() => {
     if (subCateg && subCateg.subCateg) {
       setCheckboxFilters(subCateg.subCateg);
@@ -51,7 +57,15 @@ const ShopSide = () => {
       filter._id === filterId ? { ...filter, checked: !filter.checked } : filter
     );
     setCheckboxFilters(updatedFilters);
+
+    const selectedSubcategories = updatedFilters
+      .filter((filter) => filter.checked)
+      .map((filter) => filter._id);
+
+    setSelectedSubCategory(selectedSubcategories);
+    setSelectedSubcategoriesArray(selectedSubcategories);
   };
+
   if (isLoadingCategory && isLoadingSub) {
     return <h2>loading...</h2>;
   }
@@ -126,4 +140,5 @@ const ShopSide = () => {
     </>
   );
 };
+
 export default ShopSide;
