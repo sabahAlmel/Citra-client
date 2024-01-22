@@ -118,7 +118,7 @@ function Product() {
   }
 
   return (
-    <>
+    <article>
       <section className={style.productSection}>
         {products.length == 0 ? (
           <h2 className={style.loading}>no products available</h2>
@@ -163,7 +163,7 @@ function Product() {
           )}
         />
       </div>
-    </>
+    </article>
   );
 }
 
