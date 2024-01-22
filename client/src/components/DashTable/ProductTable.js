@@ -853,14 +853,7 @@ const ProductTable = () => {
       سعر: 150,
       "رقم سري": "XYZ456",
     },
-    {
-      id: 13,
-      الإسم: "rayannn",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
+
     // Add more sample data as needed
   ];
 
@@ -940,6 +933,9 @@ const ProductTable = () => {
     rowCount: sampleData.length,
     pageSizeOptions: [10, 25, 50, 75, 100],
     filterModel,
+    dataSet: 'Employee',
+    visibleFields: columns,
+    rowLength: 100,
   };
 
   return (
@@ -975,14 +971,16 @@ const ProductTable = () => {
           onPageChange={handlePageChange}
           onPageSizeChange={handlePageSizeChange}
           onRowClick={(params, event) => handleRowClick(params, event)}
-          filterMode="server" // Optional: Use server-side filtering
+          // filterMode="server" // Optional: Use server-side filtering
           onFilterModelChange={(model) => setFilterModel(model)}
           initialState={{
             ...data.initialState,
             //pagination
             // pagination: { paginationModel: { pageSize: 5 } },
-            filter: {
+
               //filter
+            filter: {
+            
               ...data.initialState?.filter,
               filterModel: {
                 items: [

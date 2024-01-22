@@ -252,6 +252,9 @@ export default function DashTable() {
     rowCount: sampleData.length,
     pageSizeOptions: [10, 25, 50, 75, 100],
     filterModel,
+    dataSet: 'Employee',
+    visibleFields: columns,
+    rowLength: 100,
   };
   return (
     <Box
@@ -273,7 +276,7 @@ export default function DashTable() {
                 onPageChange={handlePageChange}
                 onPageSizeChange={handlePageSizeChange}
                 // onRowClick={(params, event) => handleRowClick(params, event)}
-                filterMode="server" // Optional: Use server-side filtering
+                // filterMode="server" // Optional: Use server-side filtering
                 onFilterModelChange={(model) => setFilterModel(model)}
         rows={rows}
         columns={columns}
@@ -282,10 +285,7 @@ export default function DashTable() {
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
-        slots={{
-          toolbar: EditToolbar,
-          toolbar:GridToolbar
-        }}
+
         slotProps={{
           toolbar: { setRows, setRowModesModel },
         }}
@@ -306,6 +306,10 @@ export default function DashTable() {
               ],
             },
           },
+        }}
+        slots={{
+          // toolbar: EditToolbar,
+          toolbar:GridToolbar
         }}
       />
         </div>
