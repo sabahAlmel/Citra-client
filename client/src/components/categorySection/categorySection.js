@@ -12,36 +12,36 @@ const CategorySection = () => {
       name:'حجابات'
   },
   {
-    id:1,
+    id:2,
      image:image ,
       name:'بيت قرآن'
   },
   {
-    id:1,
+    id:3,
      image:image ,
       name:'مسبحة'
   },
   {
-    id:1,
+    id:4,
      image:image ,
       name:'مرطبات'
   },
   {
-    id:1,
+    id:5,
      image:image ,
       name:'صابون'
   },
   {
-    id:1,
+    id:6,
      image:image ,
       name:'مناشف'
   },
   {
-    id:1,
+    id:7,
      image:image ,
       name:'إكسسوارات'
   },{
-    id:1,
+    id:8,
      image:image ,
       name:'أطقم صلاة'
   }

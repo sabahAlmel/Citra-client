@@ -1,22 +1,45 @@
+
 import { FaRegHeart } from "react-icons/fa";
-import styles from './SignUp.module.css'
+import styles from '../../components/SignUp/SignUp.module.css'
 import TextField from '@mui/material/TextField';
-import { Button } from "@mui/material";
+import { Button , Paper } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
 // import { LuEyeOff } from "react-icons/lu";
 import openeye from "../../assets/icons/open.svg"
 import closeeye from "../../assets/icons/close.svg"
-import { useState } from "react";
-import {toast} from "react-toastify";
-import { Link } from 'react-router-dom';
+import { useContext, useState } from "react";
+import { Link,useNavigate } from 'react-router-dom';
 import { color } from "framer-motion";
 import { Opacity } from "@mui/icons-material";
+import useApi from "../../hooks/useApi";
+import axiosInstance from "../../utils/axiosInstance";
+import {auth , provider } from '../../Firebase'
+import { signInWithPopup } from "firebase/auth";
+import { AuthContext } from "../../context/AuthContext";
+import {toast} from 'react-toastify'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
-function SignUp(){
+function SignUpp(){
 
     const [open ,setOpen]=useState(false);
+  
+    const {setUser} = useContext(AuthContext)
+    const [isPending, setIsPending] = useState(false);
+    const navigate = useNavigate()
+    const [formData, setFormData] = useState({
+      name:'',
+       email: '',
+       password: '',
+       phone:'',
+       role:'user'
+     });
+     const [disabled, setDisabled] = useState(false);
+    
+     
 
+    // hide or show password
     const openCloseHandler=()=>{
     setOpen(!open)
     }
@@ -31,11 +54,8 @@ function SignUp(){
     textPass="password"
     }
 
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-      });
-    
+   
+      
       const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({
@@ -44,32 +64,107 @@ function SignUp(){
         }));
       };
 
-      const handleSubmit = (event) => {
+
+      // google sign up
+
+      const handleGoogle = () => {
+        signInWithPopup(auth, provider)
+          .then((data) => {
+            setDisabled(!disabled);
+            axiosInstance
+              .post(
+                '/user/gsignup',
+                {
+                  name: data.user.displayName,
+                  email: data.user.email,
+                  photourl: data.user.photoURL,
+                  role: "user",
+                },
+                {
+                  headers: {
+                    "Content-Type": "multipart/form-data",
+                  },
+                }
+              )
+              .then((res) => {
+                setIsPending(false);
+                if (res) {
+                  setUser(res.data.token.data);
+                  console.log(res.data.token.data);
+                  setDisabled(!disabled);
+                  toast.success("تم تسجيل الدخول بنجاح")
+
+                } else {
+                  setUser("no user found");
+                }
+                navigate("/");
+              });
+          })
+          .catch((err) => {
+            setDisabled(false);
+            if (err.code === "auth/popup-closed-by-user") {
+              console.log("exited the google auth");
+            }
+          });
+      };
+
+
+      //sign up
+      const handleSubmit = async (event) => {
         event.preventDefault();
     
         setIsPending(true);
     
-        setTimeout(() => {
-          setIsPending(false);
-          notify();
-        }, 2000);
+        try {
+            const response = await axiosInstance.post('/user/signup', formData);
+            toast.success("تم تسجيل الدخول بنجاح")
+            navigate('/');
+          } catch (error) {
+            if (error.response && error.response.data && error.response.data.errors) {
+              const { errors } = error.response.data;
+          
+              if (errors.email) {
+                const emailError = errors.email;
+                toast.error(emailError);
+              }
+              if (errors.password) {
+                const passwordError = errors.password;
+                toast.error(passwordError);
+              }
+            } else {
+              toast.error(error.message);
+            }
+            setIsPending(false);
+          }
+        setFormData({
+          name:"",
+          email:"",
+          password:"",
+          phone : "",
+          role:""
+        })
+    
+        
+        
       };
 
-      const [isPending, setIsPending] = useState(false);
-
-      const notify = () => toast("! تم التسجيل بنجاح");
 
     return(
         <>
+       
         <form onSubmit={handleSubmit} className={styles.wrapper}>
+          
             
             <main className={styles.main}>
+            <ToastContainer />
+
                 {/* <div className={`${styles.circle} ${styles.left}`}>
 
                 </div>
                 <div className={`${styles.circle} ${styles.right}`}>
                     
                 </div> */}
+                
                 <span style={{
                     display: 'flex',
                     width: 'fit-content',
@@ -101,7 +196,10 @@ function SignUp(){
                              
                             },
                     }}
-                    id="filled-basic" 
+                    id="filled-basic"
+                    name="name"
+              value={formData.name}
+              onChange={handleInputChange} 
                     label="الاسم" 
                     variant="filled" 
                     required 
@@ -131,41 +229,36 @@ function SignUp(){
                              height: '13px'
                             },
                     }}
+                    name="email"
+              value={formData.email}
+              onChange={handleInputChange}
                     id="filled-basic" 
                     label="البريد" 
                     variant="filled" 
                     required
                     />
                 </div>
-                <div className={styles.passInp} style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}>
-          <TextField
-        
-          
-            sx={{
-              color: 'var(--blue-color)',
-              backgroundColor: 'white',
-            }}
-            inputProps={{
-              style: { color: 'var(--brown-color)',
-                       height: '13px',
-                       fontSize: '16px' 
-                    },
-            }}
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            id="filled-basic" 
-            label="كلمة المرور" 
-            variant="filled" 
-            type={textPass}
-            required
+                <div className={styles.passInp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <TextField
+              sx={{
+                color: 'var(--blue-color)',
+                backgroundColor: 'white',
+              }}
+              inputProps={{
+                style: { color: 'var(--brown-color)', height: '13px', fontSize: '16px' },
+              }}
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              id="filled-basic"
+              label="كلمة المرور"
+              variant="filled"
+              type={textPass}
+              required
+              dir="LTR"
             />
             <img src={openClose} alt="open close" onClick={openCloseHandler} className={styles.openClose} />
-        </div>
+          </div>
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -183,6 +276,9 @@ function SignUp(){
                            },
                     }}
                     id="filled-basic" 
+                    name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
                     label="رقم الهاتف" 
                     variant="filled" 
                     required 
@@ -199,7 +295,7 @@ function SignUp(){
                 <Button
                 fullWidth
                 type="submit"
-                onClick={() => (window.location.href = '/homepage')}
+                disabled={isPending}
                     sx={{
                     height: 38,
                     width: 227,
@@ -217,12 +313,14 @@ function SignUp(){
                     }
 
                     }} color="primary">
-                    تسجيل الدخول
+                    {isPending ? 'جارٍ التحميل...' : 'تسجيل الدخول'}
                 </Button>
                 {/* <p className={styles.p}> أو </p> */}
                 <Button
                 fullWidth
                 type="submit"
+                onClick={handleGoogle}
+                disabled={disabled}
                     sx={{
                         height: 35,
                         border: '2px solid #919191',
@@ -253,9 +351,10 @@ function SignUp(){
                     <p className={styles.p}><span>العودة الى الصفحة الرئيسية</span></p>
                 </Link>
             </main>
+           
             </form>
         </>
     )
 }
 
-export default SignUp;
+export default SignUpp;

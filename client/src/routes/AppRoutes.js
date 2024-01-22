@@ -13,6 +13,7 @@ import NotFound from "../pages/NotFound/NotFound.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
 import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Cart from "../pages/cart/Cart.js";
+import AboutUs from "../components/aboutUs/aboutUs.js";
 function AppRoutes() {
   return (
     <Routes>
