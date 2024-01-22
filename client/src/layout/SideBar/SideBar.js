@@ -73,7 +73,7 @@ const Sidebar = () => {
         <CSSTransition
           in={isOpen}
           timeout={200}
-          classNames={Styles.fade}
+          className={Styles.fade}
           unmountOnExit
         >
           <span>{item.title}</span>
@@ -85,7 +85,7 @@ const Sidebar = () => {
         <CSSTransition
           in={isOpen}
           timeout={200}
-          classNames={Styles.fade}
+          className={Styles.fade}
           unmountOnExit
         >
           <span>{item.title}</span>
