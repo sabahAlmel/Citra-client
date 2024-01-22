@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from "react";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
@@ -8,6 +8,8 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
 
 import {
+  GridToolbar,
+  
   GridRowModes,
   DataGrid,
   GridToolbarContainer,
@@ -21,12 +23,12 @@ import {
   randomArrayItem,
 } from '@mui/x-data-grid-generator';
 
-const roles = ['Admin', 'DataEntry', 'Normal'];
+const roles = ['admin', 'dataEntry', 'normal'];
 const randomRole = () => {
   return randomArrayItem(roles);
 };
 
-const initialRows = [
+const sampleData = [
   {
     id: randomId(),
     name: randomTraderName(),
@@ -80,27 +82,29 @@ function EditToolbar(props) {
     <GridToolbarContainer>
       <Button sx={{
         // color: 368681,
-        width:'9%',
-        height: 40,
+        margin: "10px",
+          height: "3rem",
+          width: "5rem",
         border: '2px solid #368681',
-        backgroundColor: "#FEE7CB",
-        color: '#4D342B',
+        backgroundColor: "var(--brown-color)",
+        color: "var(--main-color)",
 
         '&:hover':{
           
-          boxShadow: '0px 0px 10px 3px rgba(0,0,0,0.5)',
-          backgroundColor: '#368681',
+        
+          backgroundColor: "var(--blue-color)",
+          color: "var(--brown-color)",
         }
       
       }} color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
+      أضف عميل
       </Button>
     </GridToolbarContainer>
   );
 }
 
 export default function DashTable() {
-  const [rows, setRows] = React.useState(initialRows);
+  const [rows, setRows] = React.useState(sampleData);
   const [rowModesModel, setRowModesModel] = React.useState({});
 
   const handleRowEditStop = (params, event) => {
@@ -142,12 +146,13 @@ export default function DashTable() {
   const handleRowModesModelChange = (newRowModesModel) => {
     setRowModesModel(newRowModesModel);
   };
-
+ 
   const columns = [
-    { field: 'name', headerName: 'Name', width: 180, editable: true },
+    
+    { field: 'name', headerName: 'الإسم', width: 180, editable: true },
     {
       field: 'email',
-      headerName: 'Email',
+      headerName: 'البريد الالكتروني',
       type: '',
       width: 180,
       align: 'left',
@@ -156,18 +161,18 @@ export default function DashTable() {
     },
     {
       field: 'joinDate',
-      headerName: 'Join date',
+      headerName: 'تاريخ الانضمام',
       type: 'date',
       width: 180,
       editable: true,
     },
     {
       field: 'role',
-      headerName: 'Role',
+      headerName: 'نوع العميل',
       width: 220,
       editable: true,
       type: 'singleSelect',
-      valueOptions: ['Market', 'Finance', 'Development'],
+      valueOptions: ['admin', 'user', 'dataEntry'],
     },
     {
       field: 'actions',
@@ -213,22 +218,41 @@ export default function DashTable() {
               },
             }}
           />,
-          // <GridActionsCellItem
-          //   icon={<DeleteIcon />}
-          //   label="Delete"
-          //   onClick={handleDeleteClick(id)}
-          //   color="inherit"
-          //   sx={{
-          //     '&:hover': {
-          //       backgroundColor: 'var(--main-color)',
-          //     },
-          //   }}
-          // />,
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            onClick={handleDeleteClick(id)}
+            color="inherit"
+            sx={{
+              '&:hover': {
+                backgroundColor: 'var(--main-color)',
+              },
+            }}
+          />,
         ];
       },
     },
   ];
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
+  const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
+  const handlePageChange = (params) => {
+    setPage(params.page);
+  };
 
+  const handlePageSizeChange = (params) => {
+    setPageSize(params.pageSize);
+    setPage(0);
+  };
+  const data = {
+    rows: sampleData,
+    columns,
+    page,
+    pageSize,
+    rowCount: sampleData.length,
+    pageSizeOptions: [10, 25, 50, 75, 100],
+    filterModel,
+  };
   return (
     <Box
       sx={{
@@ -242,7 +266,15 @@ export default function DashTable() {
         },
       }}
     >
+       <div style={{ height: 400, width: "100%" }}>
       <DataGrid
+                sx={{ minHeight: "60vh" }}
+                {...data}
+                onPageChange={handlePageChange}
+                onPageSizeChange={handlePageSizeChange}
+                // onRowClick={(params, event) => handleRowClick(params, event)}
+                filterMode="server" // Optional: Use server-side filtering
+                onFilterModelChange={(model) => setFilterModel(model)}
         rows={rows}
         columns={columns}
         editMode="row"
@@ -252,11 +284,31 @@ export default function DashTable() {
         processRowUpdate={processRowUpdate}
         slots={{
           toolbar: EditToolbar,
+          toolbar:GridToolbar
         }}
         slotProps={{
           toolbar: { setRows, setRowModesModel },
         }}
+        initialState={{
+          ...data.initialState,
+          //pagination
+          // pagination: { paginationModel: { pageSize: 5 } },
+          filter: {
+            //filter
+            ...data.initialState?.filter,
+            filterModel: {
+              items: [
+                {
+                  field: "rating",
+                  operator: ">",
+                  value: "2.5",
+                },
+              ],
+            },
+          },
+        }}
       />
+        </div>
     </Box>
   );
 }

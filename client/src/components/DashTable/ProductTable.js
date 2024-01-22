@@ -751,7 +751,7 @@ const ProductTable = () => {
   const sampleData = [
     {
       id: 72287362676,
-      الإسم: "Product 1",
+      الإسم: "rayannn",
       "name in english": "Product 1 (English)",
       date: "2022-01-20",
       سعر: 100,
@@ -855,7 +855,7 @@ const ProductTable = () => {
     },
     {
       id: 13,
-      الإسم: "Product 13",
+      الإسم: "rayannn",
       "name in english": "Product 2 (English)",
       date: "2022-01-21",
       سعر: 150,
