@@ -1,53 +1,53 @@
-import {React, useState} from "react";
+import { React, useContext, useState } from "react";
 import TextField from '@mui/material/TextField';
-import styles from './signin.module.css'
+import styles from '../../components/signin/signin.module.css';
 import { Button } from "@mui/material";
 import { FaRegHeart } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useMediaQuery } from '@mui/material';
-import {toast} from "react-toastify";
-import { Link } from 'react-router-dom';
-import openeye from "../../assets/icons/open.svg"
-import closeeye from "../../assets/icons/close.svg"
-// import axios from "axios";
-
-
+import { toast } from "react-toastify";
+import { Link, useNavigate } from 'react-router-dom';
+import openeye from "../../assets/icons/open.svg";
+import closeeye from "../../assets/icons/close.svg";
+import axiosInstance from "../../utils/axiosInstance";
+import { auth, provider} from '../../Firebase';
+import { signInWithPopup } from "firebase/auth";
+import { AuthContext } from "../../context/AuthContext";
+import useApi from "../../hooks/useApi";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Signin() {
-
-//password hide/see icon
-
-const [open ,setOpen]=useState(false);
-
-const openCloseHandler=()=>{
-  setOpen(!open)
-}
-
-let openClose, textPass;
-
-if(open){
-  openClose = openeye;
-  textPass="text"
-}else{
-  openClose=closeeye;
-  textPass="password"
-}
-
-  const isSmallScreen = useMediaQuery('(max-width: 330px)');
-  const [email, setEmail]= useState('');
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-  const [password, setPassword] = useState('');
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
+  const { setUser , fetchUserData } = useContext(AuthContext);
+  const [disabled, setDisabled] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const {apiCall} = useApi()
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  const [open, setOpen] = useState(false);
+
+  const openCloseHandler = () => {
+    setOpen(!open);
+  };
+
+  let openClose, textPass;
+
+  if (open) {
+    openClose = openeye;
+    textPass = "text";
+  } else {
+    openClose = closeeye;
+    textPass = "password";
+  }
+
+  const isSmallScreen = useMediaQuery('(max-width: 330px)');
+
+ 
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -57,27 +57,102 @@ if(open){
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
     setIsPending(true);
-
-    setTimeout(() => {
+    if (!formData.email || !formData.password) {
+      toast.error("أدخل البريد والإسم");
       setIsPending(false);
-      notify();
-    }, 2000);
+      
+      return;
+    }
+
+    setFormData({
+      email: "",
+      password: "",
+    });
+    
+    try {
+      await apiCall({
+        url: "/user/login",
+        method: "post",
+        data: {
+          email: formData.email,
+          password: formData.password,
+        },
+      });
+      await fetchUserData();
+      toast.success("تم تسجيل الدخول بنجاح")
+      setIsPending(false)
+      navigate('/')}
+
+     catch (error) {
+      if (error.response && error.response.data && error.response.data.errors) {
+        const { errors } = error.response.data;
+
+        if (errors.email) {
+          const emailError = errors.email;
+          toast.error(emailError);
+        }
+        if (errors.password) {
+          const passwordError = errors.password;
+          toast.error(passwordError);
+        }
+      } else {
+        toast.error(error.message);
+      }
+      setIsPending(false);
+    }
+
+
+   
   };
 
-  const [isPending, setIsPending] = useState(false);
+  // google sign in
+  const handleGoogle = async () => {
+    try {
+      const data = await signInWithPopup(auth, provider);
 
-  const handleGoodle = () =>{
+      setDisabled(!disabled);
 
-  }
+      const res = await axiosInstance.post(
+        '/user/gsignup',
+        {
+          name: data.user.displayName,
+          email: data.user.email,
+          photourl: data.user.photoURL,
+          role: "user",
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-  const notify = () => toast("! تم التسجيل بنجاح");
-  const notify2 = () => toast("خطاء في كلمة المرور او البريد");
+      setIsPending(false);
+      toast.success("تم تسجيل الدخول بنجاح");
+
+      if (res) {
+        setUser(res.data.token.data);
+        console.log(res.data.token.data);
+        setDisabled(!disabled);
+      } else {
+        setUser("no user found");
+      }
+
+      navigate("/");
+    } catch (err) {
+      setDisabled(false);
+
+      if (err.code === "auth/popup-closed-by-user") {
+        console.log("exited the google auth");
+      }
+    }
+  };
+
+
   return (
-    <>
     <form onSubmit={handleSubmit} className={styles.wrapper}>
       <main className={`${styles.main} ${isSmallScreen && styles.smallScreen}`} >
         <h1 className={styles.h1}>
@@ -92,7 +167,6 @@ if(open){
         }}>
           <h3 className={styles.h3}>
             اهلا و سهلا بكم مجدداً
-
           </h3>
           <FaRegHeart className={styles.icon} />
         </span>
@@ -102,23 +176,20 @@ if(open){
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-          <TextField className={styles.textfield}
+          <TextField
+            className={styles.textfield}
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              // marginTop: '20px',
               color: 'var(--rose-color)',
               backgroundColor: 'white',
-              
-              '& .Mui-focused > lable': {
-                color: 'black',
-              }
             }}
             inputProps={{
-              style: { color: 'var(--brown-color)',
-                       height: '17px',
-                       fontSize: '16px'
-                      },
+              style: {
+                color: 'var(--brown-color)',
+                height: '17px',
+                fontSize: '16px'
+              },
             }}
             name="email"
             value={formData.email}
@@ -128,7 +199,7 @@ if(open){
             variant="filled"
             type="email" 
             required
-            />
+          />
         </div>
         <div className={styles.passInp} style={{
           display: 'flex',
@@ -136,17 +207,16 @@ if(open){
           alignItems: 'center'
         }}>
           <TextField
-          
             sx={{
               color: 'var(--blue-color)',
               backgroundColor: 'white',
-
             }}
             inputProps={{
-              style: { color: 'var(--brown-color)',
-                       height: '17px',
-                       fontSize: '16px' 
-                    },
+              style: {
+                color: 'var(--brown-color)',
+                height: '17px',
+                fontSize: '16px' 
+              },
             }}
             name="password"
             value={formData.password}
@@ -156,8 +226,9 @@ if(open){
             variant="filled" 
             type={textPass}
             required
-            />
-            <img src={openClose} alt="open close" onClick={openCloseHandler} className={styles.openClose} />
+            dir="LTR"
+          />
+          <img src={openClose} alt="open close" onClick={openCloseHandler} className={styles.openClose} />
         </div>
         <div style={{
           width: '14rem',
@@ -166,69 +237,48 @@ if(open){
           rowGap: '1rem',
         }}>
           <Button
-          fullWidth
-          type="submit"
-          onClick={() => (window.location.href = '/homepage')}
+            fullWidth
+            type="submit"
+            onClick={handleSubmit}
             sx={{
               height: 35,
-              // border: '2px solid #368681',
               backgroundColor: "#FEE7CB",
               color: 'var(--brown-color)',
-
               '&:hover': {
-
-                // boxShadow: '0px 0px 10px 3px rgba(0,0,0,0.5)',
                 backgroundColor: '#368681',
                 color: 'white'
               }
-
             }} color="primary">
             تسجيل الدخول
           </Button>
           <Button
-          fullWidth
-          // onClick={handleGoogle}
-          // disabled={disabled}
+            onClick={handleGoogle}
+            fullWidth
             sx={{
               height: 35,
               border: '2px solid #919191',
               backgroundColor: "#f8f8f8",
               color: 'var(--brown-color)',
-
-
               '&:hover': {
-
-                // boxShadow: '0px 0px 10px 3px rgba(0,0,0,0.5)',
                 backgroundColor: '#368681',
                 color: 'white'
               }
-
             }} color="primary">
-           <span className={styles.g}> <FcGoogle /></span> تسجيل الدخول بواسطة
+            <span className={styles.g}> <FcGoogle /></span> تسجيل الدخول بواسطة
           </Button>
-
         </div>
         <Link to="/signup" className={styles.p}>
-        <p className={styles.p}>ليس لديك حساب <span style={{borderBottom:"1px solid var(--blue-color)"}}>اشترك الآن</span></p>
-
+          <p className={styles.p}>ليس لديك حساب <span style={{ borderBottom: "1px solid var(--blue-color)" }}>اشترك الآن</span></p>
         </Link>
-  
         <Link to="/homepage" className={styles.p}>
-        <p className={styles.p}><span>العودة الى الصفحة الرئيسية</span></p>
-        
+          <p className={styles.p}><span>العودة الى الصفحة الرئيسية</span></p>
         </Link>
       </main>
       {isPending && (
-          <p className={styles.pending}> . . . جاري تسجيل الدخول, الرجاء الإنتظار   </p>
-        )}
-        
-        </form>
-    </>
-
-
-
-  )
+        <p className={styles.pending}> . . . جاري تسجيل الدخول, الرجاء الإنتظار   </p>
+      )}
+    </form>
+  );
 }
 
 export default Signin;
-
