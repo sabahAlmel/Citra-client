@@ -29,7 +29,7 @@ function ProductImages({ products, isLoading }) {
         )}
       </div>
       <div className={style.imagesHandle}>
-        {products.fetchedProduct.images.map((image, index) => (
+        {products.fetchedProduct.images?.map((image, index) => (
           <img
             key={index}
             src={`${process.env.REACT_APP_BACKEND}${image}`}

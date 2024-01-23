@@ -22,6 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 40px;
 }
 .head h3 {
   font-weight: 600;
@@ -36,6 +37,7 @@
 }
 .subHead {
   margin-top: 20px;
+  margin-bottom: 40px;
 }
 .subHead h3 {
   margin: 20px 10px;
@@ -93,5 +95,6 @@
   background-color: var(--blue-color);
 }
 .filter label {
+  font-size: 25px;
   cursor: pointer;
 }

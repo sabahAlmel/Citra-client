@@ -100,7 +100,7 @@ function NavBar() {
                 className={
                   location.pathname === "/" ? styles.activeLink : styles.link
                 }
-                to="./"
+                to="/"
                 onClick={() => setMenuOpen(false)}
               >
                 الصفحة الرئيسية
