@@ -1,9 +1,11 @@
 import React from 'react'
 import DashTable from '../../../components/DashTable/DashTable'
+import styless from "./Users.module.css"
+// import styles from "../Products/Products.module.css"
 
 function Users() {
   return (
-    <div>
+    <div className={styless.container}>
       <DashTable/>
     </div>
   )

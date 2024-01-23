@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
-
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import {
   GridToolbar,
   
@@ -31,10 +32,11 @@ const randomRole = () => {
 const sampleData = [
   {
     id: randomId(),
-    name: randomTraderName(),
-    email: 'user1@getMaxListeners.com',
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
+    orderNB: randomTraderName(),
+    selectedProduct: 'user1@getMaxListeners.com',
+    user: randomRole(),
+    updateDate: randomCreatedDate(),
+    
   },
   {
     id: randomId(),
@@ -77,6 +79,7 @@ function EditToolbar(props) {
       [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
     }));
   };
+ 
 
   return (
     <GridToolbarContainer>
@@ -146,92 +149,88 @@ export default function DashTable() {
   const handleRowModesModelChange = (newRowModesModel) => {
     setRowModesModel(newRowModesModel);
   };
- 
+  const [statuses, setStatuses] = React.useState({});
+
+  const handleChange = (event, id) => {
+    const newStatus = event.target.value;
+  
+    // Save the selected status to the statuses state
+    setStatuses((prevStatuses) => ({
+      ...prevStatuses,
+      [id]: newStatus,
+    }));
+  
+    // You can also perform additional actions here if needed
+    console.log(`Status ${newStatus} selected for row ID ${id}`);
+  };
   const columns = [
-    
-    { field: 'name', headerName: 'الإسم', width: 180, editable: true },
+    { field: ' orderNB', headerName:'رقم الطلب', width: 180, editable: true, flex:1 },
+
+    { field: 'selectedProduct', headerName: ' إسم المنتج', width: 180, editable: true  ,flex:1},
     {
-      field: 'email',
-      headerName: 'البريد الالكتروني',
+      field: 'user',
+      headerName: 'اسم المستخدم ',
       type: '',
       width: 180,
       align: 'left',
       headerAlign: 'left',
       editable: true,
+      flex:1
     },
     {
-      field: 'joinDate',
-      headerName: 'تاريخ الانضمام',
+      field: 'updateDate',
+      headerName: 'تاريخ ',
       type: 'date',
       width: 180,
       editable: true,
+      flex:1
     },
     {
-      field: 'role',
-      headerName: 'نوع العميل',
-      width: 220,
-      editable: true,
-      type: 'singleSelect',
-      valueOptions: ['admin', 'user', 'dataEntry'],
-    },
-    {
-      field: 'actions',
-      type: 'actions',
-      headerName: 'Actions',
-      width: 100,
-      cellClassName: 'actions',
-      getActions: ({ id }) => {
-        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
-
-        if (isInEditMode) {
-          return [
-            <GridActionsCellItem
-              icon={<SaveIcon />}
-              label="Save"
-              sx={{
-                color: 'primary.main',
-                
-              }}
-              onClick={handleSaveClick(id)}
-            />,
-            <GridActionsCellItem
-              icon={<CancelIcon />}
-              label="Cancel"
-              className="textPrimary"
-              onClick={handleCancelClick(id)}
-              color="inherit"
-            />,
-          ];
-        }
-
-        return [
-          <GridActionsCellItem
-            icon={<EditIcon />}
-            label="Edit"
-            className="textPrimary"
-            onClick={handleEditClick(id)}
-            color="inherit"
+        field: "actions", // Add a delete column
+        headerName: "actions",
+        flex: 1,
+        // cellClassName: "delete-cell",
+  
+        renderCell: (params) => (
+            <>
+             {/* <Button
+            variant="outlined"
+            color="secondary"
             sx={{
-              '&:hover': {
-                
-                backgroundColor: 'var(--blue-color)',
+              color: "var(--brown-color)",
+              borderColor: "var(--blue-color) ",
+              "&:hover": {
+                boxShadow: "0px 0px 10px 3px rgba(0,0,0,0.5)",
+                backgroundColor: "var(--blue-color)",
               },
             }}
-          />,
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={handleDeleteClick(id)}
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: 'var(--main-color)',
-              },
-            }}
-          />,
-        ];
+            onClick={() => handleRowClickDelete(params)}
+          >
+            Cancel
+          </Button> */}
+ 
+ <Box sx={{ minWidth: 120 ,   cellClassName: 'actions',
+}}>
+      <FormControl fullWidth>
+        <InputLabel id={`status-label-${params.id}`}>Status</InputLabel>
+        <Select
+          labelId={`status-label-${params.id}`}
+          id={`status-select-${params.id}`}
+          value={statuses[params.id] || ''}
+          label="Status"
+          onChange={(event) => handleChange(event, params.id)}
+        >
+          <MenuItem value={10}>Pending</MenuItem>
+          <MenuItem value={20}>Delivered</MenuItem>
+          <MenuItem value={30}>Cancel</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+            </>
+         
+          
+        ),
       },
-    },
   ];
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);

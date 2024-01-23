@@ -1,10 +1,12 @@
 import React from "react";
-import ShopLayout from "../../layout/Shop/ShopLayout";
+import ShopSide from "../../components/Shop/ShopSide";
+import Product from "../../components/Shop/Product";
 
 function Shop() {
   return (
     <section>
-      <ShopLayout />
+      <ShopSide />
+      <Product />
     </section>
   );
 }

@@ -1,0 +1,9 @@
+/* *{
+    direction:rtl;
+} */
+
+.container{
+    overflow-x: hidden;
+    height: 100vh;
+    background-color: var(--main-color);
+}

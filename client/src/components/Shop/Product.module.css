@@ -53,3 +53,14 @@
   width: 30px;
   height: 30px;
 }
+.pagination {
+  direction: ltr;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+.loading {
+  text-align: center;
+  margin: 0 auto;
+}

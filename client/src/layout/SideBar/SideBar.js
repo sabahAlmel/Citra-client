@@ -1,4 +1,5 @@
-import React, { useState,useNavigate } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -49,6 +50,11 @@ const menuItems = [
 // };
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const navigate = useNavigate();
+  const handleLinkClick = () => {
+    //close side after navigate
+    setIsOpen(false);
+  };
 
   return (
     <div className={cx(Styles.sidebar, { [Styles["sidebar-closed"]]: !isOpen })}>
@@ -67,19 +73,19 @@ const Sidebar = () => {
         <CSSTransition
           in={isOpen}
           timeout={200}
-          classNames={Styles.fade}
+          className={Styles.fade}
           unmountOnExit
         >
           <span>{item.title}</span>
         </CSSTransition>
       </Link>
     ) : (
-      <Link className={Styles.sidebar__listItem} to={item.path}>
+      <Link className={Styles.sidebar__listItem} to={item.path}  onClick={handleLinkClick}>
         <FontAwesomeIcon className={Styles.sidebar__icon} icon={item.icon} />
         <CSSTransition
           in={isOpen}
           timeout={200}
-          classNames={Styles.fade}
+          className={Styles.fade}
           unmountOnExit
         >
           <span>{item.title}</span>
