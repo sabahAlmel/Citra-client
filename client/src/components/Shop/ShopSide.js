@@ -14,6 +14,33 @@ const ShopSide = () => {
   const [selectedSubcategoriesArray, setSelectedSubcategoriesArray] = useState(
     []
   );
+  const [isAbove769px, setIsAbove769px] = useState(window.innerWidth > 769);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsAbove769px(window.innerWidth > 769);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handleResize = () => {
+    if (window.innerWidth > 769 && sidePanelWidth === 0) {
+      openNav();
+    } else if (window.innerWidth <= 769 && sidePanelWidth > 0) {
+      closeNav();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [sidePanelWidth]);
 
   const openNav = () => {
     setSidePanelWidth(280);
@@ -22,7 +49,13 @@ const ShopSide = () => {
   const closeNav = () => {
     setSidePanelWidth(0);
   };
-
+  useEffect(() => {
+    if (isAbove769px) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, []);
   const { isLoading: isLoadingCategory, data: allCategories } = useQuery(
     "shop-categ",
     fetchAllCategories,
@@ -78,10 +111,12 @@ const ShopSide = () => {
       >
         <section className={style.sideBarContainer}>
           <section className={style.head}>
-            <div className={style.closebtn} onClick={closeNav}>
-              &times;
-            </div>
-            <h3>الخانات الاساسية</h3>
+            {!isAbove769px && (
+              <div className={style.closebtn} onClick={closeNav}>
+                &times;
+              </div>
+            )}
+            <h2>الخانات الاساسية</h2>
           </section>
           <form>
             {allCategories?.categories.map((filter) => (
@@ -104,7 +139,7 @@ const ShopSide = () => {
                 (checkboxFilters.some(
                   (filter) => filter.categoryID === selectedCategory
                 ) ? (
-                  <h3>الخانات الفرعية</h3>
+                  <h2>الخانات الفرعية</h2>
                 ) : null)}
             </div>
             {selectedCategory &&

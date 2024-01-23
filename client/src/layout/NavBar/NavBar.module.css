@@ -1,14 +1,13 @@
 * {
-  font-size: 19px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.opened{
+.opened {
   position: absolute;
   top: 10rem;
 }
-header{
+header {
   background-color: var(--main-color);
 }
 /* .nav {
@@ -20,16 +19,16 @@ header{
   align-items: center;
   background-color: var(--main-color);
 } */
-.nav{
-      height: 15vh;
-      display: flex;
-      flex-direction: row;
-      margin: 0 var(--margin-LR);
-      justify-content: space-between;
-      align-items: center;
-      background-color: var(--main-color);
+.nav {
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  margin: 0 var(--margin-LR);
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--main-color);
 }
-.cart{
+.cart {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -65,7 +64,8 @@ input:focus {
 li {
   margin-top: 10px;
 }
-.link, .activeLink {
+.link,
+.activeLink {
   text-decoration: none;
   color: var(--brown-color);
   cursor: pointer;
@@ -73,8 +73,8 @@ li {
   padding-bottom: 10px;
   transition: 0.6s;
 }
-.activeLink{
-border-color: var(--blue-color);
+.activeLink {
+  border-color: var(--blue-color);
 }
 .link {
   transition: all 0.2s ease;
@@ -110,7 +110,6 @@ border-color: var(--blue-color);
   color: white;
   background-color: var(--blue-color);
 }
-
 
 /* ///////////////////////////////////////////////////////// */
 .hamburger {
