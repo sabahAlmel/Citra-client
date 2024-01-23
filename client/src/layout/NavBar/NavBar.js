@@ -35,12 +35,11 @@ function NavBar() {
   const bar2 = [styles.bar, menuOpen ? styles.linetwo : ""].join(" ");
   const bar3 = [styles.bar, menuOpen ? styles.linethree : ""].join(" ");
   /////////////
-
+const navigate = useNavigate()
   const handleClick = () => {
     setShopping(!shopping);
   };
   //handle scroll
-  const navigate = useNavigate();
   const handleScrollToProduct = () => {
     setMenuOpen(false);
     if (location.pathname === "/") {
@@ -70,6 +69,9 @@ function NavBar() {
       }, 1000);
     }
   };
+const handlelogo=()=>{
+  navigate("./")
+}
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -93,14 +95,13 @@ function NavBar() {
           {shopping ? <DropDownCart setShopping={setShopping} /> : ""}
         </div>
 
-        <div>
           <ul className={` ${menuOpen ? styles.dropdown : styles.navUl}`}>
             <li>
               <NavLink
                 className={
                   location.pathname === "/" ? styles.activeLink : styles.link
                 }
-                to="./"
+                to="/"
                 onClick={() => setMenuOpen(false)}
               >
                 الصفحة الرئيسية
@@ -142,7 +143,6 @@ function NavBar() {
               تسجيل دخول
             </NavLink>
           </ul>
-        </div>
 
         <img
           className={styles.logo}
@@ -150,6 +150,8 @@ function NavBar() {
           height={"60px"}
           src={logo}
           alt="citra's logo"
+          onClick={handlelogo}
+          style={{cursor:"pointer"}}
         />
       </nav>
     </header>

@@ -149,8 +149,8 @@ export default function DashTable() {
  
   const columns = [
     
-    { field: 'name', headerName: 'الإسم', width: 180, editable: true },
-    {
+    { field: 'name', headerName: 'الإسم', width: 180, editable: true ,    flex:1,},
+    {    flex:1,
       field: 'email',
       headerName: 'البريد الالكتروني',
       type: '',
@@ -159,14 +159,14 @@ export default function DashTable() {
       headerAlign: 'left',
       editable: true,
     },
-    {
+    {    flex:1,
       field: 'joinDate',
       headerName: 'تاريخ الانضمام',
       type: 'date',
       width: 180,
       editable: true,
     },
-    {
+    {    flex:1,
       field: 'role',
       headerName: 'نوع العميل',
       width: 220,
@@ -175,6 +175,7 @@ export default function DashTable() {
       valueOptions: ['admin', 'user', 'dataEntry'],
     },
     {
+      flex:1,
       field: 'actions',
       type: 'actions',
       headerName: 'Actions',
