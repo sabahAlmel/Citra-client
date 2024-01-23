@@ -5,13 +5,18 @@
 }
 @media (max-width: 1166px) {
   .content {
-    width: 90%;
+    width: 80%;
     margin: 2rem auto;
   }
 }
 @media (max-width: 490px) {
   .content {
     margin: 2rem 0;
+  }
+}
+@media (max-width: 400px) {
+  .content {
+    width: 90%;
   }
 }
 /* @media (max-width: 992px) {
