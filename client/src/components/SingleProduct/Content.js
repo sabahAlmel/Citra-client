@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import style from "./Content.module.css";
 
 function Content({ products, isLoading }) {
@@ -58,6 +59,9 @@ function Content({ products, isLoading }) {
     if (quantity < availableQuantity) {
       setQuantity((prevQuantity) => prevQuantity + 1);
     }
+    if (quantity === availableQuantity) {
+      toast.info("You have reached the maximum quantity!");
+    }
   };
 
   const handleDecrement = () => {
@@ -93,14 +97,50 @@ function Content({ products, isLoading }) {
     return selectedSizeDetails ? selectedSizeDetails.quantity : 0;
   };
 
+  const handleClick = () => {
+    const productInfo = {
+      name: products.fetchedProduct.name,
+      price: products.fetchedProduct.price,
+      totalPrice: products.fetchedProduct.price * quantity,
+      image: products.fetchedProduct.images[0],
+      selectedColor,
+      selectedSize,
+      quantity,
+    };
+
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existingProductIndex = existingCart.findIndex(
+      (item) =>
+        item.selectedColor === selectedColor &&
+        item.selectedSize === selectedSize
+    );
+
+    if (existingProductIndex !== -1) {
+      existingCart[existingProductIndex].quantity += quantity;
+      existingCart[existingProductIndex].price += productInfo.price;
+    } else {
+      existingCart.push(productInfo);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+    toast.success("Item added to the cart!");
+  };
+
   if (isLoading) {
     return <h2>Loading...</h2>;
   }
   return (
     <div className={style.content}>
-      <div className={style.title}>{products.fetchedProduct.name}</div>
+      {/* <div className={style.title}>{products.fetchedProduct.name}</div> */}
+      <div className={style.title}>سجادات</div>
       <div className={style.price}>${products.fetchedProduct.price}</div>
-      <div className={style.desc}>{products.fetchedProduct.description}</div>
+      {/* <div className={style.desc}>{products.fetchedProduct.description}</div> */}
+      <div className={style.desc}>
+        ٣٠, الفترة أسابيع الجديدة، قد لها. كل هامش لهيمنة بالجانب انه, أم ونتج
+        وبولندا أما. الخاطفة انتصارهم لم تلك, حول القوى محاولات ويكيبيديا ان.
+        هذا بينما الوزراء مع.
+      </div>
       <div className={style.color}>
         <h2>اختار اللون</h2>
         <div className={style.colorPalette}>
@@ -110,8 +150,8 @@ function Content({ products, isLoading }) {
               onClick={() => handleColorChange(detail.color)}
               style={{
                 backgroundColor: detail.color,
-                width: "50px",
-                height: "50px",
+                width: "40px",
+                height: "40px",
                 borderRadius: "50%",
                 zIndex: 1,
                 display: "flex",
@@ -126,8 +166,8 @@ function Content({ products, isLoading }) {
             >
               <span
                 style={{
-                  width: "50px",
-                  height: "50px",
+                  width: "40px",
+                  height: "40px",
                   border:
                     detail.color == selectedColor ? "2px solid #333" : null,
                   position: "absolute",
@@ -146,16 +186,14 @@ function Content({ products, isLoading }) {
             .filter((detail) => detail.color === selectedColor)
             .map((detail) =>
               detail.sizes.map((size, index) => (
-                <div className={style.radio} key={index}>
-                  <input
-                    type="radio"
-                    name="size"
-                    value={size.size}
-                    id={index}
-                    checked={size.size === selectedSize}
-                    onChange={() => handleSizeChange(size.size)}
-                  />
-                  <label htmlFor={index}>{size.size}</label>
+                <div
+                  className={`${style.sizeOption} ${
+                    size.size === selectedSize ? style.selected : ""
+                  }`}
+                  key={index}
+                  onClick={() => handleSizeChange(size.size)}
+                >
+                  {size.size}
                 </div>
               ))
             )}
@@ -197,8 +235,12 @@ function Content({ products, isLoading }) {
             );
           })}
         <div className={style.orderNow}>
-          <div className={style.shop} disabled={isOrderButtonDisabled()}>
-            اضف الى السلة
+          <div
+            className={style.shop}
+            disabled={isOrderButtonDisabled()}
+            onClick={handleClick}
+          >
+            اضف الان
           </div>
         </div>
       </div>

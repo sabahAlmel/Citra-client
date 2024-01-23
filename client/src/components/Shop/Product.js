@@ -16,6 +16,7 @@ import { Pagination, PaginationItem } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { ShopContext } from "../../ShopContext/ShopContext";
+import { toast } from "react-toastify";
 
 // function ShoppingBag() {
 //   const [hover, setHovered] = useState(false);
@@ -124,6 +125,10 @@ function Product() {
     setCurrentPage(page);
   };
 
+  const handleClick = () => {
+    toast.success("Item added to the cart!");
+  };
+
   if (isLoadingProducts) {
     return <h2 className={style.loading}>loading...</h2>;
   }
@@ -155,10 +160,7 @@ function Product() {
                     <h4>{element.name}</h4>
                     <p>${element.price}</p>
                   </div>
-                  <Link
-                    className={style.addToCart}
-                    onClick={() => console.log("hello")}
-                  >
+                  <Link className={style.addToCart} onClick={handleClick}>
                     اضف الآن
                   </Link>
                 </div>
