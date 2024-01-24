@@ -29,8 +29,8 @@ function Footer() {
                 src={instagram}
                 alt="instagram"
                 className={style.logo}
-                height="40px"
-                width="50px"
+                height="30px"
+                width="40px"
               />
             </Link>
             <Link
@@ -41,8 +41,8 @@ function Footer() {
                 src={fb}
                 alt="fb"
                 className={style.logo}
-                height="40px"
-                width="50px"
+                height="28px"
+                width="42px"
               />
             </Link>
           </aside>
@@ -61,8 +61,8 @@ function Footer() {
                 src={instagram}
                 alt="instagram"
                 className={style.logo}
-                height="40px"
-                width="50px"
+                height="30px"
+                width="40px"
               />
             </Link>
             <Link
@@ -73,8 +73,8 @@ function Footer() {
                 src={fb}
                 alt="fb"
                 className={style.logo}
-                height="40px"
-                width="50px"
+                height="28px"
+                width="42px"
               />
             </Link>
           </aside>

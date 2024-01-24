@@ -39,9 +39,9 @@
     line-height: 40px;
     
   }
-  @media(max-width: 907px ) and ( min-width:768px){
+  @media(max-width: 1160px ) and ( min-width:768px){
     .description{
-      height: 500px;
+      height: 400px;
       overflow-y: scroll;
     }
   }

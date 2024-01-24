@@ -35,7 +35,7 @@ function NavBar() {
   const bar2 = [styles.bar, menuOpen ? styles.linetwo : ""].join(" ");
   const bar3 = [styles.bar, menuOpen ? styles.linethree : ""].join(" ");
   /////////////
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleClick = () => {
     setShopping(!shopping);
   };
@@ -69,9 +69,9 @@ const navigate = useNavigate()
       }, 1000);
     }
   };
-const handlelogo=()=>{
-  navigate("./")
-}
+  const handlelogo = () => {
+    navigate("./");
+  };
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -95,54 +95,53 @@ const handlelogo=()=>{
           {shopping ? <DropDownCart setShopping={setShopping} /> : ""}
         </div>
 
-          <ul className={` ${menuOpen ? styles.dropdown : styles.navUl}`}>
-            <li>
-              <NavLink
-                className={
-                  location.pathname === "/" ? styles.activeLink : styles.link
-                }
-                to="/"
-                onClick={() => setMenuOpen(false)}
-              >
-                الصفحة الرئيسية
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={styles.link}
-                to={location.pathname === "/" ? "#" : "/"}
-                onClick={() => handleScrollToProduct()}
-              >
-                منتجاتنا
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={location.pathname === "/" ? "#" : "/"}
-                className={styles.link}
-                onClick={() => handleScrollToAbout()}
-              >
-                حولنا
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={
-                  location.pathname === "/shop"
-                    ? styles.activeLink
-                    : styles.link
-                }
-                to="/shop"
-                onClick={() => setMenuOpen(false)}
-              >
-                إطلب الآن
-              </NavLink>
-            </li>
-
+        <ul className={` ${menuOpen ? styles.dropdown : styles.navUl}`}>
+          <li>
+            <NavLink
+              className={
+                location.pathname === "/" ? styles.activeLink : styles.link
+              }
+              to="/"
+              onClick={() => setMenuOpen(false)}
+            >
+              الصفحة الرئيسية
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={styles.link}
+              to={location.pathname === "/" ? "#" : "/"}
+              onClick={() => handleScrollToProduct()}
+            >
+              منتجاتنا
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={location.pathname === "/" ? "#" : "/"}
+              className={styles.link}
+              onClick={() => handleScrollToAbout()}
+            >
+              حولنا
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={
+                location.pathname === "/shop" ? styles.activeLink : styles.link
+              }
+              to="/shop"
+              onClick={() => setMenuOpen(false)}
+            >
+              إطلب الآن
+            </NavLink>
+          </li>
+          <li>
             <NavLink className={` ${styles.btn}`} to="./signin">
               تسجيل دخول
             </NavLink>
-          </ul>
+          </li>
+        </ul>
 
         <img
           className={styles.logo}
@@ -151,7 +150,7 @@ const handlelogo=()=>{
           src={logo}
           alt="citra's logo"
           onClick={handlelogo}
-          style={{cursor:"pointer"}}
+          style={{ cursor: "pointer" }}
         />
       </nav>
     </header>
