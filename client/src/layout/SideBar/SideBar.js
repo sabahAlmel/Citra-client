@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -23,7 +23,7 @@ const menuItems = [
   { title: "طلبات", icon: faClipboardList ,path:"/orders" },
   { title: " الصفحة الرئيسية", icon: faHome ,path:"/" },
 
-  { title: "تسجيل خروج", icon: faSignOutAlt }
+  // { title: "تسجيل خروج", icon: faSignOutAlt }
  
 
 ];
@@ -49,11 +49,25 @@ const menuItems = [
 //   }
 // };
 const Sidebar = () => {
+  const location = useLocation();
+
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+
   const handleLinkClick = () => {
-    //close side after navigate
+    // Close side after navigate
     setIsOpen(false);
+  };
+
+  const handleLogout = async () => {
+    // Handle logout logic here
+    try {
+      await axios.get(`${process.env.REACT_APP_API}user/logout`);
+      // setUser(null);
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   return (
@@ -64,38 +78,49 @@ const Sidebar = () => {
       >
         <FontAwesomeIcon icon={faBars} />
       </button>
+      
       <ul className={Styles.ul}>
-      {menuItems.map(item => (
-  <li key={item.title}>
-    {item.title === "تسجيل خروج" ? (
-      <Link className={`${Styles.sidebar__listItem} ${Styles.logout}`} to={item.path}>
-        <FontAwesomeIcon className={Styles.sidebar__icon} icon={item.icon} />
-        <CSSTransition
-          in={isOpen}
-          timeout={200}
-          className={Styles.fade}
-          unmountOnExit
-        >
-          <span>{item.title}</span>
-        </CSSTransition>
-      </Link>
-    ) : (
-      <Link className={Styles.sidebar__listItem} to={item.path}  onClick={handleLinkClick}>
-        <FontAwesomeIcon className={Styles.sidebar__icon} icon={item.icon} />
-        <CSSTransition
-          in={isOpen}
-          timeout={200}
-          className={Styles.fade}
-          unmountOnExit
-        >
-          <span>{item.title}</span>
-        </CSSTransition>
-      </Link>
-    )}
-  </li>
-))}
-
+        {menuItems.map(item => (
+          <li className={Styles.li} key={item.title}>
+            <NavLink  className={cx(Styles.sidebar__listItem, {
+                [Styles.activelink]: location.pathname === item.path,
+              })}
+              to={item.path}
+              onClick={handleLinkClick}>
+              <FontAwesomeIcon className={Styles.sidebar__icon} icon={item.icon} />
+              <CSSTransition
+                in={isOpen}
+                timeout={200}
+                className={Styles.fade}
+                unmountOnExit
+              >
+                <span>{item.title}</span>
+              </CSSTransition>
+            </NavLink>
+          </li>
+        ))}
       </ul>
+
+      {/* Logout Link outside the ul */}
+      <div
+        className={cx(
+          Styles.sidebar__listItem,
+          Styles.li,
+          Styles.logout,
+          { [Styles.activelink]: location.pathname === "/logout" }
+        )}
+        onClick={handleLogout}
+      >
+        <FontAwesomeIcon className={Styles.sidebar__icon} icon={faSignOutAlt} />
+        <CSSTransition
+          in={isOpen}
+          timeout={200}
+          className={Styles.fade}
+          unmountOnExit
+        >
+          <span>تسجيل خروج</span>
+        </CSSTransition>
+      </div>
     </div>
   );
 };
