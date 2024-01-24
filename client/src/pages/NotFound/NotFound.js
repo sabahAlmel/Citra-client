@@ -1,10 +1,8 @@
 import React from 'react'
-
+import WebsiteNotFound from '../../components/NotFound/WebsiteNotFound/WebsiteNotFound'
 function NotFound() {
   return (
-    <div>
-      not found
-    </div>
+    <WebsiteNotFound/>
   )
 }
 

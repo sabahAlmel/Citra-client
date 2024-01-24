@@ -3,6 +3,8 @@
     background-position: 0px 0px;
     background-repeat: no-repeat;
     animation: bg-animation linear 3s infinite;
+    padding-left: 8rem;
+    padding-right: 8rem;
 }
 
 @keyframes bg-animation {
@@ -15,6 +17,13 @@
     100% {
         background-position: 0px 0px;
     }
+}
+
+@media(max-width:930px){
+.wrapper{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
 }
 
 

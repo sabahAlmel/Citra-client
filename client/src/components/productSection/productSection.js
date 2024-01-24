@@ -2,6 +2,7 @@ import React from "react";
 import imag from "../../assets/images/image.jpeg";
 import ProductCard from "./productCard";
 import style from "../productSection/productSection.module.css";
+import Product from "../Shop/Product";
 const productData = [
   { id: 1, image: imag, description: "Product 1 Description", price: 19.99 },
   { id: 2, image: imag, description: "Product 2 Description", price: 29.99 },
@@ -17,11 +18,12 @@ const ProductSection = () => {
   return (
     <section id="ourproducts" className={style.contentsection}>
       <h2 className={style.title}>منتجاتنا</h2>
-      <div className={style.cardContainer}>
+      {/* <div className={style.cardContainer}>
         {productData.map((item, index) => (
           <ProductCard key={item.id} image={imag} {...item} />
         ))}
-      </div>
+      </div> */}
+      <Product page="home"/>
     </section>
   );
 };

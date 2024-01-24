@@ -6,6 +6,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
+import { useQuery } from "react-query";
+import { fetchUsers } from "../../db/fetchUser";  // Adjust the path accordingly
 
 import {
   GridToolbar,
@@ -27,44 +29,6 @@ const roles = ['admin', 'dataEntry', 'normal'];
 const randomRole = () => {
   return randomArrayItem(roles);
 };
-
-const sampleData = [
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    email: 'user1@getMaxListeners.com',
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    email: 'user2@getMaxListeners.com',
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    email: 'user3@getMaxListeners.com',
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    email: 'user4@getMaxListeners.com',
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    email: "user5@hotmail.com",
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-];
 
 function EditToolbar(props) {
   const { setRows, setRowModesModel } = props;
@@ -104,9 +68,16 @@ function EditToolbar(props) {
 }
 
 export default function DashTable() {
-  const [rows, setRows] = React.useState(sampleData);
   const [rowModesModel, setRowModesModel] = React.useState({});
+  const { isLoading, data: usersData } = useQuery("user-table", fetchUsers);
+  const [rows, setRows] = React.useState([]);
 
+  // Update the state when data is loaded
+  React.useEffect(() => {
+    if (usersData) {
+      setRows(usersData);
+    }
+  }, []);
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
       event.defaultMuiPrevented = true;
@@ -149,8 +120,8 @@ export default function DashTable() {
  
   const columns = [
     
-    { field: 'name', headerName: 'الإسم', width: 180, editable: true },
-    {
+    { field: 'name', headerName: 'الإسم', width: 180, editable: true ,    flex:1,},
+    {    flex:1,
       field: 'email',
       headerName: 'البريد الالكتروني',
       type: '',
@@ -159,14 +130,14 @@ export default function DashTable() {
       headerAlign: 'left',
       editable: true,
     },
-    {
+    {    flex:1,
       field: 'joinDate',
       headerName: 'تاريخ الانضمام',
       type: 'date',
       width: 180,
       editable: true,
     },
-    {
+    {    flex:1,
       field: 'role',
       headerName: 'نوع العميل',
       width: 220,
@@ -175,6 +146,7 @@ export default function DashTable() {
       valueOptions: ['admin', 'user', 'dataEntry'],
     },
     {
+      flex:1,
       field: 'actions',
       type: 'actions',
       headerName: 'Actions',
@@ -245,14 +217,14 @@ export default function DashTable() {
     setPage(0);
   };
   const data = {
-    rows: sampleData,
+    rows,
     columns,
     page,
     pageSize,
-    rowCount: sampleData.length,
+    rowCount: rows.length,
     pageSizeOptions: [10, 25, 50, 75, 100],
     filterModel,
-    dataSet: 'Employee',
+    dataSet: "Employee",
     visibleFields: columns,
     rowLength: 100,
   };
