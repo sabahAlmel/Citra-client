@@ -153,7 +153,7 @@ const ProductTable = () => {
     // Add more columns as needed
     {
       field: "delete", // Add a delete column
-      headerName: "Delete",
+      headerName: "حذف",
       flex: 1,
       cellClassName: "delete-cell",
 
@@ -171,7 +171,7 @@ const ProductTable = () => {
           }}
           onClick={() => handleRowClickDelete(params)}
         >
-          Delete
+           حذف
         </Button>
       ),
     },
@@ -247,7 +247,7 @@ const ProductTable = () => {
       </Button>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
-          sx={{ minHeight: "60vh" }}
+          sx={{ minHeight: "60vh", }}
           {...data}
           onPageChange={handlePageChange}
           onPageSizeChange={handlePageSizeChange}

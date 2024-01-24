@@ -137,3 +137,6 @@ height: 10vh;
 .css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root :nth-child(2){
   color: white !important;
 }
+.css-128fb87-MuiDataGrid-toolbarContainer{
+  margin-bottom: 3rem;
+}

@@ -49,7 +49,7 @@ const menuItems = [
 //   }
 // };
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const handleLinkClick = () => {
     //close side after navigate
