@@ -17,6 +17,7 @@
     align-items: center;
     color: var(--brown-color);
     margin: 0 auto;
+    width: 80%;
 }
 .upperTxt{
     font-size: 48px;
@@ -74,7 +75,7 @@ width: 38vw;
     color: white;
 }
 
-@media(max-width:1000px){
+@media(max-width:1030px){
     .wrapper{
         height: 100%;
         position: relative;

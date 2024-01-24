@@ -5,7 +5,8 @@
 }
 .info{
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
+    flex-direction: column-reverse;
 }
 .company{
     font-size: 24px;
@@ -49,7 +50,7 @@
 }
 .side{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     height: 100px;
 }
