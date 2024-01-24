@@ -1,10 +1,26 @@
 .handle {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-between;
+  margin: 0 var(--margin-LR);
 }
-@media (max-width: 769px) {
+@media (max-width: 1320px) {
+  .handle {
+    margin: 0 1rem;
+  }
+}
+@media (max-width: 1166px) {
   .handle {
     flex-direction: column;
+  }
+}
+@media (max-width: 800px) {
+  .handle {
+    margin: 0 2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .handle {
+    margin: 0 1rem;
   }
 }

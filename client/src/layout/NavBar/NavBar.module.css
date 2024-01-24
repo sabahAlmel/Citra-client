@@ -1,14 +1,13 @@
 * {
-  font-size: 19px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.opened{
+.opened {
   position: absolute;
   top: 10rem;
 }
-header{
+header {
   background-color: var(--main-color);
 }
 
@@ -22,7 +21,7 @@ header{
       background-color: var(--main-color);
       font-size: 24px;
 }
-.cart{
+.cart {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -53,7 +52,8 @@ input:focus {
 li {
   margin-top: 10px;
 }
-.link, .activeLink {
+.link,
+.activeLink {
   text-decoration: none;
   color: var(--brown-color);
   cursor: pointer;
@@ -62,8 +62,8 @@ li {
   transition: 0.6s;
   font-size: 24px;
 }
-.activeLink{
-border-color: var(--blue-color);
+.activeLink {
+  border-color: var(--blue-color);
 }
 .link {
   transition: all 0.2s ease;
