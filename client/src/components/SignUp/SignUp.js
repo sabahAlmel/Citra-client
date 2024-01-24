@@ -198,8 +198,8 @@ function SignUpp(){
                     }}
                     id="filled-basic"
                     name="name"
-              value={formData.name}
-              onChange={handleInputChange} 
+                    value={formData.name}
+                    onChange={handleInputChange} 
                     label="الاسم" 
                     variant="filled" 
                     required 
@@ -230,8 +230,8 @@ function SignUpp(){
                             },
                     }}
                     name="email"
-              value={formData.email}
-              onChange={handleInputChange}
+                    value={formData.email}
+                    onChange={handleInputChange}
                     id="filled-basic" 
                     label="البريد" 
                     variant="filled" 

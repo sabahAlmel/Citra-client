@@ -50,38 +50,15 @@ const CategorySection = () => {
 
 
   return(
-    <section className={style.categorySection}>
-      <h2 className={style.title}>الخانات</h2>
+    <section className={style.CategorySection}>
+      <h2 className={style.title}>الفئات</h2>
       <div className={style.categoryContainer}>
-        <div className={style.row}>
-          {fakeCategory.slice(0, 3).map((category) => (
-            <CategoryComponent
-              key={category.id}
-              image={category.image}
-              name={category.name}
-            />
-          ))}
-        </div>
-        <div className={style.row}>
-          {fakeCategory.slice(3, 6).map((category) => (
-            <CategoryComponent
-              key={category.id}
-              image={category.image}
-              name={category.name}
-            />
-          ))}
-        </div>
-        <div className={style.row}>
-          {fakeCategory.slice(6, 8).map((category) => (
-            <CategoryComponent
-              key={category.id}
-              image={category.image}
-              name={category.name}
-            />
-          ))}
-        </div>
+        {fakeCategory.map((data, index) => (
+          <CategoryComponent key={index} data={data} />
+        ))}
       </div>
     </section>
+  
 
   )
   

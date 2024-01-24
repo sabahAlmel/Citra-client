@@ -183,6 +183,7 @@ function Signin() {
               flexDirection: 'column',
               color: 'var(--rose-color)',
               backgroundColor: 'white',
+              width:'320px',
             }}
             inputProps={{
               style: {
@@ -198,6 +199,7 @@ function Signin() {
             label="البريد" 
             variant="filled"
             type="email" 
+            dir="LTR"
             required
           />
         </div>
@@ -215,7 +217,8 @@ function Signin() {
               style: {
                 color: 'var(--brown-color)',
                 height: '17px',
-                fontSize: '16px' 
+                fontSize: '16px' ,
+                width:'300px'
               },
             }}
             name="password"
@@ -268,10 +271,18 @@ function Signin() {
           </Button>
         </div>
         <Link to="/signup" className={styles.p}>
-          <p className={styles.p}>ليس لديك حساب <span style={{ borderBottom: "1px solid var(--blue-color)" }}>اشترك الآن</span></p>
+          <p className={styles.p}>ليس لديك حساب <span style={{ borderBottom: "1px solid var(--blue-color)",  }}>اشترك الآن</span></p>
         </Link>
         <Link to="/homepage" className={styles.p}>
-          <p className={styles.p}><span>العودة الى الصفحة الرئيسية</span></p>
+          <Button className={styles.Button} sx={{
+              height: 35,
+              backgroundColor: "#FEE7CB",
+              color: 'var(--brown-color)',
+              '&:hover': {
+                backgroundColor: '#368681',
+                color: 'white'
+              }
+            }} ><span> الصفحة الرئيسية</span></Button>
         </Link>
       </main>
       {isPending && (
