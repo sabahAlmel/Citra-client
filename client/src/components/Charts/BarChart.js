@@ -99,14 +99,14 @@ const BarChart = () => {
               {
                 label: "Revenue",
                 data: BarData.map((data) => data.revenue),
-                backgroundColor: "#064FF0",
-                borderColor: "#064FF0",
+                backgroundColor: "#368681",
+                borderColor: "#368681",
               },
               {
                 label: "Cost",
                 data: BarData.map((data) => data.cost),
-                backgroundColor: "#FF3030",
-                borderColor: "#FF3030",
+                backgroundColor: "#4D342B",
+                borderColor: "#4D342B",
               },
             ],
           }}
@@ -134,18 +134,18 @@ const BarChart = () => {
                 label: "Count",
                 data: SourceData.map((data) => data.value),
                 backgroundColor: [
-                  "rgba(43, 63, 229, 0.8)",
-                  "rgba(250, 192, 19, 0.8)",
-                  "rgba(253, 135, 135, 0.8)",
+                  '#368681',
+                  "#F1CAB1",
+                  "#4D342B",
                 ],
-                borderRadius: 5,
+                borderRadius: 7,
               },
             ],
           }}
           options={{
             plugins: {
               title: {
-                text: "Revenue Source",
+                text: "Products",
               },
             },
           }}
@@ -162,14 +162,14 @@ const BarChart = () => {
                 label: "Count",
                 data: SourceData.map((data) => data.value),
                 backgroundColor: [
-                  "rgba(43, 63, 229, 0.8)",
-                  "rgba(250, 192, 19, 0.8)",
-                  "rgba(253, 135, 135, 0.8)",
+                  '#368681',
+                  "#F1CAB1",
+                  "#4D342B",
                 ],
                 borderColor: [
-                  "rgba(43, 63, 229, 0.8)",
-                  "rgba(250, 192, 19, 0.8)",
-                  "rgba(253, 135, 135, 0.8)",
+                  '#368681',
+                  "#F1CAB1",
+                  "#4D342B",
                 ],
               },
             ],
@@ -177,7 +177,7 @@ const BarChart = () => {
           options={{
             plugins: {
               title: {
-                text: "Revenue Sources",
+                text: "Orders",
               },
             },
           }}

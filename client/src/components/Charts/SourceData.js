@@ -1,15 +1,15 @@
 const SourceData=[
     {
-        "label": "Ads",
-        "value": 32
+        "label": "ثوب صلاة",
+        "value": 34
       },
       {
-        "label": "Subscriptions",
-        "value": 45
+        "label": "ازدالات",
+        "value": 54
       },
       {
-        "label": "Sponsorships",
-        "value": 23
+        "label": "مغاف قرآن",
+        "value": 24
       }
 ]
 
