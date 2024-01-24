@@ -8,15 +8,17 @@
   width: 0;
   z-index: 2;
   position: absolute;
-  background-color: var(--main-color);
   overflow-x: hidden;
   transition: 0.5s;
   font-weight: 400;
   padding-top: 15px;
-  box-shadow: -10px 0px 11px -8px rgba(0, 0, 0, 0.3);
+  border-left: 1px solid var(--blue-color);
 }
 @media (max-width: 769px) {
   .sidepanel {
+    border-left: none;
+    background-color: var(--main-color);
+    box-shadow: -10px 0px 11px -8px rgba(0, 0, 0, 0.3);
     height: 100vh;
     position: fixed;
     top: 0;
