@@ -11,7 +11,7 @@ function Home() {
       <div className={style.wrapper}>
         <CategorySection />
         <AboutUs />
-        {/* <ProductSection /> */}
+        <ProductSection />
       </div>
     </div>
   );
