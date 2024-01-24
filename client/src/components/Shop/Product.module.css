@@ -16,6 +16,7 @@
 }
 .productHolder {
   display: inline-block;
+  position: relative;
   text-decoration: none;
   color: var(--brown-color);
   width: 255px;
@@ -24,20 +25,35 @@
 }
 .productHolder img {
   height: 300px;
+  display: block;
   transition: 1s cubic-bezier(0, 0, 0.2, 1);
   width: 100%;
 }
 .productHolder:hover img {
   transform: scale3d(1.05, 1.05, 1.05);
+  opacity: 0.1;
+}
+.productHolder:hover .details {
+  height: 100%;
+  opacity: 1;
 }
 .details {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   padding: 10px;
   margin-top: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: 0.4s ease;
 }
 .details div {
   display: flex;
