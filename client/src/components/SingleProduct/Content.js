@@ -113,12 +113,13 @@ function Content({ products, isLoading }) {
     const existingProductIndex = existingCart.findIndex(
       (item) =>
         item.selectedColor === selectedColor &&
-        item.selectedSize === selectedSize
+        item.selectedSize === selectedSize &&
+        item.name === products.fetchedProduct.name
     );
 
     if (existingProductIndex !== -1) {
       existingCart[existingProductIndex].quantity += quantity;
-      existingCart[existingProductIndex].price += productInfo.price;
+      existingCart[existingProductIndex].totalPrice += productInfo.totalPrice;
     } else {
       existingCart.push(productInfo);
     }

@@ -4,12 +4,15 @@
   gap: 26px;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 2rem var(--margin-LR);
+  margin: 2rem;
 }
 @media (max-width: 530px) {
   .productSection {
     margin: 2rem 0.5rem;
   }
+}
+.shopContainer {
+  margin-right: 280px;
 }
 .productHolder {
   display: inline-block;
@@ -72,5 +75,6 @@
   margin: 0 auto;
 }
 .collapse {
-  margin-right: 280px;
+  display: flex;
+  position: relative;
 }

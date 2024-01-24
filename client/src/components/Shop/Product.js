@@ -17,28 +17,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { ShopContext } from "../../ShopContext/ShopContext";
 import { toast } from "react-toastify";
-
-// function ShoppingBag() {
-//   const [hover, setHovered] = useState(false);
-//   const hoverHandler = () => {
-//     setHovered(!hover);
-//   };
-//   let cart = order;
-//   if (hover) {
-//     cart = orderHover;
-//   } else {
-//     cart = order;
-//   }
-//   return (
-//     <img
-//       src={cart}
-//       alt="order now"
-//       onMouseOver={hoverHandler}
-//       onMouseOut={hoverHandler}
-//       className={style.cart}
-//     />
-//   );
-// }
+import ShopSide from "./ShopSide";
 
 function Product() {
   const { selectedCategory, selectedSubCategory, setSelectedSubCategory } =
@@ -125,8 +104,46 @@ function Product() {
     setCurrentPage(page);
   };
 
-  const handleClick = () => {
-    toast.success("Item added to the cart!");
+  const handleClick = (product) => {
+    const { name, price, images, details } = product;
+    const selectedColor =
+      details[0].color && details[0].color.length > 0 ? details[0].color : null;
+    const selectedSize =
+      details[0].sizes[0].size && details[0].sizes[0].size.length > 0
+        ? details[0].sizes[0].size
+        : null;
+
+    const initialQuantity = 1;
+
+    const productInfo = {
+      name,
+      price,
+      totalPrice: price * initialQuantity,
+      image: images && images.length > 0 ? images[0] : null,
+      selectedColor,
+      selectedSize,
+      quantity: initialQuantity,
+    };
+
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existingProductIndex = existingCart.findIndex(
+      (item) =>
+        item.name === productInfo.name &&
+        item.selectedColor === productInfo.selectedColor &&
+        item.selectedSize === productInfo.selectedSize
+    );
+
+    if (existingProductIndex !== -1) {
+      existingCart[existingProductIndex].quantity += initialQuantity;
+      existingCart[existingProductIndex].totalPrice += productInfo.totalPrice;
+    } else {
+      existingCart.push(productInfo);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+
+    toast.success("تمت اضافة المنتج");
   };
 
   if (isLoadingProducts) {
@@ -134,9 +151,9 @@ function Product() {
   }
 
   return (
-    <div className={isAbove769px ? style.collapse : ""}>
-      <NavBar />
-      <article>
+    <article className={isAbove769px ? style.collapse : ""}>
+      <ShopSide />
+      <section className={isAbove769px ? style.shopContainer : ""}>
         <section className={style.productSection}>
           {products.length == 0 ? (
             <h2 className={style.loading}>no products available</h2>
@@ -160,7 +177,10 @@ function Product() {
                     <h4>{element.name}</h4>
                     <p>${element.price}</p>
                   </div>
-                  <Link className={style.addToCart} onClick={handleClick}>
+                  <Link
+                    className={style.addToCart}
+                    onClick={() => handleClick(element)}
+                  >
                     اضف الآن
                   </Link>
                 </div>
@@ -181,9 +201,8 @@ function Product() {
             )}
           />
         </div>
-      </article>
-      <Footer />
-    </div>
+      </section>
+    </article>
   );
 }
 

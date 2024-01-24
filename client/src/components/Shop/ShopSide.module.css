@@ -4,19 +4,29 @@
 .sidepanel {
   color: var(--brown-color);
   overflow-y: auto;
-  height: 98vh;
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100%;
   width: 0;
-  position: fixed;
   z-index: 2;
+  position: absolute;
+  /* position: fixed;
   top: 0;
-  right: 0;
+  right: 0; */
   background-color: var(--main-color);
   overflow-x: hidden;
   transition: 0.5s;
   font-weight: 400;
   padding-top: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: -10px 0px 11px -8px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
+}
+@media (max-width: 769px) {
+  .sidepanel {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
 }
 .head {
   display: flex;
@@ -76,6 +86,11 @@
 .openbtn:hover {
   background-color: #f1cab1;
 }
+@media (min-width: 769px) {
+  .openbtn {
+    display: none;
+  }
+}
 .filter {
   margin-bottom: 40px;
   margin-right: 10px;
@@ -97,4 +112,7 @@
 .filter label {
   font-size: 25px;
   cursor: pointer;
+}
+.sideBarContainer {
+  margin-right: 15px;
 }
