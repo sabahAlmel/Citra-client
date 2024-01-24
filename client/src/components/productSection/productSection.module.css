@@ -1,25 +1,24 @@
-.contentsection {
-    text-align: center;
-    width: 100%;
-    height: auto;
-    margin:  auto;
-    padding: 4rem;
+.contentsection { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   
   }
   
   .title {
     font-size: 2rem;
     color: var(--brown-color);
     font-weight: bold;
-    margin-bottom: 1.5rem;
+   
   }
-  
+/*   
   .cardContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     gap: 1rem;
-  }
+  } */
  
   @media(max-width:768px){
     .cardContainer {
