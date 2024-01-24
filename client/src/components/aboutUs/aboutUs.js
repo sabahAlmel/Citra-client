@@ -1,10 +1,21 @@
 import React, { useRef } from "react";
 import image from "../../assets/images/hijabi3.jpg";
 import style from "../aboutUs/aboutUs.module.css";
-
+import { motion } from "framer-motion";
 const AboutUs = () => {
   return (
-    <section id="aboutus" className={style.contentsection}>
+    <motion.section
+      id="aboutus"
+      className={style.contentsection}
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{
+        ease: "easeIn",
+        stiffness: 260,
+        damping: 20,
+        duration: 0.6,
+      }}
+    >
       <div className={style.textcontainer}>
         <h2 className={style.title}>حولنا</h2>
         <p className={style.description}>
@@ -15,7 +26,7 @@ const AboutUs = () => {
         </p>
       </div>
       <img src={image} alt="صورة المنتج"></img>
-    </section>
+    </motion.section>
   );
 };
 

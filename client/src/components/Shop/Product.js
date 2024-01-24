@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import style from "./Product.module.css";
-import order from "../../assets/icons/order.svg";
-import orderHover from "../../assets/icons/orderHover.svg";
-import NavBar from "../../layout/NavBar/NavBar";
-import Footer from "../../layout/Footer/Footer";
+import { motion } from "framer-motion";
 import {
   fetchProducts,
   fetchProductsByCateg,
@@ -153,7 +150,17 @@ function Product() {
   return (
     <article className={isAbove769px ? style.collapse : ""}>
       <ShopSide />
-      <section className={isAbove769px ? style.shopContainer : ""}>
+      <motion.section
+        className={isAbove769px ? style.shopContainer : ""}
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          ease: "easeIn",
+          stiffness: 260,
+          damping: 20,
+          duration: 0.6,
+        }}
+      >
         <section className={style.productSection}>
           {products.length == 0 ? (
             <h2 className={style.loading}>no products available</h2>
@@ -201,7 +208,7 @@ function Product() {
             )}
           />
         </div>
-      </section>
+      </motion.section>
     </article>
   );
 }

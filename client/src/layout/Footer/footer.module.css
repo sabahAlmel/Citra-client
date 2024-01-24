@@ -33,6 +33,7 @@
 .text{
     text-align: right;
     margin: auto;
+    line-height: 50px;
 }
 .logo{
     padding: 0 5px;
