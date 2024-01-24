@@ -37,6 +37,7 @@
 .slogan{
     color: var(--brown-color);
     font-size: 30px;
+    font-weight: 400;
 }
 .right{
     display: flex;
@@ -76,8 +77,9 @@ width: 38vw;
 @media(max-width:1000px){
     .wrapper{
         height: 100%;
-        background-image: url("../../assets//images/overview.jpeg");
-        background-blend-mode:overlay;
+        position: relative;
+        row-gap: 100px;
+        background-color: transparent;
     }
     .lower{
         flex-direction: column;
@@ -87,28 +89,41 @@ width: 38vw;
     }
     .image{
         border-radius: initial;
-        width: 80%;
-        border-radius: var(--border-radius);
-        display: none;
+        width: 100%;
+        z-index: -1;
+        filter: brightness(0.2);
+
     }
     .left,.right{
         width: 90vw;
     }
     .left{
         text-align: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        top: 0;
+    }
+    .right{
+        row-gap: 100px;
+    }
+    .slogan{
+        filter: brightness(3);
+
     }
     .gotoshop{
         align-self: center;
+        font-size: 18px;
+        filter: brightness(3);
     }
     .upperTxt{
         font-size: 28px;
         text-align: center;
         line-height: 60px;
+        filter: brightness(3);
     }
     .bigger{
         font-size: 36px;
-    }
-    .gotoshop{
-        font-size: 18px;
     }
 }

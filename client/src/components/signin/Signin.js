@@ -1,32 +1,31 @@
 import { React, useContext, useState } from "react";
-import TextField from '@mui/material/TextField';
-import styles from '../../components/signin/signin.module.css';
+import TextField from "@mui/material/TextField";
+import styles from "../../components/signin/signin.module.css";
 import { Button } from "@mui/material";
 import { FaRegHeart } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery } from "@mui/material";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import openeye from "../../assets/icons/open.svg";
 import closeeye from "../../assets/icons/close.svg";
 import axiosInstance from "../../utils/axiosInstance";
-import { auth, provider} from '../../Firebase';
+import { auth, provider } from "../../Firebase";
 import { signInWithPopup } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
 import useApi from "../../hooks/useApi";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
 
 function Signin() {
-  const { setUser , fetchUserData } = useContext(AuthContext);
+  const { setUser, fetchUserData } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(false);
   const [isPending, setIsPending] = useState(false);
-  const {apiCall} = useApi()
+  const { apiCall } = useApi();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const [open, setOpen] = useState(false);
@@ -45,9 +44,7 @@ function Signin() {
     textPass = "password";
   }
 
-  const isSmallScreen = useMediaQuery('(max-width: 330px)');
-
- 
+  const isSmallScreen = useMediaQuery("(max-width: 330px)");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -63,7 +60,7 @@ function Signin() {
     if (!formData.email || !formData.password) {
       toast.error("أدخل البريد والإسم");
       setIsPending(false);
-      
+
       return;
     }
 
@@ -71,7 +68,7 @@ function Signin() {
       email: "",
       password: "",
     });
-    
+
     try {
       await apiCall({
         url: "/user/login",
@@ -82,11 +79,10 @@ function Signin() {
         },
       });
       await fetchUserData();
-      toast.success("تم تسجيل الدخول بنجاح")
-      setIsPending(false)
-      navigate('/')}
-
-     catch (error) {
+      toast.success("تم تسجيل الدخول بنجاح");
+      setIsPending(false);
+      navigate("/");
+    } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
         const { errors } = error.response.data;
 
@@ -103,9 +99,6 @@ function Signin() {
       }
       setIsPending(false);
     }
-
-
-   
   };
 
   // google sign in
@@ -116,7 +109,7 @@ function Signin() {
       setDisabled(!disabled);
 
       const res = await axiosInstance.post(
-        '/user/gsignup',
+        "/user/gsignup",
         {
           name: data.user.displayName,
           email: data.user.email,
@@ -151,94 +144,103 @@ function Signin() {
     }
   };
 
-
   return (
     <form onSubmit={handleSubmit} className={styles.wrapper}>
-      <main className={`${styles.main} ${isSmallScreen && styles.smallScreen}`} >
-        <h1 className={styles.h1}>
-          تسجيل الدخول
-        </h1>
-        <span style={{
-          display: 'flex',
-          width: 'fit-content',
-          alignItems: 'center',
-          flexDirection: 'row-reverse',
-          columnGap: '0.5rem'
-        }}>
-          <h3 className={styles.h3}>
-            اهلا و سهلا بكم مجدداً
-          </h3>
+      <main className={`${styles.main} ${isSmallScreen && styles.smallScreen}`}>
+        <h1 className={styles.h1}>تسجيل الدخول</h1>
+        <span
+          style={{
+            display: "flex",
+            width: "fit-content",
+            alignItems: "center",
+            flexDirection: "row-reverse",
+            columnGap: "0.5rem",
+          }}
+        >
+          <h3 className={styles.h3}>اهلا و سهلا بكم مجدداً</h3>
           <FaRegHeart className={styles.icon} />
         </span>
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <TextField
             className={styles.textfield}
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              color: 'var(--rose-color)',
-              backgroundColor: 'white',
-              width:'320px',
+              display: "flex",
+              flexDirection: "column",
+              color: "var(--rose-color)",
+              backgroundColor: "white",
+              width: "320px",
             }}
             inputProps={{
               style: {
-                color: 'var(--brown-color)',
-                height: '17px',
-                fontSize: '16px'
+                color: "var(--brown-color)",
+                height: "17px",
+                fontSize: "16px",
               },
             }}
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            id="filled-basic" 
-            label="البريد" 
+            id="filled-basic"
+            label="البريد"
             variant="filled"
-            type="email" 
+            type="email"
             dir="LTR"
             required
           />
         </div>
-        <div className={styles.passInp} style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}>
+        <div
+          className={styles.passInp}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <TextField
             sx={{
-              color: 'var(--blue-color)',
-              backgroundColor: 'white',
+              color: "var(--blue-color)",
+              backgroundColor: "white",
             }}
             inputProps={{
               style: {
-                color: 'var(--brown-color)',
-                height: '17px',
-                fontSize: '16px' ,
-                width:'300px'
+                color: "var(--brown-color)",
+                height: "17px",
+                fontSize: "16px",
+                width: "300px",
               },
             }}
             name="password"
             value={formData.password}
             onChange={handleInputChange}
-            id="filled-basic" 
-            label="كلمة المرور" 
-            variant="filled" 
+            id="filled-basic"
+            label="كلمة المرور"
+            variant="filled"
             type={textPass}
             required
             dir="LTR"
           />
-          <img src={openClose} alt="open close" onClick={openCloseHandler} className={styles.openClose} />
+          <img
+            src={openClose}
+            alt="open close"
+            onClick={openCloseHandler}
+            className={styles.openClose}
+          />
         </div>
-        <div style={{
-          width: '14rem',
-          display: 'flex',
-          flexDirection:'column',
-          rowGap: '1rem',
-        }}>
+        <div
+          style={{
+            width: "14rem",
+            display: "flex",
+            flexDirection: "column",
+            rowGap: "1rem",
+          }}
+        >
           <Button
             fullWidth
             type="submit"
@@ -246,47 +248,68 @@ function Signin() {
             sx={{
               height: 35,
               backgroundColor: "#FEE7CB",
-              color: 'var(--brown-color)',
-              '&:hover': {
-                backgroundColor: '#368681',
-                color: 'white'
-              }
-            }} color="primary">
+              color: "var(--brown-color)",
+              "&:hover": {
+                backgroundColor: "#368681",
+                color: "white",
+              },
+            }}
+            color="primary"
+          >
             تسجيل الدخول
           </Button>
           <Button
-            onClick={handleGoogle}
             fullWidth
+            onClick={handleGoogle}
             sx={{
               height: 35,
-              border: '2px solid #919191',
+              border: "2px solid #919191",
               backgroundColor: "#f8f8f8",
-              color: 'var(--brown-color)',
-              '&:hover': {
-                backgroundColor: '#368681',
-                color: 'white'
-              }
-            }} color="primary">
-            <span className={styles.g}> <FcGoogle /></span> تسجيل الدخول بواسطة
+              color: "var(--brown-color)",
+              "&:hover": {
+                backgroundColor: "#368681",
+                color: "white",
+              },
+            }}
+            color="primary"
+          >
+            <span className={styles.g}>
+              {" "}
+              <FcGoogle />
+            </span>{" "}
+            تسجيل الدخول بواسطة
           </Button>
         </div>
         <Link to="/signup" className={styles.p}>
-          <p className={styles.p}>ليس لديك حساب <span style={{ borderBottom: "1px solid var(--blue-color)",  }}>اشترك الآن</span></p>
+          <p className={styles.p}>
+            ليس لديك حساب{" "}
+            <span style={{ borderBottom: "1px solid var(--blue-color)" }}>
+              اشترك الآن
+            </span>
+          </p>
         </Link>
         <Link to="/homepage" className={styles.p}>
-          <Button className={styles.Button} sx={{
+          <Button
+            className={styles.Button}
+            sx={{
               height: 35,
               backgroundColor: "#FEE7CB",
-              color: 'var(--brown-color)',
-              '&:hover': {
-                backgroundColor: '#368681',
-                color: 'white'
-              }
-            }} ><span> الصفحة الرئيسية</span></Button>
+              color: "var(--brown-color)",
+              "&:hover": {
+                backgroundColor: "#368681",
+                color: "white",
+              },
+            }}
+          >
+            <span> الصفحة الرئيسية</span>
+          </Button>
         </Link>
       </main>
       {isPending && (
-        <p className={styles.pending}> . . . جاري تسجيل الدخول, الرجاء الإنتظار   </p>
+        <p className={styles.pending}>
+          {" "}
+          . . . جاري تسجيل الدخول, الرجاء الإنتظار{" "}
+        </p>
       )}
     </form>
   );
