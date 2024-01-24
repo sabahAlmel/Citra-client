@@ -17,6 +17,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { ShopContext } from "../../ShopContext/ShopContext";
 import { toast } from "react-toastify";
+import ShopSide from "./ShopSide";
 
 function Product() {
   const { selectedCategory, selectedSubCategory, setSelectedSubCategory } =
@@ -142,7 +143,7 @@ function Product() {
 
     localStorage.setItem("cart", JSON.stringify(existingCart));
 
-    toast.success("Item added to the cart!");
+    toast.success("تمت اضافة المنتج");
   };
 
   if (isLoadingProducts) {
@@ -150,9 +151,9 @@ function Product() {
   }
 
   return (
-    <div className={isAbove769px ? style.collapse : ""}>
-      <NavBar />
-      <article>
+    <article className={isAbove769px ? style.collapse : ""}>
+      <ShopSide />
+      <section className={isAbove769px ? style.shopContainer : ""}>
         <section className={style.productSection}>
           {products.length == 0 ? (
             <h2 className={style.loading}>no products available</h2>
@@ -200,9 +201,8 @@ function Product() {
             )}
           />
         </div>
-      </article>
-      <Footer />
-    </div>
+      </section>
+    </article>
   );
 }
 

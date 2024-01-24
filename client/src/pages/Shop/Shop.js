@@ -5,7 +5,7 @@ import Product from "../../components/Shop/Product";
 function Shop() {
   return (
     <section>
-      <ShopSide />
+      {/* <ShopSide /> */}
       <Product />
     </section>
   );
