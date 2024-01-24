@@ -47,6 +47,12 @@
     font-weight: 600;
     opacity: 0.8;
 }
+.side{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+}
 
 @media(max-width:850px){
     .wrapper{

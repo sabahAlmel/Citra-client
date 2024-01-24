@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import style from "./footer.module.css";
 import logo from "../../assets/icons/logo.svg";
 import buraqLogo from "../../assets/icons/Buraq-logo.png";
-import fb from "../../assets/icons/facebook.svg";
-import instagram from "../../assets/icons/instagram.svg";
+import fb from "../../assets/icons/facebook.png";
+import instagram from "../../assets/icons/instagram.png";
 
 function Footer() {
   return (
@@ -30,7 +30,7 @@ function Footer() {
                 alt="instagram"
                 className={style.logo}
                 height="40px"
-                width="40px"
+                width="50px"
               />
             </Link>
             <Link
@@ -42,7 +42,7 @@ function Footer() {
                 alt="fb"
                 className={style.logo}
                 height="40px"
-                width="40px"
+                width="50px"
               />
             </Link>
           </aside>
@@ -62,7 +62,7 @@ function Footer() {
                 alt="instagram"
                 className={style.logo}
                 height="40px"
-                width="40px"
+                width="50px"
               />
             </Link>
             <Link
@@ -74,7 +74,7 @@ function Footer() {
                 alt="fb"
                 className={style.logo}
                 height="40px"
-                width="40px"
+                width="50px"
               />
             </Link>
           </aside>

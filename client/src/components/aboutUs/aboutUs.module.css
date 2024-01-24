@@ -36,6 +36,7 @@
     margin-bottom: 18rem;
     font-size: 20px;
     margin: auto 0;
+    line-height: 40px;
     
   }
   @media(max-width: 907px ) and ( min-width:768px){

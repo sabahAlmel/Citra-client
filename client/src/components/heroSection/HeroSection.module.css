@@ -37,6 +37,7 @@
 .slogan{
     color: var(--brown-color);
     font-size: 30px;
+    font-weight: 400;
 }
 .right{
     display: flex;
@@ -75,7 +76,7 @@ width: 38vw;
 
 @media(max-width:1000px){
     .wrapper{
-        height: 100vh;
+        height: 100%;
         position: relative;
         row-gap: 100px;
         background-color: transparent;
@@ -90,7 +91,7 @@ width: 38vw;
         border-radius: initial;
         width: 100%;
         z-index: -1;
-        filter: brightness(0.1);
+        filter: brightness(0.2);
 
     }
     .left,.right{
@@ -108,19 +109,19 @@ width: 38vw;
         row-gap: 100px;
     }
     .slogan{
-        filter: brightness(2);
+        filter: brightness(3);
 
     }
     .gotoshop{
         align-self: center;
         font-size: 18px;
-        filter: brightness(2);
+        filter: brightness(3);
     }
     .upperTxt{
         font-size: 28px;
         text-align: center;
         line-height: 60px;
-        filter: brightness(2);
+        filter: brightness(3);
     }
     .bigger{
         font-size: 36px;
