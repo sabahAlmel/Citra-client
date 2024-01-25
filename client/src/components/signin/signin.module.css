@@ -1,68 +1,69 @@
-.wrapper{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.wrapper {
+  height: 100vh;
+  width: 30vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.main{
-    width: 70%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 1rem;
+.main {
+  width: 70%;
+  /* margin: auto; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1rem;
 }
-.g{
-    margin-right: 0.2rem;
-}
-
-.h1{
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--brown-color);
+.g {
+  margin-right: 0.2rem;
 }
 
-.h3{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--brown-color);
+.h1 {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--brown-color);
 }
-.icon{
-    display: flex;
-    flex-direction: column;
-    /* margin-right: 0.1rem;    */
+
+.h3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--brown-color);
 }
-.p{
-    /* margin-top: 8px; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 14px;
-    text-decoration: none;
-    line-height: 30px;
-    color: rgb(0, 0, 171);
+.icon {
+  display: flex;
+  flex-direction: column;
+  /* margin-right: 0.1rem;    */
 }
-.p:hover{
-    color: rgb(65, 65, 255);
+.p {
+  /* margin-top: 8px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  text-decoration: none;
+  line-height: 30px;
+  color: rgb(0, 0, 171);
 }
-.pending{
-    font-size: 18px;
-    animation-name: gradient;
-    animation-duration: 4s;
+.p:hover {
+  color: rgb(65, 65, 255);
 }
-.smallScreen{
-    width: 80%;
-    margin: 2rem auto;
+.pending {
+  font-size: 18px;
+  animation-name: gradient;
+  animation-duration: 4s;
 }
-.passInp{
-    position: relative;
+.smallScreen {
+  width: 80%;
+  margin: 2rem auto;
 }
-.openClose{
-    position: absolute;
-    top: 1.2rem;
-    right: 0.8rem;
+.passInp {
+  position: relative;
+}
+.openClose {
+  position: absolute;
+  top: 1.2rem;
+  right: 0.8rem;
 }

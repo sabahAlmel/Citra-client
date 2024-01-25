@@ -149,24 +149,24 @@ function Signin() {
       <main className={`${styles.main} ${isSmallScreen && styles.smallScreen}`}>
         <h1 className={styles.h1}>تسجيل الدخول</h1>
         <span
-          style={{
-            display: "flex",
-            width: "fit-content",
-            alignItems: "center",
-            flexDirection: "row-reverse",
-            columnGap: "0.5rem",
-          }}
+        // style={{
+        //   display: "flex",
+        //   width: "fit-content",
+        //   alignItems: "center",
+        //   flexDirection: "row-reverse",
+        //   columnGap: "0.5rem",
+        // }}
         >
           <h3 className={styles.h3}>اهلا و سهلا بكم مجدداً</h3>
           <FaRegHeart className={styles.icon} />
         </span>
         <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+        // style={{
+        //   display: "flex",
+        //   flexDirection: "column",
+        //   alignItems: "center",
+        //   justifyContent: "center",
+        // }}
         >
           <TextField
             className={styles.textfield}
@@ -197,11 +197,11 @@ function Signin() {
         </div>
         <div
           className={styles.passInp}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+          // style={{
+          //   display: "flex",
+          //   flexDirection: "column",
+          //   alignItems: "center",
+          // }}
         >
           <TextField
             sx={{
@@ -234,12 +234,12 @@ function Signin() {
           />
         </div>
         <div
-          style={{
-            width: "14rem",
-            display: "flex",
-            flexDirection: "column",
-            rowGap: "1rem",
-          }}
+        // style={{
+        //   width: "14rem",
+        //   display: "flex",
+        //   flexDirection: "column",
+        //   rowGap: "1rem",
+        // }}
         >
           <Button
             fullWidth
@@ -288,7 +288,7 @@ function Signin() {
             </span>
           </p>
         </Link>
-        <Link to="/homepage" className={styles.p}>
+        <Link to="/" className={styles.p}>
           <Button
             className={styles.Button}
             sx={{
