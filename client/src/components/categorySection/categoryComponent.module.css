@@ -20,8 +20,6 @@
     height: 90%;
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
-  
-
 }
 
 .h3 {
@@ -36,15 +34,13 @@
 @media (max-width: 1030px) {
     .container {
         width: 30%;
-        height: auto;
-    
+        height: 300px;
     }
  }
  @media (max-width: 675px) {
     .container {
         width: 40%;
         height: auto;
-    
     }
  }
 
@@ -52,19 +48,5 @@
     .container {
         width:100%;
         height: auto;
-    
     }
  }
-  /*  .buttom {
-        width: 120px;
-        height: 35px;
-        background-color: var(--rose-color);
-        color:var(--brown-color);
-        border: 0;
-        transition: box-shadow 0.3s, background-color 0.3s;
-        font-weight: bold;
-        position: absolute;
-        left: 25%;
-        bottom: 5%;
-    }
-} */

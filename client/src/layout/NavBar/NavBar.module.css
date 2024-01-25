@@ -26,6 +26,11 @@ header {
   border: none;
   cursor: pointer;
   margin-right: 75px;
+  transition:all 0.3s linear;
+
+}
+.cart:hover{
+  filter: brightness(1.2);
 }
 
 .order {
@@ -81,13 +86,13 @@ li {
   align-items: center;
   width: 170px;
   min-height: 36px;
-  border-radius: var(--border-radius);
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 400;
   position: relative;
-  border: 2px solid var(--brown-color);
-  color: var(--brown-color);
-  background-color: transparent;
+  border: 2px solid var(--blue-color);
+  color: white;
+  background-color: var(--blue-color);
   overflow: hidden;
   margin-top: 5px;
   text-decoration: none;
@@ -97,8 +102,7 @@ li {
 }
 
 .btn:hover {
-  color: white;
-  background-color: var(--blue-color);
+  filter: brightness(1.2);
 }
 
 

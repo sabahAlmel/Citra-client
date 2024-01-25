@@ -3,6 +3,7 @@ import style from "./CartCards.module.css";
 import trashCan from "../../assets/icons/TrashCan.svg";
 import redTrashCan from "../../assets/icons/redTrashCan.svg";
 import { toast } from "react-toastify";
+import placeholder from "../../assets/images/hijabi3.jpg";
 
 function Img() {
   const [hover, setHover] = useState(false);
@@ -56,13 +57,17 @@ const CartCards = ({
       localStorage.setItem("cart", JSON.stringify(existingCart));
       cartItems(existingCart);
     }
-    toast.success("Item deleted successfully!!");
+    toast.success("تم المحو بنجاح");
   };
 
   return (
     <section className={style.wrapper}>
       <div className={style.picture}>
-        <img src={`${process.env.REACT_APP_BACKEND}${image}`} alt={name} />
+        {image ? (
+          <img src={`${process.env.REACT_APP_BACKEND}${image}`} alt={name} />
+        ) : (
+          <img src={placeholder} alt="placeholder" />
+        )}
       </div>
       <div className={style.pic}>
         <p>{name}</p>

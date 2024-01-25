@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./ProductImages.module.css";
+import placeholder from "../../assets/images/hijabi3.jpg";
 
 function ProductImages({ products, isLoading }) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -21,22 +22,26 @@ function ProductImages({ products, isLoading }) {
   return (
     <div className={style.allImages}>
       <div className={style.bigImage}>
-        {selectedImage && (
+        {selectedImage ? (
           <img
             src={`${process.env.REACT_APP_BACKEND}${selectedImage}`}
             alt="big"
           />
+        ) : (
+          <img src={placeholder} alt="placeholder" />
         )}
       </div>
       <div className={style.imagesHandle}>
-        {products.fetchedProduct.images?.map((image, index) => (
-          <img
-            key={index}
-            src={`${process.env.REACT_APP_BACKEND}${image}`}
-            alt={`mini${index + 1}`}
-            onClick={() => handleImageClick(image)}
-          />
-        ))}
+        {products.fetchedProduct.images
+          ? products.fetchedProduct.images.map((image, index) => (
+              <img
+                key={index}
+                src={`${process.env.REACT_APP_BACKEND}${image}`}
+                alt={`mini${index + 1}`}
+                onClick={() => handleImageClick(image)}
+              />
+            ))
+          : null}
       </div>
     </div>
   );
