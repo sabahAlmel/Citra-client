@@ -149,13 +149,13 @@ function Signin() {
       <main className={`${styles.main} ${isSmallScreen && styles.smallScreen}`}>
         <h1 className={styles.h1}>تسجيل الدخول</h1>
         <span
-        // style={{
-        //   display: "flex",
-        //   width: "fit-content",
-        //   alignItems: "center",
-        //   flexDirection: "row-reverse",
-        //   columnGap: "0.5rem",
-        // }}
+          style={{
+            display: "flex",
+            width: "fit-content",
+            alignItems: "center",
+            flexDirection: "row-reverse",
+            columnGap: "0.5rem",
+          }}
         >
           <h3 className={styles.h3}>اهلا و سهلا بكم مجدداً</h3>
           <FaRegHeart className={styles.icon} />
@@ -191,8 +191,8 @@ function Signin() {
             label="البريد"
             variant="filled"
             type="email"
-            dir="LTR"
             required
+            dir="LTR"
           />
         </div>
         <div
@@ -234,18 +234,16 @@ function Signin() {
           />
         </div>
         <div
-        // style={{
-        //   width: "14rem",
-        //   display: "flex",
-        //   flexDirection: "column",
-        //   rowGap: "1rem",
-        // }}
+          style={{
+            width: "325px",
+          }}
         >
           <Button
             fullWidth
             type="submit"
             onClick={handleSubmit}
             sx={{
+              marginBottom: "1rem",
               height: 35,
               backgroundColor: "#FEE7CB",
               color: "var(--brown-color)",
@@ -282,10 +280,8 @@ function Signin() {
         </div>
         <Link to="/signup" className={styles.p}>
           <p className={styles.p}>
-            ليس لديك حساب{" "}
-            <span style={{ borderBottom: "1px solid var(--blue-color)" }}>
-              اشترك الآن
-            </span>
+            ليس لديك حساب؟{" "}
+            <span className={styles.linkToOther}>اشترك الآن</span>
           </p>
         </Link>
         <Link to="/" className={styles.p}>

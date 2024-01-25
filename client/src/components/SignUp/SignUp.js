@@ -183,6 +183,7 @@ function SignUpp() {
               label="الاسم"
               variant="filled"
               required
+              dir="LTR"
             />
           </div>
           <div
@@ -216,6 +217,7 @@ function SignUpp() {
               label="البريد"
               variant="filled"
               required
+              dir="LTR"
             />
           </div>
           <div
@@ -246,6 +248,7 @@ function SignUpp() {
               variant="filled"
               type={textPass}
               required
+              dir="LTR"
             />
             <img
               src={openClose}
@@ -276,6 +279,7 @@ function SignUpp() {
               label="رقم الهاتف"
               variant="filled"
               required
+              dir="LTR"
             />
           </div>
 
@@ -339,13 +343,24 @@ function SignUpp() {
             <p className={styles.p}>
               {" "}
               هل لديك حساب ؟
-              <span style={{ borderBottom: "1px solid" }}>سجل الآن </span>
+              <span className={styles.linkToOther}>سجل الآن </span>
             </p>
           </Link>
-          <Link to="/homepage" className={styles.p}>
-            <p className={styles.p}>
-              <span>العودة الى الصفحة الرئيسية</span>
-            </p>
+          <Link to="/" className={styles.p}>
+            <Button
+              className={styles.Button}
+              sx={{
+                height: 35,
+                backgroundColor: "#FEE7CB",
+                color: "var(--brown-color)",
+                "&:hover": {
+                  backgroundColor: "#368681",
+                  color: "white",
+                },
+              }}
+            >
+              <span> الصفحة الرئيسية</span>
+            </Button>
           </Link>
         </main>
       </form>

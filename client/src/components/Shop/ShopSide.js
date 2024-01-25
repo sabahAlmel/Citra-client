@@ -99,9 +99,6 @@ const ShopSide = () => {
     setSelectedSubcategoriesArray(selectedSubcategories);
   };
 
-  if (isLoadingCategory && isLoadingSub) {
-    return <h2>loading...</h2>;
-  }
   return (
     <>
       <aside
