@@ -1,4 +1,4 @@
-.container {
+.containers {
     min-height: 8vh;
     margin: 0;
     display: grid;
@@ -8,7 +8,7 @@
   
   /* Media queries for responsive sidebar */
   @media (max-width: 768px) {
-    .container {
+    .containers {
       grid-template-columns: 50px 1fr; /* Adjust the sidebar width as needed */
     }
   }

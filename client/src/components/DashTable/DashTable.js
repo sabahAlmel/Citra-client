@@ -1,125 +1,50 @@
+
+
+///////////////////////table with pagination and filtration ///////////
 import React, { useState } from "react";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Close';
-import { useQuery } from "react-query";
-import { fetchUsers } from "../../db/fetchUser";  // Adjust the path accordingly
-
-import {
-  GridToolbar,
-  
-  GridRowModes,
-  DataGrid,
-  GridToolbarContainer,
-  GridActionsCellItem,
-  GridRowEditStopReasons,
-} from '@mui/x-data-grid';
-import {
-  randomCreatedDate,
-  randomTraderName,
-  randomId,
-  randomArrayItem,
-} from '@mui/x-data-grid-generator';
-
-const roles = ['admin', 'dataEntry', 'normal'];
-const randomRole = () => {
-  return randomArrayItem(roles);
-};
-
-function EditToolbar(props) {
-  const { setRows, setRowModesModel } = props;
-
-  const handleClick = () => {
-    const id = randomId();
-    setRows((oldRows) => [...oldRows, { id, name: '', email: '', isNew: true }]);
-    setRowModesModel((oldModel) => ({
-      ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
-    }));
-  };
-
-  return (
-    <GridToolbarContainer>
-      <Button sx={{
-        // color: 368681,
-        margin: "10px",
-          height: "3rem",
-          width: "5rem",
-        border: '2px solid #368681',
-        backgroundColor: "var(--brown-color)",
-        color: "var(--main-color)",
-
-        '&:hover':{
-          
-        
-          backgroundColor: "var(--blue-color)",
-          color: "var(--brown-color)",
-        }
-      
-      }} color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-      أضف عميل
-      </Button>
-    </GridToolbarContainer>
-  );
-}
-
-export default function DashTable() {
-  const [rowModesModel, setRowModesModel] = React.useState({});
+import Box from "@mui/material/Box";
+import { DataGrid, GridToolbar, FilterToolbar } from "@mui/x-data-grid";
+import { useNavigate } from "react-router-dom";
+import "./product.css";
+import { Button } from "@mui/material";
+import { fetchUsers, editUsers } from "../../db/fetchUser";  // Adjust the path accordingly
+import axios from "axios";
+import { useQuery, useQueryClient } from "react-query";
+const DashTable = () => {
+  const queryClient = useQueryClient();
+  const [rows, setRows] = React.useState([]);//data
   const { isLoading, data: usersData } = useQuery("user-table", fetchUsers);
-  const [rows, setRows] = React.useState([]);
 
+  const handleRowClickDelete = async (params) => {
+    const userId = params.row.id;
+    try {
+      // Send a DELETE request to the API to delete the product
+      await axios.delete(`${process.env.REACT_APP_BACKEND}user/${userId}`);
+  
+      // If the delete request is successful, filter out the deleted row from the displayed data
+      const updatedData = rows.filter((row) => row.id !== userId);
+      
+      // Set the updated data to the state or wherever you store your data
+      setRows(updatedData);
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      // Handle error, show a notification, etc.
+    }
+  };
+  const handleRowClickEdit = async (params) => {
+    const userId = params.row.id;
+
+    navigate(`/user/${userId}`);
+  };
   // Update the state when data is loaded
   React.useEffect(() => {
     if (usersData) {
       setRows(usersData);
     }
-  }, []);
-  const handleRowEditStop = (params, event) => {
-    if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-      event.defaultMuiPrevented = true;
-    }
-  };
+  }, [usersData]);
+  
 
-  const handleEditClick = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
-  };
-
-  const handleSaveClick = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
-  };
-
-  const handleDeleteClick = (id) => () => {
-    setRows(rows.filter((row) => row.id !== id));
-  };
-
-  const handleCancelClick = (id) => () => {
-    setRowModesModel({
-      ...rowModesModel,
-      [id]: { mode: GridRowModes.View, ignoreModifications: true },
-    });
-
-    const editedRow = rows.find((row) => row.id === id);
-    if (editedRow.isNew) {
-      setRows(rows.filter((row) => row.id !== id));
-    }
-  };
-
-  const processRowUpdate = (newRow) => {
-    const updatedRow = { ...newRow, isNew: false };
-    setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    return updatedRow;
-  };
-
-  const handleRowModesModelChange = (newRowModesModel) => {
-    setRowModesModel(newRowModesModel);
-  };
- 
   const columns = [
-    
     { field: 'name', headerName: 'الإسم', width: 180, editable: true ,    flex:1,},
     {    flex:1,
       field: 'email',
@@ -137,6 +62,16 @@ export default function DashTable() {
       width: 180,
       editable: true,
     },
+    {
+      flex: 1,
+      field: 'phone',
+      headerName: 'رقم الهاتف',
+      width: 220,
+      type: 'number',
+      align: 'left',
+      headerAlign: 'left',
+      editable: true,
+    },
     {    flex:1,
       field: 'role',
       headerName: 'نوع العميل',
@@ -145,69 +80,73 @@ export default function DashTable() {
       type: 'singleSelect',
       valueOptions: ['admin', 'user', 'dataEntry'],
     },
+    // Add more columns as needed
     {
-      flex:1,
-      field: 'actions',
-      type: 'actions',
-      headerName: 'Actions',
-      width: 100,
-      cellClassName: 'actions',
-      getActions: ({ id }) => {
-        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+      field: "delete", // Add a delete column
+      headerName: "حذف",
+      flex: 1,
+      cellClassName: "delete-cell",
 
-        if (isInEditMode) {
-          return [
-            <GridActionsCellItem
-              icon={<SaveIcon />}
-              label="Save"
-              sx={{
-                color: 'primary.main',
-                
-              }}
-              onClick={handleSaveClick(id)}
-            />,
-            <GridActionsCellItem
-              icon={<CancelIcon />}
-              label="Cancel"
-              className="textPrimary"
-              onClick={handleCancelClick(id)}
-              color="inherit"
-            />,
-          ];
-        }
-
-        return [
-          <GridActionsCellItem
-            icon={<EditIcon />}
-            label="Edit"
-            className="textPrimary"
-            onClick={handleEditClick(id)}
-            color="inherit"
-            sx={{
-              '&:hover': {
-                
-                backgroundColor: 'var(--blue-color)',
-              },
-            }}
-          />,
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={handleDeleteClick(id)}
-            color="inherit"
-            sx={{
-              '&:hover': {
-                backgroundColor: 'var(--main-color)',
-              },
-            }}
-          />,
-        ];
-      },
+      renderCell: (params) => (
+        <>
+          <Button
+          variant="outlined"
+          color="secondary"
+          sx={{
+            color: "var(--brown-color)",
+            borderColor: "var(--blue-color) ",
+            "&:hover": {
+              boxShadow: "0px 0px 10px 3px rgba(0,0,0,0.5)",
+              backgroundColor: "var(--blue-color)",
+            },
+          }}
+          onClick={() => handleRowClickDelete(params)}
+        >
+           حذف
+        </Button>
+        
+        <Button
+          variant="outlined"
+          color="secondary"
+          sx={{
+            color: "var(--brown-color)",
+            borderColor: "var(--blue-color) ",
+            "&:hover": {
+              boxShadow: "0px 0px 10px 3px rgba(0,0,0,0.5)",
+              backgroundColor: "var(--blue-color)",
+            },
+          }}
+          onClick={() => handleRowClickEdit(params)}
+        >
+           تعديل
+        </Button>
+        
+        </>
+      
+      ),
     },
   ];
+  const navigate = useNavigate();
+
+  const handleRowClick = (params, event) => {
+    // Check if the clicked element is the delete button
+    const isDeleteButton =
+      event.target.tagName.toLowerCase() === "button" &&
+      event.target.textContent.toLowerCase() === "حذف";
+
+    // If it's the delete button, trigger the delete functionality
+    if (isDeleteButton) {
+      handleRowClickDelete(params);
+    } else {
+      // Otherwise, navigate to the product details page
+      navigate(`/products/${params.id}`);
+    }
+  };
+
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
+
   const handlePageChange = (params) => {
     setPage(params.page);
   };
@@ -216,6 +155,7 @@ export default function DashTable() {
     setPageSize(params.pageSize);
     setPage(0);
   };
+
   const data = {
     rows,
     columns,
@@ -230,61 +170,67 @@ export default function DashTable() {
   };
   return (
     <Box
-      sx={{
-        height: 500,
-        width: '100%',
-        '& .actions': {
-          color: 'text.secondary',
-        },
-        '& .textPrimary': {
-          color: 'text.primary',
-        },
-      }}
+      sx={{ height: 400, width: "100%", backgroundColor: "var(--main-color)" }}
     >
-       <div style={{ height: 400, width: "100%" }}>
-      <DataGrid
-                sx={{ minHeight: "60vh" }}
-                {...data}
-                onPageChange={handlePageChange}
-                onPageSizeChange={handlePageSizeChange}
-                // onRowClick={(params, event) => handleRowClick(params, event)}
-                // filterMode="server" // Optional: Use server-side filtering
-                onFilterModelChange={(model) => setFilterModel(model)}
-        rows={rows}
-        columns={columns}
-        editMode="row"
-        rowModesModel={rowModesModel}
-        onRowModesModelChange={handleRowModesModelChange}
-        onRowEditStop={handleRowEditStop}
-        processRowUpdate={processRowUpdate}
+      <Button
+        fullWidth
+        type="submit"
+        onClick={() => (window.location.href = "/")}
+        sx={{
+          margin: "10px",
+          height: "3rem",
+          width: "5rem",
+          // border: '2px solid #368681',
+          backgroundColor: "var(--brown-color)",
+          color: "var(--main-color)",
 
-        slotProps={{
-          toolbar: { setRows, setRowModesModel },
-        }}
-        initialState={{
-          ...data.initialState,
-          //pagination
-          // pagination: { paginationModel: { pageSize: 5 } },
-          filter: {
-            //filter
-            ...data.initialState?.filter,
-            filterModel: {
-              items: [
-                {
-                  field: "rating",
-                  operator: ">",
-                  value: "2.5",
-                },
-              ],
-            },
+          "&:hover": {
+            // boxShadow: '0px 0px 10px 3px rgba(0,0,0,0.5)',
+            backgroundColor: "var(--blue-color)",
+            color: "var(--brown-color)",
           },
         }}
-        slots={{
-          // toolbar: EditToolbar,
-          toolbar:GridToolbar
-        }}
-      />
-        </div>
+        color="primary"
+      >
+        أضف عميل
+      </Button>
+      <div style={{ height: 400, width: "100%" }}>
+        <DataGrid
+          sx={{ minHeight: "60vh", }}
+          {...data}
+          onPageChange={handlePageChange}
+          onPageSizeChange={handlePageSizeChange}
+          onRowClick={(params, event) => handleRowClick(params, event)}
+          // filterMode="server" // Optional: Use server-side filtering
+          onFilterModelChange={(model) => setFilterModel(model)}
+          initialState={{
+            ...data.initialState,
+            //pagination
+            // pagination: { paginationModel: { pageSize: 5 } },
+
+              //filter
+            filter: {
+            
+              ...data.initialState?.filter,
+              filterModel: {
+                items: [
+                  {
+                    field: "rating",
+                    operator: ">",
+                    value: "2.5",
+                  },
+                ],
+              },
+            },
+          }}
+          pageSizeOptions={[10, 25, 50, 75, 100]}
+          slots={{
+            toolbar: GridToolbar,
+          }}
+        />
+      </div>
     </Box>
   );
-}
+};
+
+export default DashTable;
