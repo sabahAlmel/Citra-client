@@ -1,22 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import style from "./HeroSection.module.css";
-import overview from "../../assets/images/overview.jpeg";
+import overview from "../../assets/images/hijab.jpg";
 
 function HeroSection() {
   return (
     <>
       <hero className={style.wrapper}>
         <section className={style.upper}>
+          <p className={style.basmala}>
+            {" "}
+            بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ{" "}
+          </p>
           <p className={style.upperTxt}>
-            إِنْ أُرِيدُ إِلَّا الْإِصْلَاحَ مَا اسْتَطَعْتُ ۚ وَمَا تَوْفِيقِي
-            إِلَّا <span className={style.bigger}>بِاللَّهِ ۚ</span> عَلَيْهِ
-            تَوَكَّلْتُ وَإِلَيْهِ أُنِيبُ
+            " إِنْ أُرِيدُ إِلَّا الْإِصْلَاحَ مَا اسْتَطَعْتُ ۚ وَمَا
+            تَوْفِيقِي إِلَّا <span className={style.bigger}>بِاللَّهِ ۚ</span>{" "}
+            عَلَيْهِ تَوَكَّلْتُ وَإِلَيْهِ أُنِيبُ " ﴿۸۸﴾
           </p>
         </section>
         <section className={style.lower}>
           <aside className={style.right}>
             <p className={style.slogan}>
+              <span className={style.who}>من نحن ؟</span>
+              <br />
               صالة مبيع منتجات سترا يعمل هذا المتجر على توفير منتجات فنية تم
               صنعها بأيادي أناس لديهم حاجة ماسة للعمل. الهدف هو دعم هؤلاء
               العاملين وتوفير منتجات فريدة وجودة عالية للزبائن كما يعود ريع تلك

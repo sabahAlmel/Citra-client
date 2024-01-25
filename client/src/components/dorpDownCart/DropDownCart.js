@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import style from "./DropDownCart.module.css";
 import { Link } from "react-router-dom";
 import overview from "../../assets/images/overview.jpeg";
@@ -49,11 +49,26 @@ function DropDownCart({ setShopping }) {
       size: "large",
     },
   ];
+  /////
+  const ref = useRef();
+
+  const check = (e) => {
+    if (ref.current && !ref.current.contains(e.target)) {
+      setShopping(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", check);
+    return () => document.removeEventListener("mousedown", check);
+  });
+
+  //////////
   let nb = products.length;
   let totalPrice = 0;
   products.forEach((i) => (totalPrice += parseFloat(i.price)));
   return (
-    <div className={style.wrapper}>
+    <div className={style.wrapper} ref={ref}>
       <div className={style.header}>
         <h1 className={style.title}>سلة المشتريات {`(${nb})`}</h1>
         <p className={style.x} onClick={() => setShopping(false)}>

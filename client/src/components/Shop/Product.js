@@ -15,6 +15,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { ShopContext } from "../../ShopContext/ShopContext";
 import { toast } from "react-toastify";
 import ShopSide from "./ShopSide";
+import placeholder from "../../assets/images/hijabi2.jpg";
 
 function Product() {
   const { selectedCategory, selectedSubCategory, setSelectedSubCategory } =
@@ -175,7 +176,7 @@ function Product() {
                   src={
                     element.images
                       ? `${process.env.REACT_APP_BACKEND}${element.images[0]}`
-                      : null
+                      : placeholder
                   }
                   alt="product"
                 />

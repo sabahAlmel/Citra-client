@@ -13,45 +13,63 @@
     font-weight: 700;
     word-spacing: 10px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: var(--brown-color);
     margin: 0 auto;
     width: 80%;
 }
-.upperTxt{
+.basmala{
     font-size: 48px;
+    font-weight: 600;
+    color: var(--blue-color);
     line-height: 100px;
 }
+.upperTxt{
+    font-size: 36px;
+    line-height: 100px;
+    font-weight: 400;
+}
 .bigger{
-    color: var(--blue-color); 
-    font-size: 64px;
+    /* color: var(--blue-color);  */
+    font-size: 48px;
+    font-weight: 300;
 }
 .lower{
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
     width: 80vw;
     column-gap: 2rem;
     margin: 0 auto;
 }
+.who{
+    font-weight: 600;
+    text-align: center;
+    line-height: 100px;
+    color: var(--blue-color);
+}
 .slogan{
     color: var(--brown-color);
-    font-size: 30px;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 300;
+    align-self: center;
+    width: 100%;
 }
 .right{
     display: flex;
     flex-direction: column;
-    width: 38vw;
+    width: 70%;
     line-height: 50px;
 }
 .left{
-width: 38vw;
+width: 28%;
+height: 60%;
 }
 .image{
     border-bottom-right-radius: 200px;
-    margin: auto;
+    margin: auto ;
 }
 .gotoshop{
     padding: 10px;
@@ -60,19 +78,19 @@ width: 38vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--brown-color);
+    color: white;
     border: 2px solid var(--blue-color);
     border-radius: var(--border-radius);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 24px;
+    font-weight: 300;
+    font-size: 1.3rem;
     width: 50%;
     align-self: flex-start;
+    background-color: var(--blue-color);
     transition:all 0.3s linear;
 }
 .gotoshop:hover{
-    background-color: var(--blue-color);
-    color: white;
+    background-color: #3f9c95;
 }
 
 @media(max-width:1030px){
@@ -87,6 +105,7 @@ width: 38vw;
         row-gap: 10px;
         justify-content: center;
         align-items: center;
+        margin-bottom: 20px;
     }
     .image{
         border-radius: initial;
@@ -107,7 +126,7 @@ width: 38vw;
         top: 0;
     }
     .right{
-        row-gap: 100px;
+        row-gap: 20px;
     }
     .slogan{
         filter: brightness(3);

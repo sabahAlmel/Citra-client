@@ -23,8 +23,12 @@
 .x {
   color: var(--blue-color);
   font-weight: bold;
-  scale: 1.2;
+  scale: 1.4;
   cursor: pointer;
+  padding-left: 20px;
+}
+.x:hover{
+  color:#3f9c95;
 }
 .container {
   margin: 0.8rem;

@@ -6,7 +6,7 @@ const CategoryComponent = ({ data }) => {
   return (
     <motion.section
       className={style.container}
-      initial={{ opacity: 0, y: 100 }}
+      initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{
         ease: "easeIn",

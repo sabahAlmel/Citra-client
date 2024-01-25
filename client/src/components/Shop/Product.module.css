@@ -5,6 +5,7 @@
   justify-content: center;
   flex-wrap: wrap;
   margin: 2rem;
+  min-height: 600px;
 }
 @media (max-width: 530px) {
   .productSection {
