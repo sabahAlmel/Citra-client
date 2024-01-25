@@ -145,7 +145,7 @@ body {
 
 .sidebar__listItem span {
   white-space: nowrap;
-
+width: 7rem;
   margin-right: 15px;
 }
 
