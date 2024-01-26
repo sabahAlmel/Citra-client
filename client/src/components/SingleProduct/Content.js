@@ -99,13 +99,14 @@ function Content({ products, isLoading }) {
 
   const handleClick = () => {
     const productInfo = {
-      name: products.fetchedProduct.name,
+      arabicName: products.fetchedProduct.arabicName,
       price: products.fetchedProduct.price,
       totalPrice: products.fetchedProduct.price * quantity,
       image: products.fetchedProduct.images[0],
       selectedColor,
       selectedSize,
       quantity,
+      slug: products.fetchedProduct.slug,
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -114,7 +115,8 @@ function Content({ products, isLoading }) {
       (item) =>
         item.selectedColor === selectedColor &&
         item.selectedSize === selectedSize &&
-        item.name === products.fetchedProduct.name
+        item.arabicName === products.fetchedProduct.arabicName &&
+        item.slug === productInfo.slug
     );
 
     if (existingProductIndex !== -1) {
@@ -133,7 +135,7 @@ function Content({ products, isLoading }) {
   }
   return (
     <div className={style.content}>
-      {/* <div className={style.title}>{products.fetchedProduct.name}</div> */}
+      {/* <div className={style.title}>{products.fetchedProduct.arabicName}</div> */}
       <div className={style.title}>سجادات</div>
       <div className={style.price}>${products.fetchedProduct.price}</div>
       {/* <div className={style.desc}>{products.fetchedProduct.description}</div> */}

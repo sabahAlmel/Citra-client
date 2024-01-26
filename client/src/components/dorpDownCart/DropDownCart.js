@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import overview from "../../assets/images/overview.jpeg";
 import trashCan from "../../assets/icons/blueTrashCan.svg";
 import redTrashCan from "../../assets/icons/redTrashCan.svg";
+import { toast } from "react-toastify";
+import hijaba2 from "../../assets/images/hijabi2.jpg";
 
-function Img() {
+function Img({ onClick }) {
   const [hover, setHover] = useState(false);
   const hoverHandler = () => {
     setHover(!hover);
@@ -22,6 +24,7 @@ function Img() {
       alt="trashcan"
       onMouseOver={hoverHandler}
       onMouseOut={hoverHandler}
+      onClick={onClick}
       style={{
         cursor: "pointer",
       }}
@@ -29,27 +32,26 @@ function Img() {
   );
 }
 function DropDownCart({ setShopping }) {
-  const products = [
-    {
-      name: "product 1",
-      price: "200",
-      color: "red",
-      size: "large",
-    },
-    {
-      name: "product 2",
-      price: "300",
-      color: "black",
-      size: "medium",
-    },
-    {
-      name: "product 3",
-      price: "250",
-      color: "yellow",
-      size: "large",
-    },
-  ];
-  /////
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItems(storedCart);
+  }, []);
+
+  const nb = cartItems.length;
+  const [totalPrice, setTotalPrice] = useState(
+    cartItems.reduce((acc, item) => acc + parseFloat(item.totalPrice), 0)
+  );
+
+  useEffect(() => {
+    const newTotal = cartItems.reduce(
+      (acc, item) => acc + parseFloat(item.totalPrice),
+      0
+    );
+    setTotalPrice(newTotal);
+  }, [cartItems]);
+
   const ref = useRef();
 
   const check = (e) => {
@@ -63,10 +65,28 @@ function DropDownCart({ setShopping }) {
     return () => document.removeEventListener("mousedown", check);
   });
 
+  const handleDelete = (product) => {
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const itemIndex = existingCart.findIndex(
+      (item) =>
+        item.arabicName === product.arabicName &&
+        item.selectedColor === product.selectedColor &&
+        item.selectedSize === product.selectedSize &&
+        item.slug === product.slug
+    );
+
+    if (itemIndex !== -1) {
+      existingCart.splice(itemIndex, 1);
+
+      localStorage.setItem("cart", JSON.stringify(existingCart));
+      setCartItems(existingCart);
+      toast.success("تم المحو بنجاح");
+      return;
+    }
+    toast.error("حصل خطأ جرب مجددا");
+  };
+
   //////////
-  let nb = products.length;
-  let totalPrice = 0;
-  products.forEach((i) => (totalPrice += parseFloat(i.price)));
   return (
     <div className={style.wrapper} ref={ref}>
       <div className={style.header}>
@@ -76,18 +96,16 @@ function DropDownCart({ setShopping }) {
         </p>
       </div>
       <section className={style.orders}>
-        {products.map((product, index) => {
+        {cartItems.map((product, index) => {
           return (
-            <div
-              className={style.miniCart}
-              name={products.name}
-              price={products.price}
-              color={products.color}
-              size={products.size}
-            >
+            <div key={index} className={style.miniCart}>
               <div className={style.container}>
                 <img
-                  src={overview}
+                  src={
+                    product.image
+                      ? `${process.env.REACT_APP_BACKEND}${product.image}`
+                      : hijaba2
+                  }
                   alt="overview"
                   height="120px"
                   width="100px"
@@ -95,15 +113,19 @@ function DropDownCart({ setShopping }) {
                 />
                 <div className={style.left}>
                   <div className={style.upper}>
-                    <p className={style.main}>{product.name}</p>
-                    <p className={style.main}>{product.price} $</p>
+                    <p className={style.main}>{product.arabicName}</p>
+                    <p className={style.main}>{product.totalPrice} $</p>
                   </div>
                   <div className={style.lower}>
                     <div className={style.lowerRight}>
-                      <p className={style.details}>اللون : {product.color}</p>
-                      <p className={style.details}>الوصف : {product.size}</p>
+                      <p className={style.details}>
+                        اللون : {product.selectedColor}
+                      </p>
+                      <p className={style.details}>
+                        الوصف : {product.selectedSize}
+                      </p>
                     </div>
-                    <Img />
+                    <Img onClick={() => handleDelete(product)} />
                   </div>
                 </div>
               </div>

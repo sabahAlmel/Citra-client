@@ -103,7 +103,7 @@ function Product() {
   };
 
   const handleClick = (product) => {
-    const { name, price, images, details } = product;
+    const { arabicName, price, images, details, slug } = product;
     const selectedColor =
       details[0].color && details[0].color.length > 0 ? details[0].color : null;
     const selectedSize =
@@ -114,22 +114,24 @@ function Product() {
     const initialQuantity = 1;
 
     const productInfo = {
-      name,
+      arabicName,
       price,
       totalPrice: price * initialQuantity,
       image: images && images.length > 0 ? images[0] : null,
       selectedColor,
       selectedSize,
       quantity: initialQuantity,
+      slug,
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
 
     const existingProductIndex = existingCart.findIndex(
       (item) =>
-        item.name === productInfo.name &&
+        item.arabicName === productInfo.arabicName &&
         item.selectedColor === productInfo.selectedColor &&
-        item.selectedSize === productInfo.selectedSize
+        item.selectedSize === productInfo.selectedSize &&
+        item.slug === productInfo.slug
     );
 
     if (existingProductIndex !== -1) {
@@ -182,7 +184,7 @@ function Product() {
                 />
                 <div className={style.details}>
                   <div>
-                    <h4>{element.name}</h4>
+                    <h4>{element.arabicName}</h4>
                     <p>${element.price}</p>
                   </div>
                   <Link
