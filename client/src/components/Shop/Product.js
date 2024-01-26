@@ -16,6 +16,7 @@ import { ShopContext } from "../../ShopContext/ShopContext";
 import { toast } from "react-toastify";
 import ShopSide from "./ShopSide";
 import placeholder from "../../assets/images/hijabi2.jpg";
+import Search from "./Search";
 
 function Product() {
   const { selectedCategory, selectedSubCategory, setSelectedSubCategory } =
@@ -23,6 +24,8 @@ function Product() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isAbove769px, setIsAbove769px] = useState(window.innerWidth > 769);
+  const [search, setSearch] = useState();
+
   async function fetchTotalProducts() {
     try {
       let totalProducts = await fetchProductsNumber();
@@ -91,10 +94,18 @@ function Product() {
     });
     products = products ? products : [];
   }
+  if (search) {
+    products = search;
+  }
   useEffect(() => {
     refetch();
-    if (!selectedSubCategory || selectedSubCategory.length === 0) {
+    if (!selectedSubCategory || selectedSubCategory?.length === 0) {
       setSelectedSubCategory(null);
+      setSearch(null);
+    }
+    if (search && selectedCategory) {
+      setSelectedSubCategory(null);
+      setSearch(null);
     }
   }, [selectedCategory, selectedSubCategory]);
 
@@ -164,6 +175,7 @@ function Product() {
           duration: 0.6,
         }}
       >
+        <Search currentPage={currentPage} setSearch={setSearch} />
         <section className={style.productSection}>
           {products.length == 0 ? (
             <h2 className={style.loading}>no products available</h2>
