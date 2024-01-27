@@ -14,7 +14,6 @@ import { auth, provider } from "../../Firebase";
 import { signInWithPopup } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
 import useApi from "../../hooks/useApi";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Signin() {
@@ -60,44 +59,47 @@ function Signin() {
     if (!formData.email || !formData.password) {
       toast.error("أدخل البريد والإسم");
       setIsPending(false);
-
-      return;
-    }
-
-    setFormData({
-      email: "",
-      password: "",
-    });
-
-    try {
-      await apiCall({
-        url: "/user/login",
-        method: "post",
-        data: {
-          email: formData.email,
-          password: formData.password,
-        },
+    } else {
+      setFormData({
+        email: "",
+        password: "",
       });
-      await fetchUserData();
-      toast.success("تم تسجيل الدخول بنجاح");
-      setIsPending(false);
-      navigate("/");
-    } catch (error) {
-      if (error.response && error.response.data && error.response.data.errors) {
-        const { errors } = error.response.data;
 
-        if (errors.email) {
-          const emailError = errors.email;
-          toast.error(emailError);
+      try {
+        await apiCall({
+          url: "/user/login",
+          method: "post",
+          data: {
+            email: formData.email,
+            password: formData.password,
+            role: "user",
+          },
+        });
+        await fetchUserData();
+        toast.success("تم تسجيل الدخول بنجاح");
+        setIsPending(false);
+        navigate("/");
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          const { errors } = error.response.data;
+
+          if (errors.email) {
+            const emailError = errors.email;
+            toast.error(emailError);
+          }
+          if (errors.password) {
+            const passwordError = errors.password;
+            toast.error(passwordError);
+          }
+        } else {
+          toast.error(error.message);
         }
-        if (errors.password) {
-          const passwordError = errors.password;
-          toast.error(passwordError);
-        }
-      } else {
-        toast.error(error.message);
+        setIsPending(false);
       }
-      setIsPending(false);
     }
   };
 

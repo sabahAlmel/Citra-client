@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/icons/logo.svg";
 import order from "../../assets/icons/order.svg";
 import styles from "./NavBar.module.css";
 import DropDownCart from "../../components/dorpDownCart/DropDownCart";
+import { AuthContext } from "../../context/AuthContext";
 
 function NavBar() {
+  const { user } = useContext(AuthContext);
+
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   ///shopping cart drop down menu
@@ -15,7 +18,6 @@ function NavBar() {
 
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
-    console.log(menuOpen);
   };
   useEffect(() => {
     // Check the window width and set the isResponsive state when the component mounts
@@ -72,6 +74,7 @@ function NavBar() {
   const handlelogo = () => {
     navigate("./");
   };
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -137,9 +140,13 @@ function NavBar() {
             </NavLink>
           </li>
           <li>
+            {/* {!user.id ? ( */}
             <NavLink className={` ${styles.btn}`} to="./signin">
               تسجيل دخول
             </NavLink>
+            {/* ) : (
+              <button>log out</button>
+            )} */}
           </li>
         </ul>
 

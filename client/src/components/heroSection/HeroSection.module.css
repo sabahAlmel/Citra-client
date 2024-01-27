@@ -130,12 +130,14 @@ height: 60%;
     }
     .slogan{
         filter: brightness(3);
-
+    }
+    .who{
+        filter: brightness(0.45);
     }
     .gotoshop{
         align-self: center;
         font-size: 18px;
-        filter: brightness(3);
+        filter: brightness(1);
     }
     .upperTxt{
         font-size: 28px;

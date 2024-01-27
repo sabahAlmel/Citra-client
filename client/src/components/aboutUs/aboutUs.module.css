@@ -41,7 +41,7 @@
   }
   @media(max-width: 1160px ) and ( min-width:768px){
     .description{
-      height: 400px;
+      height: 350px;
       overflow-y: scroll;
     }
   }
