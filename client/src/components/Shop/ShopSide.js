@@ -121,13 +121,15 @@ const ShopSide = () => {
                 <input
                   type="radio"
                   name="category"
-                  value={filter.name}
+                  value={filter.arabicName}
                   id={`filter_${filter._id}`}
                   checked={filter._id === selectedCategory}
                   className={style.inputFilter}
                   onChange={() => handleRadioChange(filter._id)}
                 />
-                <label htmlFor={`filter_${filter._id}`}>{filter.name}</label>
+                <label htmlFor={`filter_${filter._id}`}>
+                  {filter.arabicName}
+                </label>
               </section>
             ))}
             <div className={style.line}></div>
@@ -146,15 +148,15 @@ const ShopSide = () => {
                     <section key={filter._id} className={style.filter}>
                       <input
                         type="checkbox"
-                        name={filter.name}
-                        value={filter.name}
+                        name={filter.arabicName}
+                        value={filter.arabicName}
                         id={`filter_${filter._id}`}
                         checked={filter.checked}
                         className={style.inputFilter}
                         onChange={() => handleCheckboxChange(filter._id)}
                       />
                       <label htmlFor={`filter_${filter._id}`}>
-                        {filter.name}
+                        {filter.arabicName}
                       </label>
                     </section>
                   );

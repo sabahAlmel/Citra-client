@@ -45,13 +45,14 @@ function Cart() {
         {cartItems.map((item, index) => (
           <CartCards
             quantity={item.quantity}
-            name={item.name}
+            arabicName={item.arabicName}
             price={item.totalPrice}
             color={item.selectedColor}
             size={item.selectedSize}
             key={index}
             image={item.image}
             cartItems={setCartItems}
+            slug={item.slug}
           />
         ))}
       </div>

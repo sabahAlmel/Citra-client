@@ -16,6 +16,7 @@ import { ShopContext } from "../../ShopContext/ShopContext";
 import { toast } from "react-toastify";
 import ShopSide from "./ShopSide";
 import placeholder from "../../assets/images/hijabi2.jpg";
+import Search from "./Search";
 
 function Product() {
   const { selectedCategory, selectedSubCategory, setSelectedSubCategory } =
@@ -23,6 +24,8 @@ function Product() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isAbove769px, setIsAbove769px] = useState(window.innerWidth > 769);
+  const [search, setSearch] = useState();
+
   async function fetchTotalProducts() {
     try {
       let totalProducts = await fetchProductsNumber();
@@ -91,10 +94,18 @@ function Product() {
     });
     products = products ? products : [];
   }
+  if (search) {
+    products = search;
+  }
   useEffect(() => {
     refetch();
-    if (!selectedSubCategory || selectedSubCategory.length === 0) {
+    if (!selectedSubCategory || selectedSubCategory?.length === 0) {
       setSelectedSubCategory(null);
+      setSearch(null);
+    }
+    if (search && selectedCategory) {
+      setSelectedSubCategory(null);
+      setSearch(null);
     }
   }, [selectedCategory, selectedSubCategory]);
 
@@ -103,7 +114,7 @@ function Product() {
   };
 
   const handleClick = (product) => {
-    const { name, price, images, details } = product;
+    const { arabicName, price, images, details, slug } = product;
     const selectedColor =
       details[0].color && details[0].color.length > 0 ? details[0].color : null;
     const selectedSize =
@@ -114,22 +125,24 @@ function Product() {
     const initialQuantity = 1;
 
     const productInfo = {
-      name,
+      arabicName,
       price,
       totalPrice: price * initialQuantity,
       image: images && images.length > 0 ? images[0] : null,
       selectedColor,
       selectedSize,
       quantity: initialQuantity,
+      slug,
     };
 
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
 
     const existingProductIndex = existingCart.findIndex(
       (item) =>
-        item.name === productInfo.name &&
+        item.arabicName === productInfo.arabicName &&
         item.selectedColor === productInfo.selectedColor &&
-        item.selectedSize === productInfo.selectedSize
+        item.selectedSize === productInfo.selectedSize &&
+        item.slug === productInfo.slug
     );
 
     if (existingProductIndex !== -1) {
@@ -162,6 +175,7 @@ function Product() {
           duration: 0.6,
         }}
       >
+        <Search currentPage={currentPage} setSearch={setSearch} />
         <section className={style.productSection}>
           {products.length == 0 ? (
             <h2 className={style.loading}>no products available</h2>
@@ -182,7 +196,7 @@ function Product() {
                 />
                 <div className={style.details}>
                   <div>
-                    <h4>{element.name}</h4>
+                    <h4>{element.arabicName}</h4>
                     <p>${element.price}</p>
                   </div>
                   <Link

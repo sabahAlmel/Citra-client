@@ -27,13 +27,14 @@ function Img() {
 }
 
 const CartCards = ({
-  name,
+  arabicName,
   price,
   size,
   color,
   quantity,
   image,
   cartItems,
+  slug,
 }) => {
   const [hover, setHovered] = useState(false);
 
@@ -46,9 +47,10 @@ const CartCards = ({
 
     const itemIndex = existingCart.findIndex(
       (item) =>
-        item.name === name &&
+        item.arabicName === arabicName &&
         item.selectedColor === color &&
-        item.selectedSize === size
+        item.selectedSize === size &&
+        item.slug === slug
     );
 
     if (itemIndex !== -1) {
@@ -56,8 +58,10 @@ const CartCards = ({
 
       localStorage.setItem("cart", JSON.stringify(existingCart));
       cartItems(existingCart);
+      toast.success("تم المحو بنجاح");
+      return;
     }
-    toast.success("تم المحو بنجاح");
+    toast.error("حصل خطأ جرب مجددا");
   };
 
   return (
@@ -70,7 +74,7 @@ const CartCards = ({
         )}
       </div>
       <div className={style.pic}>
-        <p>{name}</p>
+        <p>{arabicName}</p>
       </div>
       <div className={style.middle}>
         <p>{quantity}</p>
