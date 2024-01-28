@@ -17,10 +17,12 @@ import { toast } from "react-toastify";
 import ShopSide from "./ShopSide";
 import placeholder from "../../assets/images/hijabi2.jpg";
 import Search from "./Search";
+import LoadingPage from "../loadingPage";
 
 function Product() {
   const { selectedCategory, selectedSubCategory, setSelectedSubCategory } =
     useContext(ShopContext);
+  console.log(selectedCategory);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isAbove769px, setIsAbove769px] = useState(window.innerWidth > 769);
@@ -158,7 +160,7 @@ function Product() {
   };
 
   if (isLoadingProducts) {
-    return <h2 className={style.loading}>loading...</h2>;
+    return <LoadingPage />;
   }
 
   return (

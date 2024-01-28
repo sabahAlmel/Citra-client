@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./ProductImages.module.css";
 import placeholder from "../../assets/images/hijabi3.jpg";
+import LoadingPage from "../loadingPage";
 
 function ProductImages({ products, isLoading }) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -16,7 +17,7 @@ function ProductImages({ products, isLoading }) {
   };
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <LoadingPage />;
   }
 
   return (

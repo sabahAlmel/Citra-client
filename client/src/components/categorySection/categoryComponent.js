@@ -1,6 +1,7 @@
 import React from "react";
 import style from "../categorySection/categoryComponent.module.css";
 import { motion } from "framer-motion";
+import image2 from "../../assets/images/hijabi2.jpg";
 
 const CategoryComponent = ({ data }) => {
   return (
@@ -15,9 +16,13 @@ const CategoryComponent = ({ data }) => {
         duration: 0.6,
       }}
     >
-      <img className={style.image} src={data.image} alt="Background" />
+      {data.image ? (
+        <img className={style.image} src={data.image} alt="Background" />
+      ) : (
+        <img className={style.image} src={image2} alt="category" />
+      )}
 
-      <h3 className={style.h3}>{data.name}</h3>
+      <h3 className={style.h3}>{data.arabicName}</h3>
     </motion.section>
   );
 };

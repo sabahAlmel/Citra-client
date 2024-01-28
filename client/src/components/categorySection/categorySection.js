@@ -1,61 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import CategoryComponent from "../categorySection/categoryComponent.js";
 import style from "../categorySection/categorySection.module.css";
-import image1 from "../../assets/images/hijab.jpg";
-import image2 from "../../assets/images/hijabi2.jpg";
-import image3 from "../../assets/images/hijabi3.jpg";
-import image4 from "../../assets/images/hijabiCard.jpg";
+import { ShopContext } from "../../ShopContext/ShopContext.js";
+import { fetchAllCategories } from "../../db/fetchCategory.js";
+import { useQuery } from "react-query";
 
 const CategorySection = () => {
-  const fakeCategory = [
-    {
-      id: 1,
-      image: image4,
-      name: "حجابات",
-    },
-    {
-      id: 2,
-      image: image1,
-      name: "بيت قرآن",
-    },
-    {
-      id: 3,
-      image: image2,
-      name: "مسبحة",
-    },
-    {
-      id: 4,
-      image: image3,
-      name: "مرطبات",
-    },
-    {
-      id: 5,
-      image: image4,
-      name: "صابون",
-    },
-    {
-      id: 6,
-      image: image2,
-      name: "مناشف",
-    },
-    {
-      id: 7,
-      image: image4,
-      name: "إكسسوارات",
-    },
-    {
-      id: 8,
-      image: image1,
-      name: "أطقم صلاة",
-    },
-  ];
+  const { selectedCategory, setSelectedCategory } = useContext(ShopContext);
+  function handleCategory(id) {
+    setSelectedCategory(id);
+    console.log(selectedCategory);
+  }
 
+  const { isLoading: isLoadingCategory, data: allCategories } = useQuery(
+    "shop-categ",
+    fetchAllCategories,
+    {
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+    }
+  );
   return (
     <section className={style.CategorySection}>
       <h2 className={style.title}>الفئات</h2>
       <div className={style.categoryContainer}>
-        {fakeCategory.map((data, index) => (
-          <CategoryComponent key={index} data={data} />
+        {allCategories?.categories.map((data, index) => (
+          <NavLink to="/shop" onClick={() => handleCategory(data._id)}>
+            <CategoryComponent
+              key={index}
+              data={data}
+              onClick={() => handleCategory(data._id)}
+            />
+          </NavLink>
         ))}
       </div>
     </section>
