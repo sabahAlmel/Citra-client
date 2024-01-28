@@ -7,7 +7,7 @@ function Products() {
   return (
     <div className={styles.container}>
 
-      <ProductTable  />
+      <ProductTable />
     
     </div>
  

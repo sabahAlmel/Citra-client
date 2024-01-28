@@ -107,6 +107,8 @@ height: 10vh;
 
 .delete-cell:hover{
   background-color: var(--main-color);
+  cursor: auto;
+  color: var(--brown-color);
   
 }
 /* .css-rh4u34-MuiDataGrid-root .MuiDataGrid-withBorderColor {
@@ -139,4 +141,13 @@ height: 10vh;
 }
 .css-128fb87-MuiDataGrid-toolbarContainer{
   margin-bottom: 3rem;
+}
+.css-hxcj3o{
+  width: 100%;
+margin: 0;
+border: none;
+}
+.shrink {
+  transform: translateY(-1.25rem) scale(0.75);
+  display: none; /* Add this line to hide the label */
 }
