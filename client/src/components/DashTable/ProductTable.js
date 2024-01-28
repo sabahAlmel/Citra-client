@@ -1,5 +1,3 @@
-
-
 ///////////////////////table with pagination and filtration ///////////
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
@@ -7,20 +5,57 @@ import { DataGrid, GridToolbar, FilterToolbar } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 import "./product.css";
 import { Button } from "@mui/material";
-
+import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
+import { fetchProducts } from "../../db/fetchProduct"; // Adjust the path accordingly
 
 const ProductTable = () => {
+  const [page, setPage] = useState(1); // Move the declaration of 'page' here
+
+  const {
+    isLoading,
+    isError,
+    data: ProductData,
+  } = useQuery(["user-table", page], () => fetchProducts(page));
+    // Update the state when data is loaded
+    React.useEffect(() => {
+      if (ProductData) {
+        // Assuming your response has a 'products' field that contains the array of products
+        const updatedRows = ProductData?.products.map((product) => ({
+          ...product,
+          id: product._id, // Set 'id' to the value of '_id'
+        }));
+    
+        setRows(updatedRows);
+      }
+    }, [ProductData]);
+  const navigate = useNavigate();
+
+  const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
+  const queryClient = useQueryClient();
+  const [rows, setRows] = React.useState([]); //data
+  const [pageSize, setPageSize] = useState(5);
+
+  
+ 
+  if (isLoading) {
+    return <h2>Loading..</h2>;
+  }
+  if (isError) {
+    return <div>Error loading products</div>;
+  }
+
   const handleRowClickDelete = async (params) => {
     const productId = params.row.id;
 
     try {
       // Send a DELETE request to the API to delete the product
-      await axios.delete(`${process.env.REACT_APP_API}product/${productId}`);
+      await axios.delete(`${process.env.REACT_APP_BACKEND}product/${productId}`);
 
       // If the delete request is successful, you may want to update the UI accordingly
       // For example, you can filter out the deleted row from the displayed data
-      const updatedData = sampleData.filter((row) => row.id !== productId);
+      const updatedData = rows.filter((row) => row.id !== productId);
+      setRows(updatedData);
       // Set the updated data to the state or wherever you store your data
       // setSampleData(updatedData);
     } catch (error) {
@@ -28,128 +63,18 @@ const ProductTable = () => {
       // Handle error, show a notification, etc.
     }
   };
-  // Sample static data for testing
-  const sampleData = [
-    {
-      id: 72287362676,
-      الإسم: "rayannn",
-      "name in english": "Product 1 (English)",
-      date: "2022-01-20",
-      سعر: 100,
-      "رقم سري": "ABC123",
-    },
-    {
-      id: 2,
-      الإسم: "Product 2",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
-    {
-      id: 3,
-      الإسم: "Product 3",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
-    {
-      id: 4,
-      الإسم: "Product 4",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
-    {
-      id: 5,
-      الإسم: "Product 5",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
-    {
-      id: 6,
-      الإسم: "Product 6",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
-    {
-      id: 7,
-      الإسم: "Product 7",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
-    {
-      id: 8,
-      الإسم: "Product 8",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
-    {
-      id: 9,
-      الإسم: "Product 9",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
-    {
-      id: 10,
-      الإسم: "Product 10",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
-    {
-      id: 11,
-      الإسم: "Product 11",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
-    {
-      id: 12,
-      الإسم: "Product 12",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
-    {
-      id: 13,
-      الإسم: "Product 13",
-      "name in english": "Product 2 (English)",
-      date: "2022-01-21",
-      سعر: 150,
-      "رقم سري": "XYZ456",
-    },
+  const handleRowClickEdit = async (params) => {
+    const userId = params.row.id;
 
-    // Add more sample data as needed
-  ];
+    navigate(`/product/${userId}`);
+  };
+
 
   const columns = [
-    { field: "الإسم", headerName: "الإسم", flex: 1 , },
-    { field: "name in english", headerName: "name in english", flex: 1 },
-    {
-      field: "date",
-      headerName: "Date",
-      flex: 1,
-      type: "date",
-      valueGetter: (params) => new Date(params.row.date),
-    },
-    { field: "سعر", headerName: "سعر", flex: 1 },
-    { field: "رقم سري", headerName: "رقم سري", flex: 1 },
+    { field: "arabicName", headerName: "الإسم", flex: 1 },
+    { field: "name", headerName: "name in english", flex: 1 },
+    { field: "price", headerName: "سعر", flex: 1 },
+    { field: "serialNumber ", headerName: "رقم سري", flex: 1 },
     // Add more columns as needed
     {
       field: "delete", // Add a delete column
@@ -158,31 +83,48 @@ const ProductTable = () => {
       cellClassName: "delete-cell",
 
       renderCell: (params) => (
-        <Button
-          variant="outlined"
-          color="secondary"
-          sx={{
-            color: "var(--brown-color)",
-            borderColor: "var(--blue-color) ",
-            "&:hover": {
-              boxShadow: "0px 0px 10px 3px rgba(0,0,0,0.5)",
-              backgroundColor: "var(--blue-color)",
-            },
-          }}
-          onClick={() => handleRowClickDelete(params)}
-        >
-           حذف
-        </Button>
+        <>
+          <Button
+            variant="outlined"
+            color="secondary"
+            sx={{
+              color: "var(--brown-color)",
+              borderColor: "var(--blue-color) ",
+              "&:hover": {
+                boxShadow: "0px 0px 10px 3px rgba(0,0,0,0.5)",
+                backgroundColor: "var(--blue-color)",
+              },
+            }}
+            onClick={() => handleRowClickDelete(params)}
+          >
+            حذف
+          </Button>
+
+          <Button
+            variant="outlined"
+            color="secondary"
+            sx={{
+              color: "var(--brown-color)",
+              borderColor: "var(--blue-color) ",
+              "&:hover": {
+                boxShadow: "0px 0px 10px 3px rgba(0,0,0,0.5)",
+                backgroundColor: "var(--blue-color)",
+              },
+            }}
+            onClick={() => handleRowClickEdit(params)}
+          >
+            تعديل
+          </Button>
+        </>
       ),
     },
   ];
-  const navigate = useNavigate();
 
   const handleRowClick = (params, event) => {
     // Check if the clicked element is the delete button
     const isDeleteButton =
       event.target.tagName.toLowerCase() === "button" &&
-      event.target.textContent.toLowerCase() === "delete";
+      event.target.textContent.toLowerCase() === "حذف";
 
     // If it's the delete button, trigger the delete functionality
     if (isDeleteButton) {
@@ -193,12 +135,9 @@ const ProductTable = () => {
     }
   };
 
-  const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(5);
-  const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
-
   const handlePageChange = (params) => {
     setPage(params.page);
+    queryClient.invalidateQueries(["user-table", params.page]);
   };
 
   const handlePageSizeChange = (params) => {
@@ -207,14 +146,14 @@ const ProductTable = () => {
   };
 
   const data = {
-    rows: sampleData,
+    rows,
     columns,
     page,
     pageSize,
-    rowCount: sampleData.length,
+    rowCount: rows.length,
     pageSizeOptions: [10, 25, 50, 75, 100],
     filterModel,
-    dataSet: 'Employee',
+    dataSet: "Employee",
     visibleFields: columns,
     rowLength: 100,
   };
@@ -247,7 +186,7 @@ const ProductTable = () => {
       </Button>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
-          sx={{ minHeight: "60vh", }}
+          sx={{ minHeight: "60vh" }}
           {...data}
           onPageChange={handlePageChange}
           onPageSizeChange={handlePageSizeChange}
@@ -259,9 +198,8 @@ const ProductTable = () => {
             //pagination
             // pagination: { paginationModel: { pageSize: 5 } },
 
-              //filter
+            //filter
             filter: {
-            
               ...data.initialState?.filter,
               filterModel: {
                 items: [
