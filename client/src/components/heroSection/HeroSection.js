@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./HeroSection.module.css";
 import overview from "../../assets/images/hijab.jpg";
+import { AuthContext } from "../../context/AuthContext";
 
 function HeroSection() {
   return (

@@ -14,7 +14,6 @@ import { auth, provider } from "../../Firebase";
 import { signInWithPopup } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
 import useApi from "../../hooks/useApi";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Signin() {
@@ -51,46 +50,56 @@ function Signin() {
       [name]: value,
     }));
   };
-  // sign in 
+  // sign in
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     setIsPending(true);
-    try{
-      // if (!formData.email || !formData.password) {
-      //   toast.error("Insert Email or Password");
-      //   setLoading(false);}
-
-        const response = await axiosInstance.post("/user/login", formData)
-        console.log(response)
-        toast.success("تم تسجيل الدخول بنجاح",response.message)
-        navigate('/')
-
-    }
-   
-    catch (error) {
-      if (error.response && error.response.data && error.response.data.errors) {
-        const { errors } = error.response.data;
-
-        if (errors.email) {
-          const emailError = errors.email;
-          toast.error(emailError);
-        }
-        if (errors.password) {
-          const passwordError = errors.password;
-          toast.error(passwordError);
-        }
-      } else {
-        toast.error(error.message);
-      }
+    if (!formData.email || !formData.password) {
+      toast.error("أدخل البريد والإسم");
       setIsPending(false);
+    } else {
+      setFormData({
+        email: "",
+        password: "",
+      });
+
+      try {
+        await apiCall({
+          url: "/user/login",
+          method: "post",
+          data: {
+            email: formData.email,
+            password: formData.password,
+            role: "user",
+          },
+        });
+        await fetchUserData();
+        toast.success("تم تسجيل الدخول بنجاح");
+        setIsPending(false);
+        navigate("/");
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          const { errors } = error.response.data;
+
+          if (errors.email) {
+            const emailError = errors.email;
+            toast.error(emailError);
+          }
+          if (errors.password) {
+            const passwordError = errors.password;
+            toast.error(passwordError);
+          }
+        } else {
+          toast.error(error.message);
+        }
+        setIsPending(false);
+      }
     }
-    setFormData({
-     
-      email: "",
-      password: "",
-  
-    });
   };
 
   // google sign in
@@ -137,8 +146,8 @@ function Signin() {
   };
 
   return (
-    <form onSubmit={handleSubmit}  className={styles.wrapper}>
-    <main className={`${styles.main} ${isSmallScreen && styles.smallScreen}`}>
+    <form onSubmit={handleSubmit} className={styles.wrapper}>
+      <main className={`${styles.main} ${isSmallScreen && styles.smallScreen}`}>
         <h1 className={styles.h1}>تسجيل الدخول</h1>
         <span
           style={{

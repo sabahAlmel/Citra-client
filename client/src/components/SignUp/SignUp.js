@@ -1,16 +1,12 @@
 import { FaRegHeart } from "react-icons/fa";
 import styles from "../../components/SignUp/SignUp.module.css";
 import TextField from "@mui/material/TextField";
-import { Button, Paper } from "@mui/material";
+import { Button } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
-// import { LuEyeOff } from "react-icons/lu";
 import openeye from "../../assets/icons/open.svg";
 import closeeye from "../../assets/icons/close.svg";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { color } from "framer-motion";
-import { Opacity } from "@mui/icons-material";
-import useApi from "../../hooks/useApi";
 import axiosInstance from "../../utils/axiosInstance";
 import { auth, provider } from "../../Firebase";
 import { signInWithPopup } from "firebase/auth";
@@ -59,7 +55,8 @@ function SignUpp() {
 
   // google sign up
 
-  const handleGoogle = () => {
+  const handleGoogle = (e) => {
+    e.preventDefault();
     signInWithPopup(auth, provider)
       .then((data) => {
         setDisabled(!disabled);
@@ -84,7 +81,7 @@ function SignUpp() {
               setUser(res.data.token.data);
               console.log(res.data.token.data);
               setDisabled(!disabled);
-              toast.success("تم تسجيل الدخول بنجاح",response.message);
+              toast.success("تم تسجيل الدخول بنجاح", response.message);
             } else {
               setUser("no user found");
             }
@@ -107,9 +104,8 @@ function SignUpp() {
 
     try {
       const response = await axiosInstance.post("/user/signup", formData);
-      console.log(response)
-      toast.success("تم تسجيل الدخول بنجاح",response.message);
-      setFormData()
+      setUser(response.data.token.data);
+      toast.success("تم تسجيل الدخول بنجاح");
       navigate("/");
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
@@ -133,7 +129,7 @@ function SignUpp() {
       email: "",
       password: "",
       phone: "",
-      role: "",
+      role: "user",
     });
   };
 
@@ -142,14 +138,6 @@ function SignUpp() {
       <form onSubmit={handleSubmit} className={styles.wrapper}>
         <main className={styles.main}>
           <ToastContainer />
-
-          {/* <div className={`${styles.circle} ${styles.left}`}>
-
-                </div>
-                <div className={`${styles.circle} ${styles.right}`}>
-                    
-                </div> */}
-
           <span
             style={{
               display: "flex",
