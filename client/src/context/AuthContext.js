@@ -1,10 +1,11 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [checkUser, setCheckUser] = useState(false);
+  const [checkUser, setCheckUser] = useState(true);
   const [loading, setLoading] = useState(true);
 
   //   Fetch user data
@@ -12,9 +13,8 @@ export const AuthProvider = ({ children }) => {
   const fetchUserData = async () => {
     try {
       setCheckUser(true);
-      const response = await axiosInstance.get("/user/get");
-      console.log(response.data);
-      setUser(response.data.token.data);
+      const response = await axiosInstance.get("/user/getone");
+      setUser(response.data);
     } catch (error) {
       console.error("Error fetching user data", error);
       setUser(null);
@@ -27,12 +27,17 @@ export const AuthProvider = ({ children }) => {
   // logout
   const logout = async () => {
     try {
-      await axiosInstance.post("/user/logout");
+      await axiosInstance.get("/user/logout");
       setUser(null);
+      toast.success("Logged out successfully");
     } catch (error) {
       console.error("Logout error:", error);
     }
   };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   return (
     <AuthContext.Provider

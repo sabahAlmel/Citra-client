@@ -7,7 +7,7 @@ import DropDownCart from "../../components/dorpDownCart/DropDownCart";
 import { AuthContext } from "../../context/AuthContext";
 
 function NavBar() {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -140,13 +140,16 @@ function NavBar() {
             </NavLink>
           </li>
           <li>
-            {/* {!user.id ? ( */}
-            <NavLink className={` ${styles.btn}`} to="./signin">
-              تسجيل دخول
-            </NavLink>
-            {/* ) : (
-              <button>log out</button>
-            )} */}
+            {!user ? (
+              <NavLink className={` ${styles.btn}`} to="./signin">
+                تسجيل دخول
+              </NavLink>
+            ) : (
+              // <button onClick={logout}>log out</button>
+              <NavLink className={` ${styles.btn}`} to="./" onClick={logout}>
+                logout
+              </NavLink>
+            )}
           </li>
         </ul>
 
