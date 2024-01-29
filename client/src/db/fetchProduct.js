@@ -1,14 +1,9 @@
 import axios from "axios";
 export async function fetchProducts(nb) {
-  try {  console.log('Sending request to:', `${process.env.REACT_APP_BACKEND}product/getall?page=${nb}`);
-
-
+  try {
     const response = await axios.get(
       `${process.env.REACT_APP_BACKEND}product/getall?page=${nb}`
-      
     );
-    console.log('Request data:', response.data);
-
     return response.data;
   } catch (error) {
     console.error("Error fetching Products:", error);
@@ -21,7 +16,7 @@ export async function fetchProductsByCateg(categId, nb) {
     );
     return response.data;
   } catch (error) {
-    console.log("Error fetching By categories:", error);
+    console.error("Error fetching By categories:", error);
   }
 }
 
@@ -32,7 +27,7 @@ export async function fetchProductsBySubCateg(subCategId, nb) {
     );
     return response.data;
   } catch (error) {
-    console.log("Error fetching By Subcategories:", error);
+    console.error("Error fetching By Subcategories:", error);
   }
 }
 export async function fetchOneProduct(slug) {
@@ -58,12 +53,21 @@ export async function fetchProductsNumber() {
 
 export async function searchProduct(nb, data) {
   try {
-    console.log("data " + data);
     const response = await axios.post(
       `${process.env.REACT_APP_BACKEND}product/search?page=${nb}`,
       { search: data }
     );
-    console.log("this is the newest console " + response.data.products.length);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching Products:", error);
+  }
+}
+
+export async function fetchEight() {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_BACKEND}product/getLastEight`
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching Products:", error);

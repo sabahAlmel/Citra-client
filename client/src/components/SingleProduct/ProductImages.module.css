@@ -31,6 +31,11 @@
     height: 70vh;
   }
 }
+
+* {
+  user-select: none;
+}
+
 .allImages .imagesHandle {
   display: flex;
   flex-direction: column;
