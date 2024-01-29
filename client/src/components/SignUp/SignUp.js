@@ -84,7 +84,7 @@ function SignUpp() {
               setUser(res.data.token.data);
               console.log(res.data.token.data);
               setDisabled(!disabled);
-              toast.success("تم تسجيل الدخول بنجاح");
+              toast.success("تم تسجيل الدخول بنجاح",response.message);
             } else {
               setUser("no user found");
             }
@@ -107,7 +107,9 @@ function SignUpp() {
 
     try {
       const response = await axiosInstance.post("/user/signup", formData);
-      toast.success("تم تسجيل الدخول بنجاح");
+      console.log(response)
+      toast.success("تم تسجيل الدخول بنجاح",response.message);
+      setFormData()
       navigate("/");
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
