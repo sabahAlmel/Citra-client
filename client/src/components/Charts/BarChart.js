@@ -89,8 +89,14 @@ defaults.plugins.title.font.size = 20;
 defaults.plugins.title.color = "black";
 
 const BarChart = () => {
+
+  const [barData, setBarData] = useState([]);
+  const [lineData, setLineData] = useState([]);
+  const [productData, setProductData] = useState([]);
+
   return (
     <div className={BarCharts.App}>
+      <p className={BarCharts.title1}>OverView</p>
  <div className={`${BarCharts.dataCard} ${BarCharts.revenueCard}`}>
         <Line
           data={{
