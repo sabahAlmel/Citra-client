@@ -21,13 +21,11 @@ function Signin() {
   const { setUser, fetchUserData } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(false);
   const [isPending, setIsPending] = useState(false);
-  const { apiCall } = useApi();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
   const [open, setOpen] = useState(false);
 
   const openCloseHandler = () => {
@@ -53,36 +51,24 @@ function Signin() {
       [name]: value,
     }));
   };
-
+  // sign in 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     setIsPending(true);
-    if (!formData.email || !formData.password) {
-      toast.error("أدخل البريد والإسم");
-      setIsPending(false);
+    try{
+      // if (!formData.email || !formData.password) {
+      //   toast.error("Insert Email or Password");
+      //   setLoading(false);}
 
-      return;
+        const response = await axiosInstance.post("/user/login", formData)
+        console.log(response)
+        toast.success("تم تسجيل الدخول بنجاح",response.message)
+        navigate('/')
+
     }
-
-    setFormData({
-      email: "",
-      password: "",
-    });
-
-    try {
-      await apiCall({
-        url: "/user/login",
-        method: "post",
-        data: {
-          email: formData.email,
-          password: formData.password,
-        },
-      });
-      await fetchUserData();
-      toast.success("تم تسجيل الدخول بنجاح");
-      setIsPending(false);
-      navigate("/");
-    } catch (error) {
+   
+    catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
         const { errors } = error.response.data;
 
@@ -99,6 +85,12 @@ function Signin() {
       }
       setIsPending(false);
     }
+    setFormData({
+     
+      email: "",
+      password: "",
+  
+    });
   };
 
   // google sign in
@@ -145,8 +137,8 @@ function Signin() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.wrapper}>
-      <main className={`${styles.main} ${isSmallScreen && styles.smallScreen}`}>
+    <form onSubmit={handleSubmit}  className={styles.wrapper}>
+    <main className={`${styles.main} ${isSmallScreen && styles.smallScreen}`}>
         <h1 className={styles.h1}>تسجيل الدخول</h1>
         <span
           style={{
@@ -184,10 +176,10 @@ function Signin() {
                 fontSize: "16px",
               },
             }}
+            id="filled-basic"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            id="filled-basic"
             label="البريد"
             variant="filled"
             type="email"
@@ -216,10 +208,10 @@ function Signin() {
                 width: "300px",
               },
             }}
+            id="filled-basic"
             name="password"
             value={formData.password}
             onChange={handleInputChange}
-            id="filled-basic"
             label="كلمة المرور"
             variant="filled"
             type={textPass}
@@ -241,7 +233,7 @@ function Signin() {
           <Button
             fullWidth
             type="submit"
-            onClick={handleSubmit}
+            disabled={isPending}
             sx={{
               marginBottom: "1rem",
               height: 35,

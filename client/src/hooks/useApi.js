@@ -16,17 +16,25 @@ const useApi = () => {
             });
             return response.data;
         } catch (error) {
-            if (error.response) {
-                if (error.response.status === 401) {
-                    toast.error(error.response.data.message)
-                    setUser(null); 
-                    navigate('/login')
+            console.error("API call error:", error);
 
-                } else if (error.response.status === 403) {
-                    toast.error("Forbidden Access")
+            if (error.response) {
+                const { status, data: responseData } = error.response;
+
+                if (status === 401) {
+                    toast.error(responseData.message || "Unauthorized");
+                    setUser(null);
+                    navigate('/login');
+                } else if (status === 403) {
+                    toast.error("Forbidden Access");
+                } else {
+                    toast.error("An error occurred. Please try again.");
                 }
+            } else {
+                toast.error("Network error. Please check your connection.");
             }
-            throw error; 
+
+            throw error;
         }
     };
 
