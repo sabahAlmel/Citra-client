@@ -20,8 +20,12 @@ import Search from "./Search";
 import LoadingPage from "../loadingPage";
 
 function Product() {
-  const { selectedCategory, selectedSubCategory, setSelectedSubCategory } =
-    useContext(ShopContext);
+  const {
+    selectedCategory,
+    setSelectedCategory,
+    selectedSubCategory,
+    setSelectedSubCategory,
+  } = useContext(ShopContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isAbove769px, setIsAbove769px] = useState(window.innerWidth > 769);
@@ -158,6 +162,12 @@ function Product() {
     toast.success("تمت اضافة المنتج");
   };
 
+  function handleDelete() {
+    setSelectedSubCategory(null);
+    setSelectedCategory(null);
+    setSearch(null);
+  }
+
   if (isLoadingProducts) {
     return <LoadingPage />;
   }
@@ -176,7 +186,12 @@ function Product() {
           duration: 0.6,
         }}
       >
-        <Search currentPage={currentPage} setSearch={setSearch} />
+        <div className={style.handleHead}>
+          <Search currentPage={currentPage} setSearch={setSearch} />
+          <div className={style.clear} onClick={handleDelete}>
+            عرض جميع المنتجات
+          </div>
+        </div>
         <section className={style.productSection}>
           {products.length == 0 ? (
             <h3 className={style.loading}>منتجات غير متوفرة</h3>

@@ -55,13 +55,13 @@ function Content({ products, isLoading }) {
   }, [products]);
 
   const handleIncrement = () => {
-    const availableQuantity = getAvailableQuantity(selectedColor, selectedSize);
-
-    if (quantity < availableQuantity) {
+    // const availableQuantity = getAvailableQuantity(selectedColor, selectedSize);
+    // if(quantity<availableQuantity)
+    if (quantity < 10) {
       setQuantity((prevQuantity) => prevQuantity + 1);
     }
-    if (quantity === availableQuantity) {
-      toast.info("You have reached the maximum quantity!");
+    if (quantity === 10) {
+      toast.info("لقد وصلت الى الحد الأقصى للطلب");
     }
   };
 
@@ -87,16 +87,16 @@ function Content({ products, isLoading }) {
     return true;
   };
 
-  const getAvailableQuantity = (color, size) => {
-    const selectedColorDetails = products.fetchedProduct.details.find(
-      (detail) => detail.color === color
-    );
-    const selectedSizeDetails = selectedColorDetails.sizes.find(
-      (s) => s.size === size
-    );
+  // const getAvailableQuantity = (color, size) => {
+  //   const selectedColorDetails = products.fetchedProduct.details.find(
+  //     (detail) => detail.color === color
+  //   );
+  //   const selectedSizeDetails = selectedColorDetails.sizes.find(
+  //     (s) => s.size === size
+  //   );
 
-    return selectedSizeDetails ? selectedSizeDetails.quantity : 0;
-  };
+  //   return selectedSizeDetails ? selectedSizeDetails.quantity : 0;
+  // };
 
   const handleClick = () => {
     const productInfo = {
