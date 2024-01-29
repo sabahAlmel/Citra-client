@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import style from "./Product.module.css";
+import placeholder from "../../assets/images/test.jpg";
 import { motion } from "framer-motion";
 import {
   fetchProducts,
@@ -15,14 +16,12 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { ShopContext } from "../../ShopContext/ShopContext";
 import { toast } from "react-toastify";
 import ShopSide from "./ShopSide";
-import placeholder from "../../assets/images/hijabi2.jpg";
 import Search from "./Search";
 import LoadingPage from "../loadingPage";
 
 function Product() {
   const { selectedCategory, selectedSubCategory, setSelectedSubCategory } =
     useContext(ShopContext);
-  console.log(selectedCategory);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isAbove769px, setIsAbove769px] = useState(window.innerWidth > 769);
@@ -180,7 +179,7 @@ function Product() {
         <Search currentPage={currentPage} setSearch={setSearch} />
         <section className={style.productSection}>
           {products.length == 0 ? (
-            <h2 className={style.loading}>no products available</h2>
+            <h3 className={style.loading}>منتجات غير متوفرة</h3>
           ) : (
             products?.products.map((element) => (
               <NavLink
@@ -190,7 +189,7 @@ function Product() {
               >
                 <img
                   src={
-                    element.images
+                    element.images.length != 0
                       ? `${process.env.REACT_APP_BACKEND}${element.images[0]}`
                       : placeholder
                   }

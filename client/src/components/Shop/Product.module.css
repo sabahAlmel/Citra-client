@@ -88,6 +88,8 @@
 .loading {
   text-align: center;
   margin: 0 auto;
+  font-size: 30px;
+  font-weight: 500;
 }
 .collapse {
   display: flex;

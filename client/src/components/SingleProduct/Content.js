@@ -139,6 +139,12 @@ function Content({ products, isLoading }) {
       <div className={style.title}>{products.fetchedProduct.arabicName}</div>
       <div className={style.price}>${products.fetchedProduct.price}</div>
       <div className={style.desc}>{products.fetchedProduct.description}</div>
+      {products.fetchedProduct.type ? (
+        <div className={style.handleType}>
+          <h2>القماش المستعمل</h2>
+          <div className={style.type}>{products.fetchedProduct.type}</div>
+        </div>
+      ) : null}
       <div className={style.color}>
         <h2>اختار اللون</h2>
         <div className={style.colorPalette}>
@@ -177,26 +183,28 @@ function Content({ products, isLoading }) {
           ))}
         </div>
       </div>
-      <div className={style.size}>
-        <h2>اختار القياس</h2>
-        <div className={style.sizes}>
-          {products.fetchedProduct.details
-            .filter((detail) => detail.color === selectedColor)
-            .map((detail) =>
-              detail.sizes.map((size, index) => (
-                <div
-                  className={`${style.sizeOption} ${
-                    size.size === selectedSize ? style.selected : ""
-                  }`}
-                  key={index}
-                  onClick={() => handleSizeChange(size.size)}
-                >
-                  {size.size}
-                </div>
-              ))
-            )}
+      {products.fetchedProduct.details[0].color && (
+        <div className={style.size}>
+          <h2>اختار القياس</h2>
+          <div className={style.sizes}>
+            {products.fetchedProduct.details
+              .filter((detail) => detail.color === selectedColor)
+              .map((detail) =>
+                detail.sizes.map((size, index) => (
+                  <div
+                    className={`${style.sizeOption} ${
+                      size.size === selectedSize ? style.selected : ""
+                    }`}
+                    key={index}
+                    onClick={() => handleSizeChange(size.size)}
+                  >
+                    {size.size}
+                  </div>
+                ))
+              )}
+          </div>
         </div>
-      </div>
+      )}
       <div className={style.lastSection}>
         {products.fetchedProduct.details
           .filter((detail) => detail.color === selectedColor)
