@@ -46,14 +46,13 @@
 }
 .clear {
   padding: 10px;
-  background-color: var(--main-color);
+  background-color: var(--blue-color);
   border-radius: var(--border-radius);
-  color: var(--brown-color);
+  color: white;
   cursor: pointer;
 }
 .clear:hover {
-  background-color: var(--blue-color);
-  color: white;
+  filter: brightness(1.2);
 }
 .details {
   text-align: center;
@@ -92,7 +91,7 @@
   transition: all 0.3s;
 }
 .details .addToCart:hover {
-  background-color: #409d97;
+  filter: brightness(1.2);
 }
 .pagination {
   direction: ltr;

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import "../product.css";
 import { Button } from "@mui/material";
 import axios from "axios";
@@ -13,7 +13,7 @@ import ChildModal from "./productChildModal"; // Import the ChildModal component
 
 const ProductTable = () => {
   const [page, setPage] = useState(1); // Move the declaration of 'page' here
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
   const queryClient = useQueryClient();
@@ -240,7 +240,7 @@ const ProductTable = () => {
       <Button
         fullWidth
         type="submit"
-        onClick={() => (window.location.href = "/")}
+        // onClick={() => (window.location.href = "/")}
         sx={{
           margin: "10px",
           height: "3rem",
