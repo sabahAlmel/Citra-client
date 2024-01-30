@@ -77,7 +77,7 @@ const ProductTable = () => {
     { field: "arabicName", headerName: "الإسم", flex: 1 },
     { field: "name", headerName: "name in english", flex: 1 },
     { field: "price", headerName: "سعر", flex: 1 },
-    { field: "serialNumber ", headerName: "رقم سري", flex: 1 },
+    { field: "serialNumber", headerName: "رقم التسلسلي", flex: 1 },
     {
       field: "images",
       headerName: "Images",

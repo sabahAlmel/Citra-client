@@ -14,24 +14,34 @@ function ProductForm({ formData, onInputChange, onSubmit, setFormData }) {
     updatedDetails[index][field] = value;
     onInputChange({ ...formData, details: updatedDetails });
   };
-  const handleImageClick = (e, index) => {
-    if(type=="file"){
-      const file=e.target.files[0]
-      if(file){
-        setFormData({...formData,image:file})
-      }
-          }
+  const handleImageClick = (index) => {
     // Handle clicking on an image, e.g., navigate to a specific index
-    console.log("target: ", e.target?.files[0]);
-    const updatedImages = [...formData.images];
-    console.log(updatedImages);
-    updatedImages[index] = e.target?.files[0].name;
-    setFormData((prevFormData) => ({ ...prevFormData, images: updatedImages }));
-    console.log(formData);
     console.log(`Clicked on image at index ${index}`);
     // You can implement navigation or any other logic here
   };
-
+  
+  const handleImageUpload = (e, index) => {
+    const file = e.target.files[0];
+  
+    if (file) {
+      const updatedImages = [...formData.images];
+  
+      // Check if the current item is a file object or a string (URL)
+      if (file instanceof File) {
+        updatedImages[index] = file;
+      } else {
+        // Replace the existing URL with the new file object
+        updatedImages[index] = file;
+      }
+  
+      setFormData((prevFormData) => ({ ...prevFormData, images: updatedImages }));
+    }
+  };
+  const handleImageDelete = (index) => {
+    const updatedImages = [...formData.images];
+    updatedImages.splice(index, 1);
+    setFormData((prevFormData) => ({ ...prevFormData, images: updatedImages }));
+  };
   return (
     <div className={styles.container}>
       <h1 className={styles.formTitle}> تعديل المعلومات الشخصية</h1>
@@ -66,7 +76,7 @@ function ProductForm({ formData, onInputChange, onSubmit, setFormData }) {
             />
           </div>
           <div className={styles.userInputBox}>
-            <label for="serialNumber">رقم الهاتف</label>
+            <label for="serialNumber">رقم التسلسلي</label>
             <input
               type="text"
               id="serialNumber"
@@ -86,70 +96,80 @@ function ProductForm({ formData, onInputChange, onSubmit, setFormData }) {
               formData.images.map((imageData, index) => (
                 <div key={index}>
                   <label>
-                    <img
-                      src={process.env.REACT_APP_BACKEND + imageData}
-                      alt={`Image ${index + 1}`}
-                      style={{
-                        maxWidth: "100px",
-                        maxHeight: "100px",
-                        marginRight: "10px",
-                        cursor: "pointer",
-                      }}
-                      // onClick={(e) => handleImageClick(e, index)}
-                    />
+                  <img
+          src={
+            typeof imageData === "string"
+              ? process.env.REACT_APP_BACKEND + imageData
+              : URL.createObjectURL(imageData)
+          }
+          alt={`Image ${index + 1}`}
+          style={{
+            maxWidth: "100px",
+            maxHeight: "100px",
+            marginRight: "10px",
+            cursor: "pointer",
+          }}
+          onClick={() => handleImageClick(index)}
+        />
                     <input
                       type="file"
                       accept="image"
                       style={{ display: "none" }}
-                      onChange={(e) => handleImageClick(e, index)}
+                      onChange={(e) => handleImageUpload(e, index)}
                     />
                   </label>
                   <button
                     type="button"
-                    onClick={() => {
-                      const updatedImages = [...formData.images];
-                      updatedImages.splice(index, 1);
-                      onInputChange({ ...formData, images: updatedImages });
-                    }}
+                    onClick={() => handleImageDelete(index)}
+
                   >
                     حذف
                   </button>
                 </div>
               ))}
-          {/* <input
-  className={styles.input}
-  id="images"
-  name="images"
-  type="file"
-  multiple
-  onChange={(e) => {
-    const newImages = [...formData.images];
+          {/* <div className={styles.userInputBox}>
+            <label className={styles.label} htmlFor="newImages">
+              إضافة صور جديدة
+            </label>
+            <input
+              className={styles.input}
+              id="newImages"
+              name="newImages"
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={(e) => {
+                const newImages = [...formData.newImages];
 
-    for (let i = 0; i < e.target.files.length; i++) {
-      const file = e.target.files[i];
-      const reader = new FileReader();
+                for (let i = 0; i < e.target.files.length; i++) {
+                  const file = e.target.files[i];
+                  const reader = new FileReader();
 
-      reader.onloadend = () => {
-        newImages.push(reader.result);
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          images: newImages,
-        }));
-      };
+                  reader.onloadend = () => {
+                    newImages.push(reader.result);
+                    setFormData((prevFormData) => ({
+                      ...prevFormData,
+                      newImages: newImages,
+                    }));
+                  };
 
-      if (file) {
-        reader.readAsDataURL(file);
-      }
-    }
+                  if (file) {
+                    reader.readAsDataURL(file);
+                  }
+                }
 
-    // Move the logging here after the loop
-    console.log("Selected files:", e.target.files);
-    console.log("Updated formData:", {
-      ...formData,
-      images: newImages,
-    });
-  }}
-/> */}
+                // Move the logging here after the loop
+                console.log("Selected new files:", e.target.files);
+                console.log("Updated formData:", {
+                  ...formData,
+                  newImages: newImages,
+                });
+              }}
+            />
+          </div> */}
+      
+
+       
 
           </div>
           <div className={styles.userInputBox}>
