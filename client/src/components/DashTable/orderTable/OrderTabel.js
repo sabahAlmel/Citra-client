@@ -9,7 +9,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { fetchOrders } from "../../db/fetchOrder";  
+import { fetchOrders } from "../../../db/fetchOrder";  
 import axios from "axios";
 import { useQuery, useQueryClient } from "react-query";
 import {
@@ -97,6 +97,7 @@ export default function DashTable() {
       }));
       setRows(rowsWithId);
     }
+    setRowModesModel({})
   }, [orderData]);
   
 

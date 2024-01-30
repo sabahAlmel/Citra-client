@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductTable from '../../../components/DashTable/ProductTable'
+import ProductTable from '../../../components/DashTable/productTable/ProductTable'
 import styles from "./Products.module.css"
 
 function Products() {

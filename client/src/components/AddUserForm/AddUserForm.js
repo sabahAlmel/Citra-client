@@ -31,7 +31,7 @@ function AddUserForm({formData,onInputChange,onSubmit}) {
             />
           </div>
           {/* ... Other user input boxes */}
-          <div className={styles.userInputBox}>
+          {/* <div className={styles.userInputBox}>
             <label for="area">البريد الالكتروني</label>
             <input
               type="email"
@@ -42,7 +42,7 @@ function AddUserForm({formData,onInputChange,onSubmit}) {
               value={formData.email}
 
             />
-          </div>
+          </div> */}
           <div className={styles.userInputBox}>
             <label for="phoneNumber">رقم الهاتف</label>
             <input
