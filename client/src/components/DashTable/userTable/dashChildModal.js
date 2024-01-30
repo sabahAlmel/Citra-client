@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import AddUserForm from "../AddUserForm/AddUserForm";
+import AddUserForm from "../../AddUserForm/AddUserForm";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -10,7 +10,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "600px",
+  width: "800px",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,

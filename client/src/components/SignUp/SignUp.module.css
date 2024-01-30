@@ -14,25 +14,6 @@
   row-gap: 1rem;
   position: relative;
 }
-/* .circle {
-    position: absolute;
-    background-color: var(--brown-color); /* Circle color */
-/* width: 150px; Circle diameter */
-/* height: 200px; */
-/* border-radius: 50%; Make it a circle */
-/* }  */
-
-/* .circle.left {
-    top: 0.1px; /* Adjust the top position as needed */
-/* left: 750px; Adjust the left position as needed */
-/* background-color: var(--blue-color); */
-/* }  */
-
-/* .circle.right {
-    top: 380px; /* Adjust the top position as needed */
-/* right: 600px; Adjust the right position as needed */
-/* background-color: var(--rose-color); */
-/* } */
 
 .h2 {
   margin-bottom: 10px;

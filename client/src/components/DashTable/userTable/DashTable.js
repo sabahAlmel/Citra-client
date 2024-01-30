@@ -1,41 +1,24 @@
 ///////////////////////table with pagination and filtration ///////////
 import React, { useState } from "react";
-import { useRef } from "react";
-
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useNavigate } from "react-router-dom";
-import "./product.css";
+import "../product.css";
 import { Button } from "@mui/material";
-import { fetchUsers, editUsers } from "../../db/fetchUser";
-import ChildModal from "./dashChildModal"; // Import the ChildModal component
+import { fetchUsers, editUsers } from "../../../db/fetchUser";
 import axios from "axios";
-import { useQuery, useQueryClient, useMutation } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import Modal from "@mui/material/Modal";
+import ChildModal from "./dashChildModal"; // Import the ChildModal component
+
 const DashTable = () => {
   const queryClient = useQueryClient();
-  const [rows, setRows] = React.useState([]); //data
+  const [rows, setRows] = React.useState([]); //data for all rows
   const { isLoading, data: usersData } = useQuery("user-table", fetchUsers);
   const [openModal, setOpenModal] = useState(false); // State for modal open/close
   const [selectedRowData, setSelectedRowData] = useState(null); // Initialize selectedRowData
 
 
-  // const handleRowClickDelete = async (params) => {
-  //   const userId = params?.row?.id; // Use optional chaining to handle potential undefined
-  //   if (userId) {
-  //     try {
-  //       await axios.delete(`${process.env.REACT_APP_BACKEND}user/${userId}`);
-  //       const updatedData = rows.filter((row) => row.id !== userId);
 
-  //       // Set the updated data to the state or wherever you store your data
-  //       setRows(updatedData);
-  //       // ... rest of the function remains unchanged
-  //     } catch (error) {
-  //       console.error("Error deleting product:", error);
-  //       // Handle error, show a notification, etc.
-  //     }
-  //   }
-  // };
   const handleRowClickDelete = async (userId) => {
     try {
       await axios.delete(`${process.env.REACT_APP_BACKEND}user/${userId}`);
@@ -112,7 +95,7 @@ const DashTable = () => {
     },
     {
       field: "delete",
-      headerName: "حذف",
+      headerName: "العمليات",
       flex: 1,
       cellClassName: "delete-cell",
       renderCell: (params) => (
@@ -144,7 +127,7 @@ const DashTable = () => {
                 backgroundColor: "var(--blue-color)",
               },
             }}
-            onClick={() => handleEditClick(params.row)}
+            onClick={() => handleRowClickEdit(params)}
             >
             تعديل
           </Button>
@@ -166,9 +149,6 @@ const DashTable = () => {
     setPage(0);
   };
 
-  const handleRowClick = (params) => {
-    handleOpenModal(params.row);
-  };
 
  
 const handleOpenModal = (rowData) => {
@@ -182,9 +162,9 @@ const handleOpenModal = (rowData) => {
     setSelectedRowData(newdata)}
 
 
-    const handleEditClick = (rowData) => {
-      setOpenModal(true);
-      setSelectedRowData(rowData);
+    const handleRowClickEdit = (params) => {
+      // Open the modal with the clicked row data
+      handleOpenModal(params.row);
     };
     const handleFormSubmitSuccess = (updatedRows) => {
       // Update the local state (rows) with the updated data
@@ -228,22 +208,19 @@ const handleOpenModal = (rowData) => {
           onSubmitSuccess={handleFormSubmitSuccess}
           setSelectedRowData={setSelectedRowData}
         />
-        {/* <ChildModal onClose={handleCloseModal} rowData={selectedRowData} setRows={setRows} /> */}
       </Modal>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           sx={{ minHeight: "60vh" }}
           {...data}
           rows={rows}
-          // columns={columns}
 
           onPageChange={handlePageChange}
           onPageSizeChange={handlePageSizeChange}
           onFilterModelChange={(model) => setFilterModel(model)}
           initialState={{
             ...data.initialState,
-            //pagination
-            // pagination: { paginationModel: { pageSize: 5 } },
+            
 
             //filter
             filter: {

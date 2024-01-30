@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import style from "./DropDownCart.module.css";
 import { Link } from "react-router-dom";
-import overview from "../../assets/images/overview.jpeg";
 import trashCan from "../../assets/icons/blueTrashCan.svg";
 import redTrashCan from "../../assets/icons/redTrashCan.svg";
 import { toast } from "react-toastify";
@@ -122,7 +121,10 @@ function DropDownCart({ setShopping }) {
                         اللون : {product.selectedColor}
                       </p>
                       <p className={style.details}>
-                        الوصف : {product.selectedSize}
+                        اللون : {product.selectedColor}
+                      </p>
+                      <p className={style.details}>
+                        الكمية : {product.quantity}
                       </p>
                     </div>
                     <Img onClick={() => handleDelete(product)} />
