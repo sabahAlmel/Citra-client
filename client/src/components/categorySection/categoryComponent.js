@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import asal from "../../assets/images/3asal.jpg";
 import sabun from "../../assets/images/sabun.jpg";
 import manshafe from "../../assets/images/manshafe.jpg";
-import kroshe from "../../assets/images/kroshe.jpg";
+import accessories from "../../assets/images/accessories.jpg";
 import takem from "../../assets/images/test.jpg";
+import crochet from "../../assets/images/crochet.jpg";
+import mashlah from "../../assets/images/mashlah2.jpg";
+import masbaha from "../../assets/images/masabeh.jpg";
 
 const CategoryComponent = ({ data }) => {
   let image;
@@ -16,9 +19,15 @@ const CategoryComponent = ({ data }) => {
   } else if (data.arabicName == "مناشف") {
     image = manshafe;
   } else if (data.arabicName == "كروشيه") {
-    image = kroshe;
+    image = crochet;
   } else if (data.arabicName == "أطقم صلاة") {
     image = takem;
+  } else if (data.arabicName == "إكسسوارات") {
+    image = accessories;
+  } else if (data.arabicName == "مشالح و إسدالات") {
+    image = mashlah;
+  } else if (data.arabicName == "مسبحة") {
+    image = masbaha;
   }
   return (
     <motion.section

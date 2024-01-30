@@ -61,6 +61,7 @@
   display: flex;
   flex-direction: column;
   width: 70%;
+  row-gap: 30px;
   line-height: 50px;
 }
 .left {
@@ -84,7 +85,7 @@
   text-decoration: none;
   font-weight: 300;
   font-size: 1.3rem;
-  width: 50%;
+  width: 30%;
   align-self: flex-start;
   background-color: var(--blue-color);
   transition: all 0.3s linear;
@@ -94,6 +95,9 @@
 }
 
 @media (max-width: 1030px) {
+  .gotoshop {
+    width: 50%;
+  }
   .wrapper {
     height: 100%;
     position: relative;
@@ -143,5 +147,10 @@
   }
   .bigger {
     font-size: 36px;
+  }
+}
+@media (max-width: 400px) {
+  .gotoshop {
+    width: 90%;
   }
 }
