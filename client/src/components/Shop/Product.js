@@ -20,12 +20,8 @@ import Search from "./Search";
 import LoadingPage from "../loadingPage";
 
 function Product() {
-  const {
-    selectedCategory,
-    setSelectedCategory,
-    selectedSubCategory,
-    setSelectedSubCategory,
-  } = useContext(ShopContext);
+  const { selectedCategory, selectedSubCategory, setSelectedSubCategory } =
+    useContext(ShopContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isAbove769px, setIsAbove769px] = useState(window.innerWidth > 769);
@@ -162,19 +158,13 @@ function Product() {
     toast.success("تمت اضافة المنتج");
   };
 
-  function handleDelete() {
-    setSelectedSubCategory(null);
-    setSelectedCategory(null);
-    setSearch(null);
-  }
-
   if (isLoadingProducts) {
     return <LoadingPage />;
   }
 
   return (
     <article className={isAbove769px ? style.collapse : ""}>
-      <ShopSide />
+      <ShopSide setSearch={setSearch} search={search} />
       <motion.section
         className={isAbove769px ? style.shopContainer : ""}
         initial={{ opacity: 0, y: 100 }}
@@ -186,12 +176,7 @@ function Product() {
           duration: 0.6,
         }}
       >
-        <div className={style.handleHead}>
-          <Search currentPage={currentPage} setSearch={setSearch} />
-          <div className={style.clear} onClick={handleDelete}>
-            عرض جميع المنتجات
-          </div>
-        </div>
+        <Search currentPage={currentPage} setSearch={setSearch} />
         <section className={style.productSection}>
           {products.length == 0 ? (
             <h3 className={style.loading}>منتجات غير متوفرة</h3>

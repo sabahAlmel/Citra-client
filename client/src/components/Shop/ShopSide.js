@@ -6,7 +6,7 @@ import { fetchAllCategories } from "../../db/fetchCategory";
 import { fetchAllSubCategories } from "../../db/fetchSubCategory";
 import { ShopContext } from "../../ShopContext/ShopContext";
 
-const ShopSide = () => {
+const ShopSide = ({ setSearch, search }) => {
   const { selectedCategory, setSelectedCategory, setSelectedSubCategory } =
     useContext(ShopContext);
   const [sidePanelWidth, setSidePanelWidth] = useState(0);
@@ -99,6 +99,12 @@ const ShopSide = () => {
     setSelectedSubcategoriesArray(selectedSubcategories);
   };
 
+  const handleDelete = () => {
+    setSelectedSubCategory(null);
+    setSelectedCategory(null);
+    setSearch(null);
+  };
+
   return (
     <>
       <aside
@@ -116,6 +122,18 @@ const ShopSide = () => {
             <h2>الخانات الاساسية</h2>
           </section>
           <form>
+            <section key="allProducts" className={style.filter}>
+              <input
+                type="radio"
+                name="category"
+                value="All Products"
+                id={`filter_allProducts`}
+                checked={!selectedCategory}
+                className={style.inputFilter}
+                onChange={handleDelete}
+              />
+              <label htmlFor={`filter_allProducts`}>كل المنتجات</label>
+            </section>
             {allCategories?.categories.map((filter) => (
               <section key={filter._id} className={style.filter}>
                 <input

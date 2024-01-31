@@ -54,8 +54,7 @@
   color: var(--brown-color);
   font-size: 1.5rem;
   font-weight: 300;
-  align-self: center;
-  width: 100%;
+  width: 70%;
 }
 .right {
   display: flex;
@@ -69,7 +68,7 @@
   height: 60%;
 }
 .image {
-  border-bottom-right-radius: 200px;
+  border-radius: 20px;
   margin: auto;
 }
 .gotoshop {
@@ -134,6 +133,8 @@
   }
   .slogan {
     filter: brightness(3);
+    align-self: center;
+    width: 100%;
   }
   .gotoshop {
     align-self: center;

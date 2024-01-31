@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import image from "../../assets/images/hijabi3.jpg";
+import image from "../../assets/icons/logo.svg";
 import style from "../aboutUs/aboutUs.module.css";
 import { motion } from "framer-motion";
 const AboutUs = () => {
@@ -25,7 +25,7 @@ const AboutUs = () => {
           الخير.
         </p>
       </div>
-      <img src={image} alt="صورة المنتج"></img>
+      <img className={style.image} src={image} alt="صورة المنتج"></img>
     </motion.section>
   );
 };

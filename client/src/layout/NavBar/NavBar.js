@@ -11,37 +11,44 @@ function NavBar() {
 
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  ///shopping cart drop down menu
   const [shopping, setShopping] = useState(false);
-  ////////
   const [isResponsive, setIsResponsive] = useState(window.innerWidth <= 480);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
+  const [visible, setVisible] = useState(true);
 
-  const handleMenuClick = () => {
-    setMenuOpen(!menuOpen);
-  };
   useEffect(() => {
-    // Check the window width and set the isResponsive state when the component mounts
     const handleResize = () => {
       setIsResponsive(window.innerWidth <= 850);
     };
 
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+      setPrevScrollPos(currentScrollPos);
+
+      if (currentScrollPos > prevScrollPos && shopping) {
+        setShopping(false);
+      }
+    };
+
     window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-  // Navbar
+  }, [prevScrollPos, shopping]);
 
-  const bar1 = [styles.bar, menuOpen ? styles.lineone : ""].join(" ");
-  const bar2 = [styles.bar, menuOpen ? styles.linetwo : ""].join(" ");
-  const bar3 = [styles.bar, menuOpen ? styles.linethree : ""].join(" ");
-  /////////////
-  const navigate = useNavigate();
+  const handleMenuClick = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   const handleClick = () => {
     setShopping(!shopping);
   };
-  //handle scroll
+
+  const navigate = useNavigate();
   const handleScrollToProduct = () => {
     setMenuOpen(false);
     if (location.pathname === "/") {
@@ -71,18 +78,19 @@ function NavBar() {
       }, 1000);
     }
   };
+
   const handlelogo = () => {
     navigate("./");
   };
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${visible ? "" : styles.hidden}`}>
       <nav className={styles.nav}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <div className={styles.hamburger} onClick={handleMenuClick}>
-            <span className={bar1}></span>
-            <span className={bar2}></span>
-            <span className={bar3}></span>
+            <span className={styles.bar}></span>
+            <span className={styles.bar}></span>
+            <span className={styles.bar}></span>
           </div>
 
           <button className={styles.cart}>
@@ -145,7 +153,6 @@ function NavBar() {
                 تسجيل دخول
               </NavLink>
             ) : (
-              // <button onClick={logout}>log out</button>
               <NavLink className={` ${styles.btn}`} to="./" onClick={logout}>
                 logout
               </NavLink>
@@ -155,8 +162,8 @@ function NavBar() {
 
         <img
           className={styles.logo}
-          width={"100px"}
-          height={"100px"}
+          width={"70px"}
+          height={"70px"}
           src={logo}
           alt="citra's logo"
           onClick={handlelogo}
