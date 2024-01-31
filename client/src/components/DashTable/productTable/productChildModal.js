@@ -103,52 +103,8 @@ const ChildModal = ({
     }
   };
   
-  // const handleSubmit = async () => {
-  //   try {
-  //     const requestData = { ...formData };
-
-  //     if (!requestData.joinDate) {
-  //       delete requestData.joinDate;
-  //     }
-
-  //     const response = await axios.patch(
-  //       `${process.env.REACT_APP_BACKEND}product/${rowData.id}`,
-  //       requestData
-  //     );
-
-  //     if (response.status === 200) {
-  //       const updatedProduct = response.data;
-
-  //       const updatedRows = rows.map((row) =>
-  //         row.id === updatedProduct.id ? updatedProduct : row
-  //       );
-
-  //       setRows(updatedRows);
-
-  //       onClose();
-  //       toast.success("تم تجديد المعلومات بنجاح");
-  //       if (onSubmitSuccess) {
-  //         onSubmitSuccess(updatedProduct);
-  //       }
-  //     } else {
-  //       console.error("Error updating product:", response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error updating product:", error);
-  //   }
-  // };
-
   useEffect(() => {
-    // const fetchData = async () => {
-    //   // Fetch updated data
-    //   try {
-    //     const response = await axios.get(`${process.env.REACT_APP_BACKEND}product/`);
-    //     const updatedData = response.data;
-    //     setRows(updatedData);
-    //   } catch (error) {
-    //     console.error("Error fetching updated data:", error);
-    //   }
-    // };
+
     const fetchData = async () => {
       try {
         const response = await axios.get(
