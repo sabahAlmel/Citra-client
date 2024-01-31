@@ -7,33 +7,43 @@ function ProductForm({
   onInputChange,
   onSubmit,
   setFormData,
-  categoryName,
-  subCategoryName,
+  category,
+  subCategory,
 }) {
   console.log("Rendering ProductForm with formData:", formData);
+  const handleSubCategoryChange = (e) => {
+
+    const selectedSubCategory = e.target.value;
+    console.log("Selected SubCategory:", selectedSubCategory);
+    setSelectedSubCategory(selectedSubCategory);
+    setFormData((prevData) => ({ ...prevData,  subCategory:selectedSubCategory}));
+  
+    console.log("Updated formData with subcategories after selection:", {
+      ...formData,
+      subCategory: selectedSubCategory,
+    });
+  };
+  
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
-
-    // Call the onSubmit function and pass the formData to it
+  
     onSubmit(formData);
+    console.log("submitted form as ",formData)
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // Add categoryID and subCategoryID to formData
-  //   const updatedFormData = { ...formData, categoryID: selectedCategory, subCategoryID: selectedSubCategory };
-  //   // Call the onSubmit function and pass the updated formData to it
-  //   onSubmit(updatedFormData);
-  // };
+
+
   
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [subCategoryOptions, setSubCategoryOptions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(
-    categoryName ? categoryName._id : ""
+    category ? category._id : ""
   );
   const [selectedSubCategory, setSelectedSubCategory] = useState(
-    subCategoryName ? subCategoryName._id : ""
+    subCategory ? subCategory._id : ""
   );
+
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -79,36 +89,24 @@ function ProductForm({
 
     fetchCategories();
     fetchSubCategories();
-  }, [categoryName, subCategoryName]); // Updated dependency array
-
+  }, [category, subCategory]); // Updated dependency array
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
     console.log("Selected Category:", selectedCategory);
+  
     setSelectedCategory(selectedCategory);
-    onInputChange({
-      ...formData,
-      categoryName: selectedCategory,  // Update the correct field
-      categoryID: selectedCategory,  // Optionally, update the ID field
-    });
+    setFormData((prevData) => ({ ...prevData, category: selectedCategory }));
   
-    // Log the updated formData
-    console.log("Updated formData:", {
+    console.log("Updated formData with category after selection:", {
       ...formData,
-      categoryName: selectedCategory,
-      categoryID: selectedCategory,
+      category: selectedCategory,
     });
   };
   
-  const handleSubCategoryChange = (e) => {
-    const selectedSubCategory = e.target.value;
-    console.log("Selected SubCategory:", selectedSubCategory);
-    setSelectedSubCategory(selectedSubCategory);
-    onInputChange({
-      ...formData,
-      subCategoryName: selectedSubCategory,  // Update the correct field
-      subCategoryID: selectedSubCategory,  // Optionally, update the ID field
-    });
-  };
+
+  
+  
+
   const handleDetailsChange = (index, field, value) => {
     const updatedDetails = [...formData.details];
     updatedDetails[index][field] = value;
@@ -119,9 +117,7 @@ function ProductForm({
     console.log(`Clicked on image at index ${index}`);
     // You can implement navigation or any other logic here
   };
-  const handleInputChange = (newFormData) => {
-    setFormData(newFormData);
-  };
+ 
 
   const handleImageUpload = (e, index) => {
     const file = e.target.files[0];
@@ -238,6 +234,19 @@ function ProductForm({
                 ))}
               </select>
             </div>
+          </div>
+          <div className={styles.userInputBox}>
+            <label className={styles.label} htmlFor="description">
+              الوصف
+            </label>
+            <textarea
+              className={styles.textarea}
+              id="description"
+              name="description"
+              placeholder="الوصف"
+              value={formData.description}
+              onChange={onInputChange}
+            />
           </div>
           <div className={styles.userInputBox}>
             <label className={styles.label} htmlFor="images">

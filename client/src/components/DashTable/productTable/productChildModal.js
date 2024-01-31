@@ -40,8 +40,8 @@ const ChildModal = ({
         quantity: size.quantity || 0, // Assuming a default value for quantity
       })),
     })),
-    subCategoryName: rowData.subCategoryID || "", // Assuming subCategoryID is a string
-    categoryName: rowData.categoryID || "", // Assuming categoryID is a string
+    subCategory: rowData.subCategoryID || "", // Assuming subCategoryID is a string
+    category: rowData.categoryID || "", // Assuming categoryID is a string
     slug: rowData.slug || "",
     type: rowData.type || "",
     description: rowData.description || "",
@@ -55,24 +55,32 @@ const ChildModal = ({
 
   
   const handleInputChange = (e) => {
-     if (e.target) {
+    if (e.target) {
       const { name, value } = e.target;
       setFormData((prevData) => ({ ...prevData, [name]: value }));
+      
+      // Add a check for subCategory and update it accordingly
+      if (name === "subCategoryID") {
+        setFormData((prevData) => ({ ...prevData, subCategoryID: value }));
+      }
     }
   };
-  const handleSubmit = async (updatedData) => {
+  const handleSubmit = async (e) => {
     try {
       const requestData = { ...formData };
+      requestData.subCategory = formData.subCategory;
 
       if (!requestData.joinDate) {
         delete requestData.joinDate;
       }
+      console.log("Submitting formData:", requestData); // Add this console log
 
       const response = await axios.patch(
         `${process.env.REACT_APP_BACKEND}product/${rowData.id}`,
         requestData
       );
-  
+      console.log("Server response:", response.data); // Add this console log
+
       if (response.status === 200) {
         const updatedProduct = response.data;
   
@@ -181,8 +189,8 @@ const ChildModal = ({
             onSubmit={(updatedData) => handleSubmit(updatedData, setRows)}
             rowData={rowData}
             rows={rows}
-            categoryName={formData.categoryName}
-            subCategoryName={formData.subCategoryName}
+            category={formData.category}
+            subCategory={formData.subCategory}
           />
         </Box>
       </Modal>
