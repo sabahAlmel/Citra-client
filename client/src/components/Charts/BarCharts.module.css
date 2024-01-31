@@ -1,4 +1,4 @@
-.App {
+.AppChart {
     height: 100%;
     width: 100%;
     display: flex;
@@ -47,4 +47,31 @@
     height: 20rem;
   }
 
+.cardsWrapper{
+  /* display: flex;
+  flex-direction: row;
+  /* margin: 5px; */
+  /* padding: 1rem; */
+  /* gap: 85px; */ 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 5.8rem;
+  
+}
+.card {
+  flex: 1 0 250px;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .card {
+    flex: 1 0 100%;
+  }
+  .cardsWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+}
 

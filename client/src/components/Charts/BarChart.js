@@ -1,84 +1,11 @@
-// // // import { Chart } from "chart.js";
-// // // import { useState } from "react";
-// // import { Bar } from "react-chartjs-2";
-// // // import {chart as ChartJS} from "chart.js/auto"
-
-
-// // function BarChart() {
-   
-// // return(
-  
-// // )
-// // }
-
-// // export default BarChart;
-
-// import React from "react";
-// import { Chart as ChartJS, defaults } from "chart.js/auto";
-// import { Bar, Doughnut, Line } from "react-chartjs-2";
-// import BarData from "./BarData.js"
-// import {BarCharts} from"./BarCharts.module.css"
-// defaults.maintainAspectRatio = false;
-// defaults.responsive = true;
-
-// defaults.plugins.title.display = true;
-// defaults.plugins.title.align = "start";
-// defaults.plugins.title.font.size = 20;
-// defaults.plugins.title.color = "black";
-
-
-// function BarChart()  {
-//     return(
-        
-//             <div className="App">
-//               <div className="dataCard revenueCard">
-//                 <Line
-//                   data={{
-//                     labels: BarData.map((data) => data.label),
-//                     datasets: [
-//                       {
-//                         label: "Revenue",
-//                         data: BarData.map((data) => data.revenue),
-//                         backgroundColor: "#064FF0",
-//                         borderColor: "#064FF0",
-//                       },
-//                       {
-//                         label: "Cost",
-//                         data: BarData.map((data) => data.cost),
-//                         backgroundColor: "#FF3030",
-//                         borderColor: "#FF3030",
-//                       },
-//                     ],
-//                   }}
-//                   options={{
-//                     elements: {
-//                       line: {
-//                         tension: 0.5,
-//                       },
-//                     },
-//                     plugins: {
-//                       title: {
-//                         text: "Monthly Revenue & Cost",
-//                       },
-//                     },
-//                   }}
-//                 />
-//               </div>
-//               </div>
-//     )
-// }
-
-// export default BarChart;
-
 import React from "react";
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
-import BarCharts from "./BarCharts.module.css"
-
-
-import BarData from "./BarData.js";
+import BarCharts from "./BarCharts.module.css";
+import SingleCard from "./SingleCard";
+import axios from "axios";
 import SourceData from "./SourceData.js";
-
+import { useQuery } from "react-query";
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
@@ -89,30 +16,67 @@ defaults.plugins.title.font.size = 20;
 defaults.plugins.title.color = "black";
 
 const BarChart = () => {
+  
+  // Fetch line
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/order/all');
+      return response.data.orders;
+    } catch (error) {
+      throw new Error('Error fetching data');
+    }
+  };
 
-  const [barData, setBarData] = useState([]);
-  const [lineData, setLineData] = useState([]);
-  const [productData, setProductData] = useState([]);
+  const { isLoading , data } = useQuery('order' , fetchOrders)
+
+  if (isLoading) {
+    return <h2>Loading ...</h2>;
+  }
+  console.log('Data:', data);
+
+  if (!Array.isArray(data)) {
+    console.error('Invalid data structure:', data);
+    return <h2>Invalid data structure</h2>;
+  }
+
+  // Group orders by month
+const ordersByMonth = data.reduce((acc, order) => {
+  const month = new Date(order.createdAt).getMonth();
+  if (!acc[month]) {
+    acc[month] = [];
+  }
+  acc[month].push(order);
+  return acc;
+}, {});
+
+// Calculate total price for each month
+const monthlyTotals = Object.values(ordersByMonth).map((ordersInMonth) =>
+  ordersInMonth.reduce((total, order) => total + order.totalPrice, 0)
+);
 
   return (
-    <div className={BarCharts.App}>
-      <p className={BarCharts.title1}>OverView</p>
- <div className={`${BarCharts.dataCard} ${BarCharts.revenueCard}`}>
-        <Line
+    <div className={BarCharts.AppChart}>
+      <div className={BarCharts.cardsWrapper}>
+        <SingleCard className={BarCharts.card} />
+        <SingleCard className={BarCharts.card} />
+        <SingleCard className={BarCharts.card} />
+        <SingleCard className={BarCharts.card} />
+      </div>
+      <div className={`${BarCharts.dataCard} ${BarCharts.revenueCard}`}>
+
+          <Line
           data={{
-            labels: BarData.map((data) => data.label),
+            labels: [
+              'January', 'February', 'March', 'April', 'May', 'June',
+              'July', 'August', 'September', 'October', 'November', 'December',
+            ],
             datasets: [
               {
-                label: "Revenue",
-                data: BarData.map((data) => data.revenue),
-                backgroundColor: "#368681",
-                borderColor: "#368681",
-              },
-              {
-                label: "Cost",
-                data: BarData.map((data) => data.cost),
-                backgroundColor: "#4D342B",
-                borderColor: "#4D342B",
+                label: 'Monthly Revenue',
+                data: monthlyTotals,
+                fill: false,
+                borderColor: '#368681',
+                backgroundColor: '#368681'
               },
             ],
           }}
@@ -137,13 +101,9 @@ const BarChart = () => {
             labels: SourceData.map((data) => data.label),
             datasets: [
               {
-                label: "Count",
-                data: SourceData.map((data) => data.value),
-                backgroundColor: [
-                  '#368681',
-                  "#F1CAB1",
-                  "#4D342B",
-                ],
+                label: "Count 1",
+                data: SourceData.map((data) => data.value).slice(0, 8),
+                backgroundColor: "#368681",
                 borderRadius: 7,
               },
             ],
@@ -158,7 +118,6 @@ const BarChart = () => {
         />
       </div>
 
-      {/* <div className={BarCharts.categoryCard}> */}
       <div className={`${BarCharts.dataCard} ${BarCharts.categoryCard}`}>
         <Doughnut
           data={{
@@ -167,16 +126,8 @@ const BarChart = () => {
               {
                 label: "Count",
                 data: SourceData.map((data) => data.value),
-                backgroundColor: [
-                  '#368681',
-                  "#F1CAB1",
-                  "#4D342B",
-                ],
-                borderColor: [
-                  '#368681',
-                  "#F1CAB1",
-                  "#4D342B",
-                ],
+                backgroundColor: ["#368681", "#F1CAB1", "#4D342B"],
+                borderColor: ["#368681", "#F1CAB1", "#4D342B"],
               },
             ],
           }}
@@ -194,5 +145,3 @@ const BarChart = () => {
 };
 
 export default BarChart;
-
-
