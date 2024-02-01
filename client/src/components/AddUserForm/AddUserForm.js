@@ -1,7 +1,8 @@
-import React from "react";
+import React , {useState}from "react";
 import styles from "./AddUserForm.module.css";
 
 function AddUserForm({formData,onInputChange,onSubmit}) {
+
   console.log("Rendering AddUserForm with formData:", formData);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -9,6 +10,8 @@ function AddUserForm({formData,onInputChange,onSubmit}) {
     onSubmit(formData);
  
   };
+
+
   return (
     <div className={styles.container}>
       <h1 className={styles.formTitle}> تعديل المعلومات الشخصية</h1>
@@ -30,19 +33,7 @@ function AddUserForm({formData,onInputChange,onSubmit}) {
             
             />
           </div>
-          {/* ... Other user input boxes */}
-          {/* <div className={styles.userInputBox}>
-            <label for="area">البريد الالكتروني</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="البريد الالكترون"
-              onChange={onInputChange}
-              value={formData.email}
-
-            />
-          </div> */}
+   
           <div className={styles.userInputBox}>
             <label for="phoneNumber">رقم الهاتف</label>
             <input
@@ -66,11 +57,8 @@ function AddUserForm({formData,onInputChange,onSubmit}) {
               <option value="dataentry">مدخل بيانات</option>
             </select>
           </div>
-          <div className={styles.userInputBox}>
-            <label htmlFor="joinDate">تاريخ الانضمام</label>
-            <input type="date" id="joinDate" name="joinDate"      onChange={onInputChange} value={formData.joinDate}/>
-          </div>
        
+   
         </div>
 
         <div className={styles.formSubmitBtn}>

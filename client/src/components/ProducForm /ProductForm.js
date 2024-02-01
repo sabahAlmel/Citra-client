@@ -1,13 +1,111 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ProductForm.module.css";
+import axios from "axios";
 
-function ProductForm({ formData, onInputChange, onSubmit, setFormData }) {
+function ProductForm({
+  formData,
+  onInputChange,
+  onSubmit,
+  setFormData,
+  category,
+  subCategory,
+}) {
   console.log("Rendering ProductForm with formData:", formData);
+  const handleSubCategoryChange = (e) => {
+
+    const selectedSubCategory = e.target.value;
+    console.log("Selected SubCategory:", selectedSubCategory);
+    setSelectedSubCategory(selectedSubCategory);
+    setFormData((prevData) => ({ ...prevData,  subCategory:selectedSubCategory}));
+  
+    console.log("Updated formData with subcategories after selection:", {
+      ...formData,
+      subCategory: selectedSubCategory,
+    });
+  };
+  
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Call the onSubmit function and pass the formData to it
+  
     onSubmit(formData);
+    console.log("submitted form as ",formData)
   };
+
+
+  
+  const [categoryOptions, setCategoryOptions] = useState([]);
+  const [subCategoryOptions, setSubCategoryOptions] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(
+    category ? category._id : ""
+  );
+  const [selectedSubCategory, setSelectedSubCategory] = useState(
+    subCategory ? subCategory._id : ""
+  );
+
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND}category/getall`
+        );
+
+        if (
+          response.data.categories &&
+          Array.isArray(response.data.categories)
+        ) {
+          setCategoryOptions(response.data.categories);
+        } else {
+          console.error(
+            "Invalid response format for categories:",
+            response.data
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    const fetchSubCategories = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND}subCategory/getall`
+        );
+
+        if (response.data.subCateg && Array.isArray(response.data.subCateg)) {
+          setSubCategoryOptions(response.data.subCateg);
+        } else {
+          console.error(
+            "Invalid response format for subcategories:",
+            response.data
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching subcategories:", error);
+      }
+    };
+
+    fetchCategories();
+    fetchSubCategories();
+  }, [category, subCategory]); // Updated dependency array
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    console.log("Selected Category:", selectedCategory);
+  
+    setSelectedCategory(selectedCategory);
+    setFormData((prevData) => ({ ...prevData, category: selectedCategory }));
+  
+    console.log("Updated formData with category after selection:", {
+      ...formData,
+      category: selectedCategory,
+    });
+  };
+  
+
+  
+  
 
   const handleDetailsChange = (index, field, value) => {
     const updatedDetails = [...formData.details];
@@ -19,13 +117,14 @@ function ProductForm({ formData, onInputChange, onSubmit, setFormData }) {
     console.log(`Clicked on image at index ${index}`);
     // You can implement navigation or any other logic here
   };
-  
+ 
+
   const handleImageUpload = (e, index) => {
     const file = e.target.files[0];
-  
+
     if (file) {
       const updatedImages = [...formData.images];
-  
+
       // Check if the current item is a file object or a string (URL)
       if (file instanceof File) {
         updatedImages[index] = file;
@@ -33,8 +132,11 @@ function ProductForm({ formData, onInputChange, onSubmit, setFormData }) {
         // Replace the existing URL with the new file object
         updatedImages[index] = file;
       }
-  
-      setFormData((prevFormData) => ({ ...prevFormData, images: updatedImages }));
+
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        images: updatedImages,
+      }));
     }
   };
   const handleImageDelete = (index) => {
@@ -87,6 +189,66 @@ function ProductForm({ formData, onInputChange, onSubmit, setFormData }) {
             />
           </div>
           <div className={styles.userInputBox}>
+            <label className={styles.label} htmlFor="categoryID">
+              الفئة
+            </label>
+            <div>
+              <select
+                className={styles.select}
+                id="categoryID"
+                name="categoryID"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+              >
+                <option value="" disabled>
+                  اختر الفئة
+                </option>
+                {categoryOptions.map((category) => (
+                  <option key={category._id} value={category._id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className={styles.userInputBox}>
+            <label className={styles.label} htmlFor="subCategoryID">
+              الفئة الفرعية
+            </label>
+            <div>
+              <select
+                className={styles.select}
+                id="subCategoryID"
+                name="subCategoryID"
+                value={selectedSubCategory}
+                onChange={handleSubCategoryChange}
+              >
+                <option value="" disabled>
+                  اختر الفئة الفرعية
+                </option>
+                {subCategoryOptions.map((subCategory) => (
+                  <option key={subCategory._id} value={subCategory._id}>
+                    {subCategory.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className={styles.userInputBox}>
+            <label className={styles.label} htmlFor="description">
+              الوصف
+            </label>
+            <textarea
+              className={styles.textarea}
+              id="description"
+              name="description"
+              placeholder="الوصف"
+              value={formData.description}
+              onChange={onInputChange}
+            />
+          </div>
+          <div className={styles.userInputBox}>
             <label className={styles.label} htmlFor="images">
               الصور
             </label>
@@ -96,21 +258,21 @@ function ProductForm({ formData, onInputChange, onSubmit, setFormData }) {
               formData.images.map((imageData, index) => (
                 <div key={index}>
                   <label>
-                  <img
-          src={
-            typeof imageData === "string"
-              ? process.env.REACT_APP_BACKEND + imageData
-              : URL.createObjectURL(imageData)
-          }
-          alt={`Image ${index + 1}`}
-          style={{
-            maxWidth: "100px",
-            maxHeight: "100px",
-            marginRight: "10px",
-            cursor: "pointer",
-          }}
-          onClick={() => handleImageClick(index)}
-        />
+                    <img
+                      src={
+                        typeof imageData === "string"
+                          ? process.env.REACT_APP_BACKEND + imageData
+                          : URL.createObjectURL(imageData)
+                      }
+                      alt={`Image ${index + 1}`}
+                      style={{
+                        maxWidth: "100px",
+                        maxHeight: "100px",
+                        marginRight: "10px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => handleImageClick(index)}
+                    />
                     <input
                       type="file"
                       accept="image"
@@ -121,13 +283,12 @@ function ProductForm({ formData, onInputChange, onSubmit, setFormData }) {
                   <button
                     type="button"
                     onClick={() => handleImageDelete(index)}
-
                   >
                     حذف
                   </button>
                 </div>
               ))}
-          {/* <div className={styles.userInputBox}>
+            {/* <div className={styles.userInputBox}>
             <label className={styles.label} htmlFor="newImages">
               إضافة صور جديدة
             </label>
@@ -167,10 +328,6 @@ function ProductForm({ formData, onInputChange, onSubmit, setFormData }) {
               }}
             />
           </div> */}
-      
-
-       
-
           </div>
           <div className={styles.userInputBox}>
             <label className={styles.label} htmlFor="details">

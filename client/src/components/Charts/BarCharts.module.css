@@ -1,4 +1,4 @@
-.App {
+.AppChart {
     height: 100%;
     width: 100%;
     display: flex;
@@ -8,14 +8,28 @@
     align-content: center;
     gap: 1vw;
     flex-wrap: wrap;
-    background-color: #ddd;
-  }
+    background-color: white;
+    /* position: relative; */
+}
 
+.title1 {
+  position: absolute;
+  top: 0; /* Position at the top */
+  left: 50%; /* Position at the center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
+  background-color: white; 
+  padding: 7px; 
+  font-weight: bold;
+  margin-top: 10px;
+  color: var(--brown-color);
+  font-size: 35px; 
+}
 .dataCard {
-    background-color: #efefef;
+    background-color: white;
     border-radius: 0.5em;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     padding: 1em;
+    
   }
   
 .revenueCard {
@@ -32,3 +46,32 @@
     width: 40%;
     height: 20rem;
   }
+
+.cardsWrapper{
+  /* display: flex;
+  flex-direction: row;
+  /* margin: 5px; */
+  /* padding: 1rem; */
+  /* gap: 85px; */ 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 5.8rem;
+  
+}
+.card {
+  flex: 1 0 250px;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .card {
+    flex: 1 0 100%;
+  }
+  .cardsWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+}
+
