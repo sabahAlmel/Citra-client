@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   background-color: var(--main-color);
-  row-gap: 50px;
+  row-gap: 40px;
   margin-bottom: 60px;
 }
 .upper {
@@ -39,10 +39,10 @@
 .lower {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   width: 80vw;
   column-gap: 2rem;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 .who {
   font-weight: 600;
@@ -54,7 +54,7 @@
   color: var(--brown-color);
   font-size: 1.5rem;
   font-weight: 300;
-  width: 70%;
+  width: 100%;
 }
 .right {
   display: flex;
@@ -64,12 +64,13 @@
   line-height: 50px;
 }
 .left {
-  width: 28%;
-  height: 60%;
+  width: 68%;
+  /* height: 60%; */
 }
 .image {
   border-radius: 20px;
   margin: auto;
+  object-fit: cover;
 }
 .gotoshop {
   padding: 10px;
@@ -84,13 +85,27 @@
   text-decoration: none;
   font-weight: 300;
   font-size: 1.3rem;
-  width: 30%;
+  width: 50%;
   align-self: flex-start;
   background-color: var(--blue-color);
   transition: all 0.3s linear;
 }
 .gotoshop:hover {
   background-color: #3f9c95;
+}
+
+@media (max-width: 1500px) {
+  .gotoshop {
+    margin-left: 0;
+    margin-top: 0;
+    font-size: 20px;
+    width: 200px;
+    padding: 0;
+  }
+
+  .slogan {
+    font-size: 20px;
+  }
 }
 
 @media (max-width: 1030px) {
@@ -100,7 +115,7 @@
   .wrapper {
     height: 100%;
     position: relative;
-    row-gap: 100px;
+    /* row-gap: 100px; */
     background-color: transparent;
   }
   .lower {
@@ -116,38 +131,83 @@
     z-index: -1;
     filter: brightness(0.2);
   }
-  .left,
+  /* .left, */
   .right {
     width: 90vw;
   }
   .left {
+    display: none;
+  }
+  .wrapper {
+    background-image: url(../../assets/images/ctra.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+  }
+  .wrapper::before {
+    content: "";
+    background-color: #fee7cbad;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .upper {
+    position: relative;
+  }
+
+  /* .left {
     text-align: center;
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: -1;
     top: 0;
-  }
+  } */
   .right {
     row-gap: 20px;
   }
   .slogan {
-    filter: brightness(3);
+    /* filter: brightness(3); */
     align-self: center;
+    position: relative;
     width: 100%;
   }
   .gotoshop {
     align-self: center;
     font-size: 18px;
+    position: relative;
   }
   .upperTxt {
+    color: var(--brown-color);
+
     font-size: 28px;
     text-align: center;
     line-height: 60px;
-    filter: brightness(3);
+    /* filter: brightness(3); */
   }
   .bigger {
     font-size: 36px;
+  }
+}
+@media (max-width: 687px) {
+  .upperTxt {
+    text-align: right;
+    margin-top: 15px;
+  }
+  .right {
+    margin: 0 auto;
+  }
+  .basmala {
+    font-size: 42px;
+  }
+  .who {
+    font-size: 27px;
+  }
+  .gotoshop {
+    align-self: flex-start;
   }
 }
 @media (max-width: 400px) {

@@ -20,7 +20,7 @@ const ProductSection = () => {
     dots: true,
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
     pauseOnHover: true,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -54,7 +54,7 @@ const ProductSection = () => {
       <h2 className={style.title}>أحدث منتجاتنا</h2>
       <div className={style.cards}>
         <Slider {...settings} style={{ width: "100%", height: "450px" }}>
-          {productData?.products.map((product) => (
+          {productData?.products.map((element) => (
             <motion.div
               className={style.card}
               initial={{ opacity: 0, y: 50 }}
@@ -69,24 +69,27 @@ const ProductSection = () => {
                 width: "120px",
                 height: "450px",
               }}
-              key={product._id}
+              key={element._id}
             >
-              <NavLink to={`/singleProduct/${product.slug}`}>
+              <NavLink
+                to={`/singleProduct/${element.slug}`}
+                className={style.productHolder}
+                key={element._id}
+              >
                 <img
                   src={
-                    product.images.length != 0
-                      ? `${process.env.REACT_APP_BACKEND}${product.images[0]}`
+                    element.images.length != 0
+                      ? `${process.env.REACT_APP_BACKEND}${element.images[0]}`
                       : placeholder
                   }
                   alt="product"
-                  height="300px"
-                  width="300px"
-                  className={style.image}
                 />
-                <section className={style.lower}>
-                  <p className={style.description}>{product.arabicName}</p>
-                  <p className={style.price}>$ {product.price}</p>
-                </section>
+                <div className={style.details}>
+                  <div>
+                    <h4>{element.arabicName}</h4>
+                    <p>${element.price}</p>
+                  </div>
+                </div>
               </NavLink>
             </motion.div>
           ))}

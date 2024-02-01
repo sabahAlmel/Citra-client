@@ -128,7 +128,7 @@ function Content({ products, isLoading }) {
     }
 
     localStorage.setItem("cart", JSON.stringify(existingCart));
-    toast.success("Item added to the cart!");
+    toast.success("تمت اضاة المنتج");
   };
 
   if (isLoading) {
@@ -213,30 +213,30 @@ function Content({ products, isLoading }) {
               (s) => s.size === selectedSize
             );
             return (
-              <div className={style.quantity} key={selectedSizeDetails._id}>
-                {selectedSizeDetails.quantity === 0 ? (
+              <div className={style.quantity} key={selectedSizeDetails?._id}>
+                {/* {selectedSizeDetails?.quantity === 0 ? (
                   <span className={style.soldOut}>Sold Out</span>
-                ) : (
-                  <>
-                    <button
-                      className={style.plus}
-                      type="button"
-                      name="button"
-                      onClick={handleIncrement}
-                    >
-                      +
-                    </button>
-                    <input type="text" name="name" value={quantity} readOnly />
-                    <button
-                      className={style.minus}
-                      type="button"
-                      name="button"
-                      onClick={handleDecrement}
-                    >
-                      -
-                    </button>
-                  </>
-                )}
+                ) : ( */}
+                {/* <> */}
+                <button
+                  className={style.plus}
+                  type="button"
+                  name="button"
+                  onClick={handleIncrement}
+                >
+                  +
+                </button>
+                <input type="text" name="name" value={quantity} readOnly />
+                <button
+                  className={style.minus}
+                  type="button"
+                  name="button"
+                  onClick={handleDecrement}
+                >
+                  -
+                </button>
+                {/* </> */}
+                {/* )} */}
               </div>
             );
           })}

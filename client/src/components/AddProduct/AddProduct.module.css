@@ -6,6 +6,8 @@
     background-color: var(--rose-color);
     border-radius: var(--border-radius);
     padding: 20px;
+    overflow-y: scroll;
+    height: 600px;
 }
 .addColors{
    align-self: flex-end;
@@ -26,4 +28,16 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.add{
+    padding:10px 20px;
+    color: white;
+    background-color: var(--blue-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0px 2px 5px var(--blue-color);
+    cursor: pointer;
+}
+.add:active{
+    transform: translateY(2px);
+    box-shadow: 0px 0px 0px;
 }
