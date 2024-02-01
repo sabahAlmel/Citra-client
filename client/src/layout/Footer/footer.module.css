@@ -1,70 +1,98 @@
-.wrapper, .left, .middle, .right, .side, .info{
-    display: flex;
-    align-items: center;
-    line-height: 30px;
+.wrapper,
+.left,
+.middle,
+.right,
+.side,
+.info {
+  display: flex;
+  align-items: center;
+  line-height: 30px;
 }
-.info{
-    width: 100%;
-    justify-content: space-between;
-    flex-direction: column-reverse;
+.info {
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: column-reverse;
 }
-.company{
-    font-size: 24px;
-    color: var(--brown-color);
+.company {
+  font-size: 24px;
+  color: var(--brown-color);
 }
-.middle, .left{
-    flex-direction: column;
-    row-gap: 50px;
+.middle,
+.left {
+  flex-direction: column;
+  row-gap: 50px;
 }
-.wrapper, .left, .middle, .right{
-    justify-content: space-around;
+.wrapper,
+.left,
+.middle,
+.right {
+  justify-content: space-around;
 }
-.left, .middle, .right{
-    width: 20%;
+.left,
+.middle,
+.right {
+  width: 20%;
 }
-.wrapper{
-    width: 100%;
-    background-color: var(--main-color);
-    padding: 100px;
+.wrapper {
+  width: 100%;
+  background-color: var(--main-color);
+  padding: 30px;
 }
-.right, .side{
-    flex-direction: column;
+.right,
+.side {
+  flex-direction: column;
 }
-.text{
-    text-align: right;
-    margin: auto;
-    line-height: 50px;
+.text {
+  text-align: right;
+  margin: auto;
+  line-height: 50px;
 }
-.logo{
-    padding: 0 5px;
+.logo {
+  padding: 0 5px;
 }
-.link{
-    text-decoration: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.link {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.text, .link{
-    color: var(--brown-color);
-    font-weight: 600;
-    opacity: 0.8;
+.text,
+.link {
+  color: var(--brown-color);
+  font-weight: 600;
+  opacity: 0.8;
 }
-.side{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 100px;
+.side {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100px;
+}
+.ctra {
+  margin: 17px 0 16px;
+}
+.text {
+  margin-top: 55px;
+}
+.add {
+  text-align: start;
+  width: 100%;
+  margin-right: 55px;
+  font-size: 24px;
+  color: var(--brown-color);
 }
 
-@media(max-width:850px){
-    .wrapper{
-        flex-direction: column;
-    }
-    .left, .middle, .right{
-        margin-bottom: 20px;
-        width: 100vw;
-    }
-    .right{
-        width: 80vw;
-    }
+@media (max-width: 850px) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .left,
+  .middle,
+  .right {
+    margin-bottom: 20px;
+    width: 100vw;
+  }
+  .right {
+    width: 80vw;
+  }
 }

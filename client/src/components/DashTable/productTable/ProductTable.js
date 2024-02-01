@@ -10,10 +10,12 @@ import { useQuery, useQueryClient } from "react-query";
 import { fetchProducts } from "../../../db/fetchProduct";
 import Modal from "@mui/material/Modal";
 import ChildModal from "./productChildModal"; // Import the ChildModal component
+import AddProduct from "../../AddProduct/AddProduct";
 
 const ProductTable = () => {
   const [page, setPage] = useState(1); // Move the declaration of 'page' here
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [opedAddModal, setOpenAddModal] = useState(false);
 
   const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
   const queryClient = useQueryClient();
@@ -22,6 +24,10 @@ const ProductTable = () => {
 
   const [openModal, setOpenModal] = useState(false); // State for modal open/close
   const [selectedRowData, setSelectedRowData] = useState(null); // Initialize selectedRowData
+
+  const handleAddModal = () => {
+    setOpenAddModal((prev) => !prev);
+  };
 
   const {
     isLoading,
@@ -41,7 +47,7 @@ const ProductTable = () => {
   //   }
   // }, [ProductData]);
   // React.useEffect(() => {
-    
+
   //     // Assuming your response has a 'products' field that contains the array of products
   //     const updatedRows = ProductData?.products.map(async (product) => {
   //       try {
@@ -49,10 +55,10 @@ const ProductTable = () => {
   //         const categoryResponse = await axios.get(
   //           `${process.env.REACT_APP_BACKEND}category/getone/${product.categoryID}`
   //         );
-      
+
   //         // Extract category name
   //         const categoryName = categoryResponse.data.category.name;
-      
+
   //         // Return the updated product object with additional fields
   //         return {
   //           ...product,
@@ -69,16 +75,20 @@ const ProductTable = () => {
   //         };
   //       }
   //     });
-      
+
   // }, [ProductData]);
-  
+
   React.useEffect(() => {
     if (ProductData) {
       const updatedRows = ProductData?.products.map((product) => {
         // Check if categoryID and subCategoryID are not null or undefined
-        const categoryName = product.categoryID ? product.categoryID.name : null;
-        const subCategoryName = product.subCategoryID ? product.subCategoryID.name : null;
-  
+        const categoryName = product.categoryID
+          ? product.categoryID.name
+          : null;
+        const subCategoryName = product.subCategoryID
+          ? product.subCategoryID.name
+          : null;
+
         return {
           ...product,
           id: product._id,
@@ -86,11 +96,11 @@ const ProductTable = () => {
           subCategoryName,
         };
       });
-  
+
       setRows(updatedRows);
     }
   }, [ProductData]);
-  
+
   if (isLoading) {
     return <h2>Loading..</h2>;
   }
@@ -294,7 +304,7 @@ const ProductTable = () => {
       <Button
         fullWidth
         type="submit"
-        // onClick={() => (window.location.href = "/")}
+        onClick={handleAddModal}
         sx={{
           margin: "10px",
           height: "3rem",
@@ -348,6 +358,13 @@ const ProductTable = () => {
           }}
         />
       </div>
+      <Modal
+        open={opedAddModal}
+        onClose={handleAddModal}
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        <AddProduct />
+      </Modal>
     </Box>
   );
 };

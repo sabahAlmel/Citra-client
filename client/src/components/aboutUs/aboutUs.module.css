@@ -1,65 +1,83 @@
 .contentsection {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    text-align: center;
-    margin-bottom: 10rem;
-    width: 80%;
-    margin: 3rem auto;
-    height: 100vh;
-  }
-  
-  .contentsection img {
-    width: 100%;
-    max-width: 475px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  margin-bottom: 10rem;
+  width: 80%;
+  margin: 0 auto;
+  height: 100vh;
+}
 
-    height:551px;
-    border-top-left-radius: 80px;
-  }
-  
-  .textcontainer {
-    margin: 30px;
-    width: 100%;
-    max-width: 420px;
-    height: auto;
-  }
-  
-  .title {
-    font-size: 2rem;
-    color: var(--brown-color);
-    margin: 2.5rem 0;
-    font-weight: bold;
+.contentsection .image {
+  width: 40%;
+  max-width: 475px;
+  height: 551px;
+  border-top-left-radius: 80px;
+}
 
+.textcontainer {
+  margin: 30px;
+  max-width: 520px;
+  height: auto;
+}
+
+.title {
+  font-size: 2rem;
+  color: var(--brown-color);
+  margin: 2.5rem 0;
+  font-weight: bold;
+}
+
+.description {
+  margin-bottom: 18rem;
+  font-size: 20px;
+  margin: auto 0;
+  line-height: 40px;
+}
+
+@media screen and (max-width: 1200px) {
+  .contentsection .image {
+    height: 351px;
+    width: 40%;
   }
-  
   .description {
-    margin-bottom: 18rem;
-    font-size: 20px;
-    margin: auto 0;
-    line-height: 40px;
-    
+    height: 350px;
   }
-  @media(max-width: 1160px ) and ( min-width:768px){
-    .description{
-      height: 350px;
-      overflow-y: scroll;
-    }
+}
+@media screen and (max-width: 768px) {
+  .textcontainer {
+    height: 400px;
   }
-  @media only screen and (max-width: 768px) {
-    .contentsection {
-        display: flex;
-        flex-direction: column;
-    }
-    .contentsection img {
-      border-top-left-radius: 0; 
-    }
-    .description {
+
+  .contentsection .image {
+    width: 70%;
+  }
+
+  .contentsection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .contentsection img {
+    border-top-left-radius: 0;
+  }
+  .description {
     margin-bottom: 0rem;
-
-    }
-    .title {
-        margin-bottom: 2rem;
-    }
-
   }
-  
+  .title {
+    margin-bottom: 2rem;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .contentsection {
+    height: 80vh;
+    margin-bottom: 4rem;
+  }
+
+  .textcontainer {
+    height: 600px;
+    margin: 0;
+  }
+}
