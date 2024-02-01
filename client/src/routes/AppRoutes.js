@@ -33,7 +33,7 @@ function AppRoutes() {
       <Route path="/signin" element={<SignIn />}></Route>
       <Route path="/signup" element={<SignUp />}></Route>
 
-
+{/* protected route  */}
       <Route
         path="/products"
         element={
