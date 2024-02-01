@@ -23,6 +23,7 @@
     position: fixed;
     top: 0;
     right: 0;
+    z-index: 15;
   }
 }
 .head {
@@ -112,5 +113,5 @@
   font-weight: 300;
 }
 .sideBarContainer {
-  margin-right: 15px;
+  margin-right: 25px;
 }

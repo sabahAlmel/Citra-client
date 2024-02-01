@@ -1,0 +1,8 @@
+.ShopCont {
+  margin-top: 151px;
+}
+@media (max-width: 769px) {
+  .ShopCont {
+    margin-top: 181px;
+  }
+}

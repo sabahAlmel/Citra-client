@@ -39,6 +39,7 @@
   height: 100%;
   opacity: 1;
 }
+
 .details {
   text-align: center;
   display: flex;
@@ -76,7 +77,7 @@
   transition: all 0.3s;
 }
 .details .addToCart:hover {
-  background-color: #409d97;
+  filter: brightness(1.2);
 }
 .pagination {
   direction: ltr;
@@ -88,6 +89,8 @@
 .loading {
   text-align: center;
   margin: 0 auto;
+  font-size: 30px;
+  font-weight: 500;
 }
 .collapse {
   display: flex;

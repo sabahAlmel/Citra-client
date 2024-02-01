@@ -1,11 +1,11 @@
 .handle {
   display: flex;
   justify-content: space-between;
-  margin: 0 var(--margin-LR);
+  margin: 151px var(--margin-LR) 0;
 }
 @media (max-width: 1320px) {
   .handle {
-    margin: 0 1rem;
+    margin: 151px 1rem 0;
   }
 }
 @media (max-width: 1166px) {
@@ -15,12 +15,12 @@
 }
 @media (max-width: 800px) {
   .handle {
-    margin: 0 2rem;
+    margin: 151px 2rem 0;
   }
 }
 
 @media (max-width: 400px) {
   .handle {
-    margin: 0 1rem;
+    margin: 151px 1rem 0;
   }
 }

@@ -1,0 +1,11 @@
+.wrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@media(max-width:1121px) {
+    .wrapper{
+        flex-direction: column;
+    }
+}

@@ -10,6 +10,7 @@ function Footer() {
   return (
     <footer className={style.wrapper}>
       <section className={style.right}>
+        <p className={`${style.add}`}>العنوان</p>
         <p className={style.text}>
           متجر سترا - مركز البراق شارع المئتين <br /> مقابل مستشفى أورانج ناسو
           <br />
@@ -46,7 +47,13 @@ function Footer() {
               />
             </Link>
           </aside>
-          <img src={logo} alt="ctra" height="70px" width="70px" />
+          <img
+            src={logo}
+            className={style.ctra}
+            alt="ctra"
+            height="70px"
+            width="70px"
+          />
         </div>
       </section>
       <section className={style.left}>

@@ -1,0 +1,29 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: var(--rose-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+}
+.addColors{
+   align-self: flex-end;
+   padding: 5px;
+   background-color: var(--rose-color);
+   color: var(--brown-color);
+   font-weight: 600;
+   border: 1px solid var(--brown-color);
+    box-shadow: 0px 2px 2px var(--brown-color);
+    cursor: pointer;
+}
+.addColors:active{
+    transform: translateY(2px);
+    box-shadow: 0px 0px 0px var(--brown-color);
+}
+.left, .right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

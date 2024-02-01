@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import style from "./Content.module.css";
+import LoadingPage from "../loadingPage";
 
 function Content({ products, isLoading }) {
   const [selectedColor, setSelectedColor] = useState(
@@ -54,13 +55,13 @@ function Content({ products, isLoading }) {
   }, [products]);
 
   const handleIncrement = () => {
-    const availableQuantity = getAvailableQuantity(selectedColor, selectedSize);
-
-    if (quantity < availableQuantity) {
+    // const availableQuantity = getAvailableQuantity(selectedColor, selectedSize);
+    // if(quantity<availableQuantity)
+    if (quantity < 10) {
       setQuantity((prevQuantity) => prevQuantity + 1);
     }
-    if (quantity === availableQuantity) {
-      toast.info("You have reached the maximum quantity!");
+    if (quantity === 10) {
+      toast.info("لقد وصلت الى الحد الأقصى للطلب");
     }
   };
 
@@ -86,16 +87,16 @@ function Content({ products, isLoading }) {
     return true;
   };
 
-  const getAvailableQuantity = (color, size) => {
-    const selectedColorDetails = products.fetchedProduct.details.find(
-      (detail) => detail.color === color
-    );
-    const selectedSizeDetails = selectedColorDetails.sizes.find(
-      (s) => s.size === size
-    );
+  // const getAvailableQuantity = (color, size) => {
+  //   const selectedColorDetails = products.fetchedProduct.details.find(
+  //     (detail) => detail.color === color
+  //   );
+  //   const selectedSizeDetails = selectedColorDetails.sizes.find(
+  //     (s) => s.size === size
+  //   );
 
-    return selectedSizeDetails ? selectedSizeDetails.quantity : 0;
-  };
+  //   return selectedSizeDetails ? selectedSizeDetails.quantity : 0;
+  // };
 
   const handleClick = () => {
     const productInfo = {
@@ -131,19 +132,19 @@ function Content({ products, isLoading }) {
   };
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <LoadingPage />;
   }
   return (
     <div className={style.content}>
-      {/* <div className={style.title}>{products.fetchedProduct.arabicName}</div> */}
-      <div className={style.title}>سجادات</div>
+      <div className={style.title}>{products.fetchedProduct.arabicName}</div>
       <div className={style.price}>${products.fetchedProduct.price}</div>
-      {/* <div className={style.desc}>{products.fetchedProduct.description}</div> */}
-      <div className={style.desc}>
-        ٣٠, الفترة أسابيع الجديدة، قد لها. كل هامش لهيمنة بالجانب انه, أم ونتج
-        وبولندا أما. الخاطفة انتصارهم لم تلك, حول القوى محاولات ويكيبيديا ان.
-        هذا بينما الوزراء مع.
-      </div>
+      <div className={style.desc}>{products.fetchedProduct.description}</div>
+      {products.fetchedProduct.type ? (
+        <div className={style.handleType}>
+          <h2>القماش المستعمل</h2>
+          <div className={style.type}>{products.fetchedProduct.type}</div>
+        </div>
+      ) : null}
       <div className={style.color}>
         <h2>اختار اللون</h2>
         <div className={style.colorPalette}>
@@ -182,26 +183,28 @@ function Content({ products, isLoading }) {
           ))}
         </div>
       </div>
-      <div className={style.size}>
-        <h2>اختار القياس</h2>
-        <div className={style.sizes}>
-          {products.fetchedProduct.details
-            .filter((detail) => detail.color === selectedColor)
-            .map((detail) =>
-              detail.sizes.map((size, index) => (
-                <div
-                  className={`${style.sizeOption} ${
-                    size.size === selectedSize ? style.selected : ""
-                  }`}
-                  key={index}
-                  onClick={() => handleSizeChange(size.size)}
-                >
-                  {size.size}
-                </div>
-              ))
-            )}
+      {products.fetchedProduct.details[0].color && (
+        <div className={style.size}>
+          <h2>اختار القياس</h2>
+          <div className={style.sizes}>
+            {products.fetchedProduct.details
+              .filter((detail) => detail.color === selectedColor)
+              .map((detail) =>
+                detail.sizes.map((size, index) => (
+                  <div
+                    className={`${style.sizeOption} ${
+                      size.size === selectedSize ? style.selected : ""
+                    }`}
+                    key={index}
+                    onClick={() => handleSizeChange(size.size)}
+                  >
+                    {size.size}
+                  </div>
+                ))
+              )}
+          </div>
         </div>
-      </div>
+      )}
       <div className={style.lastSection}>
         {products.fetchedProduct.details
           .filter((detail) => detail.color === selectedColor)
