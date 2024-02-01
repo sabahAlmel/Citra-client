@@ -2,6 +2,7 @@
     height: 100%;
     width: 100%;
     display: flex;
+    margin: 0 30px;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -33,17 +34,17 @@
   }
   
 .revenueCard {
-    width: 92%;
+    width: 89.5%;
     height: 20rem;
   }
 
 .customerCard {
-    width: 50%;
+    width: 44%;
     height: 20rem;
   }
   
 .categoryCard {
-    width: 40%;
+    width: 44%;
     height: 20rem;
   }
 
@@ -56,12 +57,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 5.8rem;
+  gap: 7.8rem;
   
 }
 .card {
   flex: 1 0 250px;
   margin-bottom: 20px;
+  margin-right: 100px;
 }
 @media (max-width: 768px) {
   .card {
@@ -72,6 +74,14 @@
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 2rem;
+  }
+  .AppChart{
+    display: flex;
+    flex-direction: column;
+  }
+  .categoryCard{
+    width: 50%;
+    height: 20rem;
   }
 }
 
