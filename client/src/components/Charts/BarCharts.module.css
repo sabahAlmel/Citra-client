@@ -10,14 +10,14 @@
   gap: 1vw;
   flex-wrap: wrap;
   background-color: white;
-  /* position: relative; */
+   /* position: relative; / */
 }
 
 .title1 {
 position: absolute;
-top: 0; /* Position at the top */
-left: 50%; /* Position at the center horizontally */
-transform: translateX(-50%); /* Center horizontally */
+top: 0; 
+left: 50%; 
+transform: translateX(-50%);
 background-color: white; 
 padding: 7px; 
 font-weight: bold;
@@ -30,7 +30,7 @@ font-size: 35px;
   border-radius: 0.5em;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   padding: 1em;
-  
+
 }
 
 .revenueCard {
@@ -51,9 +51,9 @@ font-size: 35px;
 .cardsWrapper{
 /* display: flex;
 flex-direction: row;
-/* margin: 5px; */
-/* padding: 1rem; */
-/* gap: 85px; */ 
+margin: 5px; 
+padding: 1rem; 
+gap: 85px;  */
 display: flex;
 flex-wrap: wrap;
 justify-content: space-between;
@@ -82,5 +82,5 @@ margin-right: 100px;
 .categoryCard{
   width: 50%;
   height: 20rem;
-}
+} 
 }
