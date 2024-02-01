@@ -10,10 +10,12 @@ import { useQuery, useQueryClient } from "react-query";
 import { fetchProducts } from "../../../db/fetchProduct";
 import Modal from "@mui/material/Modal";
 import ChildModal from "./productChildModal"; // Import the ChildModal component
+import AddProduct from "../../AddProduct/AddProduct";
 
 const ProductTable = () => {
   const [page, setPage] = useState(1); // Move the declaration of 'page' here
   const navigate = useNavigate();
+  const [opedAddModal, setOpenAddModal] = useState(false);
 
   const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
   const queryClient = useQueryClient();
@@ -22,6 +24,10 @@ const ProductTable = () => {
 
   const [openModal, setOpenModal] = useState(false); // State for modal open/close
   const [selectedRowData, setSelectedRowData] = useState(null); // Initialize selectedRowData
+
+  const handleAddModal = () => {
+    setOpenAddModal((prev) => !prev);
+  };
 
   const {
     isLoading,
@@ -240,7 +246,7 @@ const ProductTable = () => {
       <Button
         fullWidth
         type="submit"
-        onClick={() => (window.location.href = "/")}
+        onClick={handleAddModal}
         sx={{
           margin: "10px",
           height: "3rem",
@@ -294,6 +300,13 @@ const ProductTable = () => {
           }}
         />
       </div>
+      <Modal
+        open={opedAddModal}
+        onClose={handleAddModal}
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        <AddProduct />
+      </Modal>
     </Box>
   );
 };
