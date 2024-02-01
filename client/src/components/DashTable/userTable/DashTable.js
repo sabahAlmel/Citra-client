@@ -91,7 +91,7 @@ const DashTable = () => {
       headerName: "نوع العميل",
       width: 220,
       type: "singleSelect",
-      valueOptions: ["admin", "user", "dataEntry"],
+      valueOptions: ["مدير", "مستخدم", "مدخل بيانات"],
       cellClassName: "delete-cell",
     },
     {

@@ -1,47 +1,61 @@
 import React, { createContext, useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
-import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [checkUser, setCheckUser] = useState(true);
+  const [checkUser, setCheckUser] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  //   Fetch user data
+  //Fetch user data
 
-  const fetchUserData = async () => {
+   const fetchUserData = async() =>{
+      try {
+          setCheckUser(true);
+          const response = await axiosInstance.post('/user/login')
+          console.log("fetch user data ",response.data);
+          setUser(response.data.token.data)
+          console.log("user auth:",user)
+      }catch (error) {
+          console.error("Error fetching user data", error);
+          setUser(null);
+      } finally {
+          setCheckUser(false);
+          setLoading(false); // Set loading to false when the operation is done
+      }
+   };
+
+  const fetchUserDataone = async (email, password) => {
     try {
+      console.log("authcontext process");
       setCheckUser(true);
-      const response = await axiosInstance.get("/user/getone");
+      const response = await axiosInstance.get(`http://localhost:5000/user/getone`, {
+        email: email,
+        password: password,
+      });
+      console.log("fetchuserdata", response);
       setUser(response.data);
-    } catch (error) {
-      console.error("Error fetching user data", error);
+    } catch (err) {
+      console.log(err);
       setUser(null);
     } finally {
       setCheckUser(false);
-      setLoading(false); // Set loading to false when the operation is done
     }
   };
 
   // logout
   const logout = async () => {
     try {
-      await axiosInstance.get("/user/logout");
+      await axiosInstance.post("/user/logout");
       setUser(null);
-      toast.success("Logged out successfully");
     } catch (error) {
       console.error("Logout error:", error);
     }
   };
 
-  useEffect(() => {
-    fetchUserData();
-  }, []);
-
   return (
     <AuthContext.Provider
-      value={{ user, setUser, checkUser, fetchUserData, logout, loading }}
+      value={{ user, setUser, checkUser, fetchUserData, fetchUserDataone,logout, loading }}
     >
       {children}
     </AuthContext.Provider>
