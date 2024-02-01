@@ -1,4 +1,5 @@
 import { React, useContext, useState } from "react";
+import { useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import styles from "../../components/signin/signin.module.css";
 import { Button } from "@mui/material";
@@ -16,19 +17,37 @@ import { AuthContext } from "../../context/AuthContext";
 import useApi from "../../hooks/useApi";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import axios from "axios";
 function Signin() {
-  const { setUser, fetchUserData } = useContext(AuthContext);
+  const { setUser, fetchUserData, fetchUserDataone,user } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const { apiCall } = useApi();
   const navigate = useNavigate();
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   const [open, setOpen] = useState(false);
+
+  async function getUser() {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/user/login`,
+        formData
+      );
+      if (response) {
+        console.log(response.data);
+        setUser(response.data.token.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const openCloseHandler = () => {
     setOpen(!open);
@@ -70,7 +89,7 @@ function Signin() {
     });
 
     try {
-      await apiCall({
+      const res = await apiCall({
         url: "/user/login",
         method: "post",
         data: {
@@ -78,10 +97,20 @@ function Signin() {
           password: formData.password,
         },
       });
-      await fetchUserData();
+      setUser(res.token.data.role);
+      console.log("user:", user);
+      console.log("resis", res);
+      console.log("role", res.token.data.role);
+      console.log("call auth");
+      fetchUserData();
+      fetchUserDataone()
       toast.success("تم تسجيل الدخول بنجاح");
       setIsPending(false);
-      navigate("/");
+      if (res.token.data.role === "admin") {
+        navigate("/users");
+      } else if (res.token.data.role === "user") {
+        navigate("/");
+      }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
         const { errors } = error.response.data;
@@ -143,6 +172,8 @@ function Signin() {
       }
     }
   };
+ 
+
 
   return (
     <form onSubmit={handleSubmit} className={styles.wrapper}>
@@ -241,7 +272,7 @@ function Signin() {
           <Button
             fullWidth
             type="submit"
-            onClick={handleSubmit}
+            onClick={() => fetchUserData(formData.email, formData.password)}
             sx={{
               marginBottom: "1rem",
               height: 35,

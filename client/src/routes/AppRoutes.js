@@ -29,47 +29,52 @@ function AppRoutes() {
       <Route path="/signin" element={<SignIn />}></Route>
       <Route path="/signup" element={<SignUp />}></Route>
 
+
       <Route
         path="/products"
         element={
-          // <ProtectedRoute>
+          <ProtectedRoute>
+
+       
             <LayoutWithSidebar>
               <Products />
             </LayoutWithSidebar>
-          // </ProtectedRoute>
+            </ProtectedRoute>
         }
       ></Route>
       <Route
         path="/users"
         element={
-          // <ProtectedRoute>
+          <ProtectedRoute>
+
+         
             <LayoutWithSidebar>
               {" "}
               <Users />
             </LayoutWithSidebar>
-          // </ProtectedRoute>
+            </ProtectedRoute>
         }
       ></Route>
       <Route
         path="/overview"
         element={
-          // <ProtectedRoute>
+          <ProtectedRoute>
             <LayoutWithSidebar>
               {" "}
               <OverView />
             </LayoutWithSidebar>
-          // </ProtectedRoute>
+            </ProtectedRoute>
         }
       ></Route>
       <Route
         path="/orders"
         element={
-          // <ProtectedRoute>
+          <ProtectedRoute>
             <LayoutWithSidebar>
               {" "}
               <Order />
             </LayoutWithSidebar>
-          // </ProtectedRoute>
+             </ProtectedRoute>
         }
       ></Route>
 
