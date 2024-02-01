@@ -13,6 +13,17 @@
   justify-content: space-between;
   flex-direction: column-reverse;
 }
+.bigWrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-color);
+}
+.copyRight {
+  direction: ltr;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 15px 0;
+}
 .company {
   font-size: 24px;
   color: var(--brown-color);
@@ -35,8 +46,8 @@
 }
 .wrapper {
   width: 100%;
-  background-color: var(--main-color);
   padding: 30px;
+  padding-bottom: 0;
 }
 .right,
 .side {

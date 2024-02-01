@@ -121,9 +121,6 @@ function DropDownCart({ setShopping }) {
                         اللون : {product.selectedColor}
                       </p>
                       <p className={style.details}>
-                        اللون : {product.selectedColor}
-                      </p>
-                      <p className={style.details}>
                         الكمية : {product.quantity}
                       </p>
                     </div>
