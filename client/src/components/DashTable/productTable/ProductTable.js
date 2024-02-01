@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useNavigate } from "react-router-dom";
 import "../product.css";
 import { Button } from "@mui/material";
 import axios from "axios";
@@ -35,49 +34,7 @@ const ProductTable = () => {
     isError,
     data: ProductData,
   } = useQuery(["user-table", page], () => fetchProducts(page));
-  // Update the state when data is loaded
-  // React.useEffect(() => {
-  //   if (ProductData) {
-  //     // Assuming your response has a 'products' field that contains the array of products
-  //     const updatedRows = ProductData?.products.map((product) => ({
-  //       ...product,
-  //       id: product._id, // Set 'id' to the value of '_id'
-  //     }));
 
-  //     setRows(updatedRows);
-  //   }
-  // }, [ProductData]);
-  // React.useEffect(() => {
-
-  //     // Assuming your response has a 'products' field that contains the array of products
-  //     const updatedRows = ProductData?.products.map(async (product) => {
-  //       try {
-  //         // Fetch category details based on categoryID
-  //         const categoryResponse = await axios.get(
-  //           `${process.env.REACT_APP_BACKEND}category/getone/${product.categoryID}`
-  //         );
-
-  //         // Extract category name
-  //         const categoryName = categoryResponse.data.category.name;
-
-  //         // Return the updated product object with additional fields
-  //         return {
-  //           ...product,
-  //           id: product._id, // Set 'id' to the value of '_id'
-  //           categoryName,
-  //         };
-  //       } catch (error) {
-  //         console.error("Error fetching category:", error);
-  //         // Handle the error appropriately, e.g., set categoryName to a default value
-  //         return {
-  //           ...product,
-  //           id: product._id,
-  //           categoryName: "Unknown Category",
-  //         };
-  //       }
-  //     });
-
-  // }, [ProductData]);
 
   React.useEffect(() => {
     if (ProductData) {
