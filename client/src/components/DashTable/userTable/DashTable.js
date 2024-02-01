@@ -9,24 +9,25 @@ import axios from "axios";
 import { useQuery, useQueryClient } from "react-query";
 import Modal from "@mui/material/Modal";
 import ChildModal from "./dashChildModal"; // Import the ChildModal component
-
+import LoadingPage from "../../loadingPage";
 const DashTable = () => {
   const queryClient = useQueryClient();
   const [rows, setRows] = React.useState([]); //data for all rows
   const { isLoading, data: usersData } = useQuery("user-table", fetchUsers);
   const [openModal, setOpenModal] = useState(false); // State for modal open/close
-  const [selectedRowData, setSelectedRowData] = useState(null); // Initialize selectedRowData
-
-
+  const [selectedRowData, setSelectedRowData] = useState(); // Initialize selectedRowData
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
+  const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
 
   const handleRowClickDelete = async (userId) => {
     try {
       await axios.delete(`${process.env.REACT_APP_BACKEND}user/${userId}`);
       const updatedData = rows.filter((row) => row.id !== userId);
-  
+
       // Set the updated data to the state or wherever you store your data
       setRows(updatedData);
-  
+
       // Invalidate the query to trigger a refetch
       queryClient.invalidateQueries("user-table");
     } catch (error) {
@@ -109,10 +110,11 @@ const DashTable = () => {
               "&:hover": {
                 boxShadow: "0px 0px 10px 3px rgba(0,0,0,0.5)",
                 backgroundColor: "var(--gray-color)",
+              marginLeft:"10px"
               },
             }}
             onClick={() => handleRowClickDelete(params.row.id)}
-            >
+          >
             حذف
           </Button>
 
@@ -128,17 +130,13 @@ const DashTable = () => {
               },
             }}
             onClick={() => handleRowClickEdit(params)}
-            >
+          >
             تعديل
           </Button>
         </>
       ),
     },
   ];
-
-  const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(5);
-  const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
 
   const handlePageChange = (params) => {
     setPage(params.page);
@@ -149,30 +147,28 @@ const DashTable = () => {
     setPage(0);
   };
 
-
- 
-const handleOpenModal = (rowData) => {
-  setOpenModal(true);
-  setSelectedRowData(rowData);
-};
+  const handleOpenModal = (rowData) => {
+    setOpenModal(true);
+    setSelectedRowData(rowData);
+  };
   const handleCloseModal = async (newdata) => {
     setOpenModal(false);
-  
+
     // Assuming setSelectedRowData is not async, you can use it directly
-    setSelectedRowData(newdata)}
+    setSelectedRowData(newdata);
+  };
 
+  const handleRowClickEdit = (params) => {
+    // Open the modal with the clicked row data
+    handleOpenModal(params.row);
+  };
+  const handleFormSubmitSuccess = (updatedRows) => {
+    // Update the local state (rows) with the updated data
+    setRows(updatedRows);
 
-    const handleRowClickEdit = (params) => {
-      // Open the modal with the clicked row data
-      handleOpenModal(params.row);
-    };
-    const handleFormSubmitSuccess = (updatedRows) => {
-      // Update the local state (rows) with the updated data
-      setRows(updatedRows);
-    
-      // Invalidate the query to trigger a refetch
-      queryClient.invalidateQueries("user-table");
-    };
+    // Invalidate the query to trigger a refetch
+    queryClient.invalidateQueries("user-table");
+  };
 
   const data = {
     rows,
@@ -186,7 +182,9 @@ const handleOpenModal = (rowData) => {
     visibleFields: columns,
     rowLength: 100,
   };
-
+  if(isLoading){
+    <LoadingPage/>
+  }
   return (
     <Box
       sx={{ height: 400, width: "100%", backgroundColor: "var(--main-color)" }}
@@ -214,13 +212,11 @@ const handleOpenModal = (rowData) => {
           sx={{ minHeight: "60vh" }}
           {...data}
           rows={rows}
-
           onPageChange={handlePageChange}
           onPageSizeChange={handlePageSizeChange}
           onFilterModelChange={(model) => setFilterModel(model)}
           initialState={{
             ...data.initialState,
-            
 
             //filter
             filter: {
@@ -236,7 +232,6 @@ const handleOpenModal = (rowData) => {
               },
             },
           }}
-
           pageSizeOptions={[10, 25, 50, 75, 100]}
           slots={{
             toolbar: GridToolbar,

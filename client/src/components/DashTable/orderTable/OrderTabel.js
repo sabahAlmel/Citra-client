@@ -8,6 +8,10 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { fetchOrders } from "../../../db/fetchOrder";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LoadingPage from "../../loadingPage";
+
 import { useQuery, useQueryClient } from "react-query";
 import {
   GridToolbar,
@@ -16,7 +20,7 @@ import {
   GridToolbarContainer,
 } from "@mui/x-data-grid";
 import { randomId, randomArrayItem } from "@mui/x-data-grid-generator";
-
+import { blue } from "@mui/material/colors";
 
 function EditToolbar(props) {
   const { setRows, setRowModesModel } = props;
@@ -64,59 +68,67 @@ export default function DashTable() {
   const queryClient = useQueryClient();
   const [rows, setRows] = useState([]); //data
   const [rowModesModel, setRowModesModel] = useState({});
-
+  const [statuses, setStatuses] = React.useState({});
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
+  const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
   const {
     isLoading,
     isError,
     data: orderData,
   } = useQuery("user-table", fetchOrders);
 
-  if (isLoading) {
-    return <h2>Loading..</h2>;
-  }
-  if (isError) {
-    return <div>Error loading products</div>;
-  }
-  
+  const handlePageChange = (params) => {
+    setPage(params.page);
+  };
+
+  const handlePageSizeChange = (params) => {
+    setPageSize(params.pageSize);
+    setPage(0);
+  };
 
   const handleRowClickDelete = async (params) => {
     const orderId = params.row.id;
     console.log("Deleting order with ID:", orderId);
-  
+
     try {
       await axios.delete(`${process.env.REACT_APP_BACKEND}order/${orderId}`);
       console.log("Order deleted successfully!");
-  
+
       // If the delete request is successful, filter out the deleted row from the displayed data
       const updatedData = rows.filter((row) => row.id !== orderId);
-  
+
       // Set the updated data to the state or wherever you store your data
       setRows(updatedData);
     } catch (error) {
       console.error("Error deleting order:", error);
     }
   };
-  
-  
-
-
-
 
   const handleRowModesModelChange = (newRowModesModel) => {
     setRowModesModel(newRowModesModel);
   };
-  const [statuses, setStatuses] = React.useState({});
 
- 
   const handleChange = async (event, orderId) => {
     const newStatus = event.target.value;
-  
+
     try {
       // Send a PUT request to update the status of the specific order ID
       await axios.put(`${process.env.REACT_APP_BACKEND}order/${orderId}`, {
         status: newStatus,
       });
-  
+      if (newStatus === "Cancel") {
+        console.log("Deleting order with ID:", orderId);
+        await axios.delete(`${process.env.REACT_APP_BACKEND}order/${orderId}`);
+        console.log("Order deleted successfully!");
+        toast.success("تم الغاء الطلب بنجاح");
+        // If the delete request is successful, filter out the deleted row from the displayed data
+        const updatedData = rows.filter((row) => row.id !== orderId);
+
+        // Set the updated data to the state or wherever you store your data
+        setRows(updatedData);
+      }
+
       // Update the local state (statuses) with the new status
       setStatuses((prevStatuses) => ({
         ...prevStatuses,
@@ -126,7 +138,7 @@ export default function DashTable() {
       console.error("Error updating order status:", error);
     }
   };
-  
+
   const columns = [
     {
       field: "orderNB",
@@ -138,10 +150,17 @@ export default function DashTable() {
       cellClassName: "delete-cell",
     },
 
-
     {
-      field: "userId",
-      headerName: "اسم المستخدم ",
+      field: "productName",
+      headerName: "اسم المنتج",
+      width: 180,
+      editable: true,
+      flex: 1,
+      cellClassName: "delete-cell",
+    },
+    {
+      field: "userName",
+      headerName: "اسم المستخدم",
       type: "",
       width: 180,
       align: "left",
@@ -163,8 +182,8 @@ export default function DashTable() {
     },
     {
       field: "totalPrice",
-      headerName: "  ",
-      type: "المجموع",
+      headerName: "المجموع",
+      type: "",
       width: 180,
       align: "left",
       headerAlign: "left",
@@ -195,22 +214,32 @@ export default function DashTable() {
       type: "singleSelect",
       renderCell: (params) => (
         <>
-         
           <Box sx={{ minWidth: 120, cellClassName: "actions" }}>
             <FormControl fullWidth>
-              <InputLabel id={`status-label-${params.id} `}> {params.row.status || "Select Status"}</InputLabel>
-               <Select
+              <InputLabel
+                id={`status-label-${params.id}`}
+                style={{
+                  color: params.row.status === "تم التسليم" ? "var(--blue-color)" : "",
+                }}
+              >
+                {params.row.status || "Select Status"}
+              </InputLabel>
+              <Select
                 labelId={`status-label-${params.id}`}
                 id={`status-select-${params.id}`}
                 value={statuses[params.id] || ""}
                 label="Status"
                 onChange={(event) => handleChange(event, params.id)}
               >
-                <MenuItem value="Pending">Pending</MenuItem>
-                <MenuItem value="Delivered">Delivered</MenuItem>
-                <MenuItem value="Cancel">Cancel</MenuItem>
-              </Select> 
-       
+                <MenuItem value="انتظار">انتظار</MenuItem>
+                <MenuItem
+                  style={{ color: "var(--blue-color)" }}
+                  value="تم التسليم"
+                >
+                  تم التسليم
+                </MenuItem>
+                <MenuItem value="الغاء">الغاء</MenuItem>
+              </Select>
             </FormControl>
           </Box>
         </>
@@ -228,8 +257,8 @@ export default function DashTable() {
             variant="outlined"
             color="secondary"
             sx={{
-              textAlign:"center",
-              margin:"0 auto",
+              textAlign: "center",
+              margin: "0 auto",
               color: "var(--brown-color)",
               borderColor: "var(--blue-color) ",
               "&:hover": {
@@ -241,23 +270,11 @@ export default function DashTable() {
           >
             حذف
           </Button>
-
-        
         </>
       ),
     },
   ];
-  const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(5);
-  const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
-  const handlePageChange = (params) => {
-    setPage(params.page);
-  };
 
-  const handlePageSizeChange = (params) => {
-    setPageSize(params.pageSize);
-    setPage(0);
-  };
   const data = {
     rows,
     columns,
@@ -280,6 +297,12 @@ export default function DashTable() {
     }
     setRowModesModel({});
   }, [orderData]);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+  if (isError) {
+    return <div>Error loading products</div>;
+  }
 
   return (
     <Box
@@ -300,14 +323,11 @@ export default function DashTable() {
           {...data}
           onPageChange={handlePageChange}
           onPageSizeChange={handlePageSizeChange}
-       
           onFilterModelChange={(model) => setFilterModel(model)}
-   
           onRowModesModelChange={handleRowModesModelChange}
-         
           initialState={{
             ...data.initialState,
-          
+
             filter: {
               //filter
               ...data.initialState?.filter,
