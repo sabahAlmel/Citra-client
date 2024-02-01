@@ -52,11 +52,15 @@
   text-decoration: none;
   color: var(--brown-color);
   height: 400px;
-  width: 300px;
+  /* width: 300px; */
   padding: 20px;
   overflow: hidden;
   border-radius: var(--border-radius);
+  transition: all 0.3s;
+}
+.productHolder:hover {
   box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
+  transform: scale3d(1.05, 1.05, 1.05);
 }
 .productHolder img {
   height: 300px;
@@ -64,9 +68,6 @@
   border-radius: var(--border-radius);
   transition: 1s cubic-bezier(0, 0, 0.2, 1);
   width: 100%;
-}
-.productHolder:hover img {
-  transform: scale3d(1.05, 1.05, 1.05);
 }
 
 .details {
