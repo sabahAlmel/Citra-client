@@ -314,9 +314,12 @@ function AddProduct() {
           />
         </Box>
       </div>
-      <button className={style.addColors} type="button">
+      {/* <button
+        className={style.addColors}
+        type="button">
         أضف ألوان أخرى
-      </button>
+      </button> */}
+      <button className={style.add}>أضف المنتج</button>
     </form>
   );
 }

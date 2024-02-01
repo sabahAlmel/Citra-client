@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../product.css";
 import { Button } from "@mui/material";
 import axios from "axios";

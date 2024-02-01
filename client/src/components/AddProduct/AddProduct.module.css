@@ -7,7 +7,7 @@
     border-radius: var(--border-radius);
     padding: 20px;
 }
-.addColors{
+/* .addColors{
    align-self: flex-end;
    padding: 5px;
    background-color: var(--rose-color);
@@ -20,10 +20,22 @@
 .addColors:active{
     transform: translateY(2px);
     box-shadow: 0px 0px 0px var(--brown-color);
-}
+} */
 .left, .right{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.add{
+    padding:10px 20px;
+    color: white;
+    background-color: var(--blue-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0px 2px 5px var(--blue-color);
+    cursor: pointer;
+}
+.add:active{
+    transform: translateY(2px);
+    box-shadow: 0px 0px 0px;
 }
