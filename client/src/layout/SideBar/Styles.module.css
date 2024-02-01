@@ -140,6 +140,8 @@ width: 7rem;
     align-items: flex-start;
     width: 100vw; 
     justify-content: flex-start;
+    position: absolute;
+    z-index: 2;
   }
 
   .sidebar-closed {

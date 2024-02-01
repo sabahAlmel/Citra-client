@@ -1,5 +1,6 @@
 ///////////////////////table with pagination and filtration ///////////
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
@@ -187,7 +188,7 @@ const ProductTable = () => {
                 backgroundColor: "var(--blue-color)",
               },
             }}
-            onClick={() => handleRowClickDelete(params.row.id)}
+            onClick={() => handleRowClickDelete(params)}
           >
             حذف
           </Button>

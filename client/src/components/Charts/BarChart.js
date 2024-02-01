@@ -1,12 +1,84 @@
+// // // import { Chart } from "chart.js";
+// // // import { useState } from "react";
+// // import { Bar } from "react-chartjs-2";
+// // // import {chart as ChartJS} from "chart.js/auto"
+
+
+// // function BarChart() {
+   
+// // return(
+  
+// // )
+// // }
+
+// // export default BarChart;
+
+// import React from "react";
+// import { Chart as ChartJS, defaults } from "chart.js/auto";
+// import { Bar, Doughnut, Line } from "react-chartjs-2";
+// import BarData from "./BarData.js"
+// import {BarCharts} from"./BarCharts.module.css"
+// defaults.maintainAspectRatio = false;
+// defaults.responsive = true;
+
+// defaults.plugins.title.display = true;
+// defaults.plugins.title.align = "start";
+// defaults.plugins.title.font.size = 20;
+// defaults.plugins.title.color = "black";
+
+
+// function BarChart()  {
+//     return(
+        
+//             <div className="App">
+//               <div className="dataCard revenueCard">
+//                 <Line
+//                   data={{
+//                     labels: BarData.map((data) => data.label),
+//                     datasets: [
+//                       {
+//                         label: "Revenue",
+//                         data: BarData.map((data) => data.revenue),
+//                         backgroundColor: "#064FF0",
+//                         borderColor: "#064FF0",
+//                       },
+//                       {
+//                         label: "Cost",
+//                         data: BarData.map((data) => data.cost),
+//                         backgroundColor: "#FF3030",
+//                         borderColor: "#FF3030",
+//                       },
+//                     ],
+//                   }}
+//                   options={{
+//                     elements: {
+//                       line: {
+//                         tension: 0.5,
+//                       },
+//                     },
+//                     plugins: {
+//                       title: {
+//                         text: "Monthly Revenue & Cost",
+//                       },
+//                     },
+//                   }}
+//                 />
+//               </div>
+//               </div>
+//     )
+// }
+
+// export default BarChart;
+
 import React from "react";
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
-import BarCharts from "./BarCharts.module.css";
-import SingleCard from "./SingleCard";
-import axios from "axios";
-import SourceData from "./SourceData.js";
-import { useQuery } from "react-query";
+import BarCharts from "./BarCharts.module.css"
 
+
+import BarData from "./BarData.js";
+import SourceData from "./SourceData.js";
+import { useState , useEffect } from "react";
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 
@@ -88,12 +160,14 @@ const monthlyTotals = Object.values(ordersByMonth).map((ordersInMonth) =>
             },
             plugins: {
               title: {
-                text: "Monthly Revenue & Cost",
+                text: "Monthly Revenue",
               },
             },
           }}
         />
       </div>
+
+
 
       <div className={`${BarCharts.dataCard} ${BarCharts.customerCard}`}>
         <Bar
@@ -117,6 +191,8 @@ const monthlyTotals = Object.values(ordersByMonth).map((ordersInMonth) =>
           }}
         />
       </div>
+
+
 
       <div className={`${BarCharts.dataCard} ${BarCharts.categoryCard}`}>
         <Doughnut
