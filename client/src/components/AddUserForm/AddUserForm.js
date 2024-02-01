@@ -53,8 +53,8 @@ function AddUserForm({formData,onInputChange,onSubmit}) {
               onChange={onInputChange}
             >
               <option value="admin">مدير</option>
-              <option value="user">مستخدم عادي</option>
-              <option value="dataentry">مدخل بيانات</option>
+              <option value="user">مستخدم </option>
+              <option value="dataEntry">مدخل بيانات</option>
             </select>
           </div>
        
