@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
@@ -50,8 +51,9 @@ export const AuthProvider = ({ children }) => {
   // logout
   const logout = async () => {
     try {
-      await axiosInstance.post("/user/logout");
+      await axiosInstance.get("/user/logout");
       setUser(null);
+      // toast.success("loggedout");
     } catch (error) {
       console.error("Logout error:", error);
     }
