@@ -102,15 +102,17 @@ function Signin() {
       console.log("resis", res);
       console.log("role", res.token.data.role);
       console.log("call auth");
-      fetchUserData();
+      // fetchUserData();
       fetchUserDataone()
       toast.success("تم تسجيل الدخول بنجاح");
       setIsPending(false);
       if (res.token.data.role === "admin") {
         navigate("/users");
-      } else if (res.token.data.role === "user") {
-        navigate("/");
+      } else if (res.token.data.role === "dataEntry") {
+        navigate("/products");
       }
+      else navigate("/")
+      
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
         const { errors } = error.response.data;
