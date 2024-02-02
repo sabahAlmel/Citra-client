@@ -43,7 +43,7 @@ function AppRoutes() {
             <LayoutWithSidebar>
               <Products />
             </LayoutWithSidebar>
-            </ProtectedRoute>
+             </ProtectedRoute>
         }
       ></Route>
       <Route
