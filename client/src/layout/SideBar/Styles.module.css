@@ -1,0 +1,161 @@
+.content {
+  padding: 40px 60px;
+}
+
+/* FADE ANIMATIONS */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 400ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 400ms;
+}
+
+/* SIDEBAR */
+
+.sidebar__button {
+  background: transparent;
+  padding: 10px;
+  border: 1px solid var(--main-color);
+  border-radius: 4px;
+  color: var(--brow-color);
+  transition: 0.3s linear;
+  cursor: pointer;
+  margin-top: 14px;
+  margin-bottom: 44px;
+
+
+}
+
+.activelink {
+  display: flex;
+  align-items: center;
+  background-color: var(--main-color);
+  color: var(--brown-color);
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.activelink .sidebar__icon,
+.activelink span {
+  color: var(--brown-color);
+}
+
+.activelink {
+  padding: 1rem;
+}
+
+.li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 66px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.sidebar {
+  height: 100vh;
+  width: 250px;
+  display: flex;
+  background: var(--brown-color);
+  color: var(--main-color);
+  transition: 0.4s ease-in;
+  align-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: flex-start;
+}
+
+.sidebar-closed {
+  width: 70px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+.ul {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 100%;
+
+}
+
+.sidebar__listItem {
+  margin: 0 auto;
+  display: flex;
+  height: 20px;
+  text-decoration: none;
+  color: var(--main-color);
+  align-items: center;
+  transition: transform 0.3s ease-in-out; 
+
+}
+
+.sidebar__listItem:hover {
+  border-radius: 8px;
+  transform: scale(1.1);
+}
+
+.sidebar__listItem-closed {
+  margin: 0 auto;
+  display: flex;
+  height: 20px;
+  text-decoration: none;
+  color: var(--main-color);
+  align-items: center;
+}
+
+.sidebar__listItem span {
+  white-space: nowrap;
+width: 7rem;
+  margin-right: 15px;
+}
+
+.sidebar__icon:hover {
+
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: flex;
+    align-items: flex-start;
+    width: 100vw; 
+    justify-content: flex-start;
+    position: absolute;
+    z-index: 2;
+  }
+
+  .sidebar-closed {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    flex-wrap: wrap;
+  
+  }
+  .sidebar__listItem  {
+padding: 8px;
+  }
+.sidebar__button{
+  margin-right: 8px;
+}
+}

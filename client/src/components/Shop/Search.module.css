@@ -1,0 +1,133 @@
+.header {
+  margin-bottom: 2rem;
+}
+.main {
+  padding: 2% 10%;
+}
+.h1 {
+  font-size: 3rem;
+  width: fit-content;
+  color: var(--color-green);
+  position: relative;
+  margin-bottom: 0;
+}
+
+.h1::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 5px;
+  bottom: 1px;
+  left: 0;
+  background-color: var(--color-green);
+}
+.pheader {
+  margin-top: 10px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+}
+
+.Link {
+  color: black;
+}
+
+.searchButton {
+  background-color: white;
+  color: #03151e;
+  display: flex;
+  top: 10px;
+  border: none;
+  width: 0px;
+  position: absolute;
+  height: 0px;
+  text-align: center;
+  cursor: pointer;
+  right: 30%;
+}
+
+.inputSearch:focus {
+  outline: none;
+}
+.bookSearch {
+  width: 300px;
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  direction: ltr;
+}
+
+.inputSearch {
+  width: 70%;
+  border: none;
+  padding: 10px 0;
+  border-bottom: 1px solid black;
+  text-align: left;
+  position: relative;
+  font-size: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5rem;
+  }
+  /* .searchButton {
+    background-color: white;
+    color: #03151e;
+    border: none;
+    top: 34px;
+
+    position: absolute;
+    height: 1rem;
+    text-align: center;
+    cursor: pointer;
+    right: 0%;
+  } */
+  /* .inputSearch {
+    width: 100%;
+    border: none;
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+    text-align: left;
+    position: relative;
+    font-size: 13px;
+  } */
+}
+
+@media screen and (max-width: 450px) {
+  .h1 {
+    font-size: 1.8rem;
+  }
+
+  .h1::before {
+    width: 30%;
+    height: 3px;
+    bottom: 1px;
+  }
+
+  /* .searchButton {
+    background-color: white;
+    color: #03151e;
+    border: none;
+    top: 34px;
+    position: absolute;
+    height: 1rem;
+    text-align: center;
+    cursor: pointer;
+    right: 10%;
+  }
+  .inputSearch {
+    width: 90%;
+    border: none;
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+    text-align: left;
+    position: relative;
+    font-size: 10px;
+  } */
+}

@@ -1,0 +1,220 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.hidden {
+  transform: translateY(-100%);
+  transition: transform 0.5s ease;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  transition: transform 0.5s ease;
+  background-color: var(--main-color);
+  border-bottom: 1px solid #e9d0b1;
+}
+
+.nav {
+  height: 150px;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--main-color);
+}
+.opened {
+  position: absolute;
+  top: 10rem;
+}
+
+.nav {
+  height: 150px;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  margin: 0 var(--margin-LR);
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--main-color);
+}
+.cart {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 75px;
+  transition: all 0.3s linear;
+}
+.cart:hover {
+  filter: brightness(1.2);
+}
+
+.order {
+  width: 40px;
+  height: 40px;
+}
+.navUl {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style-type: none;
+  column-gap: 1.5rem;
+}
+
+input::placeholder {
+  align-items: center;
+  height: 3rem;
+}
+input:focus {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+li {
+  margin-top: 10px;
+}
+.link,
+.activeLink {
+  text-decoration: none;
+  color: var(--brown-color);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 10px;
+  transition: 0.6s;
+  font-size: 1.1rem;
+}
+.activeLink {
+  border-color: var(--blue-color);
+}
+.link {
+  transition: all 0.2s ease;
+}
+.link:hover {
+  color: var(--brown-color);
+}
+/* ////////////////////////login btn transition///////////////////////////////// */
+.btn {
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 170px;
+  min-height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 400;
+  position: relative;
+  border: 2px solid var(--blue-color);
+  color: white;
+  background-color: var(--blue-color);
+  overflow: hidden;
+  margin-top: 5px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 5px 5px;
+  transition: all 0.3s linear;
+}
+
+.btn:hover {
+  filter: brightness(1.2);
+}
+
+/* ////////////////////////hamburger///////////////////////////////// */
+.hamburger {
+  display: none;
+}
+.bar {
+  width: 30px;
+  display: block;
+  height: 5px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--brown-color);
+}
+/* /////////////////////////Responcive///////////////////////////// */
+
+@media (max-width: 957px) {
+  .nav {
+    margin: 0 40px;
+    width: 80%;
+  }
+  .hamburger {
+    display: block;
+    margin-left: 20px;
+  }
+
+  .dropdown {
+    position: absolute;
+    height: 100vh;
+    left: 0px;
+    top: 0; /* Adjusted to start from the top of the page */
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    background-color: var(--main-color);
+    align-items: center;
+    padding: 10px;
+    transition: top 0.3s ease; /* Add transition for smooth animation */
+    justify-content: center;
+  }
+  .navUl {
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+  }
+  li {
+    height: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 4rem;
+  }
+  .link {
+    font-size: 32px;
+  }
+
+  /* //////////////hamburger transform to x ///////////////////// */
+  .line {
+    width: 100%;
+    height: 2px;
+    list-style-type: none;
+    background-color: var(--brown-color);
+    margin-top: 3em;
+    transition: all 500ms ease;
+  }
+
+  .hamburger .bar {
+    transform-origin: 3.8% 50%;
+  }
+
+  .hamburger .lineone {
+    transform: rotate(45deg);
+  }
+
+  .hamburger .linetwo {
+    opacity: 0;
+
+    /* transform: rotate(45deg); */
+  }
+
+  .hamburger .linethree {
+    transform: rotate(-45deg);
+  }
+
+  /* ////////////////////////btn login/////////// */
+
+  .btn:hover {
+    color: var(--main-color);
+  }
+}
+/* @media (max-width: 1024px) {
+  .link{
+
+    font-size: px;
+}
+} */

@@ -1,0 +1,24 @@
+.container {
+    background-image: url(../../assets/images/bubble1.png), url(../../assets/images/bubble2.png), url(../../assets/images/bubble3.png);
+    background-position: -6% 0px , 115% 120% , 140% 120%;
+    background-repeat: no-repeat , no-repeat, no-repeat;
+    animation: bg-animation ease-in-out 4s infinite;
+}
+
+@keyframes bg-animation {
+    0% {
+        background-position: 0px 0px ,115% 120% ,140% 120% , ;
+    }
+    25% {
+        background-position: -6% 0px ,115% 130%, 150% 120% ;
+    }
+    50% {
+        background-position: 0px 0px , 115% 120% , 140% 120%;
+    }
+    75% {
+        background-position: -6% 0px ,115% 130%, 150% 120% ;
+    }
+    100% {
+        background-position: 0px 0px ,115% 120% ,140% 120% , ;
+    }
+}

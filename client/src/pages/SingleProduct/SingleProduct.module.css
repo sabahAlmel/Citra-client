@@ -1,0 +1,26 @@
+.handle {
+  display: flex;
+  justify-content: space-between;
+  margin: 151px var(--margin-LR) 0;
+}
+@media (max-width: 1320px) {
+  .handle {
+    margin: 151px 1rem 0;
+  }
+}
+@media (max-width: 1166px) {
+  .handle {
+    flex-direction: column;
+  }
+}
+@media (max-width: 800px) {
+  .handle {
+    margin: 151px 2rem 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .handle {
+    margin: 151px 1rem 0;
+  }
+}
