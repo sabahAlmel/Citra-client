@@ -140,11 +140,8 @@ function DropDownCart({ setShopping }) {
           <span>المجموع</span>
           <span>{totalPrice} $</span>
         </p>
-        <Link to="/cart" className={style.gotocart}>
-          الذهاب الى السلة
-        </Link>
-        <Link to="" className={style.gotocheckout}>
-          طلب الشراء
+        <Link to="/cart" className={style.gotocheckout}>
+        طلب الشراء
         </Link>
       </section>
     </div>
