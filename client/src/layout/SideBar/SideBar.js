@@ -15,7 +15,10 @@ import {
   faClipboardList,
   faSignOutAlt,
   faHome,
+  faSearch
+ 
 } from "@fortawesome/free-solid-svg-icons";
+
 import cx from "classnames";
 import Styles from "./Styles.module.css";
 const menuItems = [
@@ -24,6 +27,7 @@ const menuItems = [
   { title: "منتجات", icon: faShoppingBag, path: "/products" },
   { title: "طلبات", icon: faClipboardList, path: "/orders" },
   { title: " الصفحة الرئيسية", icon: faHome, path: "/" },
+  { title: "تحليلات جوجل", icon: faSearch, path: "https://analytics.google.com/analytics/web/#/p425619017/reports/intelligenthome" },
 
   // { title: "تسجيل خروج", icon: faSignOutAlt }
  

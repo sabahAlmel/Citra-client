@@ -12,29 +12,27 @@ function ProductForm({
 }) {
   console.log("Rendering ProductForm with formData:", formData);
   const handleSubCategoryChange = (e) => {
-
     const selectedSubCategory = e.target.value;
     console.log("Selected SubCategory:", selectedSubCategory);
     setSelectedSubCategory(selectedSubCategory);
-    setFormData((prevData) => ({ ...prevData,  subCategory:selectedSubCategory}));
-  
+    setFormData((prevData) => ({
+      ...prevData,
+      subCategory: selectedSubCategory,
+    }));
+
     console.log("Updated formData with subcategories after selection:", {
       ...formData,
       subCategory: selectedSubCategory,
     });
   };
-  
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     onSubmit(formData);
-    console.log("submitted form as ",formData)
+    console.log("submitted form as ", formData);
   };
 
-
-  
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [subCategoryOptions, setSubCategoryOptions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(
@@ -43,7 +41,6 @@ function ProductForm({
   const [selectedSubCategory, setSelectedSubCategory] = useState(
     subCategory ? subCategory._id : ""
   );
-
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -93,19 +90,15 @@ function ProductForm({
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
     console.log("Selected Category:", selectedCategory);
-  
+
     setSelectedCategory(selectedCategory);
     setFormData((prevData) => ({ ...prevData, category: selectedCategory }));
-  
+
     console.log("Updated formData with category after selection:", {
       ...formData,
       category: selectedCategory,
     });
   };
-  
-
-  
-  
 
   const handleDetailsChange = (index, field, value) => {
     const updatedDetails = [...formData.details];
@@ -117,7 +110,6 @@ function ProductForm({
     console.log(`Clicked on image at index ${index}`);
     // You can implement navigation or any other logic here
   };
- 
 
   const handleImageUpload = (e, index) => {
     const file = e.target.files[0];
@@ -205,7 +197,7 @@ function ProductForm({
                 </option>
                 {categoryOptions.map((category) => (
                   <option key={category._id} value={category._id}>
-                    {category.arabicName}
+                    {category.name}
                   </option>
                 ))}
               </select>
@@ -229,7 +221,7 @@ function ProductForm({
                 </option>
                 {subCategoryOptions.map((subCategory) => (
                   <option key={subCategory._id} value={subCategory._id}>
-                    {subCategory.arabicName}
+                    {subCategory.name}
                   </option>
                 ))}
               </select>

@@ -7,6 +7,7 @@ import HeroSection from "../../components/heroSection/HeroSection";
 function Home() {
   return (
     <div className={style.container}>
+     
       <HeroSection />
       <div className={style.wrapper}>
         <CategorySection />

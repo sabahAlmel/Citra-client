@@ -1,5 +1,4 @@
-
-.container{
+.container {
     width: 100%;
     /* max-width: 950px; */
     background: white;
@@ -10,9 +9,9 @@
     justify-content: center;
     max-height: 600px; /* Set a maximum height for the container */
     overflow-y: auto;
-}
-
-.formTitle{
+  }
+  
+  .formTitle {
     font-size: 26px;
     font-weight: 600;
     text-align: center;
@@ -20,44 +19,43 @@
     color: var(--brown-color);
     /* text-shadow: 2px 2px 2px  var(--blue-color); */
     border-bottom: solid 1px var(--brown-color);
-}
-
-.mainUserInfo{
+  }
+  
+  .mainUserInfo {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 20px 0;
-    
-}
-
-.userInputBox:nth-child(2n){
+  }
+  
+  .userInputBox:nth-child(2n) {
     justify-content: end;
-}
-
-.userInputBox{
+  }
+  
+  .userInputBox {
     display: flex;
     flex-wrap: wrap;
     width: 50%;
     padding-bottom: 15px;
-}
-
-.userInputBox label{
+  }
+  
+  .userInputBox label {
     width: 95%;
     color: var(--brown-color);
     font-size: 20px;
     font-weight: 400;
     margin: 5px 0;
-}
-
-.userInputBox input{
+  }
+  
+  .userInputBox input {
     height: 40px;
     width: 95%;
     border-radius: 7px;
     outline: none;
     border: 1px solid var(--brown-color);
     padding: 0 10px;
-}
-.userInputBox select{
+  }
+  .userInputBox select {
     height: 40px;
     width: 95%;
     border-radius: 7px;
@@ -65,92 +63,88 @@
     border: 1px solid var(--brown-color);
     padding: 0 10px;
     background-color: white;
-}
-
-.MuiBox-root .css-105qr5e{
-width: 70%;
-}
-/* .gender-title{
-    color:white;
-    font-size: 24px;
-    font-weight: 600;
-    border-bottom: 1px solid white;
-}
-
-.gender-category{
-    margin: 15px 0;
-    color: white;
-}
-
-.gender-category label{
-    padding: 0 20px 0 5px;
-}
-
-.gender-category label,
-.gender-category input,
-.form-submit-btn input{
-    cursor: pointer;
-} */
-
-.formSubmitBtn{
+  }
+  
+  .MuiBox-root .css-105qr5e {
+    width: 70%;
+  }
+  /* .gender-title{
+      color:white;
+      font-size: 24px;
+      font-weight: 600;
+      border-bottom: 1px solid white;
+  }
+  
+  .gender-category{
+      margin: 15px 0;
+      color: white;
+  }
+  
+  .gender-category label{
+      padding: 0 20px 0 5px;
+  }
+  
+  .gender-category label,
+  .gender-category input,
+  .form-submit-btn input{
+      cursor: pointer;
+  } */
+  
+  .formSubmitBtn {
     margin-top: 40px;
     border-color: var(--brown-color);
-    
-    
-}
-
-.formSubmitBtn Button{
+  }
+  
+  .formSubmitBtn Button {
     display: block;
     width: 100%;
     margin-top: 10px;
     font-size: 20px;
     padding: 10px;
-    border:none;
+    border: none;
     border-radius: 3px;
     color: var(--brown-color);
-    background:var(--main-color);
+    background: var(--main-color);
     font-weight: bold;
-    border: 2px solid var(--brown-color)
-    
-    
-    
-}
-
-.formSubmitBtn Button:hover{
+    border: 2px solid var(--brown-color);
+  }
+  
+  .formSubmitBtn Button:hover {
     background: var(--brown-color);
     color: rgb(255, 255, 255);
-}
-
-@media(max-width: 600px){
-    .container{
-        min-width: 280px;
-    }
-
-    .userInputBox{
-        margin-bottom: 12px;
-        width: 100%;
-    }
-
-    .userInputBox:nth-child(2n){
-        justify-content: space-between;
-    }
-
-    .gender-category{
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .main-user-info{
-        max-height: 380px;
-        overflow: auto;
-    }
-
-    .mainUserInfo::-webkit-scrollbar{
-        width: 0;
-    }
-}
-@media(max-width: 600px){
+  }
+  
+  @media (max-width: 600px) {
     .container {
-        max-height: none; /* Remove the maximum height for smaller screens */
-    }}
+      min-width: 280px;
+    }
+  
+    .userInputBox {
+      margin-bottom: 12px;
+      width: 100%;
+    }
+  
+    .userInputBox:nth-child(2n) {
+      justify-content: space-between;
+    }
+  
+    .gender-category {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+  
+    .main-user-info {
+      max-height: 380px;
+      overflow: auto;
+    }
+  
+    .mainUserInfo::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+  @media (max-width: 600px) {
+    .container {
+      max-height: none; /* Remove the maximum height for smaller screens */
+    }
+  }

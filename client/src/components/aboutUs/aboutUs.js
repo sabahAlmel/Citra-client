@@ -17,6 +17,7 @@ const AboutUs = () => {
       }}
     >
       <div className={style.textcontainer}>
+     
         <h2 className={style.title}>معلومات حول سترا</h2>
         <p className={style.description}>
           صالة مبيع منتجات سترا يعمل هذا المتجر على توفير منتجات فنية تم صنعها
