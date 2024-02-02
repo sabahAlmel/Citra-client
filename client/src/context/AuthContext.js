@@ -9,30 +9,34 @@ export const AuthProvider = ({ children }) => {
 
   //Fetch user data
 
-   const fetchUserData = async() =>{
-      try {
-          setCheckUser(true);
-          const response = await axiosInstance.post('/user/login')
-          console.log("fetch user data ",response.data);
-          setUser(response.data.token.data)
-          console.log("user auth:",user)
-      }catch (error) {
-          console.error("Error fetching user data", error);
-          setUser(null);
-      } finally {
-          setCheckUser(false);
-          setLoading(false); // Set loading to false when the operation is done
-      }
-   };
+  const fetchUserData = async () => {
+    try {
+      setCheckUser(true);
+      const response = await axiosInstance.post("/user/login");
+      console.log("response from fetchUser function", response);
+      console.log("fetch user data ", response.data);
+      setUser(response.data.token.data);
+      console.log("user auth:", user);
+    } catch (error) {
+      console.error("Error fetching user data", error);
+      setUser(null);
+    } finally {
+      setCheckUser(false);
+      setLoading(false); // Set loading to false when the operation is done
+    }
+  };
 
   const fetchUserDataone = async (email, password) => {
     try {
       console.log("authcontext process");
       setCheckUser(true);
-      const response = await axiosInstance.get(`http://localhost:5000/user/getone`, {
-        email: email,
-        password: password,
-      });
+      const response = await axiosInstance.get(
+        `http://localhost:5000/user/getone`,
+        {
+          email: email,
+          password: password,
+        }
+      );
       console.log("fetchuserdata", response);
       setUser(response.data);
     } catch (err) {
@@ -55,7 +59,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, checkUser, fetchUserData, fetchUserDataone,logout, loading }}
+      value={{
+        user,
+        setUser,
+        checkUser,
+        fetchUserData,
+        fetchUserDataone,
+        logout,
+        loading,
+      }}
     >
       {children}
     </AuthContext.Provider>
