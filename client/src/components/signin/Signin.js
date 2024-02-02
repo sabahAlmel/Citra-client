@@ -79,41 +79,43 @@ function Signin() {
     if (!formData.email || !formData.password) {
       toast.error("أدخل البريد والإسم");
       setIsPending(false);
-    } else {
-      setFormData({
-        email: "",
-        password: "",
-      });
 
-      try {
-        const res = await apiCall({
-          url: "/user/login",
-          method: "post",
-          data: {
-            email: formData.email,
-            password: formData.password,
-          },
-        });
-        setUser(res.token.data);
-        console.log("user:", user);
-        console.log("resis", res);
-        console.log("role", res.token.data.role);
-        console.log("call auth");
-        fetchUserDataone();
-        toast.success("تم تسجيل الدخول بنجاح");
-        setIsPending(false);
-        if (res.token.data.role === "admin" ) {
-          navigate("/users");
-        } else if (res.token.data.role === "user") {
-          navigate("/");
-        }
-      } catch (error) {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.errors
-        ) {
-          const { errors } = error.response.data;
+      return;
+    }
+
+    setFormData({
+      email: "",
+      password: "",
+    });
+
+    try {
+      const res = await apiCall({
+        url: "/user/login",
+        method: "post",
+        data: {
+          email: formData.email,
+          password: formData.password,
+        },
+      });
+      setUser(res.token.data.role);
+      console.log("user:", user);
+      console.log("resis", res);
+      console.log("role", res.token.data.role);
+      console.log("call auth");
+      // fetchUserData();
+      fetchUserDataone()
+      toast.success("تم تسجيل الدخول بنجاح");
+      setIsPending(false);
+      if (res.token.data.role === "admin") {
+        navigate("/users");
+      } else if (res.token.data.role === "dataEntry") {
+        navigate("/products");
+      }
+      else navigate("/")
+      
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.errors) {
+        const { errors } = error.response.data;
 
           if (errors.email) {
             const emailError = errors.email;
@@ -339,6 +341,6 @@ function Signin() {
       )}
     </form>
   );
-}
 
+      }
 export default Signin;
