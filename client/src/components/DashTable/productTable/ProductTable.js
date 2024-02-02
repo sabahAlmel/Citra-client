@@ -132,30 +132,7 @@ const ProductTable = () => {
     { field: "categoryName", headerName: "التصنيف", flex: 0.5 },
     { field: "subCategoryName", headerName: "تصنيف فرعي", flex: 0.5 },
 
-    {
-      field: "images",
-      headerName: "Images",
-      flex: 1,
-      renderCell: (params) => {
-        <>
-          {/* {params.row.images.map((img) => {
-            <>
-              <img
-                src={process.env.REACT_APP_BACKEND + img}
-                alt="product_image"
-                height="25px"
-                width="25px"
-              />
-            </>;
-          })} */}
-          <img
-            src={process.env.REACT_APP_BACKEND + rows[1].images[0]}
-            height="25px"
-            width="25px"
-          />
-        </>;
-      },
-    },
+    
 
     // Add more columns as needed
     {
