@@ -35,7 +35,6 @@ const ProductTable = () => {
     data: ProductData,
   } = useQuery(["user-table", page], () => fetchProducts(page));
 
-
   React.useEffect(() => {
     if (ProductData) {
       const updatedRows = ProductData?.products.map((product) => {
@@ -46,6 +45,7 @@ const ProductTable = () => {
         const subCategoryName = product.subCategoryID
           ? product.subCategoryID.name
           : null;
+        console.log("subCategoryName", subCategoryName);
 
         return {
           ...product,
@@ -99,8 +99,6 @@ const ProductTable = () => {
     { field: "description", headerName: "لوصف", flex: 0.5 },
     { field: "categoryName", headerName: "التصنيف", flex: 0.5 },
     { field: "subCategoryName", headerName: "تصنيف فرعي", flex: 0.5 },
-
-    
 
     // Add more columns as needed
     {

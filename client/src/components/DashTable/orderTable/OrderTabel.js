@@ -117,7 +117,7 @@ export default function DashTable() {
       await axios.put(`${process.env.REACT_APP_BACKEND}order/${orderId}`, {
         status: newStatus,
       });
-      if (newStatus === "Cancel") {
+      if (newStatus === "الغاء") {
         console.log("Deleting order with ID:", orderId);
         await axios.delete(`${process.env.REACT_APP_BACKEND}order/${orderId}`);
         console.log("Order deleted successfully!");
@@ -219,7 +219,10 @@ export default function DashTable() {
               <InputLabel
                 id={`status-label-${params.id}`}
                 style={{
-                  color: params.row.status === "تم التسليم" ? "var(--blue-color)" : "",
+                  color:
+                    params.row.status === "تم التسليم"
+                      ? "var(--blue-color)"
+                      : "",
                 }}
               >
                 {params.row.status || "Select Status"}
