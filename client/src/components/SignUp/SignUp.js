@@ -135,6 +135,7 @@ function SignUpp() {
 
   return (
     <>
+     
       <form onSubmit={handleSubmit} className={styles.wrapper}>
         <main className={styles.main}>
           <ToastContainer />

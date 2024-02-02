@@ -144,7 +144,7 @@ const ProductTable = () => {
                 backgroundColor: "var(--blue-color)",
               },
             }}
-            onClick={() => handleRowClickDelete(params.row.id)}
+            onClick={() => handleRowClickDelete(params)}
           >
             حذف
           </Button>

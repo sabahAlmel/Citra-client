@@ -1,20 +1,22 @@
 import React, { createContext, useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
-import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [checkUser, setCheckUser] = useState(true);
+  const [checkUser, setCheckUser] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  //   Fetch user data
+  //Fetch user data
 
   const fetchUserData = async () => {
     try {
       setCheckUser(true);
-      const response = await axiosInstance.get("/user/getone");
-      setUser(response.data);
+      const response = await axiosInstance.post("/user/login");
+      console.log("response from fetchUser function", response);
+      console.log("fetch user data ", response.data);
+      setUser(response.data.token.data);
+      console.log("user auth:", user);
     } catch (error) {
       console.error("Error fetching user data", error);
       setUser(null);
@@ -48,17 +50,13 @@ export const AuthProvider = ({ children }) => {
   // logout
   const logout = async () => {
     try {
-      await axiosInstance.get("/user/logout");
+      await axiosInstance.post("/user/logout");
       setUser(null);
       toast.success("تم تسجيل الخروج");
     } catch (error) {
       console.error("Logout error:", error);
     }
   };
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
 
   return (
     <AuthContext.Provider

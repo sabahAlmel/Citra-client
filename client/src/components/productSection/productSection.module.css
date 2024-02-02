@@ -22,21 +22,33 @@
   height: 470px;
 }
 
-.card {
+@media (max-width: 768px) {
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.productSection {
+  font-size: 20px;
   display: flex;
-  flex-direction: column;
+  gap: 26px;
   justify-content: center;
-  align-items: center;
-  color: var(--brown-color);
-  transition: 0.6s;
-  min-height: 430px !important;
+  flex-wrap: wrap;
+  margin: 2rem;
+  min-height: 600px;
 }
-.card:hover {
-  scale: 0.9;
-  cursor: pointer;
+@media (max-width: 530px) {
+  .productSection {
+    margin: 2rem 0.5rem;
+  }
 }
-.card a {
+.shopContainer {
+  margin-right: 280px;
+}
+.productHolder {
+  background-color: #fee7cb26;
   display: inline-block;
+  position: relative;
   text-decoration: none;
   color: var(--brown-color);
   width: 300px;
@@ -48,28 +60,42 @@
 }
 .lower {
   height: 20%;
+  height: 400px;
+  /* width: 300px; */
+  padding: 20px;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  transition: all 0.3s;
+}
+.productHolder:hover {
+  box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
+  transform: scale3d(1.05, 1.05, 1.05);
+}
+.productHolder img {
+  height: 300px;
+  display: block;
+  border-radius: var(--border-radius);
+  transition: 1s cubic-bezier(0, 0, 0.2, 1);
   width: 100%;
-  background-color: #f1cab12e;
-  border-bottom-left-radius: var(--border-radius);
-  border-bottom-right-radius: var(--border-radius);
-  padding: 10px;
+}
+
+.details {
+  margin-top: 10px;
+}
+.details div {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  row-gap: 10px;
+  gap: 10px;
+  direction: rtl;
 }
-.price {
-  text-align: center;
+
+.cart:hover {
+  cursor: pointer;
 }
-div.card {
-  width: 0 !important;
-}
-@media (max-width: 768px) {
-  .cardContainer {
-    display: flex;
-    flex-direction: column;
-  }
+
+.collapse {
+  display: flex;
+  position: relative;
 }
 .productSection {
   font-size: 20px;

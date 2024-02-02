@@ -28,6 +28,7 @@ function AppRoutes() {
         <Route path="/singleProduct" element={<SingleProduct />}></Route>
         <Route path="/forgetpassword" element={<ForgetPassword />}></Route>
         <Route path="/orderform" element={<AddressForm />}></Route>
+        <Route path="/orderform" element={<AddressForm />}></Route>
         <Route path="/test" element={<AddProduct />}></Route>
       </Route>
       <Route path="/signin" element={<SignIn />}></Route>

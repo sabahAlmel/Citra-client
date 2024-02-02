@@ -15,10 +15,10 @@ const DashTable = () => {
   const [rows, setRows] = React.useState([]); //data for all rows
   const { isLoading, data: usersData } = useQuery("user-table", fetchUsers);
   const [openModal, setOpenModal] = useState(false); // State for modal open/close
-  const [pageSize, setPageSize] = useState(5);
+  const [selectedRowData, setSelectedRowData] = useState(); // Initialize selectedRowData
   const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
   const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
-  const [selectedRowData, setSelectedRowData] = useState(null); // Initialize selectedRowData
 
   const handleRowClickDelete = async (userId) => {
     try {
@@ -183,7 +183,7 @@ const DashTable = () => {
     rowLength: 100,
   };
   if (isLoading) {
-    return <LoadingPage />;
+    <LoadingPage />;
   }
   return (
     <Box

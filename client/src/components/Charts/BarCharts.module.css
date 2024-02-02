@@ -2,6 +2,7 @@
   height: 100%;
   width: 100%;
   display: flex;
+  margin: 0 30px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -9,14 +10,14 @@
   gap: 1vw;
   flex-wrap: wrap;
   background-color: white;
-  /* position: relative; */
+  /* position: relative; / */
 }
 
 .title1 {
   position: absolute;
-  top: 0; /* Position at the top */
-  left: 50%; /* Position at the center horizontally */
-  transform: translateX(-50%); /* Center horizontally */
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: white;
   padding: 7px;
   font-weight: bold;
@@ -32,43 +33,57 @@
 }
 
 .revenueCard {
-  width: 92%;
+  width: 89.5%;
   height: 20rem;
 }
 
 .customerCard {
-  width: 50%;
+  width: 44%;
   height: 20rem;
 }
 
 .categoryCard {
-  width: 40%;
+  width: 44%;
   height: 20rem;
 }
 
 .cardsWrapper {
   /* display: flex;
-  flex-direction: row;
-  /* margin: 5px; */
-  /* padding: 1rem; */
-  /* gap: 85px; */
+flex-direction: row;
+margin: 5px; 
+padding: 1rem; 
+gap: 85px;  */
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 5.8rem;
+  justify-content: space-around;
+  gap: 11.7rem;
 }
 .card {
   flex: 1 0 250px;
   margin-bottom: 20px;
+  margin-right: 100px;
+  background-color: #ffffff;
 }
-@media (max-width: 768px) {
-  .card {
-    flex: 1 0 100%;
-  }
+
+@media (max-width: 1660px) and (min-width: 768) {
   .cardsWrapper {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: row;
     gap: 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .cardsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .AppChart {
+    display: flex;
+    flex-direction: column;
+  }
+  .categoryCard {
+    width: 50%;
+    height: 20rem;
   }
 }

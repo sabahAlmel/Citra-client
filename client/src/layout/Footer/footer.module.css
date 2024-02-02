@@ -24,6 +24,17 @@
   margin: 0 auto;
   padding: 15px 0;
 }
+.bigWrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-color);
+}
+.copyRight {
+  direction: ltr;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 15px 0;
+}
 .company {
   font-size: 24px;
   color: var(--brown-color);

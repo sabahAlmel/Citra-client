@@ -1,7 +1,6 @@
 .wrapper {
-  padding-top: 150px;
-  /* padding-top: 151px; */
-  height: calc(120vh + 150px);
+  padding-top: 151px;
+  height: calc(120vh + 151px);
   width: 100%;
   display: flex;
   flex-direction: column;

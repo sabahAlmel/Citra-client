@@ -197,7 +197,7 @@ function ProductForm({
                 </option>
                 {categoryOptions.map((category) => (
                   <option key={category._id} value={category._id}>
-                    {category.name}
+                    {category.arabicName}
                   </option>
                 ))}
               </select>
@@ -221,7 +221,7 @@ function ProductForm({
                 </option>
                 {subCategoryOptions.map((subCategory) => (
                   <option key={subCategory._id} value={subCategory._id}>
-                    {subCategory.name}
+                    {subCategory.arabicName}
                   </option>
                 ))}
               </select>

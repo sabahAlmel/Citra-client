@@ -138,6 +138,7 @@ export default function DashTable() {
       console.error("Error updating order status:", error);
     }
   };
+
   const columns = [
     {
       field: "orderNB",
@@ -158,8 +159,8 @@ export default function DashTable() {
       cellClassName: "delete-cell",
     },
     {
-      field: "userId",
-      headerName: "اسم المستخدم ",
+      field: "userName",
+      headerName: "اسم المستخدم",
       type: "",
       width: 180,
       align: "left",
@@ -276,6 +277,7 @@ export default function DashTable() {
       ),
     },
   ];
+
   const data = {
     rows,
     columns,
