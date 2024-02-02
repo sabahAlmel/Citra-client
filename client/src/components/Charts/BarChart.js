@@ -167,29 +167,31 @@ const BarChart = () => {
 
   //for card two
   useEffect(() => {
-    // Function to calculate total revenue for the current day
-    const calculateTotalRevenueToday = () => {
-      // Get current date
-      const currentDate = new Date();
-      currentDate.setHours(0, 0, 0, 0); 
+    console.log('All Orders:', orderss);
 
-      // Filter orders placed on the current day
+    const calculateTotalRevenueToday = () => {
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
+
+      console.log('Current Date:', currentDate);
+
       const ordersToday = orderss.filter((order) => {
         const orderDate = new Date(order.createdAt);
-        return orderDate >= currentDate;
+
+        console.log('Order Date:', orderDate);
+
+        // Check if the order date is on or after the current date
+        return orderDate <= currentDate;
       });
-
-      // Calculate total revenue from orders today
       const totalRevenueToday = ordersToday.reduce((total, order) => total + order.totalPrice, 0);
-
       setTotalRevenueToday(totalRevenueToday);
     };
 
-    // Call the function to calculate total revenue
-    calculateTotalRevenueToday();
+    // Check if orderss is not empty before calculating
+    if (orderss.length > 0) {
+      calculateTotalRevenueToday();
+    }
   }, [orderss]);
-
-
 
   //for card four 
   useEffect(() => {
@@ -240,7 +242,7 @@ const BarChart = () => {
             },
             plugins: {
               title: {
-                text: "Monthly Revenue & Cost",
+                text: "Monthly Revenue",
               },
             },
           }}

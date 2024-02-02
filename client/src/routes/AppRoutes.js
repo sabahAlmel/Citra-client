@@ -50,8 +50,6 @@ function AppRoutes() {
         path="/users"
         element={
           <ProtectedRoute>
-
-         
             <LayoutWithSidebar>
               {" "}
               <Users />
@@ -62,12 +60,12 @@ function AppRoutes() {
       <Route
         path="/overview"
         element={
-          <ProtectedRoute>
+          
             <LayoutWithSidebar>
               {" "}
               <OverView />
             </LayoutWithSidebar>
-            </ProtectedRoute>
+           
         }
       ></Route>
       <Route

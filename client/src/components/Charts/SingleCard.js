@@ -13,20 +13,20 @@ export const CardBalanceOne = (props) => {
           sx={{
             width: 320,
             height: 170,
-            pt: 0.5,
-            pb: 0.5,
             borderRadius: "12px",
             border: "1px solid #E6E9EE",
-            backgroundColor: "#fee7cb",
+            backgroundColor: "#ffffff",
           }}
         >
           {/* <div className={SingleCards.box1}> */}
           <Box
             sx={{
-              borderLeft: "8px solid",
+              // borderRight: "20px solid #368681",
+              borderBottom: "20px solid #368681",
+              borderLeft: "20px solid #fee7cb",
               height: "100%",
               borderRadius: 2,
-              borderLeftColor: "#368681",
+              
             }}
           >
             <Typography
@@ -35,6 +35,8 @@ export const CardBalanceOne = (props) => {
                 p: 2,
                 ml: 2,
                 color: "#4D342B",
+                textAlign:"center",
+                fontWeight:"bold"
               }}
             >
               قيمة الطلب الإجمالي
@@ -47,6 +49,7 @@ export const CardBalanceOne = (props) => {
                 fontWeight: "600",
                 fontSize: "20px",
                 color: "#368681",
+                textAlign:"center"
               }}
             >
               {averageOrderValue !== null
@@ -61,8 +64,8 @@ export const CardBalanceOne = (props) => {
   );
 };
 
-export const CardBalanceTwo = (data) => {
-  const { totalRevenueToday } = data;
+export const CardBalanceTwo = (revenue) => {
+  const { totalRevenueToday } = revenue;
   return (
     <>
       <div className={SingleCards.main}>
@@ -71,20 +74,18 @@ export const CardBalanceTwo = (data) => {
           sx={{
             width: 320,
             height: 170,
-            pt: 0.5,
-            pb: 0.5,
             borderRadius: "12px",
             border: "1px solid #E6E9EE",
-            backgroundColor: "#fee7cb",
+            backgroundColor: "#ffffff",
           }}
         >
           {/* <div className={SingleCards.box1}> */}
           <Box
             sx={{
-              borderLeft: "8px solid",
+              borderBottom: "20px solid #368681",
+              borderLeft: "20px solid #fee7cb",
               height: "100%",
               borderRadius: 2,
-              borderLeftColor: "#368681",
             }}
           >
             <Typography
@@ -93,9 +94,11 @@ export const CardBalanceTwo = (data) => {
                 p: 2,
                 ml: 2,
                 color: "#4D342B",
+                textAlign:"center",
+                fontWeight:"bold"
               }}
             >
-              مجموع الأرباح في اليوم
+              إجمالي الربح اليومي
             </Typography>
             <Typography
               variant="body1"
@@ -105,9 +108,12 @@ export const CardBalanceTwo = (data) => {
                 fontWeight: "600",
                 fontSize: "20px",
                 color: "#368681",
+                textAlign:"center",
+
               }}
             >
-              {totalRevenueToday}$
+              {totalRevenueToday !== null ? `${totalRevenueToday} $`: "Loading..." }
+
             </Typography>
           </Box>
           {/* </div> */}
@@ -127,20 +133,18 @@ export const CardBalanceThree = (users) => {
           sx={{
             width: 320,
             height: 170,
-            pt: 0.5,
-            pb: 0.5,
             borderRadius: "12px",
             border: "1px solid #E6E9EE",
-            backgroundColor: "#fee7cb",
+            backgroundColor: "#ffffff",
           }}
         >
           {/* <div className={SingleCards.box1}> */}
           <Box
             sx={{
-              borderLeft: "8px solid",
+              borderBottom: "20px solid #368681",
+              borderLeft: "20px solid #fee7cb",
               height: "100%",
               borderRadius: 2,
-              borderLeftColor: "#368681",
             }}
           >
             <Typography
@@ -149,6 +153,8 @@ export const CardBalanceThree = (users) => {
                 p: 2,
                 ml: 2,
                 color: "#4D342B",
+                textAlign:"center",
+                fontWeight:"bold"
               }}
             >
               إجمالي المستخدمين
@@ -161,6 +167,8 @@ export const CardBalanceThree = (users) => {
                 fontWeight: "600",
                 fontSize: "20px",
                 color: "#368681",
+                textAlign:"center",
+
               }}
             >
               {totalUsers !== null ? `${totalUsers} مستخدم` : "Loading..."}
@@ -182,20 +190,18 @@ export const CardBalanceFour = (product) => {
           sx={{
             width: 320,
             height: 170,
-            pt: 0.5,
-            pb: 0.5,
             borderRadius: "12px",
             border: "1px solid #E6E9EE",
-            backgroundColor: "#fee7cb",
+            backgroundColor: "#ffffff",
           }}
         >
           {/* <div className={SingleCards.box1}> */}
           <Box
             sx={{
-              borderLeft: "8px solid",
+              borderBottom: "20px solid #368681",
+              borderLeft: "20px solid #fee7cb",
               height: "100%",
               borderRadius: 2,
-              borderLeftColor: "#368681",
             }}
           >
             <Typography
@@ -204,6 +210,8 @@ export const CardBalanceFour = (product) => {
                 p: 2,
                 ml: 2,
                 color: "#4D342B",
+                textAlign:"center",
+                fontWeight:"bold"
               }}
             >
               إجمالي المنتجات
@@ -216,6 +224,7 @@ export const CardBalanceFour = (product) => {
                 fontWeight: "600",
                 fontSize: "20px",
                 color: "#368681",
+                textAlign:"center",
               }}
             >
               {totalProducts !== null ? `${totalProducts} منتجات` : "Loading..."}

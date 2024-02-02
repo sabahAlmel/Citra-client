@@ -55,26 +55,33 @@ margin: 5px;
 padding: 1rem; 
 gap: 85px;  */
 display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
-gap: 7.8rem;
+justify-content: space-around;
+gap: 11.7rem;
 
 }
 .card {
 flex: 1 0 250px;
 margin-bottom: 20px;
 margin-right: 100px;
+background-color: #ffffff;
+}
+
+@media (max-width:1660px) and (min-width:768){
+  .cardsWrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+
 }
 @media (max-width: 768px) {
-.card {
-  flex: 1 0 100%;
-}
+
 .cardsWrapper{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 2rem;
 }
+
 .AppChart{
   display: flex;
   flex-direction: column;
