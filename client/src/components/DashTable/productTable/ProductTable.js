@@ -35,7 +35,6 @@ const ProductTable = () => {
     data: ProductData,
   } = useQuery(["user-table", page], () => fetchProducts(page));
 
-
   React.useEffect(() => {
     if (ProductData) {
       const updatedRows = ProductData?.products.map((product) => {
@@ -145,7 +144,7 @@ const ProductTable = () => {
                 backgroundColor: "var(--blue-color)",
               },
             }}
-            onClick={() => handleRowClickDelete(params)}
+            onClick={() => handleRowClickDelete(params.row.id)}
           >
             حذف
           </Button>

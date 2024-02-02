@@ -48,6 +48,7 @@
   width: 100%;
   padding: 30px;
   padding-bottom: 0;
+  background-color: var(--main-color);
 }
 .right,
 .side {

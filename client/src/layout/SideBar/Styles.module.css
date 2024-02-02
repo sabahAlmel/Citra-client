@@ -33,8 +33,6 @@
   cursor: pointer;
   margin-top: 14px;
   margin-bottom: 44px;
-
-
 }
 
 .activelink {
@@ -92,7 +90,6 @@
   align-items: flex-end;
   flex-direction: column;
   width: 100%;
-
 }
 
 .sidebar__listItem {
@@ -102,8 +99,7 @@
   text-decoration: none;
   color: var(--main-color);
   align-items: center;
-  transition: transform 0.3s ease-in-out; 
-
+  transition: transform 0.3s ease-in-out;
 }
 
 .sidebar__listItem:hover {
@@ -122,23 +118,21 @@
 
 .sidebar__listItem span {
   white-space: nowrap;
-width: 7rem;
+  width: 7rem;
   margin-right: 15px;
 }
 
 .sidebar__icon:hover {
-
   justify-content: center;
   align-items: center;
   align-content: center;
-  
 }
 
 @media (max-width: 768px) {
   .sidebar {
     display: flex;
     align-items: flex-start;
-    width: 100vw; 
+    width: 100vw;
     justify-content: flex-start;
     position: absolute;
     z-index: 2;
@@ -150,12 +144,11 @@ width: 7rem;
     flex-direction: column;
     align-content: flex-start;
     flex-wrap: wrap;
-  
   }
-  .sidebar__listItem  {
-padding: 8px;
+  .sidebar__listItem {
+    padding: 8px;
   }
-.sidebar__button{
-  margin-right: 8px;
-}
+  .sidebar__button {
+    margin-right: 8px;
+  }
 }

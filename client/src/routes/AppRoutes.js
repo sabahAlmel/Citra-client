@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home/Home.js";
 import AddProduct from "../components/AddProduct/AddProduct.js";
-import AddressForm from "../../src/components/AddressForm/AddressForm.js"
+import AddressForm from "../../src/components/AddressForm/AddressForm.js";
 import Products from "../pages/Dashboard/Products/Products.js";
 import Users from "../pages/Dashboard/Users/Users.js";
 import OverView from "../pages/Dashboard/OverView/OverView.js";
@@ -33,30 +33,26 @@ function AppRoutes() {
       <Route path="/signin" element={<SignIn />}></Route>
       <Route path="/signup" element={<SignUp />}></Route>
 
-{/* protected route  */}
+      {/* protected route  */}
       <Route
         path="/products"
         element={
           <ProtectedRoute>
-
-       
             <LayoutWithSidebar>
               <Products />
             </LayoutWithSidebar>
-            </ProtectedRoute>
+          </ProtectedRoute>
         }
       ></Route>
       <Route
         path="/users"
         element={
           <ProtectedRoute>
-
-         
             <LayoutWithSidebar>
               {" "}
               <Users />
             </LayoutWithSidebar>
-            </ProtectedRoute>
+          </ProtectedRoute>
         }
       ></Route>
       <Route
@@ -67,7 +63,7 @@ function AppRoutes() {
               {" "}
               <OverView />
             </LayoutWithSidebar>
-            </ProtectedRoute>
+          </ProtectedRoute>
         }
       ></Route>
       <Route
@@ -78,7 +74,7 @@ function AppRoutes() {
               {" "}
               <Order />
             </LayoutWithSidebar>
-             </ProtectedRoute>
+          </ProtectedRoute>
         }
       ></Route>
 

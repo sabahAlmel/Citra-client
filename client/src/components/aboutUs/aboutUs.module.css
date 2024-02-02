@@ -10,7 +10,7 @@
 }
 
 .contentsection .image {
-  /* width: 40%; */
+  width: 40%;
   max-width: 475px;
   height: 551px;
   border-top-left-radius: 80px;
@@ -51,8 +51,9 @@
   }
 
   .contentsection .image {
-    width: 250px;
+    /* width: 250px; */
     margin-bottom: 20px;
+    width: 70%;
   }
 
   .contentsection {

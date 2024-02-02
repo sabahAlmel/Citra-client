@@ -2,7 +2,7 @@ import axios from "axios";
 export async function fetchProducts(nb) {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_BACKEND}product/all-data`
+      `${process.env.REACT_APP_BACKEND}product/getall?page=${nb}`
     );
     return response.data;
   } catch (error) {

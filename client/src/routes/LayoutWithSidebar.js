@@ -15,8 +15,8 @@ function LayoutWithSidebar({ children }) {
         }}
       >
         {" "}
-          <Sidebar />
-          {children}
+        <Sidebar />
+        {children}
       </div>
     </>
   );

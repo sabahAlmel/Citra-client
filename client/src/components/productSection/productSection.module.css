@@ -22,6 +22,49 @@
   height: 470px;
 }
 
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--brown-color);
+  transition: 0.6s;
+  min-height: 430px !important;
+}
+.card:hover {
+  scale: 0.9;
+  cursor: pointer;
+}
+.card a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--brown-color);
+  width: 300px;
+  height: 400px;
+}
+.image {
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+}
+.lower {
+  height: 20%;
+  width: 100%;
+  background-color: #f1cab12e;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 10px;
+}
+.price {
+  text-align: center;
+}
+div.card {
+  width: 0 !important;
+}
 @media (max-width: 768px) {
   .cardContainer {
     display: flex;

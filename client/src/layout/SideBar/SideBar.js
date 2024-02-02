@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
@@ -25,31 +23,8 @@ const menuItems = [
   { title: "طلبات", icon: faClipboardList, path: "/orders" },
   { title: " الصفحة الرئيسية", icon: faHome, path: "/" },
 
-  // { title: "تسجيل خروج", icon: faSignOutAlt }
- 
-
+  { title: "تسجيل خروج", icon: faSignOutAlt },
 ];
-// const logout = async () => {
-//   try{
-
-
-//         await axios.get(`${process.env.REACT_APP_API}user/logout`);
-//   setUser(null);
-//     } catch (error) {
-//     console.error("Error logging out:", error);
-//   }
-// };
-// const navigate = useNavigate();
-// const handleLogout = () => {
-//   try {
-//     // setUser(null);
-
-//     logout(); // Call the logout function from AuthContext
-//     navigate("/");
-//   } catch (error) {
-//     console.log("err from handle logout", error);
-//   }
-// };
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();

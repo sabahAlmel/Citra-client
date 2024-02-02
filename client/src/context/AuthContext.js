@@ -5,19 +5,16 @@ import { toast } from "react-toastify";
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [checkUser, setCheckUser] = useState(false);
+  const [checkUser, setCheckUser] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  //Fetch user data
+  //   Fetch user data
 
   const fetchUserData = async () => {
     try {
       setCheckUser(true);
-      const response = await axiosInstance.post("/user/login");
-      console.log("response from fetchUser function", response);
-      console.log("fetch user data ", response.data);
-      setUser(response.data.token.data);
-      console.log("user auth:", user);
+      const response = await axiosInstance.get("/user/getone");
+      setUser(response.data);
     } catch (error) {
       console.error("Error fetching user data", error);
       setUser(null);
@@ -53,11 +50,15 @@ export const AuthProvider = ({ children }) => {
     try {
       await axiosInstance.get("/user/logout");
       setUser(null);
-      // toast.success("loggedout");
+      toast.success("تم تسجيل الخروج");
     } catch (error) {
       console.error("Logout error:", error);
     }
   };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -66,8 +67,8 @@ export const AuthProvider = ({ children }) => {
         setUser,
         checkUser,
         fetchUserData,
-        fetchUserDataone,
         logout,
+        fetchUserDataone,
         loading,
       }}
     >

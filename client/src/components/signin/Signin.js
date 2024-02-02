@@ -19,7 +19,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 function Signin() {
-  const { setUser, fetchUserData, fetchUserDataone,user } = useContext(AuthContext);
+  const { setUser, fetchUserData, fetchUserDataone, user } =
+    useContext(AuthContext);
   const [disabled, setDisabled] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const { apiCall } = useApi();
@@ -103,16 +104,14 @@ function Signin() {
       console.log("role", res.token.data.role);
       console.log("call auth");
       // fetchUserData();
-      fetchUserDataone()
+      fetchUserDataone();
       toast.success("تم تسجيل الدخول بنجاح");
       setIsPending(false);
       if (res.token.data.role === "admin") {
         navigate("/users");
       } else if (res.token.data.role === "dataEntry") {
         navigate("/products");
-      }
-      else navigate("/")
-      
+      } else navigate("/");
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
         const { errors } = error.response.data;
@@ -174,8 +173,6 @@ function Signin() {
       }
     }
   };
- 
-
 
   return (
     <form onSubmit={handleSubmit} className={styles.wrapper}>
@@ -275,6 +272,7 @@ function Signin() {
             fullWidth
             type="submit"
             onClick={() => fetchUserData(formData.email, formData.password)}
+            disabled={isPending}
             sx={{
               marginBottom: "1rem",
               height: 35,
