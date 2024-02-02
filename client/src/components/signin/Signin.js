@@ -15,22 +15,23 @@ import { auth, provider } from "../../Firebase";
 import { signInWithPopup } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
 import useApi from "../../hooks/useApi";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 function Signin() {
-  const { setUser, fetchUserData, fetchUserDataone, user } =
-    useContext(AuthContext);
+  const { setUser, fetchUserData, fetchUserDataone,user } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const { apiCall } = useApi();
   const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const { apiCall } = useApi();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
   const [open, setOpen] = useState(false);
 
   async function getUser() {
@@ -71,10 +72,9 @@ function Signin() {
       [name]: value,
     }));
   };
-  // sign in
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     setIsPending(true);
     if (!formData.email || !formData.password) {
       toast.error("أدخل البريد والإسم");
@@ -117,19 +117,18 @@ function Signin() {
       if (error.response && error.response.data && error.response.data.errors) {
         const { errors } = error.response.data;
 
-          if (errors.email) {
-            const emailError = errors.email;
-            toast.error(emailError);
-          }
-          if (errors.password) {
-            const passwordError = errors.password;
-            toast.error(passwordError);
-          }
-        } else {
-          toast.error(error.message);
+        if (errors.email) {
+          const emailError = errors.email;
+          toast.error(emailError);
         }
-        setIsPending(false);
+        if (errors.password) {
+          const passwordError = errors.password;
+          toast.error(passwordError);
+        }
+      } else {
+        toast.error(error.message);
       }
+      setIsPending(false);
     }
   };
 
@@ -175,6 +174,8 @@ function Signin() {
       }
     }
   };
+ 
+
 
   return (
     <form onSubmit={handleSubmit} className={styles.wrapper}>
@@ -216,10 +217,10 @@ function Signin() {
                 fontSize: "16px",
               },
             }}
-            id="filled-basic"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
+            id="filled-basic"
             label="البريد"
             variant="filled"
             type="email"
@@ -248,10 +249,10 @@ function Signin() {
                 width: "300px",
               },
             }}
-            id="filled-basic"
             name="password"
             value={formData.password}
             onChange={handleInputChange}
+            id="filled-basic"
             label="كلمة المرور"
             variant="filled"
             type={textPass}
@@ -341,6 +342,6 @@ function Signin() {
       )}
     </form>
   );
+}
 
-      }
 export default Signin;
