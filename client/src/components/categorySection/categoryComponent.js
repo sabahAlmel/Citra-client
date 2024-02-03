@@ -8,7 +8,7 @@ import accessories from "../../assets/images/accessories.jpg";
 import takem from "../../assets/images/test.jpg";
 import crochet from "../../assets/images/crochet.jpg";
 import mashlah from "../../assets/images/mashlah2.jpg";
-import masbaha from "../../assets/images/masabeh.jpg";
+import masbaha from "../../assets/images/masabeh.jpeg";
 
 const CategoryComponent = ({ data }) => {
   let image;

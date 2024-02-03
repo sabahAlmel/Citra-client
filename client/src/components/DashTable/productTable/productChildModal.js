@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import ProductForm from "../../../components/productForm/ProductForm";
 import axios from "axios";
 import ProductForm from "../../../components/productForm/ProductForm.js";
 import { toast } from "react-toastify";

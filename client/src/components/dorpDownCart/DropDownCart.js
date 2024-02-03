@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import trashCan from "../../assets/icons/blueTrashCan.svg";
 import redTrashCan from "../../assets/icons/redTrashCan.svg";
 import { toast } from "react-toastify";
-import hijaba2 from "../../assets/images/hijabi2.jpg";
+import test from "../../assets/images/test.jpg";
 
 function Img({ onClick }) {
   const [hover, setHover] = useState(false);
@@ -103,7 +103,7 @@ function DropDownCart({ setShopping }) {
                   src={
                     product.image
                       ? `${process.env.REACT_APP_BACKEND}${product.image}`
-                      : hijaba2
+                      : test
                   }
                   alt="overview"
                   height="120px"
