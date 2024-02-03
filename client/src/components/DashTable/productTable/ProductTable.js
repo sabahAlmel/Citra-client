@@ -1,8 +1,8 @@
 ///////////////////////table with pagination and filtration ///////////
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+// import { useNavigate } from "react-router-dom";
 import "../product.css";
 import { Button } from "@mui/material";
 import axios from "axios";
@@ -10,12 +10,10 @@ import { useQuery, useQueryClient } from "react-query";
 import { fetchProducts } from "../../../db/fetchProduct";
 import Modal from "@mui/material/Modal";
 import ChildModal from "./productChildModal"; // Import the ChildModal component
-import AddProduct from "../../AddProduct/AddProduct";
 
 const ProductTable = () => {
   const [page, setPage] = useState(1); // Move the declaration of 'page' here
-  const navigate = useNavigate();
-  const [opedAddModal, setOpenAddModal] = useState(false);
+  // const navigate = useNavigate();
 
   const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
   const queryClient = useQueryClient();
@@ -25,22 +23,61 @@ const ProductTable = () => {
   const [openModal, setOpenModal] = useState(false); // State for modal open/close
   const [selectedRowData, setSelectedRowData] = useState(null); // Initialize selectedRowData
 
-  const handleAddModal = () => {
-    setOpenAddModal((prev) => !prev);
-  };
-
   const {
     isLoading,
     isError,
     data: ProductData,
   } = useQuery(["user-table", page], () => fetchProducts(page));
+  // Update the state when data is loaded
+  // React.useEffect(() => {
+  //   if (ProductData) {
+  //     // Assuming your response has a 'products' field that contains the array of products
+  //     const updatedRows = ProductData?.products.map((product) => ({
+  //       ...product,
+  //       id: product._id, // Set 'id' to the value of '_id'
+  //     }));
+
+  //     setRows(updatedRows);
+  //   }
+  // }, [ProductData]);
+  // React.useEffect(() => {
+
+  //     // Assuming your response has a 'products' field that contains the array of products
+  //     const updatedRows = ProductData?.products.map(async (product) => {
+  //       try {
+  //         // Fetch category details based on categoryID
+  //         const categoryResponse = await axios.get(
+  //           `${process.env.REACT_APP_BACKEND}category/getone/${product.categoryID}`
+  //         );
+
+  //         // Extract category name
+  //         const categoryName = categoryResponse.data.category.name;
+
+  //         // Return the updated product object with additional fields
+  //         return {
+  //           ...product,
+  //           id: product._id, // Set 'id' to the value of '_id'
+  //           categoryName,
+  //         };
+  //       } catch (error) {
+  //         console.error("Error fetching category:", error);
+  //         // Handle the error appropriately, e.g., set categoryName to a default value
+  //         return {
+  //           ...product,
+  //           id: product._id,
+  //           categoryName: "Unknown Category",
+  //         };
+  //       }
+  //     });
+
+  // }, [ProductData]);
 
   React.useEffect(() => {
     if (ProductData) {
       const updatedRows = ProductData?.products.map((product) => {
         // Check if categoryID and subCategoryID are not null or undefined
         const categoryName = product.categoryID
-          ? product.categoryID.name
+          ? product.categoryID.arabicName
           : null;
         const subCategoryName = product.subCategoryID
           ? product.subCategoryID.name
@@ -96,31 +133,21 @@ const ProductTable = () => {
     { field: "price", headerName: "سعر", flex: 1 },
     { field: "serialNumber", headerName: "رقم التسلسلي", flex: 0.5 },
     { field: "description", headerName: "لوصف", flex: 0.5 },
-    { field: "categoryName", headerName: "التصنيف", flex: 0.5 },
-    { field: "subCategoryName", headerName: "تصنيف فرعي", flex: 0.5 },
-
     {
-      field: "images",
-      headerName: "Images",
-      flex: 1,
+      field: "categoryName",
+      headerName: "التصنيف",
+      flex: 0.5,
+    },
+    {
+      field: "subCategoryName",
+      headerName: "تصنيف فرعي",
+      flex: 0.5,
       renderCell: (params) => {
-        <>
-          {/* {params.row.images.map((img) => {
-            <>
-              <img
-                src={process.env.REACT_APP_BACKEND + img}
-                alt="product_image"
-                height="25px"
-                width="25px"
-              />
-            </>;
-          })} */}
-          <img
-            src={process.env.REACT_APP_BACKEND + rows[1].images[0]}
-            height="25px"
-            width="25px"
-          />
-        </>;
+        return (
+          <p>
+            {params.row.subCategoryID && params.row.subCategoryID.arabicName}
+          </p>
+        );
       },
     },
 
@@ -144,7 +171,7 @@ const ProductTable = () => {
                 backgroundColor: "var(--blue-color)",
               },
             }}
-            onClick={() => handleRowClickDelete(params)}
+            onClick={() => handleRowClickDelete(params.row.id)}
           >
             حذف
           </Button>
@@ -261,7 +288,7 @@ const ProductTable = () => {
       <Button
         fullWidth
         type="submit"
-        onClick={handleAddModal}
+        // onClick={() => (window.location.href = "/")}
         sx={{
           margin: "10px",
           height: "3rem",
@@ -315,13 +342,6 @@ const ProductTable = () => {
           }}
         />
       </div>
-      <Modal
-        open={opedAddModal}
-        onClose={handleAddModal}
-        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-      >
-        <AddProduct />
-      </Modal>
     </Box>
   );
 };

@@ -4,6 +4,9 @@ export async function fetchProducts(nb) {
     const response = await axios.get(
       `${process.env.REACT_APP_BACKEND}product/all-data`
     );
+    console.log("data product",response.data)
+    console.log("categ from product",response.data.categoryID)
+
     return response.data;
   } catch (error) {
     console.error("Error fetching Products:", error);

@@ -108,36 +108,82 @@ export default function DashTable() {
   const handleRowModesModelChange = (newRowModesModel) => {
     setRowModesModel(newRowModesModel);
   };
-
   const handleChange = async (event, orderId) => {
     const newStatus = event.target.value;
-
+  
     try {
       // Send a PUT request to update the status of the specific order ID
       await axios.put(`${process.env.REACT_APP_BACKEND}order/${orderId}`, {
         status: newStatus,
       });
-      if (newStatus === "Cancel") {
+      if (newStatus === "الغاء") {
         console.log("Deleting order with ID:", orderId);
         await axios.delete(`${process.env.REACT_APP_BACKEND}order/${orderId}`);
         console.log("Order deleted successfully!");
         toast.success("تم الغاء الطلب بنجاح");
         // If the delete request is successful, filter out the deleted row from the displayed data
         const updatedData = rows.filter((row) => row.id !== orderId);
-
+  
         // Set the updated data to the state or wherever you store your data
         setRows(updatedData);
       }
-
+  
       // Update the local state (statuses) with the new status
       setStatuses((prevStatuses) => ({
         ...prevStatuses,
         [orderId]: newStatus,
       }));
+  
+      // Trigger a re-render by updating the state used to render the DataGrid
+      setRows((prevRows) => {
+        const updatedRows = prevRows.map((row) => {
+          if (row.id === orderId) {
+            // Update the row with the new status
+            return {
+              ...row,
+              status: newStatus,
+            };
+          }
+          return row;
+        });
+        return updatedRows;
+      });
     } catch (error) {
       console.error("Error updating order status:", error);
     }
   };
+  
+  // const handleChange = async (event, orderId) => {
+  //   const newStatus = event.target.value;
+
+  //   try {
+  //     // Send a PUT request to update the status of the specific order ID
+  //     await axios.put(`${process.env.REACT_APP_BACKEND}order/${orderId}`, {
+  //       status: newStatus,
+  //     });
+  //     if (newStatus === "الغاء") {
+  //       console.log("Deleting order with ID:", orderId);
+  //       await axios.delete(`${process.env.REACT_APP_BACKEND}order/${orderId}`);
+  //       console.log("Order deleted successfully!");
+  //       toast.success("تم الغاء الطلب بنجاح");
+  //       // If the delete request is successful, filter out the deleted row from the displayed data
+  //       const updatedData = rows.filter((row) => row.id !== orderId);
+
+  //       // Set the updated data to the state or wherever you store your data
+  //       setRows(updatedData);
+  //     }
+
+  //     // Update the local state (statuses) with the new status
+  //     setStatuses((prevStatuses) => ({
+  //       ...prevStatuses,
+  //       [orderId]: newStatus,
+        
+  //     }));
+     
+  //   } catch (error) {
+  //     console.error("Error updating order status:", error);
+  //   }
+  // };
 
   const columns = [
     {
@@ -241,7 +287,7 @@ export default function DashTable() {
                 >
                   تم التسليم
                 </MenuItem>
-                <MenuItem value="الغاء">الغاء</MenuItem>
+                {/* <MenuItem value="الغاء">الغاء</MenuItem> */}
               </Select>
             </FormControl>
           </Box>

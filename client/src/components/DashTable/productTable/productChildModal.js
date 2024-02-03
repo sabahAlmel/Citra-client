@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import ProductForm from "../../../components/productForm/ProductForm";
 import axios from "axios";
 import ProductForm from "../../../components/productForm/ProductForm.js";
 import { toast } from "react-toastify";
@@ -56,6 +57,7 @@ const ChildModal = ({
     if (e.target) {
       const { name, value } = e.target;
       setFormData((prevData) => ({ ...prevData, [name]: value }));
+
       // Add a check for subCategory and update it accordingly
       if (name === "subCategoryID") {
         setFormData((prevData) => ({ ...prevData, subCategoryID: value }));
