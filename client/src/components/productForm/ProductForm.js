@@ -197,7 +197,7 @@ function ProductForm({
                 </option>
                 {categoryOptions.map((category) => (
                   <option key={category._id} value={category._id}>
-                    {category.name}
+                    {category.arabicName}
                   </option>
                 ))}
               </select>
@@ -221,7 +221,7 @@ function ProductForm({
                 </option>
                 {subCategoryOptions.map((subCategory) => (
                   <option key={subCategory._id} value={subCategory._id}>
-                    {subCategory.name}
+                    {subCategory.arabicName}
                   </option>
                 ))}
               </select>
@@ -240,7 +240,7 @@ function ProductForm({
               onChange={onInputChange}
             />
           </div>
-          <div className={styles.userInputBox}>
+          {/* <div className={styles.userInputBox}>
             <label className={styles.label} htmlFor="images">
               الصور
             </label>
@@ -278,8 +278,8 @@ function ProductForm({
                   >
                     حذف
                   </button>
-                </div>
-              ))}
+                </div> */}
+              {/* ))} */}
             {/* <div className={styles.userInputBox}>
             <label className={styles.label} htmlFor="newImages">
               إضافة صور جديدة
@@ -320,7 +320,7 @@ function ProductForm({
               }}
             />
           </div> */}
-          </div>
+          {/* </div> */}
           <div className={styles.userInputBox}>
             <label className={styles.label} htmlFor="details">
               التفاصيل
