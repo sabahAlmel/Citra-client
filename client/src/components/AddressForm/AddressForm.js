@@ -1,16 +1,34 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import styles from "./AddressForm.module.css";
+import axios from "axios";
+import {toast} from "react-toastify"
 
 function AddressForm(props) {
 
   const {total, cartItems} = props
 
   const items = cartItems.map((item,index)=>(`${"  "}
-  الاسم= ${item.arabicName}
+  المنتج= ${item.arabicName}
   الكمية= ${item.quantity}
     السعر= ${item.totalPrice}
     اللون= ${item.selectedColor}
     الحجم= ${item.selectedSize}\n${"_______"}`))
+
+const itemsID = cartItems.map((item,index)=>(item._id))
+
+// const orderNumbers = async()=>{
+//    try{
+// const orders =await axios.get(`${process.env.REACT_APP_BACKEND}order/all`);
+//     return orders.data;
+//     console.log(orders.data)
+//   }catch(err){
+//     console.log(err)
+//   }
+// }
+
+// useEffect(()=>{
+//   orderNumbers();
+// },[])
 
 const [formData, setFormData] = useState({
   fullname:"",
@@ -29,15 +47,34 @@ const handleChange = (e) => {
   }));
 };
 
-const phone =96181131145;
+const phone =96176153425;
 const message = `الاسم: ${formData.fullname}\nالبريد: ${formData.email}\nرقم الهاتف: ${formData.phoneNumber}\nالبناية: ${formData.building}\nاسم صاحب المنزل: ${formData.ownername}\nبجوار: ${formData.shopsname}\n${"_______"},${items}`
 const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
 
-const handleSubmit = (e)=>{
+const handleSubmit = async(e)=>{
   e.preventDefault();
   console.log("hello");
   window.open(url , "_blank");
+  // await axios
+  // .post(`${process.env.REACT_APP_BACKEND}order/create`, {
+  //   status:"pending",
+  //   productID:itemsID,
+  //   orderNB:"",
+  // }, {
+  //   headers: {
+  //     "Content-Type": "multipart/form-data",
+  //   },
+  // })
+  // .then((res) => {
+  //   toast.success("تمت اضافة الطلب بنجاح");
+  // })
+  // .catch((err) => {
+  //   toast.error("حصل خطأ أثناء اضافة الطلب");
+  //   console.log(err);
+  // });
 }
+
+
 
   return (
     <>
