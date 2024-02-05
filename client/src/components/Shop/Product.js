@@ -4,7 +4,7 @@ import style from "./Product.module.css";
 import placeholder from "../../assets/images/test.jpg";
 import { motion } from "framer-motion";
 import {
-  fetchProducts,
+  fetchProductsShop,
   fetchProductsByCateg,
   fetchProductsBySubCateg,
   fetchProductsNumber,
@@ -89,10 +89,14 @@ function Product() {
       isLoading: isLoadingProducts,
       data: products,
       refetch,
-    } = useQuery(["products", currentPage], () => fetchProducts(currentPage), {
-      refetchOnMount: true,
-      refetchOnWindowFocus: true,
-    });
+    } = useQuery(
+      ["products", currentPage],
+      () => fetchProductsShop(currentPage),
+      {
+        refetchOnMount: true,
+        refetchOnWindowFocus: true,
+      }
+    );
     products = products ? products : [];
   }
   if (search) {

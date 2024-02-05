@@ -45,15 +45,6 @@
 .shopContainer {
   margin-right: 280px;
 }
-.productHolder {
-  background-color: #fee7cb26;
-  display: inline-block;
-  position: relative;
-  text-decoration: none;
-  color: var(--brown-color);
-  width: 300px;
-  height: 400px;
-}
 .image {
   border-top-right-radius: var(--border-radius);
   border-top-left-radius: var(--border-radius);
@@ -114,6 +105,7 @@
 .shopContainer {
   margin-right: 280px;
 }
+
 .productHolder {
   background-color: #fee7cb26;
   display: inline-block;
@@ -121,7 +113,7 @@
   text-decoration: none;
   color: var(--brown-color);
   height: 400px;
-  /* width: 300px; */
+  margin-right: 10px;
   padding: 20px;
   overflow: hidden;
   border-radius: var(--border-radius);

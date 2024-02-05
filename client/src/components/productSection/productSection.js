@@ -22,7 +22,7 @@ const ProductSection = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     pauseOnHover: true,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     responsive: [
       {
