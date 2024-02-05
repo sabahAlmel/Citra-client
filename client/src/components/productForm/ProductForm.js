@@ -367,27 +367,7 @@ function ProductForm({
                         }
                       />
 
-                      <label
-                        className={styles.label}
-                        htmlFor={`quantity_${index}_${sizeIndex}`}
-                      >
-                        الكمية
-                      </label>
-                      <input
-                        className={styles.input}
-                        type="number"
-                        id={`quantity_${index}_${sizeIndex}`}
-                        name={`quantity_${index}_${sizeIndex}`}
-                        placeholder="الكمية"
-                        value={size.quantity}
-                        onChange={(e) =>
-                          handleDetailsChange(
-                            index,
-                            `sizes.${sizeIndex}.quantity`,
-                            e.target.value
-                          )
-                        }
-                      />
+                     
                     </div>
                   ))}
               </div>
