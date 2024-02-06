@@ -10,7 +10,7 @@
   gap: 1vw;
   flex-wrap: wrap;
   background-color: white;
-  /* position: relative; / */
+  position: fixed; 
 }
 
 .title1 {
