@@ -11,39 +11,44 @@ export const CardBalanceOne = (props) => {
         <Paper
           variant="outlined"
           sx={{
-            width: 320,
-            height: 170,
+            width: "100%",
+            // height: 170, pt: 0.5,
+            height: "100%",
+            pb: 0.5,
             borderRadius: "12px",
             border: "1px solid #E6E9EE",
-            backgroundColor: "#ffffff",
+            backgroundColor: "white",
+            boxShadow: "15px 10px 8px rgba(54, 134, 129, 0.1)",
           }}
         >
           {/* <div className={SingleCards.box1}> */}
           <Box
             sx={{
-              // borderRight: "20px solid #368681",
-              borderBottom: "20px solid #368681",
-              borderLeft: "20px solid #fee7cb",
+              borderRight: "8px solid #368681",
+              // borderBottom: '8px solid',
               height: "100%",
               borderRadius: 2,
+
+              // borderBottomColor: "gray",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
             }}
           >
             <Typography
-              variant="h6"
+              variant="p"
               sx={{
-                p: 2,
                 ml: 2,
                 color: "#4D342B",
-                textAlign: "center",
-                fontWeight: "bold",
+                textAlign:"center",
+                fontWeight:"bold"
               }}
             >
               قيمة الطلب الإجمالي
             </Typography>
             <Typography
-              variant="body1"
+              variant="p"
               sx={{
-                p: 2,
                 ml: 2,
                 fontWeight: "600",
                 fontSize: "20px",
@@ -71,38 +76,44 @@ export const CardBalanceTwo = (revenue) => {
         <Paper
           variant="outlined"
           sx={{
-            width: 320,
-            height: 170,
+            width: "100%",
+            // height: 170, pt: 0.5,
+            height: "100%",
+            pb: 0.5,
             borderRadius: "12px",
             border: "1px solid #E6E9EE",
-            backgroundColor: "#ffffff",
+            backgroundColor: "white",
+            boxShadow: "15px 10px 8px rgba(54, 134, 129, 0.1)",
           }}
         >
           {/* <div className={SingleCards.box1}> */}
           <Box
             sx={{
-              borderBottom: "20px solid #368681",
-              borderLeft: "20px solid #fee7cb",
+              borderRight: "8px solid #368681",
+              // borderBottom: '8px solid',
               height: "100%",
               borderRadius: 2,
+
+              // borderBottomColor: "gray",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
             }}
           >
             <Typography
-              variant="h6"
+              variant="p"
               sx={{
-                p: 2,
                 ml: 2,
                 color: "#4D342B",
-                textAlign: "center",
-                fontWeight: "bold",
+                textAlign:"center",
+                fontWeight:"bold"
               }}
             >
               إجمالي الربح اليومي
             </Typography>
             <Typography
-              variant="body1"
+              variant="p"
               sx={{
-                p: 2,
                 ml: 2,
                 fontWeight: "600",
                 fontSize: "20px",
@@ -110,9 +121,8 @@ export const CardBalanceTwo = (revenue) => {
                 textAlign: "center",
               }}
             >
-              {totalRevenueToday !== null
-                ? `${totalRevenueToday} $`
-                : "Loading..."}
+              {totalRevenueToday !== null ? `${totalRevenueToday} $`: "Loading..." }
+
             </Typography>
           </Box>
           {/* </div> */}
@@ -130,38 +140,44 @@ export const CardBalanceThree = (users) => {
         <Paper
           variant="outlined"
           sx={{
-            width: 320,
-            height: 170,
+            width: "100%",
+            // height: 170, pt: 0.5,
+            height: "100%",
+            pb: 0.5,
             borderRadius: "12px",
             border: "1px solid #E6E9EE",
-            backgroundColor: "#ffffff",
+            backgroundColor: "white",
+            boxShadow: "15px 10px 8px rgba(54, 134, 129, 0.1)",
           }}
         >
           {/* <div className={SingleCards.box1}> */}
           <Box
             sx={{
-              borderBottom: "20px solid #368681",
-              borderLeft: "20px solid #fee7cb",
+              borderRight: "8px solid #368681",
+              // borderBottom: '8px solid',
               height: "100%",
               borderRadius: 2,
+
+              // borderBottomColor: "gray",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
             }}
           >
             <Typography
-              variant="h6"
+              variant="p"
               sx={{
-                p: 2,
                 ml: 2,
                 color: "#4D342B",
-                textAlign: "center",
-                fontWeight: "bold",
+                textAlign:"center",
+                fontWeight:"bold"
               }}
             >
               إجمالي المستخدمين
             </Typography>
             <Typography
-              variant="body1"
+              variant="p"
               sx={{
-                p: 2,
                 ml: 2,
                 fontWeight: "600",
                 fontSize: "20px",
@@ -186,38 +202,44 @@ export const CardBalanceFour = (product) => {
         <Paper
           variant="outlined"
           sx={{
-            width: 320,
-            height: 170,
+            width: "100%",
+            // height: 170, pt: 0.5,
+            height: "100%",
+            pb: 0.5,
             borderRadius: "12px",
             border: "1px solid #E6E9EE",
-            backgroundColor: "#ffffff",
+            backgroundColor: "white",
+            boxShadow: "15px 10px 8px rgba(54, 134, 129, 0.1)",
           }}
         >
           {/* <div className={SingleCards.box1}> */}
           <Box
             sx={{
-              borderBottom: "20px solid #368681",
-              borderLeft: "20px solid #fee7cb",
+              borderRight: "8px solid #368681",
+              // borderBottom: '8px solid',
               height: "100%",
               borderRadius: 2,
+
+              // borderBottomColor: "gray",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
             }}
           >
             <Typography
-              variant="h6"
+              variant="p"
               sx={{
-                p: 2,
                 ml: 2,
                 color: "#4D342B",
-                textAlign: "center",
-                fontWeight: "bold",
+                textAlign:"center",
+                fontWeight:"bold"
               }}
             >
               إجمالي المنتجات
             </Typography>
             <Typography
-              variant="body1"
+              variant="p"
               sx={{
-                p: 2,
                 ml: 2,
                 fontWeight: "600",
                 fontSize: "20px",

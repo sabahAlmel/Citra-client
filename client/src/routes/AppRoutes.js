@@ -65,12 +65,11 @@ function AppRoutes() {
       <Route
         path="/orders"
         element={
-          <ProtectedRoute>
+         
             <LayoutWithSidebar>
               {" "}
               <Order />
             </LayoutWithSidebar>
-          </ProtectedRoute>
         }
       ></Route>
 

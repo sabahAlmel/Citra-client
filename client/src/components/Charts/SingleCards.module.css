@@ -1,8 +1,11 @@
-/* @media (max-width:1660px) and (min-width:768){
+.main{
+    width: 20rem;
+    height: 10rem;
+}
+
+@media screen and (max-width: 450px){
     .main{
-        width: 300px,
-            
-      
+        width: 12rem;
+        height: 6rem;
     }
-  
-  } */
+}

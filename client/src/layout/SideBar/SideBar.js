@@ -27,7 +27,7 @@ const menuItems = [
   { title: "منتجات", icon: faShoppingBag, path: "/products" },
   { title: "طلبات", icon: faClipboardList, path: "/orders" },
   { title: " الصفحة الرئيسية", icon: faHome, path: "/" },
-  { title: "تحليلات جوجل", icon: faSearch, path: "https://analytics.google.com/analytics/web/#/p425619017/reports/intelligenthome" },
+  { title: "تحليلات جوجل", icon: faSearch, path: "https://analytics.google.com/analytics/web/#/p425619017/reports/intelligenthome",target: "_blank" },
 
   // { title: "تسجيل خروج", icon: faSignOutAlt }
  
@@ -81,53 +81,54 @@ const Sidebar = () => {
           flexDirection: "column",
         }}
       >
-        {menuItems.map((item) => (
-          <li className={Styles.li} key={item.title}>
-            {item.title === "تسجيل خروج" ? (
-              <NavLink
-                className={cx(Styles.sidebar__listItem, {
-                  [Styles.activelink]: location.pathname === item.path,
-                })}
-                to={item.path}
-                onClick={handleLinkClick}
-              >
-                <FontAwesomeIcon
-                  className={Styles.sidebar__icon}
-                  icon={item.icon}
-                />
-                <CSSTransition
-                  in={isOpen}
-                  timeout={200}
-                  className={Styles.fade}
-                  unmountOnExit
-                >
-                  <span>{item.title}</span>
-                </CSSTransition>
-              </NavLink>
-            ) : (
-              <Link
-                className={cx(Styles.sidebar__listItem, {
-                  [Styles.activelink]: location.pathname === item.path,
-                })}
-                to={item.path}
-                onClick={handleLinkClick}
-              >
-                <FontAwesomeIcon
-                  className={Styles.sidebar__icon}
-                  icon={item.icon}
-                />
-                <CSSTransition
-                  in={isOpen}
-                  timeout={200}
-                  className={Styles.fade}
-                  unmountOnExit
-                >
-                  <span>{item.title}</span>
-                </CSSTransition>
-              </Link>
-            )}
-          </li>
-        ))}
+       {menuItems.map((item) => (
+  <li className={Styles.li} key={item.title}>
+    {item.title === "تسجيل خروج" ? (
+      <NavLink
+        className={cx(Styles.sidebar__listItem, {
+          [Styles.activelink]: location.pathname === item.path,
+        })}
+        to={item.path}
+        onClick={handleLinkClick}
+      >
+        <FontAwesomeIcon
+          className={Styles.sidebar__icon}
+          icon={item.icon}
+        />
+        <CSSTransition
+          in={isOpen}
+          timeout={200}
+          className={Styles.fade}
+          unmountOnExit
+        >
+          <span>{item.title}</span>
+        </CSSTransition>
+      </NavLink>
+    ) : (
+      <Link
+        className={cx(Styles.sidebar__listItem, {
+          [Styles.activelink]: location.pathname === item.path,
+        })}
+        to={item.path}
+        target={item.target || "_self"} 
+        onClick={handleLinkClick}
+      >
+        <FontAwesomeIcon
+          className={Styles.sidebar__icon}
+          icon={item.icon}
+        />
+        <CSSTransition
+          in={isOpen}
+          timeout={200}
+          className={Styles.fade}
+          unmountOnExit
+        >
+          <span>{item.title}</span>
+        </CSSTransition>
+      </Link>
+    )}
+  </li>
+))}
       </ul>
     </div>
   );
