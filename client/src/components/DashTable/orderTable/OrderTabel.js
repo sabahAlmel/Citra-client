@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -15,54 +14,10 @@ import LoadingPage from "../../loadingPage";
 import { useQuery, useQueryClient } from "react-query";
 import {
   GridToolbar,
-  GridRowModes,
   DataGrid,
-  GridToolbarContainer,
 } from "@mui/x-data-grid";
-import { randomId, randomArrayItem } from "@mui/x-data-grid-generator";
-import { blue } from "@mui/material/colors";
 
-function EditToolbar(props) {
-  const { setRows, setRowModesModel } = props;
-  const [labelVisible, setLabelVisible] = useState(true);
 
-  const handleClick = () => {
-    const id = randomId();
-    setRows((oldRows) => [
-      ...oldRows,
-      { id, name: "", email: "", isNew: true },
-    ]);
-    setRowModesModel((oldModel) => ({
-      ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: "name" },
-    }));
-  };
-
-  return (
-    <GridToolbarContainer>
-      <Button
-        sx={{
-          margin: "10px",
-          height: "3rem",
-          width: "5rem",
-          border: "2px solid #368681",
-          backgroundColor: "var(--brown-color)",
-          color: "var(--main-color)",
-
-          "&:hover": {
-            backgroundColor: "var(--blue-color)",
-            color: "var(--brown-color)",
-          },
-        }}
-        color="primary"
-        startIcon={<AddIcon />}
-        onClick={handleClick}
-      >
-        أضف عميل
-      </Button>
-    </GridToolbarContainer>
-  );
-}
 
 export default function DashTable() {
   const queryClient = useQueryClient();
@@ -116,17 +71,6 @@ export default function DashTable() {
       await axios.put(`${process.env.REACT_APP_BACKEND}order/${orderId}`, {
         status: newStatus,
       });
-      if (newStatus === "الغاء") {
-        console.log("Deleting order with ID:", orderId);
-        await axios.delete(`${process.env.REACT_APP_BACKEND}order/${orderId}`);
-        console.log("Order deleted successfully!");
-        toast.success("تم الغاء الطلب بنجاح");
-        // If the delete request is successful, filter out the deleted row from the displayed data
-        const updatedData = rows.filter((row) => row.id !== orderId);
-  
-        // Set the updated data to the state or wherever you store your data
-        setRows(updatedData);
-      }
   
       // Update the local state (statuses) with the new status
       setStatuses((prevStatuses) => ({
@@ -153,37 +97,7 @@ export default function DashTable() {
     }
   };
   
-  // const handleChange = async (event, orderId) => {
-  //   const newStatus = event.target.value;
 
-  //   try {
-  //     // Send a PUT request to update the status of the specific order ID
-  //     await axios.put(`${process.env.REACT_APP_BACKEND}order/${orderId}`, {
-  //       status: newStatus,
-  //     });
-  //     if (newStatus === "الغاء") {
-  //       console.log("Deleting order with ID:", orderId);
-  //       await axios.delete(`${process.env.REACT_APP_BACKEND}order/${orderId}`);
-  //       console.log("Order deleted successfully!");
-  //       toast.success("تم الغاء الطلب بنجاح");
-  //       // If the delete request is successful, filter out the deleted row from the displayed data
-  //       const updatedData = rows.filter((row) => row.id !== orderId);
-
-  //       // Set the updated data to the state or wherever you store your data
-  //       setRows(updatedData);
-  //     }
-
-  //     // Update the local state (statuses) with the new status
-  //     setStatuses((prevStatuses) => ({
-  //       ...prevStatuses,
-  //       [orderId]: newStatus,
-        
-  //     }));
-     
-  //   } catch (error) {
-  //     console.error("Error updating order status:", error);
-  //   }
-  // };
 
   const columns = [
     {
@@ -196,14 +110,7 @@ export default function DashTable() {
       cellClassName: "delete-cell",
     },
 
-    {
-      field: "productName",
-      headerName: "اسم المنتج",
-      width: 180,
-      editable: true,
-      flex: 1,
-      cellClassName: "delete-cell",
-    },
+
     {
       field: "userName",
       headerName: "اسم المستخدم",
@@ -253,7 +160,7 @@ export default function DashTable() {
       },
     },
     {
-      field: "status", // Add a delete column
+      field: "status", 
       headerName: "status",
       flex: 1,
       cellClassName: "delete-cell",
@@ -287,7 +194,6 @@ export default function DashTable() {
                 >
                   تم التسليم
                 </MenuItem>
-                {/* <MenuItem value="الغاء">الغاء</MenuItem> */}
               </Select>
             </FormControl>
           </Box>
