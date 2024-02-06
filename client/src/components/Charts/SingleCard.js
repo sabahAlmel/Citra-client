@@ -122,7 +122,7 @@ export const CardBalanceTwo = (revenue) => {
               }}
             >
               {totalRevenueToday !== null
-                ? `${totalRevenueToday} $`
+                ? ` $ ${totalRevenueToday} `
                 : "Loading..."}
             </Typography>
           </Box>
