@@ -103,17 +103,16 @@ const ProductTable = () => {
   }
 
   const handleRowClickDelete = async (params) => {
-    const productId = params.row.id;
+    // const productId = params.row._id;
 
     try {
       // Send a DELETE request to the API to delete the product
-      await axios.delete(
-        `${process.env.REACT_APP_BACKEND}product/${productId}`
-      );
+      await axios.delete(`${process.env.REACT_APP_BACKEND}product/${params}`);
 
       // If the delete request is successful, you may want to update the UI accordingly
       // For example, you can filter out the deleted row from the displayed data
-      const updatedData = rows.filter((row) => row.id !== productId);
+      const updatedData = rows.filter((row) => row._id !== params);
+
       setRows(updatedData);
       // Set the updated data to the state or wherever you store your data
       // setSampleData(updatedData);
@@ -171,7 +170,7 @@ const ProductTable = () => {
                 backgroundColor: "var(--blue-color)",
               },
             }}
-            onClick={() => handleRowClickDelete(params.row.id)}
+            onClick={() => handleRowClickDelete(params.row._id)}
           >
             حذف
           </Button>

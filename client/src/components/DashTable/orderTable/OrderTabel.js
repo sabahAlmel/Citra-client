@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -13,14 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingPage from "../../loadingPage";
 
 import { useQuery, useQueryClient } from "react-query";
-import {
-  GridToolbar,
-  GridRowModes,
-  DataGrid,
-  GridToolbarContainer,
-} from "@mui/x-data-grid";
-import { randomId, randomArrayItem } from "@mui/x-data-grid-generator";
-import { blue } from "@mui/material/colors";
+import { GridToolbar, DataGrid } from "@mui/x-data-grid";
 
 export default function DashTable() {
   const queryClient = useQueryClient();
@@ -155,14 +147,6 @@ export default function DashTable() {
     },
 
     {
-      field: "productName",
-      headerName: "اسم المنتج",
-      width: 180,
-      editable: true,
-      flex: 1,
-      cellClassName: "delete-cell",
-    },
-    {
       field: "userName",
       headerName: "اسم المستخدم",
       type: "",
@@ -211,7 +195,7 @@ export default function DashTable() {
       },
     },
     {
-      field: "status", // Add a delete column
+      field: "status",
       headerName: "status",
       flex: 1,
       cellClassName: "delete-cell",
@@ -245,7 +229,6 @@ export default function DashTable() {
                 >
                   تم التسليم
                 </MenuItem>
-                {/* <MenuItem value="الغاء">الغاء</MenuItem> */}
               </Select>
             </FormControl>
           </Box>

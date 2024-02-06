@@ -50,6 +50,10 @@ function Signin() {
     }
   }
 
+  useEffect(() => {
+    getUser();
+  }, []);
+
   const openCloseHandler = () => {
     setOpen(!open);
   };
