@@ -15,7 +15,6 @@ import NotFound from "../pages/NotFound/NotFound.js";
 import LayoutWithSidebar from "./LayoutWithSidebar.js";
 import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Cart from "../pages/cart/Cart.js";
-import ForgetPassword from "../pages/ForgetPassword/ForgetPassword.js";
 import ProtectedRoute from "./ProtectedRoute.js";
 function AppRoutes() {
   return (
@@ -26,10 +25,6 @@ function AppRoutes() {
         <Route path="/singleProduct/:slug" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/singleProduct" element={<SingleProduct />}></Route>
-        <Route path="/forgetpassword" element={<ForgetPassword />}></Route>
-        <Route path="/orderform" element={<AddressForm />}></Route>
-        <Route path="/orderform" element={<AddressForm />}></Route>
-        <Route path="/test" element={<AddProduct />}></Route>
       </Route>
       <Route path="/signin" element={<SignIn />}></Route>
       <Route path="/signup" element={<SignUp />}></Route>

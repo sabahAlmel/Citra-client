@@ -42,6 +42,47 @@ function ProductForm({
     subCategory ? subCategory._id : ""
   );
 
+  // Updated dependency array
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    console.log("Selected Category:", selectedCategory);
+
+    setSelectedCategory(selectedCategory);
+    setFormData((prevData) => ({ ...prevData, category: selectedCategory }));
+
+    console.log("Updated formData with category after selection:", {
+      ...formData,
+      category: selectedCategory,
+    });
+  };
+  // const handleDetailsChange = (index, value) => {
+  //   console.log("object");
+  //   const updatedDetails = [...formData.details];
+  //   updatedDetails[index] = value;
+  //   console.log("Updated details:", updatedDetails); // Add this line
+  //   // setFormData({ ...formData, details: updatedDetails });
+  //   setFormData((prevData) => ({ ...prevData, details: updatedDetails }));
+
+  //   // onInputChange({ ...formData, details: updatedDetails });
+  // };
+  const handleDetailsChange = (index, field, value) => {
+    const updatedDetails = formData.details.map((detail, idx) => {
+      if (idx === index) {
+        return {
+          ...detail,
+          [field]: value,
+        };
+      }
+      return detail;
+    });
+  
+    setFormData((prevData) => ({
+      ...prevData,
+      details: updatedDetails,
+    }));
+  };
+
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -86,56 +127,32 @@ function ProductForm({
 
     fetchCategories();
     fetchSubCategories();
-  }, [category, subCategory]); // Updated dependency array
-  const handleCategoryChange = (e) => {
-    const selectedCategory = e.target.value;
-    console.log("Selected Category:", selectedCategory);
-
-    setSelectedCategory(selectedCategory);
-    setFormData((prevData) => ({ ...prevData, category: selectedCategory }));
-
-    console.log("Updated formData with category after selection:", {
-      ...formData,
-      category: selectedCategory,
-    });
-  };
-
-  const handleDetailsChange = (index, field, value) => {
-    const updatedDetails = [...formData.details];
-    updatedDetails[index][field] = value;
-    onInputChange({ ...formData, details: updatedDetails });
-  };
-  const handleImageClick = (index) => {
-    // Handle clicking on an image, e.g., navigate to a specific index
-    console.log(`Clicked on image at index ${index}`);
-    // You can implement navigation or any other logic here
-  };
-
-  const handleImageUpload = (e, index) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      const updatedImages = [...formData.images];
-
-      // Check if the current item is a file object or a string (URL)
-      if (file instanceof File) {
-        updatedImages[index] = file;
-      } else {
-        // Replace the existing URL with the new file object
-        updatedImages[index] = file;
+  }, []);
+  const handleSizeChange = (detailIndex, sizeIndex, value) => {
+    const updatedDetails = formData.details.map((detail, index) => {
+      if (index === detailIndex) {
+        const updatedSizes = detail.sizes.map((size, idx) => {
+          if (idx === sizeIndex) {
+            return {
+              ...size,
+              size: value,
+            };
+          }
+          return size;
+        });
+        return {
+          ...detail,
+          sizes: updatedSizes,
+        };
       }
-
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        images: updatedImages,
-      }));
-    }
+      return detail;
+    });
+    setFormData((prevData) => ({
+      ...prevData,
+      details: updatedDetails,
+    }));
   };
-  const handleImageDelete = (index) => {
-    const updatedImages = [...formData.images];
-    updatedImages.splice(index, 1);
-    setFormData((prevFormData) => ({ ...prevFormData, images: updatedImages }));
-  };
+  
   return (
     <div className={styles.container}>
       <h1 className={styles.formTitle}> تعديل المعلومات الشخصية</h1>
@@ -240,87 +257,7 @@ function ProductForm({
               onChange={onInputChange}
             />
           </div>
-          {/* <div className={styles.userInputBox}>
-            <label className={styles.label} htmlFor="images">
-              الصور
-            </label>
-            {console.log(Array.isArray(formData.images))}
-            {console.log("formData: ", formData)}
-            {Array.isArray(formData.images) &&
-              formData.images.map((imageData, index) => (
-                <div key={index}>
-                  <label>
-                    <img
-                      src={
-                        typeof imageData === "string"
-                          ? process.env.REACT_APP_BACKEND + imageData
-                          : URL.createObjectURL(imageData)
-                      }
-                      alt={`Image ${index + 1}`}
-                      style={{
-                        maxWidth: "100px",
-                        maxHeight: "100px",
-                        marginRight: "10px",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => handleImageClick(index)}
-                    />
-                    <input
-                      type="file"
-                      accept="image"
-                      style={{ display: "none" }}
-                      onChange={(e) => handleImageUpload(e, index)}
-                    />
-                  </label>
-                  <button
-                    type="button"
-                    onClick={() => handleImageDelete(index)}
-                  >
-                    حذف
-                  </button>
-                </div> */}
-              {/* ))} */}
-            {/* <div className={styles.userInputBox}>
-            <label className={styles.label} htmlFor="newImages">
-              إضافة صور جديدة
-            </label>
-            <input
-              className={styles.input}
-              id="newImages"
-              name="newImages"
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={(e) => {
-                const newImages = [...formData.newImages];
 
-                for (let i = 0; i < e.target.files.length; i++) {
-                  const file = e.target.files[i];
-                  const reader = new FileReader();
-
-                  reader.onloadend = () => {
-                    newImages.push(reader.result);
-                    setFormData((prevFormData) => ({
-                      ...prevFormData,
-                      newImages: newImages,
-                    }));
-                  };
-
-                  if (file) {
-                    reader.readAsDataURL(file);
-                  }
-                }
-
-                // Move the logging here after the loop
-                console.log("Selected new files:", e.target.files);
-                console.log("Updated formData:", {
-                  ...formData,
-                  newImages: newImages,
-                });
-              }}
-            />
-          </div> */}
-          {/* </div> */}
           <div className={styles.userInputBox}>
             <label className={styles.label} htmlFor="details">
               التفاصيل
@@ -332,7 +269,7 @@ function ProductForm({
                 </label>
                 <input
                   className={styles.input}
-                  type="text"
+                  type="color"
                   id={`color_${index}`}
                   name={`color_${index}`}
                   placeholder={`لون ${index + 1}`}
@@ -341,8 +278,7 @@ function ProductForm({
                     handleDetailsChange(index, "color", e.target.value)
                   }
                 />
-
-                {detail.sizes &&
+                   {detail.sizes &&
                   detail.sizes.map((size, sizeIndex) => (
                     <div key={`${index}_${sizeIndex}`}>
                       <label
@@ -351,6 +287,7 @@ function ProductForm({
                       >
                         حجم {sizeIndex + 1}
                       </label>
+                      {/* Render input field for size */}
                       <input
                         className={styles.input}
                         type="text"
@@ -359,20 +296,15 @@ function ProductForm({
                         placeholder={`حجم ${sizeIndex + 1}`}
                         value={size.size || ""}
                         onChange={(e) =>
-                          handleDetailsChange(
-                            index,
-                            `sizes.${sizeIndex}.size`,
-                            e.target.value
-                          )
+                          handleSizeChange(index, sizeIndex, e.target.value)
                         }
                       />
-
-                     
                     </div>
                   ))}
               </div>
             ))}
           </div>
+
         </div>
 
         <div className={styles.formSubmitBtn}>
