@@ -16,6 +16,7 @@ import LayoutWithSidebar from "./LayoutWithSidebar.js";
 import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Cart from "../pages/cart/Cart.js";
 import ProtectedRoute from "./ProtectedRoute.js";
+import Hero from "../pages/Dashboard/Hero/Hero.js";
 function AppRoutes() {
   return (
     <Routes>
@@ -36,6 +37,16 @@ function AppRoutes() {
           <ProtectedRoute>
             <LayoutWithSidebar>
               <Products />
+            </LayoutWithSidebar>
+          </ProtectedRoute>
+        }
+      ></Route>
+            <Route
+        path="/hero"
+        element={
+          <ProtectedRoute>
+            <LayoutWithSidebar>
+              <Hero />
             </LayoutWithSidebar>
           </ProtectedRoute>
         }

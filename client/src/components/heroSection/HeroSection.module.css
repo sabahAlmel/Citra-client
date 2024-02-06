@@ -1,6 +1,6 @@
 .wrapper {
   padding-top: 151px;
-  height: 105vh;
+  height: 1200px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -67,7 +67,7 @@
 }
 .left {
   width: 68%;
-  /* height: 60%; */
+  height: 550px;
 }
 .image {
   border-radius: 20px;

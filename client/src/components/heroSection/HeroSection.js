@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./HeroSection.module.css";
-import overview from "../../assets/images/ctra.png";
-import { AuthContext } from "../../context/AuthContext";
+import axios from 'axios';
 
 function HeroSection() {
+
+  const [pic,setPic]=useState();
+
+const getPic = async() => {
+  try{
+    axios.get(`${process.env.REACT_APP_BACKEND}hero/display`).then(response=>setPic(`${process.env.REACT_APP_BACKEND}${response.data.picture}`))
+  }catch(err){
+    console.log(err)
+  }
+}
+
+useEffect(()=>{
+  getPic()
+},[])
+
   return (
     <>
       <hero className={style.wrapper}>
@@ -35,7 +49,7 @@ function HeroSection() {
           </aside>
           <aside className={style.left}>
             <img
-              src={overview}
+              src={pic}
               alt="hero"
               className={style.image}
               height="100%"
