@@ -10,10 +10,11 @@ import { useQuery, useQueryClient } from "react-query";
 import { fetchProducts } from "../../../db/fetchProduct";
 import Modal from "@mui/material/Modal";
 import ChildModal from "./productChildModal"; // Import the ChildModal component
+import AddProduct from "../../AddProduct/AddProduct";
 
 const ProductTable = () => {
   const [page, setPage] = useState(1); // Move the declaration of 'page' here
-  // const navigate = useNavigate();
+  const [opedAddModal, setOpenAddModal] = useState(false);
 
   const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
   const queryClient = useQueryClient();
@@ -264,6 +265,9 @@ const ProductTable = () => {
     rowLength: 100,
   };
 
+  const handleAddModal = () => {
+    setOpenAddModal((prev) => !prev);
+  };
   return (
     <Box
       sx={{ height: 400, width: "100%", backgroundColor: "var(--main-color)" }}
@@ -287,6 +291,7 @@ const ProductTable = () => {
       <Button
         fullWidth
         type="submit"
+        onClick={handleAddModal}
         // onClick={() => (window.location.href = "/")}
         sx={{
           margin: "10px",
@@ -341,6 +346,13 @@ const ProductTable = () => {
           }}
         />
       </div>
+      <Modal
+        open={opedAddModal}
+        onClose={handleAddModal}
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        <AddProduct />
+      </Modal>
     </Box>
   );
 };
