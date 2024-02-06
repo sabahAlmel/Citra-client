@@ -107,6 +107,7 @@ const Sidebar = () => {
                   [Styles.activelink]: location.pathname === item.path,
                 })}
                 to={item.path}
+                target={item.target || "_self"}
                 onClick={handleLinkClick}
               >
                 <FontAwesomeIcon

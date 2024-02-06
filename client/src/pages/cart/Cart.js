@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./Cart.module.css";
 import CartCards from "../../components/cartCards/CartCards";
-import { Link } from "react-router-dom";
+import AddressForm from "../../components/AddressForm/AddressForm";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -36,6 +36,7 @@ function Cart() {
   }
 
   return (
+    <>
     <section className={style.wrapper}>
       <div className={style.description}>
         <h1 className={style.header}>سلة المشتريات</h1>
@@ -56,11 +57,9 @@ function Cart() {
           />
         ))}
       </div>
-      <Link to="" className={style.checkoutBTN}>
-        <span className={style.checkout}> طلب الشراء</span>
-        <span className={style.total}>{total} $</span>
-      </Link>
+      <AddressForm total={total} cartItems={cartItems} />
     </section>
+    </>
   );
 }
 
