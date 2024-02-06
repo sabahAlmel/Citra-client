@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
@@ -15,8 +13,7 @@ import {
   faClipboardList,
   faSignOutAlt,
   faHome,
-  faSearch
- 
+  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 
 import cx from "classnames";
@@ -27,15 +24,15 @@ const menuItems = [
   { title: "منتجات", icon: faShoppingBag, path: "/products" },
   { title: "طلبات", icon: faClipboardList, path: "/orders" },
   { title: " الصفحة الرئيسية", icon: faHome, path: "/" },
-  { title: "تحليلات جوجل", icon: faSearch, path: "https://analytics.google.com/analytics/web/#/p425619017/reports/intelligenthome" },
-
-  // { title: "تسجيل خروج", icon: faSignOutAlt }
- 
-
+  { title: " الفآت ", icon: faHome, path: "/category" },
+  {
+    title: "تحليلات جوجل",
+    icon: faSearch,
+    path: "https://analytics.google.com/analytics/web/#/p425619017/reports/intelligenthome",
+  },
 ];
 // const logout = async () => {
 //   try{
-
 
 //         await axios.get(`${process.env.REACT_APP_API}user/logout`);
 //   setUser(null);

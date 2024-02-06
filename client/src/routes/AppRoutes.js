@@ -17,6 +17,7 @@ import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Cart from "../pages/cart/Cart.js";
 import ForgetPassword from "../pages/ForgetPassword/ForgetPassword.js";
 import ProtectedRoute from "./ProtectedRoute.js";
+import Category from "../pages/Dashboard/category/Category.js";
 function AppRoutes() {
   return (
     <Routes>
@@ -63,6 +64,16 @@ function AppRoutes() {
             <LayoutWithSidebar>
               {" "}
               <OverView />
+            </LayoutWithSidebar>
+          </ProtectedRoute>
+        }
+      ></Route>
+      <Route
+        path="/category"
+        element={
+          <ProtectedRoute>
+            <LayoutWithSidebar>
+              <Category />
             </LayoutWithSidebar>
           </ProtectedRoute>
         }
