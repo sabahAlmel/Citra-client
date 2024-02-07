@@ -1,24 +1,22 @@
 .AppChart {
   height: 100%;
-  /* width: 100%; */
   display: flex;
-  /* width: 100vw; */
+  width: 90vw;
   margin: 0 30px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
   background-color: white;
-  position: fixed; 
+  position: fixed;
 }
 
 .title1 {
   width: "100%";
   margin-top: "1.2rem";
-  margin-Right:"2.5rem";
+  margin-right: "2.5rem";
   color: var(--brown-color);
   align-self: flex-start;
-  
 }
 
 .dataCard {
@@ -26,7 +24,6 @@
   border-radius: 0.5em;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   padding: 1em;
-
 }
 
 .revenueCard {
@@ -49,16 +46,13 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 2rem;
-
 }
 
-.ChartWrapper{
+.ChartWrapper {
   display: flex;
   width: 100%;
   justify-content: space-between;
 }
-
-
 
 /* @media (max-width: 768px) {
   .card {
@@ -79,7 +73,7 @@
     height: 20rem;
   }
 } */
-.cardsWrapper{
+.cardsWrapper {
   width: 100%;
 }
 
@@ -97,21 +91,22 @@
     margin-right: 0;
     flex: 1 0 100%;
     margin-bottom: 15px;
-    gap: 0px
+    gap: 0px;
   }
 
   .sidebarOpen .cardsWrapper {
     justify-content: space-between;
   }
 }
-@media (max-width: 650px){
-  .ChartWrapper{
+@media (max-width: 650px) {
+  .ChartWrapper {
     flex-direction: column;
   }
-  .customerCard, .categoryCard{
+  .customerCard,
+  .categoryCard {
     width: 100%;
   }
-  .title1{
+  .title1 {
     text-align: center;
     margin-right: 8.5rem;
   }
@@ -120,7 +115,7 @@
   .card {
     margin-right: 5px;
   }
-  .title1{
+  .title1 {
     text-align: center;
     margin-right: 5rem;
   }

@@ -22,7 +22,7 @@ const CategoryTable = () => {
   const [openModal, setOpenModal] = useState(false); // State for modal open/close
   const [selectedRowData, setSelectedRowData] = useState(null); // Initialize selectedRowData
 
-  const {
+  let {
     isLoading,
     isError,
     data: CategoryData,
@@ -214,7 +214,7 @@ const CategoryTable = () => {
         }}
         color="primary"
       >
-        أضف منتج
+        اضف فئة
       </Button>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid

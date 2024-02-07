@@ -18,7 +18,7 @@ function CategoryForm({ formData, onInputChange, onSubmit }) {
         <div className={styles.mainUserInfo}>
           <div className={styles.userInputBox}>
             <label className={styles.label} htmlFor="arabicName">
-              الاسم
+              الإسم العربي
             </label>
             <input
               className={styles.input}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../categoryForm/CategoryForm.module.css";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function CreateCategoryForm({ id, onClose }) {
   const [formData, setFormData] = useState({
@@ -38,7 +39,6 @@ function CreateCategoryForm({ id, onClose }) {
       if (res) {
         onClose();
         toast.success("تمت اضافة المعلومات بنجاح");
-        console.log("success");
       }
     } catch (error) {
       console.log(error);
@@ -46,20 +46,20 @@ function CreateCategoryForm({ id, onClose }) {
   };
 
   return (
-    <div className={styles.container} style={{ width: "80%" }}>
-      <h1 className={styles.formTitle}> تعديل الفآت</h1>
+    <div className={styles.container} style={{ width: "50%" }}>
+      <h1 className={styles.formTitle}> اضف فئة</h1>
       <form action="#" onSubmit={handleSubmit}>
         <div className={styles.mainUserInfo}>
           <div className={styles.userInputBox}>
             <label className={styles.label} htmlFor="arabicName">
-              الاسم
+              الاسم العربي
             </label>
             <input
               className={styles.input}
               type="text"
               id="arabicName"
               name="arabicName"
-              placeholder=" الاسم "
+              placeholder="الاسم العربي  "
               // Add an onChange handler to update the state when the input changes
               onChange={handleInputChange}
               defaultValue={initial.arabicName}
@@ -68,14 +68,14 @@ function CreateCategoryForm({ id, onClose }) {
           <div>
             <div className={styles.userInputBox}>
               <label className={styles.label} htmlFor="name">
-                الاسم
+                الاسم الاجنبي
               </label>
               <input
                 className={styles.input}
                 type="text"
                 id="name"
                 name="name"
-                placeholder=" الاسم "
+                placeholder=" الاسم الاجنبي"
                 // Add an onChange handler to update the state when the input changes
                 onChange={handleInputChange}
                 defaultValue={initial.name}
@@ -94,7 +94,7 @@ function CreateCategoryForm({ id, onClose }) {
         </div>
 
         <div className={styles.formSubmitBtn}>
-          <button type="submit"> طلب</button>
+          <button type="submit"> تأكيد</button>
         </div>
       </form>
     </div>

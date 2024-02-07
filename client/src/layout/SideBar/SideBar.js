@@ -11,8 +11,9 @@ import {
   faChartBar,
   faShoppingBag,
   faClipboardList,
-  faSignOutAlt,
   faHome,
+  faLayerGroup,
+  faFolderOpen,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -23,9 +24,9 @@ const menuItems = [
   { title: "المستخدمين", icon: faUsers, path: "/users" },
   { title: "منتجات", icon: faShoppingBag, path: "/products" },
   { title: "طلبات", icon: faClipboardList, path: "/orders" },
+  { title: " الفآت ", icon: faFolderOpen, path: "/category" },
+  { title: " الفئة الفرعية ", icon: faLayerGroup, path: "/subcategory" },
   { title: " الصفحة الرئيسية", icon: faHome, path: "/" },
-  { title: " الفآت ", icon: faHome, path: "/category" },
-  { title: " الفئة الفرعية ", icon: faHome, path: "/subcategory" },
   {
     title: "تحليلات جوجل",
     icon: faSearch,

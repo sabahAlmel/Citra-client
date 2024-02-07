@@ -54,46 +54,46 @@ function SignUpp() {
   };
 
   // google sign up
+  const handleGoogle = async () => {
+    try {
+      const data = await signInWithPopup(auth, provider);
 
-  const handleGoogle = (e) => {
-    e.preventDefault();
-    signInWithPopup(auth, provider)
-      .then((data) => {
-        setDisabled(!disabled);
-        axiosInstance
-          .post(
-            "/user/gsignup",
-            {
-              name: data.user.displayName,
-              email: data.user.email,
-              photourl: data.user.photoURL,
-              role: "user",
-            },
-            {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            }
-          )
-          .then((res) => {
-            setIsPending(false);
-            if (res) {
-              setUser(res.data.token.data);
-              console.log(res.data.token.data);
-              setDisabled(!disabled);
-              toast.success("تم تسجيل الدخول بنجاح", response.message);
-            } else {
-              setUser("no user found");
-            }
-            navigate("/");
-          });
-      })
-      .catch((err) => {
-        setDisabled(false);
-        if (err.code === "auth/popup-closed-by-user") {
-          console.log("exited the google auth");
+      setDisabled(!disabled);
+
+      const res = await axiosInstance.post(
+        "/user/gsignup",
+        {
+          name: data.user.displayName,
+          email: data.user.email,
+          photourl: data.user.photoURL,
+          role: "user",
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
-      });
+      );
+
+      setIsPending(false);
+      toast.success("تم تسجيل الدخول بنجاح");
+
+      if (res) {
+        setUser(res.data.token.data);
+        console.log(res.data.token.data);
+        setDisabled(!disabled);
+      } else {
+        setUser("no user found");
+      }
+
+      navigate("/");
+    } catch (err) {
+      setDisabled(false);
+
+      if (err.code === "auth/popup-closed-by-user") {
+        console.log("exited the google auth");
+      }
+    }
   };
 
   //sign up
@@ -135,7 +135,6 @@ function SignUpp() {
 
   return (
     <>
-     
       <form onSubmit={handleSubmit} className={styles.wrapper}>
         <main className={styles.main}>
           <ToastContainer />
