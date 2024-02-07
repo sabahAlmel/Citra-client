@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
-import cookieClient from "react-cookie";
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
