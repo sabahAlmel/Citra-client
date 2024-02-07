@@ -17,6 +17,7 @@ import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Cart from "../pages/cart/Cart.js";
 import ProtectedRoute from "./ProtectedRoute.js";
 import Category from "../pages/Dashboard/category/Category.js";
+import SubCategoryTable from "../components/DashTable/SubCategory/subCategoryTable.js";
 function AppRoutes() {
   return (
     <Routes>
@@ -74,13 +75,22 @@ function AppRoutes() {
         }
       ></Route>
       <Route
+        path="/subcategory"
+        element={
+          <ProtectedRoute>
+            <LayoutWithSidebar>
+              <SubCategoryTable />
+            </LayoutWithSidebar>
+          </ProtectedRoute>
+        }
+      ></Route>
+      <Route
         path="/orders"
         element={
-         
-            <LayoutWithSidebar>
-              {" "}
-              <Order />
-            </LayoutWithSidebar>
+          <LayoutWithSidebar>
+            {" "}
+            <Order />
+          </LayoutWithSidebar>
         }
       ></Route>
 

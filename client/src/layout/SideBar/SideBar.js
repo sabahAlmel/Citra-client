@@ -25,6 +25,7 @@ const menuItems = [
   { title: "طلبات", icon: faClipboardList, path: "/orders" },
   { title: " الصفحة الرئيسية", icon: faHome, path: "/" },
   { title: " الفآت ", icon: faHome, path: "/category" },
+  { title: " الفئة الفرعية ", icon: faHome, path: "/subcategory" },
   {
     title: "تحليلات جوجل",
     icon: faSearch,

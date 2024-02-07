@@ -42,7 +42,11 @@ const CategoryComponent = ({ data }) => {
       }}
     >
       {data.image ? (
-        <img className={style.image} src={data.image} alt="Background" />
+        <img
+          className={style.image}
+          src={`${process.env.REACT_APP_BACKEND}${data.image}`}
+          alt="Background"
+        />
       ) : (
         <img className={style.image} src={image} alt="category" />
       )}

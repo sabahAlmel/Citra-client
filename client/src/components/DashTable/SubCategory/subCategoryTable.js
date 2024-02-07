@@ -6,11 +6,11 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { useQuery, useQueryClient } from "react-query";
 import Modal from "@mui/material/Modal";
-import ChildModal from "./categoryChildModal"; // Import the ChildModal component
-import { fetchAllCategories } from "../../../db/fetchCategory";
-import CreateCategoryForm from "./createForm";
+import ChildModal from "./subCategoryChildModal"; // Import the ChildModal component
+import CreateCategoryForm from "./createSubCategoy";
+import { fetchAllSubCategories } from "../../../db/fetchSubCategory";
 
-const CategoryTable = () => {
+const SubCategoryTable = () => {
   const [page, setPage] = useState(1); // Move the declaration of 'page' here
   const [rowModesModel, setRowModesModel] = useState({});
 
@@ -25,19 +25,19 @@ const CategoryTable = () => {
   const {
     isLoading,
     isError,
-    data: CategoryData,
-  } = useQuery(["user-table", page], () => fetchAllCategories(page));
+    data: SubCategoryData,
+  } = useQuery(["user-table", page], () => fetchAllSubCategories(page));
 
   useEffect(() => {
-    if (CategoryData && CategoryData.categories) {
-      const rowsWithId = CategoryData.categories.map((row) => ({
+    if (SubCategoryData && SubCategoryData.subCateg) {
+      const rowsWithId = SubCategoryData.subCateg.map((row) => ({
         ...row,
         id: row._id, // Assuming _id is a unique identifier
       }));
       setRows(rowsWithId);
     }
     setRowModesModel({});
-  }, [CategoryData]);
+  }, [SubCategoryData]);
 
   if (isLoading) {
     return <h2>Loading..</h2>;
@@ -49,7 +49,7 @@ const CategoryTable = () => {
   const handleRowClickDelete = async (params) => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_BACKEND}category/delete/${params}`
+        `${process.env.REACT_APP_BACKEND}subCategory/delete/${params}`
       );
 
       const updatedData = rows.filter((row) => row._id !== params);
@@ -65,19 +65,6 @@ const CategoryTable = () => {
 
   const columns = [
     { field: "arabicName", headerName: "الإسم", flex: 1 },
-    {
-      field: "image",
-      headerName: "الصور",
-      width: 90,
-      flex: 1,
-      renderCell: (params) => (
-        <img
-          src={`${process.env.REACT_APP_BACKEND}${params.row.image}`}
-          alt="Image"
-          style={{ width: 50, height: 50, borderRadius: "50%" }}
-        />
-      ),
-    },
 
     // Add more columns as needed
     {
@@ -214,7 +201,7 @@ const CategoryTable = () => {
         }}
         color="primary"
       >
-        أضف منتج
+        أضف فئة فرعية
       </Button>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
@@ -250,4 +237,4 @@ const CategoryTable = () => {
   );
 };
 
-export default CategoryTable;
+export default SubCategoryTable;

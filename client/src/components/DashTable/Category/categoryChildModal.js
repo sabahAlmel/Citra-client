@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
-import ProductForm from "../../productForm/ProductForm.js";
 import { toast } from "react-toastify";
+import CategoryForm from "../../categoryForm/CategoryForm.js";
 
 const style = {
   position: "absolute",
@@ -29,23 +29,8 @@ const ChildModal = ({
 }) => {
   const [formData, setFormData] = useState({
     arabicName: rowData.arabicName || "",
-    name: rowData.name || "",
-    price: rowData.price || 0, // Assuming a default value for price
-    serialNumber: rowData.serialNumber || "",
-    images: rowData.images || [], // Assuming images is an array of strings
-    details: (rowData.details || []).map((detail) => ({
-      color: detail.color || "",
-      sizes: (detail.sizes || []).map((size) => ({
-        size: size.size || "",
-        quantity: size.quantity || 0, // Assuming a default value for quantity
-      })),
-    })),
-    subCategory: rowData.subCategoryID || "", // Assuming subCategoryID is a string
-    category: rowData.categoryID || "", // Assuming categoryID is a string
-    slug: rowData.slug || "",
-    type: rowData.type || "",
-    description: rowData.description || "",
-    joinDate: rowData.joinDate || "", // Assuming joinDate is a string (adjust accordingly)
+
+    image: null, // Assuming images is an array of strings
   });
 
   const handleClose = () => {
@@ -53,31 +38,25 @@ const ChildModal = ({
   };
 
   const handleInputChange = (e) => {
-    if (e.target) {
-      const { name, value } = e.target;
-      setFormData((prevData) => ({ ...prevData, [name]: value }));
-
-      // Add a check for subCategory and update it accordingly
-      if (name === "subCategoryID") {
-        setFormData((prevData) => ({ ...prevData, subCategoryID: value }));
-      }
-    }
+    const name = e.target.name;
+    const value = e.target.type === "file" ? e.target.files[0] : e.target.value;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     try {
       const requestData = { ...formData };
-      requestData.subCategory = formData.subCategory;
-
-      if (!requestData.joinDate) {
-        delete requestData.joinDate;
-      }
-      console.log("Submitting formData:", requestData); // Add this console log
-
-      const response = await axios.patch(
-        `${process.env.REACT_APP_BACKEND}product/${rowData.id}`,
-        requestData
+      const response = await axios.put(
+        `${process.env.REACT_APP_BACKEND}category/update/${rowData.id}`,
+        requestData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
-      console.log("Server response:", response.data); // Add this console log
 
       if (response.status === 200) {
         const updatedProduct = response.data;
@@ -101,31 +80,6 @@ const ChildModal = ({
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND}product/${rowData.id}`
-        );
-        const updatedData = response.data;
-        setRows((prevRows) => {
-          // Update the specific row in the state
-          const updatedRows = prevRows.map((row) =>
-            row.id === updatedData.id ? updatedData : row
-          );
-          return updatedRows;
-        });
-      } catch (error) {
-        console.error("Error fetching updated data:", error);
-      }
-    };
-
-    // Call fetchData function after successful form submission
-    if (onSubmitSuccess) {
-      fetchData();
-    }
-  }, [onSubmitSuccess, setRows]);
-
   return (
     <React.Fragment>
       <Modal
@@ -135,15 +89,11 @@ const ChildModal = ({
         aria-describedby="child-modal-description"
       >
         <Box sx={{ ...style }}>
-          <ProductForm
+          <CategoryForm
             formData={formData}
             setFormData={setFormData}
             onInputChange={handleInputChange}
-            onSubmit={(updatedData) => handleSubmit(updatedData, setRows)}
-            rowData={rowData}
-            rows={rows}
-            category={formData.category}
-            subCategory={formData.subCategory}
+            onSubmit={handleSubmit}
           />
         </Box>
       </Modal>
