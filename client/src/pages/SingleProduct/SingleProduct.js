@@ -5,6 +5,7 @@ import Content from "../../components/SingleProduct/Content";
 import { fetchOneProduct } from "../../db/fetchProduct";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
+import NotFound from "../NotFound/NotFound";
 
 function SingleProduct() {
   const { slug } = useParams();
@@ -16,6 +17,9 @@ function SingleProduct() {
       refetchOnWindowFocus: true,
     }
   );
+  if (!products) {
+    return <NotFound />;
+  }
   return (
     <section className={style.handle}>
       <ProductImages products={products} isLoading={isLoading} />

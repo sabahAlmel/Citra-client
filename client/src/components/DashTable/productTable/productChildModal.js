@@ -74,7 +74,7 @@ const ChildModal = ({
       console.log("Submitting formData:", requestData); // Add this console log
 
       const response = await axios.patch(
-        `${process.env.REACT_APP_BACKEND}product/${rowData.id}`,
+        `${process.env.REACT_APP_BACKEND}product/${rowData._id}`,
         requestData
       );
       console.log("Server response:", response.data); // Add this console log
@@ -98,6 +98,24 @@ const ChildModal = ({
       }
     } catch (error) {
       console.error("Error updating product:", error);
+    }
+  };
+
+  const handleSubmitNew = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .patch(
+          `${process.env.REACT_APP_BACKEND}product/${rowData._id}`,
+          formData
+        )
+        .then((res) => {
+          toast.success("تم تعديل المنتج");
+          onClose();
+        });
+    } catch (error) {
+      toast.error("حدث خطأ حاول مجددا");
+      console.log(error);
     }
   };
 
@@ -139,7 +157,7 @@ const ChildModal = ({
             formData={formData}
             setFormData={setFormData}
             onInputChange={handleInputChange}
-            onSubmit={(updatedData) => handleSubmit(updatedData, setRows)}
+            onSubmit={handleSubmitNew}
             rowData={rowData}
             rows={rows}
             category={formData.category}

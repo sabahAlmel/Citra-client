@@ -183,6 +183,7 @@ function Content({ products, isLoading }) {
           ))}
         </div>
       </div>
+      {console.log("products::", products.fetchedProduct)}
       {products.fetchedProduct.details[0].color && (
         <div className={style.size}>
           <h2>اختار القياس</h2>

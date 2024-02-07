@@ -75,13 +75,12 @@ function ProductForm({
       }
       return detail;
     });
-  
+
     setFormData((prevData) => ({
       ...prevData,
       details: updatedDetails,
     }));
   };
-
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -152,11 +151,11 @@ function ProductForm({
       details: updatedDetails,
     }));
   };
-  
+
   return (
     <div className={styles.container}>
       <h1 className={styles.formTitle}> تعديل المعلومات الشخصية</h1>
-      <form action="#" onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <div className={styles.mainUserInfo}>
           <div className={styles.userInputBox}>
             <label className={styles.label} htmlFor="arabicName">
@@ -278,7 +277,7 @@ function ProductForm({
                     handleDetailsChange(index, "color", e.target.value)
                   }
                 />
-                   {detail.sizes &&
+                {detail.sizes &&
                   detail.sizes.map((size, sizeIndex) => (
                     <div key={`${index}_${sizeIndex}`}>
                       <label
@@ -304,7 +303,6 @@ function ProductForm({
               </div>
             ))}
           </div>
-
         </div>
 
         <div className={styles.formSubmitBtn}>

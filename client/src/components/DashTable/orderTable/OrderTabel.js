@@ -137,36 +137,30 @@ export default function DashTable() {
 
   const columns = [
     {
-      field: "orderNB",
-      headerName: "رقم الطلب",
-      width: 180,
-      editable: true,
-      type: "number",
-      flex: 1,
-      cellClassName: "delete-cell",
-    },
-
-    {
-      field: "userName",
-      headerName: "اسم المستخدم",
+      field: "description",
+      headerName: "الوصف  ",
       type: "",
       width: 180,
+      height: 300,
       align: "left",
       headerAlign: "left",
-      editable: true,
-      flex: 1,
+      editable: false,
+      flex: 2,
       cellClassName: "delete-cell",
-    },
-    {
-      field: "address",
-      headerName: "العنوان  ",
-      type: "",
-      width: 180,
-      align: "left",
-      headerAlign: "left",
-      editable: true,
-      flex: 1,
-      cellClassName: "delete-cell",
+      renderCell: (params) => (
+        <div style={{ maxWidth: "600px" }}>
+          <p
+            style={{
+              maxWidth: "600px",
+              width: "100%",
+              display: "flex",
+              overflow: "auto",
+            }}
+          >
+            {params.row.description}
+          </p>
+        </div>
+      ),
     },
     {
       field: "totalPrice",
@@ -175,12 +169,12 @@ export default function DashTable() {
       width: 180,
       align: "left",
       headerAlign: "left",
-      editable: true,
-      flex: 1,
+      editable: false,
+      flex: 0.5,
       cellClassName: "delete-cell",
     },
     {
-      flex: 1,
+      flex: 0.5,
       field: "createdAt",
       headerName: "تاريخ الانشاء",
       type: "date",
@@ -197,7 +191,7 @@ export default function DashTable() {
     {
       field: "status",
       headerName: "status",
-      flex: 1,
+      flex: 0.7,
       cellClassName: "delete-cell",
       type: "singleSelect",
       renderCell: (params) => (
@@ -238,7 +232,7 @@ export default function DashTable() {
     {
       field: "العمليات", // Add a delete column
       headerName: "حذف",
-      flex: 1,
+      flex: 0.5,
       cellClassName: "delete-cell",
 
       renderCell: (params) => (

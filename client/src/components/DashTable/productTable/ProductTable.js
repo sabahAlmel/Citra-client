@@ -1,5 +1,5 @@
 ///////////////////////table with pagination and filtration ///////////
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 // import { useNavigate } from "react-router-dom";
@@ -13,95 +13,65 @@ import ChildModal from "./productChildModal"; // Import the ChildModal component
 import AddProduct from "../../AddProduct/AddProduct";
 
 const ProductTable = () => {
-  const [page, setPage] = useState(1); // Move the declaration of 'page' here
+  // const [page, setPage] = useState(1); // Move the declaration of 'page' here
   const [opedAddModal, setOpenAddModal] = useState(false);
 
-  const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
+  // const [filterModel, setFilterModel] = useState({ items: [] }); // State for filter model
   const queryClient = useQueryClient();
   const [rows, setRows] = React.useState([]); //data
-  const [pageSize, setPageSize] = useState(5);
+  // const [pageSize, setPageSize] = useState(5);
 
   const [openModal, setOpenModal] = useState(false); // State for modal open/close
   const [selectedRowData, setSelectedRowData] = useState(null); // Initialize selectedRowData
+  const [loading, setLoading] = useState(false);
 
-  const {
-    isLoading,
-    isError,
-    data: ProductData,
-  } = useQuery(["user-table", page], () => fetchProducts(page));
-  // Update the state when data is loaded
+  // const {
+  //   isLoading,
+  //   isError,
+  //   data: ProductData,
+  // } = useQuery(["user-table", page], () => fetchProducts(page));
+
   // React.useEffect(() => {
   //   if (ProductData) {
-  //     // Assuming your response has a 'products' field that contains the array of products
-  //     const updatedRows = ProductData?.products.map((product) => ({
-  //       ...product,
-  //       id: product._id, // Set 'id' to the value of '_id'
-  //     }));
+  //     const updatedRows = ProductData?.products?.map((product) => {
+  //       // Check if categoryID and subCategoryID are not null or undefined
+  //       const categoryName = product.categoryID
+  //         ? product.categoryID.arabicName
+  //         : null;
+  //       const subCategoryName = product.subCategoryID
+  //         ? product.subCategoryID.name
+  //         : null;
+
+  //       return {
+  //         ...product,
+  //         id: product._id,
+  //         categoryName,
+  //         subCategoryName,
+  //       };
+  //     });
 
   //     setRows(updatedRows);
   //   }
   // }, [ProductData]);
-  // React.useEffect(() => {
 
-  //     // Assuming your response has a 'products' field that contains the array of products
-  //     const updatedRows = ProductData?.products.map(async (product) => {
-  //       try {
-  //         // Fetch category details based on categoryID
-  //         const categoryResponse = await axios.get(
-  //           `${process.env.REACT_APP_BACKEND}category/getone/${product.categoryID}`
-  //         );
-
-  //         // Extract category name
-  //         const categoryName = categoryResponse.data.category.name;
-
-  //         // Return the updated product object with additional fields
-  //         return {
-  //           ...product,
-  //           id: product._id, // Set 'id' to the value of '_id'
-  //           categoryName,
-  //         };
-  //       } catch (error) {
-  //         console.error("Error fetching category:", error);
-  //         // Handle the error appropriately, e.g., set categoryName to a default value
-  //         return {
-  //           ...product,
-  //           id: product._id,
-  //           categoryName: "Unknown Category",
-  //         };
-  //       }
-  //     });
-
-  // }, [ProductData]);
-
-  React.useEffect(() => {
-    if (ProductData) {
-      const updatedRows = ProductData?.products.map((product) => {
-        // Check if categoryID and subCategoryID are not null or undefined
-        const categoryName = product.categoryID
-          ? product.categoryID.arabicName
-          : null;
-        const subCategoryName = product.subCategoryID
-          ? product.subCategoryID.name
-          : null;
-
-        return {
-          ...product,
-          id: product._id,
-          categoryName,
-          subCategoryName,
-        };
-      });
-
-      setRows(updatedRows);
+  const getData = async () => {
+    try {
+      setLoading(true);
+      let res = await axios.get(
+        `${process.env.REACT_APP_BACKEND}product/getall`
+      );
+      console.log("res.data.products", res.data.products);
+      setRows(res.data.products);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
-  }, [ProductData]);
+  };
 
-  if (isLoading) {
-    return <h2>Loading..</h2>;
-  }
-  if (isError) {
-    return <div>Error loading products</div>;
-  }
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleRowClickDelete = async (params) => {
     // const productId = params.row._id;
@@ -137,6 +107,11 @@ const ProductTable = () => {
       field: "categoryName",
       headerName: "التصنيف",
       flex: 0.5,
+      renderCell: (params) => {
+        return (
+          <span>{params.row.categoryID ? params.row.categoryID.name : ""}</span>
+        );
+      },
     },
     {
       field: "subCategoryName",
@@ -213,33 +188,23 @@ const ProductTable = () => {
   //   }
   // };
 
-  const handlePageChange = (params) => {
-    setPage(params.page);
-    queryClient.invalidateQueries(["user-table", params.page]);
-  };
+  // const handlePageChange = (params) => {
+  //   setPage(params.page);
+  //   queryClient.invalidateQueries(["user-table", params.page]);
+  // };
 
-  const handlePageSizeChange = (params) => {
-    setPageSize(params.pageSize);
-    setPage(0);
-  };
+  // const handlePageSizeChange = (params) => {
+  //   setPageSize(params.pageSize);
+  //   setPage(0);
+  // };
   const handleOpenModal = (rowData) => {
     setOpenModal(true);
     setSelectedRowData(rowData);
   };
   const handleCloseModal = async (newdata) => {
     setOpenModal(false);
-
-    // Assuming setSelectedRowData is not async, you can use it directly
     setSelectedRowData(newdata);
   };
-
-  // const handleFormSubmitSuccess = (updatedRows) => {
-  //   // Update the local state (rows) with the updated data
-  //   setRows(updatedRows);
-
-  //   // Invalidate the query to trigger a refetch
-  //   queryClient.invalidateQueries("user-table");
-  // };
   const handleFormSubmitSuccess = (updatedProduct) => {
     // Update the specific row in the state
     setRows((prevRows) => {
@@ -250,20 +215,19 @@ const ProductTable = () => {
     });
 
     // Invalidate the query to trigger a refetch
-    queryClient.invalidateQueries(["user-table", page]);
+    // queryClient.invalidateQueries(["user-table", page]);
   };
-  const data = {
-    rows,
-    columns,
-    page,
-    pageSize,
-    rowCount: rows.length,
-    pageSizeOptions: [10, 25, 50, 75, 100],
-    filterModel,
-    dataSet: "Employee",
-    // visibleFields: columns,
-    rowLength: 100,
-  };
+  // const data = {
+  // rows,
+  // columns,
+  // page,
+  // pageSize,
+  // pageSizeOptions: [10, 25, 50, 75, 100],
+  // filterModel,
+  // dataSet: "Employee",
+  // visibleFields: columns,
+  // rowLength: 100,
+  // };
 
   const handleAddModal = () => {
     setOpenAddModal((prev) => !prev);
@@ -286,7 +250,6 @@ const ProductTable = () => {
           onSubmitSuccess={handleFormSubmitSuccess}
           setSelectedRowData={setSelectedRowData}
         />
-        {/* <ChildModal onClose={handleCloseModal} rowData={selectedRowData} setRows={setRows} /> */}
       </Modal>
       <Button
         fullWidth
@@ -312,15 +275,15 @@ const ProductTable = () => {
         أضف منتج
       </Button>
       <div style={{ height: 400, width: "100%" }}>
-        <DataGrid
+        {/* <DataGrid
           sx={{ minHeight: "60vh" }}
-          {...data}
+          // {...data}
           rows={rows}
-          onPageChange={handlePageChange}
-          onPageSizeChange={handlePageSizeChange}
+          // onPageChange={handlePageChange}
+          // onPageSizeChange={handlePageSizeChange}
           // onRowClick={(params, event) => handleRowClick(params, event)}
           // filterMode="server" // Optional: Use server-side filtering
-          onFilterModelChange={(model) => setFilterModel(model)}
+          // onFilterModelChange={(model) => setFilterModel(model)}
           initialState={{
             ...data.initialState,
             //pagination
@@ -341,6 +304,17 @@ const ProductTable = () => {
             },
           }}
           pageSizeOptions={[10, 25, 50, 75, 100]}
+          slots={{
+            toolbar: GridToolbar,
+          }}
+        /> */}
+        <DataGrid
+          sx={{ minHeight: "60vh" }}
+          getRowId={(row) => row._id}
+          rows={rows}
+          loading={loading}
+          columns={columns}
+          // pageSizeOptions={[10, 20, 30, 50, 100]}
           slots={{
             toolbar: GridToolbar,
           }}
