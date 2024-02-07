@@ -11,7 +11,7 @@ import {
   faChartBar,
   faShoppingBag,
   faClipboardList,
-  faSignOutAlt,
+  faImage,
   faHome,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
@@ -26,6 +26,7 @@ const menuItems = [
   { title: " الصفحة الرئيسية", icon: faHome, path: "/" },
   { title: " الفآت ", icon: faHome, path: "/category" },
   { title: " الفئة الفرعية ", icon: faHome, path: "/subcategory" },
+  { title: "الصورة الرئيسية", icon: faImage, path: "/hero" },
   {
     title: "تحليلات جوجل",
     icon: faSearch,
