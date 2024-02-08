@@ -149,19 +149,21 @@ function NavBar() {
           </li>
           <li>
             {user ? (
-              <NavLink
-                className={
-                  location.pathname === "/shop"
-                    ? styles.activeLink
-                    : styles.link
-                }
-                to="/overview"
-              >
-                لوحة التحكم
-              </NavLink>
-            ) : (
-              ""
-            )}
+              user.Role === "admin" || user.Role === "dataEntry" ? (
+                <NavLink
+                  className={
+                    location.pathname === "/shop"
+                      ? styles.activeLink
+                      : styles.link
+                  }
+                  to="/overview"
+                >
+                  لوحة التحكم
+                </NavLink>
+              ) : (
+                ""
+              )
+            ) : null}
           </li>
           <li>
             {!user ? (
