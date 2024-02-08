@@ -148,6 +148,22 @@ function NavBar() {
             </NavLink>
           </li>
           <li>
+            {user ? (
+              <NavLink
+                className={
+                  location.pathname === "/shop"
+                    ? styles.activeLink
+                    : styles.link
+                }
+                to="/overview"
+              >
+                لوحة التحكم
+              </NavLink>
+            ) : (
+              ""
+            )}
+          </li>
+          <li>
             {!user ? (
               <NavLink className={` ${styles.btn}`} to="./signin">
                 تسجيل دخول

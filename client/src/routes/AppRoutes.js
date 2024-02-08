@@ -16,6 +16,7 @@ import LayoutWithSidebar from "./LayoutWithSidebar.js";
 import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Cart from "../pages/cart/Cart.js";
 import ProtectedRoute from "./ProtectedRoute.js";
+import Hero from "../pages/Dashboard/Hero/Hero.js";
 import Category from "../pages/Dashboard/category/Category.js";
 import SubCategoryTable from "../components/DashTable/SubCategory/subCategoryTable.js";
 function AppRoutes() {
@@ -38,6 +39,16 @@ function AppRoutes() {
           <ProtectedRoute>
             <LayoutWithSidebar>
               <Products />
+            </LayoutWithSidebar>
+          </ProtectedRoute>
+        }
+      ></Route>
+            <Route
+        path="/hero"
+        element={
+          <ProtectedRoute>
+            <LayoutWithSidebar>
+              <Hero />
             </LayoutWithSidebar>
           </ProtectedRoute>
         }

@@ -101,6 +101,33 @@ function AddProduct() {
   };
   ///input handling
 
+  const [imgs, setImgs] = useState([]);
+
+  useEffect(() => {
+    console.log(imgs);
+  });
+
+  const handleImageChange = async (e) => {
+    e.preventDefault();
+    try {
+      let img = "";
+      let fd = new FormData();
+      for (let i = 0; i < formData.images.length; i++) {
+        fd.append("image", e.target.files[i], img.name);
+        await axios
+          .post(
+            "https://api.imgbb.com/1/upload?key=268f44c0b0444e18ebac10c0e5823c72",
+            fd
+          )
+          .then((res) => {
+            setImgs([...imgs, res.data.data.display_url]);
+          });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const [formData, setFormData] = useState({
     name: "",
     arabicName: "",
@@ -109,9 +136,9 @@ function AddProduct() {
     details: [{ color: "", size: [] }],
     type: null,
     description: "",
-    category: "",
-    subCategory: null,
-    images: "",
+    categoryID: "",
+    subCategoryID: null,
+    images: [],
   });
   const [categories, setCategories] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
@@ -160,6 +187,7 @@ function AddProduct() {
 
   const handleChange = (e) => {
     let { name, value } = e.target;
+    // console.log(e.target);
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -173,12 +201,19 @@ function AddProduct() {
     } else {
       setFormData({ ...formData, details: [...formData.details, details] });
     }
+    const fd = new FormData();
+    formData.images.map((img) => {
+      fd.append("image", img);
+    });
+    console.log(imgs);
     await axios
-      .post(`${process.env.REACT_APP_BACKEND}product/create`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(
+        `${process.env.REACT_APP_BACKEND}product/create`,
+        { ...formData, images: imgs }
+        // {
+        //    headers: { "Content-Type": "multipart/form-data" },
+        // }
+      )
       .then((res) => {
         toast.success("تمت اضافة المنتج بنجاح");
       })
@@ -345,7 +380,7 @@ function AddProduct() {
             label="category"
             name="categoryID"
             onChange={(e) => {
-              setFormData({ ...formData, subCategory: null });
+              setFormData({ ...formData, subCategoryID: null });
               setSubCategory([]);
               handleChange(e);
               getSubCategories(e.target.value);
@@ -408,11 +443,50 @@ function AddProduct() {
           <input
             type="file"
             id="files"
-            onChange={handleChange}
+            onChange={(e) => {
+              setFormData({
+                ...formData,
+                images: [...formData.images, e.target.files[0]],
+                // images: e.target.files[0],
+              });
+              console.log(formData);
+              handleImageChange(e);
+              console.log(imgs);
+            }}
             name="images"
             multiple
           />
         </Box>
+        {imgs.length ? (
+          <Box
+            component="form"
+            sx={{
+              // "& > :not(style)": { m: 1, width: "25ch" },
+              display: "flex",
+              alignItems: "center",
+              gap: "5px",
+              justifyContent: "center",
+              padding: " 0 20px",
+              flexWrap: "no-wrap",
+              maxWidth: "80px",
+            }}
+            noValidate
+            autoComplete
+          >
+            {imgs.map((img) => (
+              <img
+                height={"30px"}
+                width={"30px"}
+                src={img}
+                key={img}
+                alt=""
+                style={{ width: "30px", height: "30px", objectFit: "cover" }}
+              />
+            ))}
+          </Box>
+        ) : (
+          <></>
+        )}
         {newData && (
           <>
             {Array.from({ length: newData }).map((_, index) => (

@@ -11,6 +11,7 @@ import {
   faChartBar,
   faShoppingBag,
   faClipboardList,
+  faImage,
   faHome,
   faLayerGroup,
   faFolderOpen,
@@ -26,6 +27,7 @@ const menuItems = [
   { title: "طلبات", icon: faClipboardList, path: "/orders" },
   { title: " الفآت ", icon: faFolderOpen, path: "/category" },
   { title: " الفئة الفرعية ", icon: faLayerGroup, path: "/subcategory" },
+  { title: "الصورة الرئيسية", icon: faImage, path: "/hero" },
   { title: " الصفحة الرئيسية", icon: faHome, path: "/" },
   {
     title: "تحليلات جوجل",

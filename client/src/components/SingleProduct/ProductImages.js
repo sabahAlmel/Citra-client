@@ -24,10 +24,7 @@ function ProductImages({ products, isLoading }) {
     <div className={style.allImages}>
       <div className={style.bigImage}>
         {selectedImage ? (
-          <img
-            src={`${process.env.REACT_APP_BACKEND}${selectedImage}`}
-            alt="big"
-          />
+          <img src={`${selectedImage}`} alt="big" />
         ) : (
           <img src={placeholder} alt="placeholder" />
         )}
@@ -37,7 +34,7 @@ function ProductImages({ products, isLoading }) {
           ? products.fetchedProduct.images.map((image, index) => (
               <img
                 key={index}
-                src={`${process.env.REACT_APP_BACKEND}${image}`}
+                src={`${image}`}
                 alt={`mini${index + 1}`}
                 onClick={() => handleImageClick(image)}
               />

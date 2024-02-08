@@ -7,7 +7,7 @@ import axios from "axios";
 import { useQuery, useQueryClient } from "react-query";
 import Modal from "@mui/material/Modal";
 import ChildModal from "./subCategoryChildModal"; // Import the ChildModal component
-import CreateCategoryForm from "./createSubCategoy";
+import CreateCategoryForm from "./createSubCategory";
 import { fetchAllSubCategories } from "../../../db/fetchSubCategory";
 
 const SubCategoryTable = () => {
