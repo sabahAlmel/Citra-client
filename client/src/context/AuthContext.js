@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
       console.log("authcontext process");
       setCheckUser(true);
       const response = await axiosInstance.get(
-        `http://localhost:5000/user/getone`,
+        `${process.env.REACT_APP_BACKEND}user/getone`,
         {
           withCredentials: true,
         }
