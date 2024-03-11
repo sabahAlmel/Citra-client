@@ -29,7 +29,7 @@ const BarChart = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/order/all");
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/order/all`);
         console.log("Response:", response);
         setOrderss(response.data.orders);
       } catch (error) {
@@ -62,7 +62,7 @@ const BarChart = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/product/getall"
+          `${process.env.REACT_APP_BACKEND_ENDPOINT}/product/getall`
         );
         console.log("Response:", response);
         setProductsArray(response.data.products);
@@ -139,7 +139,7 @@ const BarChart = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/user/getall");
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/user/getall`);
         console.log("Response:", response);
         setTotalUsers(response.data.length);
       } catch (error) {
